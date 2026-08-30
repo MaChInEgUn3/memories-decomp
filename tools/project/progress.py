@@ -3,21 +3,21 @@
 from __future__ import annotations
 
 import json
-import re
 import sys
 from pathlib import Path
 from typing import Any
 
+from function_inventory import (
+    Function,
+    InventoryError,
+    load_inventory,
+    parse_generated_functions,
+)
 from workspace import WorkspaceError, require_workspace_root, resolve_within
 
 
 class ProgressError(RuntimeError):
     pass
-
-
-FUNCTION_PATTERN = re.compile(
-    r"^nonmatching\s+(?P<name>\S+),\s+0x(?P<size>[0-9A-Fa-f]+)$"
-)
 
 
 def parse_integer(value: Any, description: str) -> int:
@@ -47,33 +47,29 @@ def load_text_size(root: Path) -> int:
     raise ProgressError("image map has no text region")
 
 
-def parse_functions(path: Path) -> list[dict[str, Any]]:
-    functions: list[dict[str, Any]] = []
-    handwritten = False
-    with path.open("r", encoding="utf-8") as handle:
-        for raw_line in handle:
-            line = raw_line.strip()
-            if line == "/* Handwritten function */":
-                handwritten = True
-                continue
-
-            match = FUNCTION_PATTERN.fullmatch(line)
-            if match:
-                functions.append(
-                    {
-                        "name": match.group("name"),
-                        "size": int(match.group("size"), 16),
-                        "handwritten": handwritten,
-                    }
-                )
-                handwritten = False
-                continue
-
-            if line and not line.startswith("/*"):
-                handwritten = False
-    if not functions:
-        raise ProgressError(f"{path}: no generated functions found")
-    return functions
+def validate_inventory(
+    generated: list[Function], inventory: list[Function]
+) -> None:
+    generated_by_address = {function.address: function for function in generated}
+    inventory_by_address = {function.address: function for function in inventory}
+    if len(generated_by_address) != len(generated):
+        raise ProgressError("generated function list contains duplicate addresses")
+    if len(inventory_by_address) != len(inventory):
+        raise ProgressError("function inventory contains duplicate addresses")
+    if set(generated_by_address) != set(inventory_by_address):
+        raise ProgressError(
+            "function inventory does not match the generated split; run make inventory"
+        )
+    for address, generated_function in generated_by_address.items():
+        inventory_function = inventory_by_address[address]
+        if (
+            generated_function.size != inventory_function.size
+            or generated_function.name != inventory_function.name
+        ):
+            raise ProgressError(
+                f"function inventory differs at {address:#010x}; "
+                "run make inventory"
+            )
 
 
 def atomic_write_json(path: Path, value: dict[str, Any]) -> None:
@@ -94,13 +90,26 @@ def calculate(root: Path) -> dict[str, Any]:
     assembly_path = resolve_within(
         root, "tmp/splat/asm/entry.s", must_exist=True
     )
-    functions = parse_functions(assembly_path)
+    generated = parse_generated_functions(assembly_path)
+    inventory_path = resolve_within(
+        root, "config/slus_01411/functions.csv", must_exist=True
+    )
+    functions = load_inventory(inventory_path)
+    validate_inventory(generated, functions)
     text_bytes = load_text_size(root)
-    function_bytes = sum(function["size"] for function in functions)
+    function_bytes = sum(function.size for function in functions)
     handwritten = [
-        function for function in functions if function["handwritten"]
+        function for function in functions if function.status == "handwritten_asm"
     ]
-    handwritten_bytes = sum(function["size"] for function in handwritten)
+    handwritten_bytes = sum(function.size for function in handwritten)
+    assembly = [
+        function for function in functions if function.status == "unmatched_asm"
+    ]
+    assembly_bytes = sum(function.size for function in assembly)
+    sdk = [function for function in functions if function.status == "sdk_asm"]
+    sdk_bytes = sum(function.size for function in sdk)
+    matching = [function for function in functions if function.status == "matching_c"]
+    matching_bytes = sum(function.size for function in matching)
     if function_bytes > text_bytes:
         raise ProgressError(
             f"function bytes {function_bytes:#x} exceed text size {text_bytes:#x}"
@@ -113,9 +122,12 @@ def calculate(root: Path) -> dict[str, Any]:
         "function_bytes": function_bytes,
         "handwritten_function_count": len(handwritten),
         "handwritten_function_bytes": handwritten_bytes,
-        "assembly_function_bytes": function_bytes - handwritten_bytes,
-        "matching_c_function_count": 0,
-        "matching_c_bytes": 0,
+        "assembly_function_count": len(assembly),
+        "assembly_function_bytes": assembly_bytes,
+        "sdk_function_count": len(sdk),
+        "sdk_function_bytes": sdk_bytes,
+        "matching_c_function_count": len(matching),
+        "matching_c_bytes": matching_bytes,
         "unassigned_text_bytes": text_bytes - function_bytes,
     }
 
@@ -128,6 +140,7 @@ def main() -> int:
         atomic_write_json(output, progress)
     except (
         ProgressError,
+        InventoryError,
         WorkspaceError,
         OSError,
         UnicodeError,
