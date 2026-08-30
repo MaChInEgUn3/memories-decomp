@@ -54,3 +54,5 @@ address,attempt,compiler,flags,result,summary
 0x800289B4,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty function matched exactly.
 0x80029574,1,gcc_2_8_1_g8,-O2 -G8 direct-global,nonmatch,Direct global access duplicated address relocations
 0x80029574,2,gcc_2_8_1_g8,-O2 -G8 local-entry-pointer,matched,Local entry pointer reproduced exact stores and relocations
+0x80029EB0,1,gcc_2_8_1_g8,-O2 -G8 direct-index,nonmatch,Direct indexing used the wrong address register allocation
+0x80029EB0,2,gcc_2_8_1_g8,-O2 -G8 explicit-base-increment,matched,Explicit base increment reproduced the exact byte load
