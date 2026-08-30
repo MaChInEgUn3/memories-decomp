@@ -160,3 +160,7 @@ address,attempt,compiler,flags,result,summary
 0x800137E4,1,gcc-2.8.1-psx,-O2 -G0 structured-loops,nonmatch,Compiler hoisted the loop mask and collapsed initial condition checks producing a function twenty bytes short
 0x80012D4C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Straight four-call wrapper matched all linked bytes and four R_MIPS_26 relocations.
 0x80012D84,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Do-while with predecrement placed the decrement in the call delay slot and matched exactly.
+0x800134B4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Direct descending array indexing emitted a scaled index each iteration and different HI16/LO16 placement.
+0x800134B4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Explicit descending pointer matched the loop but folded +12 into the LO16 relocation and was one instruction short.
+0x800134B4,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,Split-address profile still folded +12 into the LO16 relocation.
+0x800134B4,4,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Fixed $v0 pointer plus an empty barrier separated base materialization from +12 and matched bytes/relocations.
