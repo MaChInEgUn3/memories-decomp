@@ -369,7 +369,7 @@ address,size,name,status,module,notes
 0x80030F80,0x20,func_80030F80,matching_c,game,First -O2 -G8 call-wrapper candidate matched linked bytes and relocations.
 0x80030FA0,0x30,func_80030FA0,unmatched_asm,game,
 0x80030FD0,0xA8,func_80030FD0,unmatched_asm,game,
-0x80031078,0xC,func_80031078,unmatched_asm,game,
+0x80031078,0xC,func_80031078,matching_c,game,First -O2 -G8 global-byte assignment candidate matched.
 0x80031084,0x2C8,func_80031084,unmatched_asm,game,
 0x8003134C,0x8,func_8003134C,unmatched_asm,game,
 0x80031354,0x94,func_80031354,unmatched_asm,game,
