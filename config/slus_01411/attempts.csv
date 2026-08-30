@@ -76,3 +76,4 @@ address,attempt,compiler,flags,result,summary
 0x80035A58,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 global-byte assignment candidate matched.
 0x800377AC,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 conditional-byte-store candidate matched.
 0x80038070,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 call-wrapper candidate matched.
+0x80038888,1,gcc_2_8_1_g8,-O2 -G8,matched,First empty-function candidate matched.
