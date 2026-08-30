@@ -42,7 +42,9 @@ class Function:
     notes: str = ""
 
 
-def parse_generated_functions(path: Path) -> list[Function]:
+def parse_generated_functions(
+    path: Path, *, require_functions: bool = True
+) -> list[Function]:
     functions: list[Function] = []
     handwritten = False
     pending: tuple[str, int, bool] | None = None
@@ -92,22 +94,47 @@ def parse_generated_functions(path: Path) -> list[Function]:
 
     if pending is not None:
         raise InventoryError(f"{path}: function {pending[0]} has no first instruction")
-    if not functions:
+    if require_functions and not functions:
         raise InventoryError(f"{path}: no generated functions found")
+    return functions
+
+
+def validate_function_order(
+    functions: list[Function], description: str
+) -> None:
+    if not functions:
+        raise InventoryError(f"{description}: no generated functions found")
 
     seen_addresses: set[int] = set()
     previous_end = 0
     for function in functions:
         if function.address in seen_addresses:
             raise InventoryError(
-                f"{path}: duplicate function address {function.address:#010x}"
+                f"{description}: duplicate function address "
+                f"{function.address:#010x}"
             )
         if function.address < previous_end:
             raise InventoryError(
-                f"{path}: overlapping function at {function.address:#010x}"
+                f"{description}: overlapping function at "
+                f"{function.address:#010x}"
             )
         seen_addresses.add(function.address)
         previous_end = function.address + function.size
+
+
+def parse_generated_function_tree(path: Path) -> list[Function]:
+    if not path.is_dir():
+        raise InventoryError(f"{path}: assembly root is not a directory")
+    functions: list[Function] = []
+    for assembly_path in sorted(path.rglob("*.s")):
+        functions.extend(
+            parse_generated_functions(
+                assembly_path,
+                require_functions=False,
+            )
+        )
+    functions.sort(key=lambda function: function.address)
+    validate_function_order(functions, str(path))
     return functions
 
 
@@ -218,9 +245,9 @@ def parse_args() -> argparse.Namespace:
         description="Create or update the resident-function inventory."
     )
     parser.add_argument(
-        "--assembly",
-        default="tmp/splat/asm/entry.s",
-        help="generated resident assembly path relative to the repository root",
+        "--assembly-root",
+        default="tmp/splat/asm",
+        help="generated assembly directory relative to the repository root",
     )
     parser.add_argument(
         "--output",
@@ -234,9 +261,11 @@ def main() -> int:
     args = parse_args()
     try:
         root = require_workspace_root()
-        assembly = resolve_within(root, args.assembly, must_exist=True)
+        assembly_root = resolve_within(
+            root, args.assembly_root, must_exist=True
+        )
         output = resolve_within(root, args.output)
-        generated = parse_generated_functions(assembly)
+        generated = parse_generated_function_tree(assembly_root)
         existing = load_inventory(output) if output.exists() else []
         merged = merge_inventory(generated, existing)
         write_inventory(output, merged)

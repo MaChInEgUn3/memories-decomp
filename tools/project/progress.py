@@ -11,7 +11,7 @@ from function_inventory import (
     Function,
     InventoryError,
     load_inventory,
-    parse_generated_functions,
+    parse_generated_function_tree,
 )
 from workspace import WorkspaceError, require_workspace_root, resolve_within
 
@@ -87,10 +87,10 @@ def atomic_write_json(path: Path, value: dict[str, Any]) -> None:
 
 
 def calculate(root: Path) -> dict[str, Any]:
-    assembly_path = resolve_within(
-        root, "tmp/splat/asm/entry.s", must_exist=True
+    assembly_root = resolve_within(
+        root, "tmp/splat/asm", must_exist=True
     )
-    generated = parse_generated_functions(assembly_path)
+    generated = parse_generated_function_tree(assembly_root)
     inventory_path = resolve_within(
         root, "config/slus_01411/functions.csv", must_exist=True
     )
