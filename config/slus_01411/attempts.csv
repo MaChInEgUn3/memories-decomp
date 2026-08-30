@@ -168,3 +168,5 @@ address,attempt,compiler,flags,result,summary
 0x80015038,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,"Volatile short-circuit tests reproduced both global loads, branches, and the call relocation."
 0x800151B0,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"Eight-byte stand-in State was classified as small data, producing an invalid GPREL16 access."
 0x800151B0,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Forty-byte State forced the target HI16/LO16 address and preserved the five ordered byte stores.
+0x800157DC,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Eight-byte stand-in State was classified as small data instead of the target absolute address.
+0x800157DC,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,"Large State plus ordered field updates matched both calls, address relocations, and delay-slot store."
