@@ -1,0 +1,154 @@
+# Toolchain Fingerprint
+
+## Current conclusion
+
+The resident executable strongly supports a late PsyQ GCC/CCPSX toolchain.
+Assembler output in the main game cohort matches the **ASPSX 2.81/2.86
+behavior class**. The available binary does not distinguish 2.81 from 2.86 and
+does not independently identify the complete SDK package.
+
+The user reports that corresponding SDK material contains `LIBDS.LIB`
+identified as PsyQ 4.7. This makes **PsyQ 4.7 the leading package candidate**.
+No `LIBDS.LIB` artifact is currently present in this workspace, so its hash,
+archive-member identities, and relationship to this executable remain
+unverified. Package version and assembler executable version are separate
+claims: the user-provided 4.7 evidence is compatible with the late assembler
+fingerprint but does not replace instruction-level matching.
+
+The working hypotheses are:
+
+| Component | Current assessment |
+|---|---|
+| C compiler | Optimized GCC-based CCPSX, likely a 2.8-era backend |
+| Optimization | Likely `-O2`; exact flags remain unselected |
+| Main game small-data setting | Approximately `-G8` |
+| Later game/engine objects | Probable separate `-G0` cohort |
+| Resident SDK libraries | Prebuilt PsyQ/SN archive members, generally no GP-relative access |
+| Assembler | ASPSX 2.81 or 2.86 behavior |
+| Linker | PSYLINK-compatible layout |
+| EXE wrapper | CPE2X-style PS-X EXE conversion |
+
+The project-local GNU binutils 2.42 toolchain reproduces the exact assembly
+baseline. It is a deterministic replacement build tool, not a claim about the
+original compiler or linker.
+
+## Address conversion
+
+For the supplied executable:
+
+```text
+virtual address = file offset + 0x8000F800
+file offset     = virtual address - 0x8000F800
+```
+
+The entry point `0x800129D8` is therefore at file offset `0x31D8`.
+
+## Assembler evidence
+
+The game uses GP-relative address formation such as:
+
+```asm
+800140B8  addiu  a1, gp, 0x1FC
+```
+
+There are 68 compiler-shaped `addiu reg,gp,offset` address formations across
+36 game functions. The local maspsx fixture
+`tools/vendor/maspsx/aspsx/fixtures/la.yaml` records:
+
+- ASPSX through 2.79: `lui` followed by `addiu`
+- ASPSX 2.81 and 2.86: one `addiu reg,gp,offset`
+
+This is the strongest evidence for the late assembler class.
+
+Other constraints:
+
+- Positive small immediates overwhelmingly use `addiu reg,zero,imm`.
+- Compiler-shaped code consistently avoids trapping `addi`.
+- Expanded signed and unsigned division sequences use `break 7` and `break 6`
+  checks rather than the `tge zero,zero,93` behavior associated with ASPSX
+  2.05/2.08.
+- Full division checks are present, so the objects were not uniformly assembled
+  with the reduced `-0` expansion mode.
+
+## Compiler evidence
+
+The game region has conventional optimized GCC code generation:
+
+- 922 detected stack prologues, all eight-byte aligned.
+- Common stack frames are 24, 32, and 40 bytes.
+- Calls and returns routinely fill their delay slots.
+- Absolute switch tables are common.
+- Multiplication by constants such as 140000 and 20832 is reduced to
+  shift/add/sub sequences.
+- Eight-byte unaligned copies use `lwl`, `lwr`, `swl`, and `swr`.
+- No COP1 instructions are present; the target is MIPS-I/R3000 fixed-point code.
+
+GP-based instructions occur throughout the main cohort and end at
+`0x8005FB50`. No GP-based instruction occurs in the resident SDK region
+beginning at `0x80073704`. This supports separate object/flag cohorts rather
+than one uniform compiler invocation.
+
+These patterns are compatible with a late CCPSX/GCC 2.8-era compiler, probably
+at `-O2`, but they are not unique enough to select an exact compiler binary.
+
+## Linker and small-data evidence
+
+At file offset `0x80EEC` is the tuple:
+
+```text
+800129D8 0007DD08
+800906E0 0000A828
+8009B4A8 00063280
+```
+
+It describes:
+
+| Section group | Range |
+|---|---|
+| Resident text plus alignment | `0x800129D8-0x800906E0` |
+| Ordinary initialized data through small-data start | `0x800906E0-0x8009AF08` |
+| Small initialized data | `0x8009AF08-0x8009B090` |
+| Small BSS | `0x8009B090-0x8009B4A8` |
+| Ordinary BSS | `0x8009B4A8-0x800FE728` |
+
+The runtime GP is `0x8009AF08`, the start of small initialized data. Small
+strings and objects occupy positive GP offsets, which is consistent with a
+small-data threshold near eight bytes.
+
+## PsyQ library anchors
+
+| Embedded evidence | Virtual address | File offset |
+|---|---:|---:|
+| `intr.c` revision 1.75, 1997-02-07 | `0x800119B8` | `0x21B8` |
+| `bios.c` revision 1.86, 1997-03-28 | `0x80011D70` | `0x2570` |
+| `sys.c` revision 1.140, 1998-01-12 | `0x80012148` | `0x2948` |
+| Sony library copyright 1993-1997 | `0x800919A8` | `0x821A8` |
+
+The latest RCS string requires library source no earlier than January 1998.
+These dates constrain library members; they are not PsyQ package-version
+banners and must not be used alone to select an SDK package.
+
+## Candidate decision gate
+
+An original C compiler is not selected yet. Selection requires multiple
+independent exact matches, including relocation and section behavior.
+
+Probe cases:
+
+1. `1024 / signed_short`, including full divide-by-zero and overflow handling.
+2. Taking the address of an approximately `-G8` static object.
+3. A seven-case switch with an absolute jump table.
+4. Multiplication by 140000 and 20832.
+5. An unaligned eight-byte structure copy.
+6. A five-argument callback call with filled delay slots.
+7. Synthetic `.rdata`, `.text`, `.data`, `.sdata`, `.sbss`, and `.bss`
+   objects linked around `_gp = 0x8009AF08`.
+
+Test a lawful PsyQ 4.7 candidate first, then adjacent versions as controls,
+across `-O1`/`-O2`, `-G0`/`-G4`/`-G8`/`-G16`, and ASPSX 2.81/2.86 behavior.
+Preserve compiler-generated assembly before maspsx so compiler and assembler
+differences remain separable. When `LIBDS.LIB` is supplied, record its complete
+hash and compare individual members against the anchored CD/filesystem code.
+
+Until a candidate passes this gate, exact assembly remains the primary build
+input and matching C progress remains zero.

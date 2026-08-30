@@ -17,14 +17,19 @@ SHA-256: 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 | Resident text bytes | 515,324 (`0x7DCFC`) |
 | Discovered functions | 1,792 |
 | Bytes assigned to functions | 513,544 (`0x7D608`) |
-| Functions heuristically marked handwritten | 116 |
-| Handwritten-function bytes | 54,024 (`0xD308`) |
-| Remaining assembly-function bytes | 459,520 (`0x70300`) |
+| Game/engine functions | 1,194 |
+| Game/engine function bytes | 396,212 (`0x60BB4`) |
+| PsyQ CRT/SDK functions | 598 |
+| PsyQ CRT/SDK function bytes | 117,332 (`0x1CA54`) |
+| Game functions heuristically marked handwritten | 63 |
+| Game handwritten-function bytes | 46,236 (`0xB49C`) |
+| Remaining game assembly-function bytes | 349,976 (`0x55718`) |
 | Embedded/unassigned text bytes | 1,780 (`0x6F4`) |
 | Matching C bytes | 0 |
 
-Handwritten classifications are provisional Splat/spimdisasm findings and do
-not yet distinguish game assembly from PsyQ or other library implementations.
+SDK classification is based on verified ownership boundaries. Handwritten
+classifications inside the game region remain provisional Splat/spimdisasm
+findings.
 
 ## Generate metrics
 

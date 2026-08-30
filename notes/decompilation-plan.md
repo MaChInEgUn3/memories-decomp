@@ -43,8 +43,11 @@ with full-file comparison as the merge gate.
   unrelated directories.
 - No original symbols, map files, source fragments, debug data, BIN/CUE image,
   or confirmed original compiler are currently available.
-- PsyQ 4.5/4.6 is a hypothesis to test, not a fixed assumption. The 2002 North
-  American release may contain older engine objects or SDK libraries.
+- PsyQ 4.7 is the leading package hypothesis because the user reports that the
+  corresponding SDK material contains a 4.7 `LIBDS.LIB`. The library is not
+  currently present in this workspace, so its hash and member signatures still
+  require verification. Binary-derived compiler and assembler fingerprints
+  remain the final matching criteria.
 
 ## Current state
 
@@ -311,9 +314,9 @@ Treat toolchain identification as a measured investigation:
   signed/unsigned arithmetic, structure accesses, and call-heavy routines.
 - Document prologue/epilogue forms, delay-slot scheduling, register allocation,
   branch idioms, switch-table layout, small-data use, and emitted helper calls.
-- Build a small local compiler probe corpus with candidate PsyQ 4.5/4.6
-  toolchains when lawfully available, while also testing plausible older
-  versions and reproducible open-source GCC/binutils combinations.
+- Build a small local compiler probe corpus with PsyQ 4.7 first when lawfully
+  available. Retain 4.5/4.6 and plausible older versions as controls, together
+  with reproducible open-source GCC/binutils combinations.
 - Compare generated instruction sequences and object/link behavior rather than
   relying on game release dates or SDK library RCS dates.
 - Identify likely PsyQ library functions separately from game-owned code and
@@ -491,7 +494,7 @@ Final acceptance criteria:
 
 | Risk | Handling |
 |---|---|
-| PsyQ 4.5/4.6 is incorrect or unavailable | Fingerprint multiple functions and test candidates; retain exact assembly until a lawful matching compiler is established. |
+| The reported PsyQ 4.7 library provenance is incomplete or the game used mixed tool cohorts | Hash and compare `LIBDS.LIB` when supplied, fingerprint multiple functions, test adjacent candidates, and retain exact assembly until a lawful matching compiler is established. |
 | SDK library dates are mistaken for game compiler dates | Treat RCS strings only as library evidence and corroborate with generated code/object behavior. |
 | No map or symbols exist | Use conservative address-based names, cross-references, string anchors, signatures, and documented evidence-based renames. |
 | Section/BSS boundaries are not explicit in the PS-X header | Infer them from address references, initialization loops, alignment, linker experiments, and complete byte accounting. |

@@ -58,6 +58,32 @@ The corresponding executable bytes are all zero. An additional zero region
 continues to `0x8013A000`, but startup does not include that gap in this clear
 loop, so it is classified separately.
 
+## Original linker subregions
+
+A descriptor at file offset `0x80EEC` contains:
+
+```text
+800129D8 0007DD08
+800906E0 0000A828
+8009B4A8 00063280
+```
+
+Together with `_gp = 0x8009AF08` and the startup clear loop, this supports the
+finer linker layout:
+
+| Region | Address range | Size |
+|---|---:|---:|
+| Read-only data before resident text | `0x80010000-0x800129D8` | `0x29D8` |
+| Resident text and alignment | `0x800129D8-0x800906E0` | `0x7DD08` |
+| Ordinary initialized data | `0x800906E0-0x8009AF08` | `0xA828` |
+| Small initialized data | `0x8009AF08-0x8009B090` | `0x188` |
+| Small BSS | `0x8009B090-0x8009B4A8` | `0x418` |
+| Ordinary BSS | `0x8009B4A8-0x800FE728` | `0x63280` |
+
+The PS-X EXE header flattens these into one loaded payload, so the project keeps
+the top-level exact-byte image map separately from this inferred original
+linker organization.
+
 ## Runtime load slots
 
 The region beginning at `0x8013A000` contains fixed slot boundaries also
