@@ -1118,7 +1118,7 @@ address,size,name,status,module,notes
 0x8006C37C,0x9FC,func_8006C37C,unmatched_asm,game,
 0x8006CD78,0x243C,func_8006CD78,unmatched_asm,game,
 0x8006F1B4,0x13D8,func_8006F1B4,unmatched_asm,game,
-0x8007058C,0x20,func_8007058C,unmatched_asm,game,
+0x8007058C,0x20,func_8007058C,matching_c,game,Bytecode reader using GCC 2.8.1 PSX -O2 -G0 with a v1 register hint
 0x800705AC,0x2C,func_800705AC,unmatched_asm,game,
 0x800705D8,0x78,func_800705D8,unmatched_asm,game,
 0x80070650,0xC0,func_80070650,unmatched_asm,game,
