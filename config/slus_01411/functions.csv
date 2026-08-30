@@ -718,7 +718,7 @@ address,size,name,status,module,notes
 0x800451E0,0x28,func_800451E0,unmatched_asm,game,
 0x80045208,0x12C,func_80045208,unmatched_asm,game,
 0x80045334,0x118,func_80045334,unmatched_asm,game,
-0x8004544C,0x10,func_8004544C,unmatched_asm,game,
+0x8004544C,0x10,func_8004544C,matching_c,game,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x8004545C,0x28,func_8004545C,unmatched_asm,game,
 0x80045484,0x90,func_80045484,unmatched_asm,game,
 0x80045514,0x6D4,func_80045514,unmatched_asm,game,

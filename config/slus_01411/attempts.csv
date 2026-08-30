@@ -94,3 +94,4 @@ address,attempt,compiler,flags,result,summary
 0x80044DA0,1,gcc_2_8_1_g0,pre-policy-6 final -O2 -G0,matched,6 pre-policy variants: exact -G0; -G8 used GP-relative global access and volatile-byte form added loads
 0x80044FE4,1,gcc_2_8_1_g0,pre-policy-2 final -O2 -G0,matched,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x8004503C,1,gcc_2_8_1_g0,pre-policy-4 final -O2 -G0,matched,4 pre-policy variants: exact -G0; -G8 used GP-relative global access
+0x8004544C,1,gcc_2_8_1_g0,pre-policy-2 final -O2 -G0,matched,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
