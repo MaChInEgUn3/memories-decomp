@@ -17,7 +17,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain check-tools info extract map split build match progress clean
+.PHONY: help workspace verify-inputs tools python-tools toolchain check-tools info extract map split build match inventory progress clean
 
 help:
 	@printf '%s\n' \
@@ -30,6 +30,7 @@ help:
 		'  split          Split the executable into temporary analysis output' \
 		'  build          Build the assembly/data PS-X executable baseline' \
 		'  match          Build and compare the complete target executable' \
+		'  inventory      Update the tracked resident-function inventory' \
 		'  progress       Generate current resident-code progress metrics' \
 		'  clean          Remove known generated project output under tmp/' \
 		'  verify-inputs  Validate the SLUS-01411 executable and DATA files' \
@@ -72,6 +73,9 @@ build: split
 
 match: build
 	@$(PYTHON) tools/project/match.py
+
+inventory: split
+	@$(PYTHON) tools/project/function_inventory.py
 
 progress: split
 	@$(PYTHON) tools/project/progress.py
