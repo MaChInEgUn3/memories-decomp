@@ -57,3 +57,4 @@ address,attempt,compiler,flags,result,summary
 0x80029EB0,1,gcc_2_8_1_g8,-O2 -G8 direct-index,nonmatch,Direct indexing used the wrong address register allocation
 0x80029EB0,2,gcc_2_8_1_g8,-O2 -G8 explicit-base-increment,matched,Explicit base increment reproduced the exact byte load
 0x8002BAA0,1,gcc_2_8_1_g8,-O2 -G8,matched,Byte store of one matched first variant.
+0x8002BAAC,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty pointer-parameter function matched first variant.
