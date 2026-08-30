@@ -48,6 +48,9 @@ make info
 make extract
 make map
 make split
+make inventory
+make classify-functions
+make progress
 ```
 
 - `info` prints the verified PS-X EXE header.
@@ -57,6 +60,12 @@ make split
 - `split` deletes only the previous `tmp/splat/` output and regenerates
   disassembly, data assembly, binary regions, linker diagnostics, and automatic
   symbols there.
+- `inventory` reconciles generated function boundaries with the tracked
+  `config/slus_01411/functions.csv`.
+- `classify-functions` applies the verified game/CRT/SDK ownership ranges
+  without overwriting a future `matching_c` status.
+- `progress` writes current status and ownership metrics to
+  `tmp/reports/progress.json`.
 
 The Splat linker script under `tmp/splat/` is diagnostic. The exact build uses
 the project linker script at `linker/slus_01411.ld`, which preserves the
@@ -90,6 +99,22 @@ This baseline does not include the original executable as one opaque blob.
 Resident code is regenerated as MIPS assembly, known data ranges are
 regenerated as assembly, and remaining binary ranges are separately classified
 and excluded from C-decompilation progress.
+
+## Full repository audit
+
+```sh
+make audit
+```
+
+The audit performs a clean exact build, reconciles the function inventory,
+reapplies ownership classifications, generates progress metrics, and checks:
+
+- Every commit author and committer is Copilot.
+- No commit contains a `Co-authored-by` trailer.
+- No supplied game file, generated output, downloaded dependency, installed
+  environment, vendor checkout, or local toolchain is tracked.
+- Tracked Markdown documentation is under `notes/`.
+- The worktree is clean after deterministic regeneration.
 
 ## Cleanup
 

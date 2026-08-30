@@ -28,6 +28,18 @@ For each candidate:
 8. Update generated progress metadata.
 9. Commit only that function or an inseparable tightly coupled group.
 
+The tracked inventory is `config/slus_01411/functions.csv`. Reconcile generated
+boundaries and ownership before selecting work:
+
+```sh
+make classify-functions
+make progress
+```
+
+The inventory records address, size, current name, status, module ownership,
+and durable notes. Its address and size fields must continue to agree with the
+generated split.
+
 ## Function status classes
 
 - **Matching C:** compiler-generated game code reproduced from tracked C.
