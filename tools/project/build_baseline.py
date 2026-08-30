@@ -128,6 +128,9 @@ def compile_c(
     raw_assembly = resolve_within(
         root, f"tmp/project-build/asm/{object_name}.compiler.s"
     )
+    filtered_assembly = resolve_within(
+        root, f"tmp/project-build/asm/{object_name}.filtered.s"
+    )
     transformed_assembly = resolve_within(
         root, f"tmp/project-build/asm/{object_name}.maspsx.s"
     )
@@ -137,6 +140,7 @@ def compile_c(
     maspsx_flags = profile.get("maspsx_flags")
     aspsx_version = profile.get("aspsx_version")
     data_limit = profile.get("data_limit")
+    assembly_filter = profile.get("assembly_filter")
     if (
         not isinstance(compiler_flags, list)
         or not all(isinstance(flag, str) for flag in compiler_flags)
@@ -146,6 +150,10 @@ def compile_c(
         or not isinstance(data_limit, int)
         or isinstance(data_limit, bool)
         or data_limit < 0
+        or (
+            assembly_filter is not None
+            and not isinstance(assembly_filter, str)
+        )
     ):
         raise BuildError(f"invalid C compiler configuration for {source}")
 
@@ -161,10 +169,33 @@ def compile_c(
         ],
     )
 
+    maspsx_input = raw_assembly
     environment = os.environ.copy()
     environment.update(local_environment(root))
+    if assembly_filter is not None:
+        filter_path = resolve_within(
+            root, assembly_filter, must_exist=True
+        )
+        try:
+            with raw_assembly.open("rb") as input_handle:
+                with filtered_assembly.open("wb") as output_handle:
+                    subprocess.run(
+                        [sys.executable, str(filter_path)],
+                        cwd=root,
+                        env=environment,
+                        stdin=input_handle,
+                        stdout=output_handle,
+                        check=True,
+                    )
+        except subprocess.CalledProcessError as error:
+            raise BuildError(
+                f"assembly filter failed with exit code "
+                f"{error.returncode}: {source}"
+            ) from error
+        maspsx_input = filtered_assembly
+
     try:
-        with raw_assembly.open("rb") as input_handle:
+        with maspsx_input.open("rb") as input_handle:
             with transformed_assembly.open("wb") as output_handle:
                 subprocess.run(
                     [
