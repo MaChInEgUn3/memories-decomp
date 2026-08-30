@@ -60,3 +60,4 @@ address,attempt,compiler,flags,result,summary
 0x8002BAAC,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty pointer-parameter function matched first variant.
 0x8002C560,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty function matched exactly.
 0x8002C568,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty function matched exactly.
+0x8002CDE8,1,gcc_2_8_1_g8,-O2 -G8,matched,Direct call matched the exact R_MIPS_26 relocation.
