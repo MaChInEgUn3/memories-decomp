@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "segments": [
+    {
+      "kind": "asm",
+      "source": "tmp/splat/asm/entry.s",
+      "object": "entry.o"
+    },
+    {
+      "kind": "c",
+      "source": "src/game/check_point.c",
+      "object": "check_point.o",
+      "compiler": "tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc",
+      "compiler_flags": [
+        "-O2",
+        "-G8",
+        "-mel",
+        "-mips1",
+        "-mcpu=R3000",
+        "-msoft-float",
+        "-fno-builtin",
+        "-Dpsx",
+        "-D__psx__",
+        "-D__psx"
+      ],
+      "aspsx_version": "2.81",
+      "maspsx_flags": [
+        "--expand-div",
+        "-G8"
+      ],
+      "data_limit": 8
+    },
+    {
+      "kind": "asm",
+      "source": "tmp/splat/asm/sdk.s",
+      "object": "sdk.o"
+    }
+  ]
+}

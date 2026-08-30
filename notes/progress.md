@@ -23,9 +23,10 @@ SHA-256: 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 | PsyQ CRT/SDK function bytes | 117,332 (`0x1CA54`) |
 | Game functions heuristically marked handwritten | 63 |
 | Game handwritten-function bytes | 46,236 (`0xB49C`) |
-| Remaining game assembly-function bytes | 349,976 (`0x55718`) |
+| Remaining game assembly-function bytes | 349,912 (`0x556D8`) |
 | Embedded/unassigned text bytes | 1,780 (`0x6F4`) |
-| Matching C bytes | 0 |
+| Matching C functions | 1 |
+| Matching C bytes | 64 (`0x40`) |
 
 SDK classification is based on verified ownership boundaries. Handwritten
 classifications inside the game region remain provisional Splat/spimdisasm
@@ -43,3 +44,6 @@ machine-readable output to `tmp/reports/progress.json`.
 Only matching C contributes to C progress. Exact generated assembly and
 classified binary data are necessary for a matching baseline but do not count
 as decompiled C.
+
+The first matching function is `func_800736C4`, which prints the
+`check_point` diagnostic and its numbered separator.

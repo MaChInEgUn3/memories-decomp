@@ -1195,7 +1195,7 @@ address,size,name,status,module,notes
 0x800735DC,0x48,func_800735DC,unmatched_asm,game,
 0x80073624,0x68,func_80073624,unmatched_asm,game,
 0x8007368C,0x38,func_8007368C,unmatched_asm,game,
-0x800736C4,0x40,func_800736C4,unmatched_asm,game,
+0x800736C4,0x40,func_800736C4,matching_c,game,First matching C using GCC 2.8.1 PSX -O2 -G8 and maspsx 2.81
 0x80073704,0x20,func_80073704,sdk_asm,psyq/sdk,
 0x80073724,0x10,func_80073724,sdk_asm,psyq/sdk,
 0x80073734,0x24,func_80073734,sdk_asm,psyq/sdk,
