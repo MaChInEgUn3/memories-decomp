@@ -925,7 +925,7 @@ address,size,name,status,module,notes
 0x800590DC,0x58,func_800590DC,unmatched_asm,game,
 0x80059134,0x8C,func_80059134,unmatched_asm,game,
 0x800591C0,0x3C,func_800591C0,unmatched_asm,game,
-0x800591FC,0xC,func_800591FC,unmatched_asm,game,
+0x800591FC,0xC,func_800591FC,matching_c,game,3 pre-policy variants: Plain address return and split-only failed; -mgas -msplit-addresses placed LO16 in the return delay slot.
 0x80059208,0xC,func_80059208,unmatched_asm,game,
 0x80059214,0xC,func_80059214,unmatched_asm,game,
 0x80059220,0xC,func_80059220,unmatched_asm,game,
