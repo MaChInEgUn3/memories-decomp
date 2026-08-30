@@ -83,3 +83,4 @@ address,attempt,compiler,flags,result,summary
 0x800156B8,1,gcc-2.8.1-psx,pre-policy >113 variants,deferred,Closest pointer-loop form matched size relocations and final seven instructions but used a1 instead of v0 for the initial address load; search exceeded the later six-attempt rule
 0x800136D4,1,gcc_2_8_1_g8,pre-policy-47 final -O2 -G8,matched,47 pre-policy variants: volatile nine-byte local reproduced the exact stack adjustment and empty return.
 0x80015BD8,1,gcc_2_8_1_g8,pre-policy-19 final -O2 -G8,matched,19 pre-policy variants: shared state pointer reproduced one absolute base load and the ordered value and flagged-byte stores.
+0x80015BF0,1,gcc_2_8_1_g8,pre-policy-17 final -O2 -G8,matched,17 pre-policy variants: shared state pointer and ordered assignments reproduced the exact three-byte store sequence.
