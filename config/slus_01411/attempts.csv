@@ -142,3 +142,4 @@ address,attempt,compiler,flags,result,summary
 0x80073474,1,gcc_2_8_1_g0_split,pre-policy-3 final -O2 -G0 -mgas -msplit-addresses,matched,3 pre-policy variants: Direct assignment and split-only failed; -mgas -msplit-addresses selected the target base register and delay-slot store.
 0x800134E0,1,gcc-2.8.1-psx,-O2 -G8 direct-fields,nonmatch,Direct fields reordered loads and stores and produced a function eight bytes short
 0x800134E0,2,gcc-2.8.1-psx,-O2 -G8 local-vector-pointer,matched,Local vector pointer reproduced the exact nineteen-instruction sequence
+0x80013898,1,gcc-2.8.1-psx,-O2 -G8 ordered-globals,matched,Direct ordered GP-relative assignments and polling loop matched all twenty-three instructions

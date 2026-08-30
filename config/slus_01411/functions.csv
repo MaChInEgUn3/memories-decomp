@@ -18,7 +18,7 @@ address,size,name,status,module,notes
 0x800136D4,0x10,func_800136D4,matching_c,game,47 pre-policy variants: volatile nine-byte local reproduced the exact stack adjustment and empty return.
 0x800136E4,0x100,func_800136E4,unmatched_asm,game,
 0x800137E4,0xB4,func_800137E4,unmatched_asm,game,
-0x80013898,0x5C,func_80013898,unmatched_asm,game,
+0x80013898,0x5C,func_80013898,matching_c,game,File-system state initializer using GCC 2.8.1 -O2 -G8
 0x800138F4,0x4C,func_800138F4,unmatched_asm,game,
 0x80013940,0x58,func_80013940,unmatched_asm,game,
 0x80013998,0xFC,func_80013998,unmatched_asm,game,
