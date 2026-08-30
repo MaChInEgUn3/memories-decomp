@@ -849,7 +849,7 @@ address,size,name,status,module,notes
 0x8004BC2C,0x7C,func_8004BC2C,unmatched_asm,game,
 0x8004BCA8,0x40,func_8004BCA8,unmatched_asm,game,
 0x8004BCE8,0x184,func_8004BCE8,unmatched_asm,game,
-0x8004BE6C,0x14,func_8004BE6C,unmatched_asm,game,
+0x8004BE6C,0x14,func_8004BE6C,matching_c,game,4 pre-policy variants: exact for void/return forms under -G0/-G8; selected void -G0
 0x8004BE80,0x8,func_8004BE80,unmatched_asm,game,
 0x8004BE88,0x224,func_8004BE88,unmatched_asm,game,
 0x8004C0AC,0x68,func_8004C0AC,unmatched_asm,game,
