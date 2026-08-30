@@ -62,7 +62,10 @@ make verify-disc
 - `map` validates every top-level byte range and its SHA-256.
 - `split` deletes only the previous `tmp/splat/` output and regenerates
   disassembly, data assembly, binary regions, linker diagnostics, and automatic
-  symbols there.
+  symbols there. Before Splat runs,
+  `tools/project/generate_build_config.py` combines the static split template
+  with `config/slus_01411/matching_c.json` and writes generated manifests under
+  `tmp/generated/`.
 - `inventory` reconciles generated function boundaries with the tracked
   `config/slus_01411/functions.csv`.
 - `classify-functions` applies the verified game/CRT/SDK ownership ranges
@@ -88,9 +91,10 @@ The build performs these steps:
 1. Regenerate the validated Splat split beneath `tmp/splat/`.
 2. Assemble unmatched resident MIPS text and exact data using the local GNU
    assembler.
-3. Compile ordered matching-C segments using the compiler and flags recorded in
-   `config/slus_01411/text_sources.json`, then normalize their assembly through
-   maspsx.
+3. Compile ordered matching-C segments using
+   `config/slus_01411/matching_c.json` and the named profiles in
+   `config/slus_01411/compiler_profiles.json`, then normalize their assembly
+   through maspsx.
 4. Convert each classified binary region into a MIPS object.
 5. Link all text objects in manifest order with the original VRAM and file load
    addresses.

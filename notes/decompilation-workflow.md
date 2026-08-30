@@ -40,6 +40,21 @@ The inventory records address, size, current name, status, module ownership,
 and durable notes. Its address and size fields must continue to agree with the
 generated split.
 
+After a candidate has a terminal `matched` row in
+`config/slus_01411/attempts.csv`, promote it with:
+
+```sh
+tools/environments/python/bin/python \
+  tools/project/integrate_verified_match.py ADDRESS \
+  --source tmp/path/to/verified.c \
+  --destination src/game/func_ADDRESS.c \
+  --profile gcc_2_8_1_g8 \
+  --note "Concise matching evidence"
+```
+
+The integrator updates the inventory and `matching_c.json`. Generated Splat and
+text-object manifests remain under `tmp/generated/` and must not be edited.
+
 ## Function status classes
 
 - **Matching C:** compiler-generated game code reproduced from tracked C.
