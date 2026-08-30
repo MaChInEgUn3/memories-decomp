@@ -91,3 +91,4 @@ address,attempt,compiler,flags,result,summary
 0x80044D0C,1,gcc_2_8_1_g0,pre-policy-26 final -O2 -G0,matched,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly
 0x80044D20,1,gcc_2_8_1_g0,pre-policy-26 final -O2 -G0,matched,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly
 0x80044D34,1,gcc_2_8_1_g0,pre-policy-26 final -O2 -G0,matched,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly
+0x80044DA0,1,gcc_2_8_1_g0,pre-policy-6 final -O2 -G0,matched,6 pre-policy variants: exact -G0; -G8 used GP-relative global access and volatile-byte form added loads
