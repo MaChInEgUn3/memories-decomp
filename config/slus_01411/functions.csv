@@ -672,7 +672,7 @@ address,size,name,status,module,notes
 0x80042B98,0x28,func_80042B98,unmatched_asm,game,
 0x80042BC0,0x48,func_80042BC0,unmatched_asm,game,
 0x80042C08,0x570,func_80042C08,unmatched_asm,game,
-0x80043178,0x14,func_80043178,unmatched_asm,game,
+0x80043178,0x14,func_80043178,matching_c,game,Two halfword field copies matched exact load/store scheduling.
 0x8004318C,0xA4,func_8004318C,unmatched_asm,game,
 0x80043230,0xF8,func_80043230,unmatched_asm,game,
 0x80043328,0x1CC,func_80043328,unmatched_asm,game,

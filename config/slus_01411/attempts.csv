@@ -45,3 +45,4 @@ address,attempt,compiler,flags,result,summary
 0x80041434,1,gcc_2_8_1_g8,-O2 -G8,matched,Constant 1 return matched exactly.
 0x800429A8,1,gcc_2_8_1_g8,-O2 -G8,matched,Little-endian two-byte load expression matched exactly.
 0x800429BC,1,gcc_2_8_1_g8,-O2 -G8,matched,Base pointer plus little-endian two-byte offset matched exactly.
+0x80043178,1,gcc_2_8_1_g8,-O2 -G8,matched,Two halfword field copies matched exact load/store scheduling.
