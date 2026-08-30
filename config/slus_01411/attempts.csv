@@ -41,3 +41,4 @@ address,attempt,compiler,flags,result,summary
 0x80040410,1,gcc_2_8_1_g8,-O2 -G8,matched,Byte assignment followed by flags clear matched exact scheduling.
 0x8004044C,1,gcc_2_8_1_g8,-O2 -G8,matched,Three byte assignments followed by flags clear matched exactly.
 0x8004141C,1,gcc_2_8_1_g8,-O2 -G8,matched,Halfword clear with -1 return matched exactly.
+0x80041428,1,gcc_2_8_1_g8,-O2 -G8,matched,Halfword clear with 1 return matched exactly.
