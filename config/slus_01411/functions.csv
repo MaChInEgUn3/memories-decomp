@@ -589,7 +589,7 @@ address,size,name,status,module,notes
 0x8003E80C,0x48,func_8003E80C,unmatched_asm,game,
 0x8003E854,0x63C,func_8003E854,unmatched_asm,game,
 0x8003EE90,0x38,func_8003EE90,unmatched_asm,game,
-0x8003EEC8,0x8,func_8003EEC8,unmatched_asm,game,
+0x8003EEC8,0x8,func_8003EEC8,matching_c,game,Empty void function matched the return-and-nop sequence.
 0x8003EED0,0x3E0,func_8003EED0,unmatched_asm,game,
 0x8003F2B0,0xD8,func_8003F2B0,unmatched_asm,game,
 0x8003F388,0xCC,func_8003F388,unmatched_asm,game,
