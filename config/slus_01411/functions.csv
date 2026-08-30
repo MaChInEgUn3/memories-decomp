@@ -483,7 +483,7 @@ address,size,name,status,module,notes
 0x80038798,0x68,func_80038798,unmatched_asm,game,
 0x80038800,0x88,func_80038800,unmatched_asm,game,
 0x80038888,0x8,func_80038888,matching_c,game,First empty-function candidate matched.
-0x80038890,0x8,func_80038890,unmatched_asm,game,
+0x80038890,0x8,func_80038890,matching_c,game,First empty-function candidate matched.
 0x80038898,0x40,func_80038898,unmatched_asm,game,
 0x800388D8,0xEC,func_800388D8,unmatched_asm,game,
 0x800389C4,0x14,func_800389C4,unmatched_asm,game,
