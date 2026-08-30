@@ -28,3 +28,5 @@ address,attempt,compiler,flags,result,summary
 0x8003B714,1,gcc_2_8_1_g8,-O2 -G8,matched,Zero-valued third-argument call wrapper matched exactly.
 0x8003B734,1,gcc_2_8_1_g8,-O2 -G8,matched,Incomplete-array halfword declaration produced the required absolute masked getter.
 0x8003D32C,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty void function matched the return-and-nop sequence.
+0x8003E46C,1,gcc_2_8_1_g8,-O2 -G8 merged-stores,nonmatch,Compiler merged the two flag stores and produced a function four bytes short
+0x8003E46C,2,gcc_2_8_1_g8,-O2 -G8 volatile-flags,matched,Variant 1 merged two flag stores and was four bytes short; volatile flags plus a local value preserved the intermediate store.
