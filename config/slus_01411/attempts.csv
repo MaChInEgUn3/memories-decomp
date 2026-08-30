@@ -68,3 +68,4 @@ address,attempt,compiler,flags,result,summary
 0x800300AC,1,gcc_2_8_1_g0_split,pre-policy-6 final -O2 -G0 -mgas -msplit-addresses,matched,6 pre-policy variants: exact with -G0 -mgas -msplit-addresses; non-matching variants used the wrong address temporary or GPREL access.
 0x80030F80,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 call-wrapper candidate matched linked bytes and relocations.
 0x80031078,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 global-byte assignment candidate matched.
+0x8003134C,1,gcc_2_8_1_g8,-O2 -G8,matched,First empty-function candidate matched.
