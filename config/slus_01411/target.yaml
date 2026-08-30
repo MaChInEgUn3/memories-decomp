@@ -36,3 +36,9 @@ inputs:
   - path: game/DATA/WA_MRG.MRG
     size: 37748736
     sha256: a519a1f5b27f4c6702613ba48c10bf945d25c9c51611ae3d2fab6e5d562b2d66
+  - path: game/rpg-yfm.bin
+    size: 517872768
+    sha256: c020cb7cef2f55a0433324444f9052d0660c3eb247730d1ab1ec7204962d6c59
+  - path: game/rpg-yfm.cue
+    size: 73
+    sha256: 5d834807b43eaee5a3113cf1ed9167efac9fc40a2b64b395435095e429b86d4a
