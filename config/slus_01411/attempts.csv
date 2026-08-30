@@ -27,3 +27,4 @@ address,attempt,compiler,flags,result,summary
 0x800735A0,1,gcc-2.8.1-psx,-O2 -G0 volatile-base,matched,Immediate value store reproduced all fifteen instructions on the first attempt
 0x8003B714,1,gcc_2_8_1_g8,-O2 -G8,matched,Zero-valued third-argument call wrapper matched exactly.
 0x8003B734,1,gcc_2_8_1_g8,-O2 -G8,matched,Incomplete-array halfword declaration produced the required absolute masked getter.
+0x8003D32C,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty void function matched the return-and-nop sequence.
