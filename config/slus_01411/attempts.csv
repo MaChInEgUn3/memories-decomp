@@ -80,3 +80,4 @@ address,attempt,compiler,flags,result,summary
 0x80038890,1,gcc_2_8_1_g8,-O2 -G8,matched,First empty-function candidate matched.
 0x800389C4,1,gcc_2_8_1_g8,-O2 -G8,matched,First halfword bit-clear candidate matched.
 0x80038D14,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 byte/global-store candidate matched.
+0x800156B8,1,gcc-2.8.1-psx,pre-policy >113 variants,deferred,Closest pointer-loop form matched size relocations and final seven instructions but used a1 instead of v0 for the initial address load; search exceeded the later six-attempt rule
