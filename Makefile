@@ -16,13 +16,15 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain check-tools
+.PHONY: help workspace verify-inputs tools python-tools toolchain check-tools info extract
 
 help:
 	@printf '%s\n' \
 		'Available targets:' \
 		'  tools          Install pinned project tools beneath tools/' \
 		'  check-tools    Verify pinned local project tools' \
+		'  info           Show the verified PS-X executable header' \
+		'  extract        Extract the verified header and loaded payload' \
 		'  verify-inputs  Validate the SLUS-01411 executable and DATA files' \
 		'  workspace      Validate that commands are running from the project root'
 
@@ -43,3 +45,9 @@ toolchain: verify-inputs
 check-tools: workspace
 	@$(PYTHON) tools/bootstrap/bootstrap.py --check
 	@$(PYTHON) tools/bootstrap/binutils.py --check
+
+info: verify-inputs
+	@$(PYTHON) tools/project/psx_exe.py info
+
+extract: verify-inputs
+	@$(PYTHON) tools/project/psx_exe.py extract

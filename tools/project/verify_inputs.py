@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import re
 import struct
 import sys
 from pathlib import Path
 from typing import Any
 
+from hashing import sha256_file
 from workspace import WorkspaceError, require_workspace_root, resolve_within
 
 
@@ -142,14 +142,6 @@ def require_positive_int(
             f"{description} field {field} must be a positive integer"
         )
     return value
-
-
-def hash_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        while chunk := handle.read(1024 * 1024):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def validate_psx_executable(path: Path, metadata: dict[str, Any]) -> None:
@@ -309,7 +301,7 @@ def verify(
                 f"{relative_path}: size is {actual_size}, expected {expected_size}"
             )
 
-        actual_checksum = hash_file(path)
+        actual_checksum = sha256_file(path)
         if actual_checksum != declared_checksum:
             raise VerificationError(
                 f"{relative_path}: SHA-256 is {actual_checksum}, "
