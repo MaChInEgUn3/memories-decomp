@@ -33,6 +33,51 @@ The project-local GNU binutils 2.42 toolchain reproduces the exact assembly
 baseline. It is a deterministic replacement build tool, not a claim about the
 original compiler or linker.
 
+## Open-source GCC 2.8.1 probe
+
+The project pins the public decompals/old-gcc PSX branch:
+
+| Property | Value |
+|---|---|
+| Repository commit | `3fc018e71fcbd150c0887185703f7550723189ff` |
+| Repository tree | `42e6f7d501097920b3a4bde96a9190f3c0b8e114` |
+| GCC source SHA-256 | `3b30fbfdf93e628373d90d174243f3267b0eec9ebe792bb64fd15b8828c2ea4c` |
+| Target | `mips-sony-psx` |
+| GCC version | `2.8.1` |
+| Local prefix | `tools/toolchains/gcc-2.8.1-psx/` |
+
+This is stock GNU GCC 2.8.1 patched for the PSX target. It is not Sony CCPSX
+and does not replace the selected Psy-Q 4.6.1 SDK identity.
+
+The historical patch has two important defects:
+
+1. Its configure-time PSX predefine assignment is unquoted, so `psx`,
+   `__psx__`, and `__psx` are not reliably defined.
+2. Its default-endian expression produces a negative target flag mask, which
+   can clear intended defaults such as soft float.
+
+The matching pipeline therefore always supplies explicit flags:
+
+```text
+-O2 -G8 -mel -mips1 -mcpu=R3000 -msoft-float -fno-builtin
+-Dpsx -D__psx__ -D__psx
+```
+
+Compiler assembly is normalized with:
+
+```text
+maspsx --aspsx-version=2.81 --expand-div -G8
+```
+
+The compiler is built as a native 64-bit host executable because this
+environment lacks 32-bit multilib headers and static libraries. It is suitable
+for matching probes, but broader compiler selection still requires comparison
+with genuine Psy-Q 4.6.1 tools or a verified 32-bit build.
+
+`func_800736C4` is the first confirmed match: GCC 2.8.1 with the explicit flags
+above and maspsx emits its exact 64-byte instruction sequence, and the complete
+PS-X EXE retains the target SHA-256.
+
 ## Address conversion
 
 For the supplied executable:
@@ -154,5 +199,6 @@ assembler, linker, and library artifact. Compare individual members against the
 anchored resident SDK code, but do not use the shared `LIBDS.LIB` alone to
 differentiate 4.6.1 from 4.7.
 
-Until a candidate passes this gate, exact assembly remains the primary build
-input and matching C progress remains zero.
+The GCC probe has passed one independent function. Exact assembly remains the
+fallback until the candidate passes multiple function shapes and genuine
+Psy-Q 4.6.1 artifacts are compared.

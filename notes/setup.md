@@ -43,6 +43,7 @@ The bootstrap is pinned by:
 - `tools/bootstrap/requirements.lock`
 - `tools/bootstrap/bootstrap-requirements.lock`
 - `tools/bootstrap/binutils.json`
+- `tools/bootstrap/old_gcc.json`
 
 The installed state is ignored by Git. The bootstrap does not install global or
 user-level packages.
@@ -71,3 +72,7 @@ tools, so 4.6.1 is the selected SDK version. Its `LIBDS.LIB` was also
 distributed with Psy-Q 4.7, so that library alone cannot distinguish the two
 packages. Exact compiler and library binaries must still be recorded by hash
 when added to the workspace.
+
+The bootstrapped GCC 2.8.1 PSX compiler is a reproducible diagnostic stand-in,
+not Sony CCPSX. The build always supplies explicit PSX target flags as recorded
+in `notes/toolchain.md`.

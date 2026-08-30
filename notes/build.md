@@ -37,6 +37,8 @@ The bootstrap installs:
 - Splat, spimdisasm, Rabbitizer, and `m2c`.
 - Pinned checkouts of asm-differ, maspsx, and decomp-permuter.
 - GNU binutils 2.42 configured for `mipsel-none-elf`.
+- A pinned `mips-sony-psx` GCC 2.8.1 probe compiler built from the public
+  decompals/old-gcc recipe.
 
 Downloaded archives, installed packages, source checkouts, and toolchains remain
 under `tools/`. Temporary build directories remain under `tmp/`.
@@ -81,12 +83,16 @@ make match
 The build performs these steps:
 
 1. Regenerate the validated Splat split beneath `tmp/splat/`.
-2. Assemble the PS-X header, initial data, resident MIPS text, and initialized
-   data using the local GNU assembler.
-3. Convert each classified binary region into a MIPS object.
-4. Link sections with their original VRAM and file load addresses.
-5. Emit `tmp/project-build/SLUS_014.11`.
-6. Compare its complete size and SHA-256 with the supplied executable.
+2. Assemble unmatched resident MIPS text and exact data using the local GNU
+   assembler.
+3. Compile ordered matching-C segments using the compiler and flags recorded in
+   `config/slus_01411/text_sources.json`, then normalize their assembly through
+   maspsx.
+4. Convert each classified binary region into a MIPS object.
+5. Link all text objects in manifest order with the original VRAM and file load
+   addresses.
+6. Emit `tmp/project-build/SLUS_014.11`.
+7. Compare its complete size and SHA-256 with the supplied executable.
 
 A successful run prints:
 
@@ -99,6 +105,9 @@ This baseline does not include the original executable as one opaque blob.
 Resident code is regenerated as MIPS assembly, known data ranges are
 regenerated as assembly, and remaining binary ranges are separately classified
 and excluded from C-decompilation progress.
+
+The current C pipeline has one matching function,
+`src/game/check_point.c::func_800736C4`.
 
 ## Full repository audit
 

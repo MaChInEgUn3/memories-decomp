@@ -59,13 +59,16 @@ with full-file comparison as the merge gate.
 - User-supplied files under `game/` are immutable, ignored, and hash-validated.
 - Pinned Python analysis tools and GNU binutils 2.42 for `mipsel-none-elf` are
   installed locally under `tools/`.
+- A pinned open-source `mips-sony-psx` GCC 2.8.1 probe compiler is installed
+  locally with explicit PSX flags; it is not treated as Sony CCPSX.
 - The executable has a validated region map, Splat configuration, linker
   script, exact assembly/data build, ownership classifications, and a tracked
   1,792-function inventory.
 - `make match` reproduces the target SHA-256 exactly, and `make audit` verifies
   repository policy and clean deterministic regeneration.
-- Matching C remains at zero bytes. Incremental C conversion is gated on
-  validating the selected Psy-Q 4.6.1 compiler/library set and exact flags.
+- One 64-byte game function at `0x800736C4` is matching C using the GCC 2.8.1
+  probe with `-O2 -G8` and maspsx 2.81. Broader conversion remains gated on
+  additional probe matches and comparison with Psy-Q 4.6.1 artifacts.
 
 ### Target executable
 
