@@ -17,7 +17,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain check-tools info extract map split clean
+.PHONY: help workspace verify-inputs tools python-tools toolchain check-tools info extract map split build match clean
 
 help:
 	@printf '%s\n' \
@@ -28,6 +28,8 @@ help:
 		'  extract        Extract the verified header and loaded payload' \
 		'  map            Validate the top-level executable region map' \
 		'  split          Split the executable into temporary analysis output' \
+		'  build          Build the assembly/data PS-X executable baseline' \
+		'  match          Build and compare the complete target executable' \
 		'  clean          Remove known generated project output under tmp/' \
 		'  verify-inputs  Validate the SLUS-01411 executable and DATA files' \
 		'  workspace      Validate that commands are running from the project root'
@@ -62,6 +64,13 @@ map: verify-inputs
 split: map check-tools
 	@$(PYTHON) tools/project/clean.py splat
 	@$(SPLAT) split config/slus_01411/split.yaml
+
+build: split
+	@$(PYTHON) tools/project/clean.py project-build
+	@$(PYTHON) tools/project/build_baseline.py
+
+match: build
+	@$(PYTHON) tools/project/match.py
 
 clean: workspace
 	@$(PYTHON) tools/project/clean.py extract splat project-build reports
