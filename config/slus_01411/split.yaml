@@ -49,7 +49,7 @@ options:
     - ".bss"
 
   string_encoding: ASCII
-  data_string_encoding: SHIFT_JIS
+  data_string_encoding: ASCII
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
 
