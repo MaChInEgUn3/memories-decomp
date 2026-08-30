@@ -89,3 +89,4 @@ address,attempt,compiler,flags,result,summary
 0x80016778,1,gcc_2_8_1_g8,pre-policy-4 final -O2 -G8,matched,4 pre-policy variants: unsigned top-bit extraction stored to byte offset 0x69 reproduced the exact three-instruction sequence.
 0x80044CFC,1,gcc_2_8_1_g0,pre-policy-26 final -O2 -G0,matched,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v0 form; simpler forms used $at/GP or extra addiu
 0x80044D0C,1,gcc_2_8_1_g0,pre-policy-26 final -O2 -G0,matched,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly
+0x80044D20,1,gcc_2_8_1_g0,pre-policy-26 final -O2 -G0,matched,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly

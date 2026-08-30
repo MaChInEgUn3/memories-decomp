@@ -703,7 +703,7 @@ address,size,name,status,module,notes
 0x80044CD4,0x28,func_80044CD4,unmatched_asm,game,
 0x80044CFC,0x10,func_80044CFC,matching_c,game,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v0 form; simpler forms used $at/GP or extra addiu
 0x80044D0C,0x14,func_80044D0C,matching_c,game,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly
-0x80044D20,0x14,func_80044D20,unmatched_asm,game,
+0x80044D20,0x14,func_80044D20,matching_c,game,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly
 0x80044D34,0x14,func_80044D34,unmatched_asm,game,
 0x80044D48,0x58,func_80044D48,unmatched_asm,game,
 0x80044DA0,0x20,func_80044DA0,unmatched_asm,game,
