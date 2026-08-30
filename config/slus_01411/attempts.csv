@@ -152,3 +152,4 @@ address,attempt,compiler,flags,result,summary
 0x80013B04,1,gcc-2.8.1-psx,-O2 -G8 early-return,nonmatch,Compiler placed the busy return at the end and reordered descriptor and LBA address formation
 0x80013B04,2,gcc-2.8.1-psx,-O2 -G8 forced-register-body,nonmatch,Forced registers still inverted the branch layout and changed mask and return scheduling
 0x80013B04,3,gcc-2.8.1-psx,-O2 -G8 forward-goto,nonmatch,Compiler still inverted the busy branch and moved the null return to the shared epilogue
+0x8003FE80,1,gcc-2.8.1-psx,-O2 -G8 volatile-v0-lba-base,matched,Runtime LBA entries four through six and transfer polling matched all twenty-four instructions
