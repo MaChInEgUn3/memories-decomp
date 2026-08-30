@@ -780,7 +780,7 @@ address,size,name,status,module,notes
 0x80048D08,0x20C,func_80048D08,unmatched_asm,game,
 0x80048F14,0xFC,func_80048F14,unmatched_asm,game,
 0x80049010,0xE0,func_80049010,unmatched_asm,game,
-0x800490F0,0x18,func_800490F0,unmatched_asm,game,
+0x800490F0,0x18,func_800490F0,matching_c,game,4 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x80049108,0x18,func_80049108,unmatched_asm,game,
 0x80049120,0x18,func_80049120,unmatched_asm,game,
 0x80049138,0xC8,func_80049138,unmatched_asm,game,
