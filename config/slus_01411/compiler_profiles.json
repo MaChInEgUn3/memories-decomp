@@ -34,7 +34,7 @@
         "-D__psx"
       ],
       "assembly_filter": "tools/project/normalize_gcc272.py",
-      "aspsx_version": "2.81",
+      "aspsx_version": "2.72",
       "maspsx_flags": [
         "--expand-div",
         "-G0"
@@ -74,7 +74,7 @@
         "-D__psx"
       ],
       "assembly_filter": "tools/project/normalize_gcc272.py",
-      "aspsx_version": "2.81",
+      "aspsx_version": "2.72",
       "maspsx_flags": [
         "--expand-div",
         "-G8"
