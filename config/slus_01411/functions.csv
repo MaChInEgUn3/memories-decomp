@@ -993,7 +993,7 @@ address,size,name,status,module,notes
 0x8005BE3C,0x18C,func_8005BE3C,unmatched_asm,game,
 0x8005BFC8,0x22C,func_8005BFC8,unmatched_asm,game,
 0x8005C1F4,0x180,func_8005C1F4,unmatched_asm,game,
-0x8005C374,0x14,func_8005C374,unmatched_asm,game,
+0x8005C374,0x14,func_8005C374,matching_c,game,1 pre-policy variants: Three direct G8 byte assignments matched instruction order and all three GPREL16 relocations.
 0x8005C388,0xDC,func_8005C388,unmatched_asm,game,
 0x8005C464,0x8C,func_8005C464,unmatched_asm,game,
 0x8005C4F0,0x40,func_8005C4F0,unmatched_asm,game,

@@ -121,3 +121,4 @@ address,attempt,compiler,flags,result,summary
 0x80059C18,1,gcc_2_8_1_g8,pre-policy-1 final -O2 -G8,matched,1 pre-policy variants: Straight unsigned-halfword G8 setter matched linked bytes and GPREL16 relocation.
 0x80059C88,1,gcc_2_8_1_g8,pre-policy-1 final -O2 -G8,matched,1 pre-policy variants: Signed-byte comparison against -2 matched linked bytes and GPREL16 relocation.
 0x80059CD0,1,gcc_2_8_1_g8,pre-policy-1 final -O2 -G8,matched,1 pre-policy variants: Signed-byte comparison against -2 matched linked bytes and GPREL16 relocation.
+0x8005C374,1,gcc_2_8_1_g8,pre-policy-1 final -O2 -G8,matched,1 pre-policy variants: Three direct G8 byte assignments matched instruction order and all three GPREL16 relocations.
