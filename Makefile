@@ -17,7 +17,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain compiler check-tools info extract map split build match inventory classify-functions progress disc-layout verify-disc audit clean
+.PHONY: help workspace verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions progress disc-layout verify-disc audit clean
 
 help:
 	@printf '%s\n' \
@@ -54,13 +54,19 @@ python-tools: verify-inputs
 toolchain: verify-inputs
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/binutils.py
 
-compiler: verify-inputs
+compiler: compiler-281 compiler-272
+
+compiler-281: verify-inputs
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/old_gcc.py
+
+compiler-272: verify-inputs
+	@$(BOOTSTRAP_PYTHON) tools/bootstrap/old_gcc_272.py
 
 check-tools: workspace
 	@$(PYTHON) tools/bootstrap/bootstrap.py --check
 	@$(PYTHON) tools/bootstrap/binutils.py --check
 	@$(PYTHON) tools/bootstrap/old_gcc.py --check
+	@$(PYTHON) tools/bootstrap/old_gcc_272.py --check
 
 info: verify-inputs
 	@$(PYTHON) tools/project/psx_exe.py info
