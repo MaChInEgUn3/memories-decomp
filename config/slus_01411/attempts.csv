@@ -65,3 +65,4 @@ address,attempt,compiler,flags,result,summary
 0x80030050,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 candidate matched linked bytes and relocations.
 0x8003006C,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 candidate matched linked bytes and relocations.
 0x80030090,1,gcc_2_8_1_g0_split,pre-policy-31 final -O2 -G0 -mgas -msplit-addresses,matched,"31 pre-policy variants: exact with -G0 -mgas -msplit-addresses; earlier variants used the wrong address temporary, GPREL access, repeated loads, or extra instructions/frame."
+0x800300AC,1,gcc_2_8_1_g0_split,pre-policy-6 final -O2 -G0 -mgas -msplit-addresses,matched,6 pre-policy variants: exact with -G0 -mgas -msplit-addresses; non-matching variants used the wrong address temporary or GPREL access.
