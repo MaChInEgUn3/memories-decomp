@@ -7,13 +7,14 @@ Assembler output in the main game cohort matches the **ASPSX 2.81/2.86
 behavior class**. The available binary does not distinguish 2.81 from 2.86 and
 does not independently identify the complete SDK package.
 
-The user reports that corresponding SDK material contains `LIBDS.LIB`
-identified as PsyQ 4.7. This makes **PsyQ 4.7 the leading package candidate**.
-No `LIBDS.LIB` artifact is currently present in this workspace, so its hash,
-archive-member identities, and relationship to this executable remain
-unverified. Package version and assembler executable version are separate
-claims: the user-provided 4.7 evidence is compatible with the late assembler
-fingerprint but does not replace instruction-level matching.
+The user independently evaluated the SDK with multiple tools and selected
+**Psy-Q 4.6.1**, a minor 4.6 release with limited distribution. Its
+`LIBDS.LIB` was also shipped with Psy-Q 4.7, explaining the earlier apparent
+4.7 identification. `LIBDS.LIB` therefore constrains the library cohort but is
+not unique package evidence. Package version and assembler executable version
+remain separate claims: the 4.6.1 conclusion is compatible with the late
+assembler fingerprint, while instruction-level matching still determines exact
+flags and mixed object cohorts.
 
 The working hypotheses are:
 
@@ -144,11 +145,14 @@ Probe cases:
 7. Synthetic `.rdata`, `.text`, `.data`, `.sdata`, `.sbss`, and `.bss`
    objects linked around `_gp = 0x8009AF08`.
 
-Test a lawful PsyQ 4.7 candidate first, then adjacent versions as controls,
-across `-O1`/`-O2`, `-G0`/`-G4`/`-G8`/`-G16`, and ASPSX 2.81/2.86 behavior.
-Preserve compiler-generated assembly before maspsx so compiler and assembler
-differences remain separable. When `LIBDS.LIB` is supplied, record its complete
-hash and compare individual members against the anchored CD/filesystem code.
+Test the lawful Psy-Q 4.6.1 compiler and libraries first, then 4.6 and 4.7 as
+diagnostic controls, across `-O1`/`-O2`,
+`-G0`/`-G4`/`-G8`/`-G16`, and ASPSX 2.81/2.86 behavior. Preserve
+compiler-generated assembly before maspsx so compiler and assembler differences
+remain separable. Record complete hashes for every supplied 4.6.1 compiler,
+assembler, linker, and library artifact. Compare individual members against the
+anchored resident SDK code, but do not use the shared `LIBDS.LIB` alone to
+differentiate 4.6.1 from 4.7.
 
 Until a candidate passes this gate, exact assembly remains the primary build
 input and matching C progress remains zero.

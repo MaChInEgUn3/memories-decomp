@@ -66,7 +66,8 @@ candidate may be placed beneath an ignored directory in `tools/toolchains/`.
 Record its exact hash and provenance in `notes/toolchain.md` before using it.
 
 The current evidence requires testing late ASPSX behavior and likely CCPSX
-`-O2`/`-G8` output. The user reports that corresponding SDK material contains
-PsyQ 4.7 `LIBDS.LIB`, making 4.7 the first package candidate to test. That
-library is not currently present under `game/` and cannot yet be hashed or
-signature-compared.
+`-O2`/`-G8` output. The user independently verified Psy-Q 4.6.1 with multiple
+tools, so 4.6.1 is the selected SDK version. Its `LIBDS.LIB` was also
+distributed with Psy-Q 4.7, so that library alone cannot distinguish the two
+packages. Exact compiler and library binaries must still be recorded by hash
+when added to the workspace.

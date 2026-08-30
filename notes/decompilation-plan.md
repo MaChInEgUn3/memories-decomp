@@ -43,21 +43,29 @@ with full-file comparison as the merge gate.
   unrelated directories.
 - No original symbols, map files, source fragments, debug data, BIN/CUE image,
   or confirmed original compiler are currently available.
-- PsyQ 4.7 is the leading package hypothesis because the user reports that the
-  corresponding SDK material contains a 4.7 `LIBDS.LIB`. The library is not
-  currently present in this workspace, so its hash and member signatures still
-  require verification. Binary-derived compiler and assembler fingerprints
-  remain the final matching criteria.
+- Psy-Q 4.6.1 is the selected SDK version based on the user's independent
+  multi-tool verification. This limited-distribution minor release used a
+  `LIBDS.LIB` that was also shipped with Psy-Q 4.7, which explains why
+  library-only identification can report 4.7. Binary-derived compiler,
+  assembler, and linker fingerprints remain the matching criteria for exact
+  flags and object cohorts.
 
 ## Current state
 
 ### Repository
 
-- Git repository exists but has no commits.
-- `game/` is the only untracked content.
-- `tools/`, `notes/`, and `tmp/` exist and are empty.
-- There is no source tree, build system, linker script, symbol map, test
-  harness, or project documentation.
+- Git history contains small, atomic commits authored and committed solely by
+  Copilot.
+- User-supplied files under `game/` are immutable, ignored, and hash-validated.
+- Pinned Python analysis tools and GNU binutils 2.42 for `mipsel-none-elf` are
+  installed locally under `tools/`.
+- The executable has a validated region map, Splat configuration, linker
+  script, exact assembly/data build, ownership classifications, and a tracked
+  1,792-function inventory.
+- `make match` reproduces the target SHA-256 exactly, and `make audit` verifies
+  repository policy and clean deterministic regeneration.
+- Matching C remains at zero bytes. Incremental C conversion is gated on
+  validating the selected Psy-Q 4.6.1 compiler/library set and exact flags.
 
 ### Target executable
 
@@ -314,9 +322,9 @@ Treat toolchain identification as a measured investigation:
   signed/unsigned arithmetic, structure accesses, and call-heavy routines.
 - Document prologue/epilogue forms, delay-slot scheduling, register allocation,
   branch idioms, switch-table layout, small-data use, and emitted helper calls.
-- Build a small local compiler probe corpus with PsyQ 4.7 first when lawfully
-  available. Retain 4.5/4.6 and plausible older versions as controls, together
-  with reproducible open-source GCC/binutils combinations.
+- Build a small local compiler probe corpus with Psy-Q 4.6.1 first when
+  lawfully available. Retain 4.6, 4.7, and reproducible open-source
+  GCC/binutils combinations as controls.
 - Compare generated instruction sequences and object/link behavior rather than
   relying on game release dates or SDK library RCS dates.
 - Identify likely PsyQ library functions separately from game-owned code and
@@ -494,7 +502,7 @@ Final acceptance criteria:
 
 | Risk | Handling |
 |---|---|
-| The reported PsyQ 4.7 library provenance is incomplete or the game used mixed tool cohorts | Hash and compare `LIBDS.LIB` when supplied, fingerprint multiple functions, test adjacent candidates, and retain exact assembly until a lawful matching compiler is established. |
+| Psy-Q 4.6.1 is correct at the package level but shared 4.6.1/4.7 libraries or mixed object cohorts obscure provenance | Hash every supplied tool/library, treat the shared `LIBDS.LIB` as non-unique evidence, probe representative objects independently, and retain exact assembly until each cohort is matched. |
 | SDK library dates are mistaken for game compiler dates | Treat RCS strings only as library evidence and corroborate with generated code/object behavior. |
 | No map or symbols exist | Use conservative address-based names, cross-references, string anchors, signatures, and documented evidence-based renames. |
 | Section/BSS boundaries are not explicit in the PS-X header | Infer them from address references, initialization loops, alignment, linker experiments, and complete byte accounting. |
