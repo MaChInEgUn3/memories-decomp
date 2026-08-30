@@ -46,3 +46,5 @@ address,attempt,compiler,flags,result,summary
 0x800429A8,1,gcc_2_8_1_g8,-O2 -G8,matched,Little-endian two-byte load expression matched exactly.
 0x800429BC,1,gcc_2_8_1_g8,-O2 -G8,matched,Base pointer plus little-endian two-byte offset matched exactly.
 0x80043178,1,gcc_2_8_1_g8,-O2 -G8,matched,Two halfword field copies matched exact load/store scheduling.
+0x800705D8,5,gcc-2.7.2-mips,-O2 -G0 straightforward,nonmatch,Fallback compiler used s0 and s1 only and repeated absolute stream addresses
+0x800705D8,6,gcc-2.7.2-mips,-O2 -G0 register-shaped,deferred,Closest variants still failed the original s0-s2 derivation and instruction scheduling; six-attempt budget exhausted
