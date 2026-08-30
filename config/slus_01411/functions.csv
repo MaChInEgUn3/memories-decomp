@@ -247,7 +247,7 @@ address,size,name,status,module,notes
 0x80029164,0x7C,func_80029164,unmatched_asm,game,
 0x800291E0,0x348,func_800291E0,unmatched_asm,game,
 0x80029528,0x4C,func_80029528,unmatched_asm,game,
-0x80029574,0x1C,func_80029574,unmatched_asm,game,
+0x80029574,0x1C,func_80029574,matching_c,game,Local entry pointer reproduced exact stores and relocations
 0x80029590,0xF4,func_80029590,unmatched_asm,game,
 0x80029684,0x158,func_80029684,unmatched_asm,game,
 0x800297DC,0x158,func_800297DC,unmatched_asm,game,
