@@ -56,7 +56,12 @@ def validate_inventory(
         raise ProgressError("generated function list contains duplicate addresses")
     if len(inventory_by_address) != len(inventory):
         raise ProgressError("function inventory contains duplicate addresses")
-    if set(generated_by_address) != set(inventory_by_address):
+    expected_generated = {
+        address
+        for address, function in inventory_by_address.items()
+        if function.status != "matching_c"
+    }
+    if set(generated_by_address) != expected_generated:
         raise ProgressError(
             "function inventory does not match the generated split; run make inventory"
         )

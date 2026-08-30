@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 import sys
@@ -81,6 +82,165 @@ def assemble(
     return output
 
 
+def assemble_c_output(
+    root: Path,
+    assembler: Path,
+    source: Path,
+    output: Path,
+    data_limit: int,
+) -> Path:
+    output.parent.mkdir(parents=True, exist_ok=True)
+    run(
+        root,
+        [
+            str(assembler),
+            "-EL",
+            "-mips1",
+            f"-G{data_limit}",
+            "-o",
+            str(output),
+            str(source),
+        ],
+    )
+    return output
+
+
+def compile_c(
+    root: Path,
+    assembler: Path,
+    segment: dict[str, object],
+) -> Path:
+    source = resolve_within(root, str(segment["source"]), must_exist=True)
+    compiler = resolve_within(root, str(segment["compiler"]), must_exist=True)
+    maspsx = resolve_within(
+        root, "tools/vendor/maspsx/maspsx.py", must_exist=True
+    )
+    if not source.is_file() or not compiler.is_file() or not maspsx.is_file():
+        raise BuildError(f"invalid C build input for {source}")
+
+    object_name = str(segment["object"])
+    output = resolve_within(root, f"{OBJECT_DIRECTORY}/{object_name}")
+    raw_assembly = resolve_within(
+        root, f"tmp/project-build/asm/{object_name}.compiler.s"
+    )
+    transformed_assembly = resolve_within(
+        root, f"tmp/project-build/asm/{object_name}.maspsx.s"
+    )
+    raw_assembly.parent.mkdir(parents=True, exist_ok=True)
+
+    compiler_flags = segment.get("compiler_flags")
+    maspsx_flags = segment.get("maspsx_flags")
+    aspsx_version = segment.get("aspsx_version")
+    data_limit = segment.get("data_limit")
+    if (
+        not isinstance(compiler_flags, list)
+        or not all(isinstance(flag, str) for flag in compiler_flags)
+        or not isinstance(maspsx_flags, list)
+        or not all(isinstance(flag, str) for flag in maspsx_flags)
+        or not isinstance(aspsx_version, str)
+        or not isinstance(data_limit, int)
+        or isinstance(data_limit, bool)
+        or data_limit < 0
+    ):
+        raise BuildError(f"invalid C compiler configuration for {source}")
+
+    run(
+        root,
+        [
+            str(compiler),
+            "-S",
+            *compiler_flags,
+            "-o",
+            str(raw_assembly),
+            str(source),
+        ],
+    )
+
+    environment = os.environ.copy()
+    environment.update(local_environment(root))
+    try:
+        with raw_assembly.open("rb") as input_handle:
+            with transformed_assembly.open("wb") as output_handle:
+                subprocess.run(
+                    [
+                        sys.executable,
+                        str(maspsx),
+                        f"--aspsx-version={aspsx_version}",
+                        *maspsx_flags,
+                    ],
+                    cwd=root,
+                    env=environment,
+                    stdin=input_handle,
+                    stdout=output_handle,
+                    check=True,
+                )
+    except subprocess.CalledProcessError as error:
+        raise BuildError(
+            f"maspsx failed with exit code {error.returncode}: {source}"
+        ) from error
+
+    return assemble_c_output(
+        root,
+        assembler,
+        transformed_assembly,
+        output,
+        data_limit,
+    )
+
+
+def load_text_segments(root: Path) -> list[dict[str, object]]:
+    manifest = resolve_within(root, "config/slus_01411/text_sources.json")
+    if not manifest.exists():
+        return [
+            {
+                "kind": "asm",
+                "source": "tmp/splat/asm/entry.s",
+                "object": "text.o",
+            }
+        ]
+    with manifest.open("r", encoding="utf-8") as handle:
+        configuration = json.load(handle)
+    if configuration.get("schema") != 1:
+        raise BuildError(f"{manifest}: unsupported text-source schema")
+    segments = configuration.get("segments")
+    if not isinstance(segments, list) or not segments:
+        raise BuildError(f"{manifest}: segments must be a non-empty list")
+    return segments
+
+
+def build_text_objects(root: Path, assembler: Path) -> list[Path]:
+    objects: list[Path] = []
+    seen_objects: set[str] = set()
+    for index, segment in enumerate(load_text_segments(root)):
+        if not isinstance(segment, dict):
+            raise BuildError(f"text segment {index} must be an object")
+        kind = segment.get("kind")
+        source = segment.get("source")
+        object_name = segment.get("object")
+        if (
+            kind not in ("asm", "c")
+            or not isinstance(source, str)
+            or not isinstance(object_name, str)
+            or not object_name.endswith(".o")
+            or "/" in object_name
+            or object_name in seen_objects
+        ):
+            raise BuildError(f"invalid text segment {index}")
+        seen_objects.add(object_name)
+        if kind == "asm":
+            objects.append(
+                assemble(
+                    root,
+                    assembler,
+                    source,
+                    f"{OBJECT_DIRECTORY}/{object_name}",
+                )
+            )
+        else:
+            objects.append(compile_c(root, assembler, segment))
+    return objects
+
+
 def binary_object(
     root: Path,
     objcopy: Path,
@@ -125,12 +285,7 @@ def build(root: Path) -> Path:
             "tmp/splat/asm/data/initial_data.data.s",
             f"{OBJECT_DIRECTORY}/initial_data.o",
         ),
-        assemble(
-            root,
-            assembler,
-            "tmp/splat/asm/entry.s",
-            f"{OBJECT_DIRECTORY}/text.o",
-        ),
+        *build_text_objects(root, assembler),
         assemble(
             root,
             assembler,
@@ -211,7 +366,15 @@ def main() -> int:
     try:
         root = require_workspace_root()
         output = build(root)
-    except (BuildError, WorkspaceError, OSError) as error:
+    except (
+        BuildError,
+        WorkspaceError,
+        OSError,
+        UnicodeError,
+        KeyError,
+        TypeError,
+        ValueError,
+    ) as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
     print(f"built: {output.relative_to(root)}")

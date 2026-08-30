@@ -186,8 +186,15 @@ def merge_inventory(
 
     generated_addresses = {function.address for function in generated}
     removed = sorted(set(existing_by_address) - generated_addresses)
-    if removed:
-        formatted = ", ".join(f"{address:#010x}" for address in removed[:10])
+    invalid_removed = [
+        address
+        for address in removed
+        if existing_by_address[address].status != "matching_c"
+    ]
+    if invalid_removed:
+        formatted = ", ".join(
+            f"{address:#010x}" for address in invalid_removed[:10]
+        )
         raise InventoryError(
             f"generated split removed inventory functions: {formatted}"
         )
@@ -213,6 +220,9 @@ def merge_inventory(
                 notes=previous.notes,
             )
         )
+    merged.extend(existing_by_address[address] for address in removed)
+    merged.sort(key=lambda function: function.address)
+    validate_function_order(merged, "merged function inventory")
     return merged
 
 

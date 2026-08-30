@@ -24,7 +24,7 @@ SECTIONS
 
     .text 0x800129D8 : AT(0x0031D8)
     {
-        KEEP(*text.o(.text))
+        KEEP(*(.text))
     }
     ASSERT(SIZEOF(.text) == 0x7DCFC, "resident text size mismatch")
 
