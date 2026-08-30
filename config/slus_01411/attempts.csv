@@ -102,3 +102,4 @@ address,attempt,compiler,flags,result,summary
 0x800490F0,1,gcc_2_8_1_g0,pre-policy-4 final -O2 -G0,matched,4 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x80049108,1,gcc_2_8_1_g0,pre-policy-4 final -O2 -G0,matched,4 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x80049120,1,gcc_2_8_1_g0,pre-policy-2 final -O2 -G0,matched,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
+0x80049594,1,gcc_2_8_1_g0,pre-policy-2 final -O2 -G0,matched,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
