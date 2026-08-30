@@ -59,6 +59,7 @@ with full-file comparison as the merge gate.
 - Psy-Q 4.6 is the selected SDK version based on the user's independent
   multi-tool verification. Its Win32 tools use GCC 2.8.1, while the bundled DOS
   tools use GCC 2.7.2. Always try 2.8.1 first and retain 2.7.2 as the fallback.
+  Pair them with MASPSX 2.81 and 2.72 respectively.
   The unusual `LIBDS.LIB` was an online patch distributed before Psy-Q 4.7,
   which explains why library-only identification can associate it with 4.7.
 

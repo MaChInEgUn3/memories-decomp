@@ -98,9 +98,15 @@ This public recipe is not a genuine `mips-sony-psx` DOS compiler. It requires:
   return delay slot before maspsx.
 
 The fallback profile reproduces `func_800736C4` and the complete executable
-when selected temporarily, but 2.8.1 remains the default for every committed C
-function. Use 2.7.2 only after recorded 2.8.1 attempts fail or DOS-cohort
-evidence exists.
+when selected temporarily using:
+
+```text
+maspsx --aspsx-version=2.72 --expand-div -G<0-or-8>
+```
+
+GCC 2.8.1 remains the default for every committed C function and uses MASPSX
+2.81. Use GCC 2.7.2 with MASPSX 2.72 only after recorded 2.8.1 attempts fail
+or DOS-cohort evidence exists.
 
 ## Address conversion
 

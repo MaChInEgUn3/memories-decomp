@@ -98,6 +98,7 @@ be corroborated before being treated as final.
 - Require multiple independent matching samples before selecting a compiler.
 - Try GCC 2.8.1 first. Use GCC 2.7.2 only after the 2.8.1 attempts are recorded
   and exhausted or when code evidence specifically indicates the DOS cohort.
+- Pair GCC 2.8.1 with MASPSX 2.81 and GCC 2.7.2 with MASPSX 2.72.
 - Attempt no more than six distinct variants for one function.
 - Record every attempt in `config/slus_01411/attempts.csv` with compiler, flags,
   outcome, and the exact mismatch reason.
