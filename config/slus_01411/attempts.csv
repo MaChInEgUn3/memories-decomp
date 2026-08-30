@@ -105,3 +105,4 @@ address,attempt,compiler,flags,result,summary
 0x80049594,1,gcc_2_8_1_g0,pre-policy-2 final -O2 -G0,matched,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x800495DC,1,gcc_2_8_1_g0,pre-policy-2 final -O2 -G0,matched,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x800495EC,1,gcc_2_8_1_g0,pre-policy-2 final -O2 -G0,matched,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
+0x8004A6D8,1,gcc_2_8_1_g0,pre-policy-2 final -O2 -G0,matched,2 pre-policy variants: exact under -G0 and -G8; selected -G0 call wrapper
