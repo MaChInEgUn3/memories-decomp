@@ -1,0 +1,15 @@
+# User-supplied copyrighted game files
+/game/
+
+# Generated and temporary project state
+/tmp/
+
+# Locally installed or downloaded tool dependencies
+/tools/downloads/
+/tools/environments/
+/tools/toolchains/
+/tools/vendor/
+
+# Tool-generated language caches
+**/__pycache__/
+*.py[cod]
