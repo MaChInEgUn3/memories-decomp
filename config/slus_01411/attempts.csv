@@ -21,3 +21,6 @@ address,attempt,compiler,flags,result,summary
 0x800705D8,2,gcc-2.8.1-psx,-O2 -G0 fixed-region-registers,nonmatch,Hardcoded region duplicated address materialization and changed call ordering
 0x800705D8,3,gcc-2.8.1-psx,-O2 -G0 region-symbol,nonmatch,Nearly matched but emitted an extra low-zero addiu for the region symbol
 0x800705D8,4,gcc-2.8.1-psx,-O2 -G0 register-barrier,nonmatch,Forced registers introduced move and ori instructions plus duplicate stream addressing
+0x800735DC,3,gcc-2.8.1-psx,-O2 -G0 register-base,nonmatch,Nonvolatile register hints were optimized into duplicated absolute address sequences
+0x800735DC,4,gcc-2.8.1-psx,-O2 -G0 volatile-base,nonmatch,Shared base and value registers matched but source and destination shifts were reversed
+0x800735DC,5,gcc-2.8.1-psx,-O2 -G0 ordered-pointers,matched,Destination pointer evaluation reproduced the exact 18-instruction sequence
