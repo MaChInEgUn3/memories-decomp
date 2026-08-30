@@ -1,0 +1,75 @@
+name: SLUS_014.11
+sha1: 84747e64f6da8e764206ec203e489acf8c9dcf7d
+
+options:
+  basename: slus_01411
+  base_path: ../..
+  target_path: game/SLUS_014.11
+  elf_path: tmp/splat/build/slus_01411.elf
+  platform: psx
+  compiler: PSYQ
+  endianness: little
+
+  asm_path: tmp/splat/asm
+  src_path: src
+  build_path: tmp/splat/build
+  asset_path: tmp/splat/assets
+  cache_path: tmp/splat/cache
+  data_path: data
+  nonmatchings_path: nonmatchings
+  matchings_path: matchings
+
+  ld_script_path: tmp/splat/slus_01411.ld
+  generated_asm_macros_directory: tmp/splat/include
+  lib_path: tmp/splat/lib
+  o_path: tmp/splat/build
+  undefined_funcs_auto_path: tmp/splat/undefined_funcs_auto.txt
+  undefined_syms_auto_path: tmp/splat/undefined_syms_auto.txt
+
+  symbol_addrs_path:
+    - config/slus_01411/symbols.txt
+  reloc_addrs_path:
+    - config/slus_01411/relocations.txt
+
+  gp_value: 0x8009af08
+  find_file_boundaries: false
+  check_consecutive_segment_types: false
+  o_as_suffix: true
+  use_legacy_include_asm: false
+  create_asm_dependencies: true
+  ld_dependencies: true
+  subalign: 2
+
+  section_order:
+    - ".data"
+    - ".text"
+    - ".rodata"
+    - ".sdata"
+    - ".sbss"
+    - ".bss"
+
+  string_encoding: ASCII
+  data_string_encoding: SHIFT_JIS
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+
+segments:
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: main
+    type: code
+    start: 0x800
+    vram: 0x80010000
+    subsegments:
+      - [0x800, data, initial_data]
+      - [0x31d8, asm, entry]
+      - [0x80ed4, pad]
+      - [0x80ee0, data, initialized_data]
+      - [0x8b890, bin, bss_image]
+      - [0xeef28, bin, reserved_zero]
+      - [0x12a800, bin, overlay_slots]
+      - [0x19c800, bin, tail_data]
+
+  - [0x1d0800]

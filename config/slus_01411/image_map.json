@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "target_sha256": "84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88",
+  "regions": [
+    {
+      "name": "header",
+      "kind": "psx_exe_header",
+      "file_start": "0x000000",
+      "file_end": "0x000800",
+      "sha256": "38aaa55990bbd07afe32ba8947cc0d29a08dbebddeb6eae62258b03fa445546a"
+    },
+    {
+      "name": "initial_data",
+      "kind": "initialized_data",
+      "file_start": "0x000800",
+      "file_end": "0x0031d8",
+      "vram_start": "0x80010000",
+      "vram_end": "0x800129d8",
+      "sha256": "bfc2c69c152b4341b59869f52aa669be7c9f1ca1133735e50ee4018d05814711",
+      "evidence": "Pointer tables, strings, constants, and jump tables end at the executable entry point."
+    },
+    {
+      "name": "text",
+      "kind": "mips_text",
+      "file_start": "0x0031d8",
+      "file_end": "0x080ed4",
+      "vram_start": "0x800129d8",
+      "vram_end": "0x800906d4",
+      "sha256": "eb308dbd211a7396aad3305d388616101223b0b86153d5a309bc145928ea34bc",
+      "evidence": "Starts at the PS-X EXE entry point and ends after the final jr ra delay slot at 0x800906d0."
+    },
+    {
+      "name": "text_padding",
+      "kind": "alignment",
+      "file_start": "0x080ed4",
+      "file_end": "0x080ee0",
+      "vram_start": "0x800906d4",
+      "vram_end": "0x800906e0",
+      "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+      "fill": "0x00"
+    },
+    {
+      "name": "initialized_data",
+      "kind": "initialized_data",
+      "file_start": "0x080ee0",
+      "file_end": "0x08b890",
+      "vram_start": "0x800906e0",
+      "vram_end": "0x8009b090",
+      "sha256": "857ae5265e77e52a8ec1903d435e0edd65a44edb0eaa8bc408686175a7f5fc4c",
+      "evidence": "Begins with executable metadata and DATA file paths; ends at the startup clear-loop destination."
+    },
+    {
+      "name": "bss_image",
+      "kind": "runtime_cleared_zero_image",
+      "file_start": "0x08b890",
+      "file_end": "0x0eef28",
+      "vram_start": "0x8009b090",
+      "vram_end": "0x800fe728",
+      "sha256": "fdbefc3c00831fb3acccd2ceb557e8f361d4dea0c20abed945e590b01677ae61",
+      "fill": "0x00",
+      "evidence": "The entry point explicitly clears this exact address range before establishing the runtime stack and global pointer."
+    },
+    {
+      "name": "reserved_zero",
+      "kind": "reserved_zero_image",
+      "file_start": "0x0eef28",
+      "file_end": "0x12a800",
+      "vram_start": "0x800fe728",
+      "vram_end": "0x8013a000",
+      "sha256": "03c3cc3a4f4fc38b978729d8164107e15c073930427c944b6bec7d85da04d1a6",
+      "fill": "0x00",
+      "evidence": "Zero-filled gap between the runtime-cleared range and the first fixed-address high-data bank."
+    },
+    {
+      "name": "overlay_slots",
+      "kind": "overlay_load_slots",
+      "file_start": "0x12a800",
+      "file_end": "0x19c800",
+      "vram_start": "0x8013a000",
+      "vram_end": "0x801ac000",
+      "sha256": "1c7e0886f6e7454a4c3e83917f98b287060728f733daca544ac30de817ccd563",
+      "evidence": "Almost entirely zero fixed-address banks with slot identifiers; resident code calls unresolved functions in these ranges after runtime loads."
+    },
+    {
+      "name": "tail_data",
+      "kind": "resident_structured_data",
+      "file_start": "0x19c800",
+      "file_end": "0x1d0800",
+      "vram_start": "0x801ac000",
+      "vram_end": "0x801e0000",
+      "sha256": "c9ec8ee86af229dfffa975d605afe9c96865f41bc37736f62923d244a4d6ff7e",
+      "evidence": "Dense structured tables and encoded data with no resident function-return signatures."
+    }
+  ]
+}

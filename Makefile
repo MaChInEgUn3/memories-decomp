@@ -1,5 +1,6 @@
 ROOT := $(CURDIR)
 LOCAL_PYTHON := $(ROOT)/tools/environments/python/bin/python
+SPLAT := $(ROOT)/tools/environments/python/bin/splat
 PYTHON ?= $(if $(wildcard $(LOCAL_PYTHON)),$(LOCAL_PYTHON),python3)
 BOOTSTRAP_PYTHON ?= python3
 
@@ -16,7 +17,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain check-tools info extract
+.PHONY: help workspace verify-inputs tools python-tools toolchain check-tools info extract map split clean
 
 help:
 	@printf '%s\n' \
@@ -25,6 +26,9 @@ help:
 		'  check-tools    Verify pinned local project tools' \
 		'  info           Show the verified PS-X executable header' \
 		'  extract        Extract the verified header and loaded payload' \
+		'  map            Validate the top-level executable region map' \
+		'  split          Split the executable into temporary analysis output' \
+		'  clean          Remove known generated project output under tmp/' \
 		'  verify-inputs  Validate the SLUS-01411 executable and DATA files' \
 		'  workspace      Validate that commands are running from the project root'
 
@@ -51,3 +55,13 @@ info: verify-inputs
 
 extract: verify-inputs
 	@$(PYTHON) tools/project/psx_exe.py extract
+
+map: verify-inputs
+	@$(PYTHON) tools/project/validate_image_map.py
+
+split: map check-tools
+	@$(PYTHON) tools/project/clean.py splat
+	@$(SPLAT) split config/slus_01411/split.yaml
+
+clean: workspace
+	@$(PYTHON) tools/project/clean.py extract splat project-build reports

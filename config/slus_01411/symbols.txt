@@ -1,0 +1,9 @@
+entrypoint = 0x800129D8; // type:func
+text_end = 0x800906D4;
+initialized_data_start = 0x800906E0;
+runtime_gp = 0x8009AF08;
+bss_start = 0x8009B090;
+bss_end = 0x800FE728;
+overlay_slots_start = 0x8013A000;
+tail_data_start = 0x801AC000;
+loaded_image_end = 0x801E0000; // absolute:True
