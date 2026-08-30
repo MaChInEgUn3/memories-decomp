@@ -35,6 +35,11 @@ with full-file comparison as the merge gate.
   files, and other temporary work under `tmp/`.
 - Commit implementation work continuously in small, independently understandable
   and verifiable changes rather than accumulating a large uncommitted batch.
+- Attempt at most six distinct source/compiler variants for one function.
+  Record every result in `config/slus_01411/attempts.csv`; defer the function
+  after the sixth nonmatching attempt.
+- Push committed work to `origin/master` at least every 30 minutes during active
+  decompilation.
 - Attribute every implementation commit solely to
   `Copilot <223556219+Copilot@users.noreply.github.com>`. Do not add a
   `Co-authored-by` trailer or attribute commits to the user.
@@ -43,12 +48,11 @@ with full-file comparison as the merge gate.
   unrelated directories.
 - No original symbols, map files, source fragments, debug data, BIN/CUE image,
   or confirmed original compiler are currently available.
-- Psy-Q 4.6.1 is the selected SDK version based on the user's independent
-  multi-tool verification. This limited-distribution minor release used a
-  `LIBDS.LIB` that was also shipped with Psy-Q 4.7, which explains why
-  library-only identification can report 4.7. Binary-derived compiler,
-  assembler, and linker fingerprints remain the matching criteria for exact
-  flags and object cohorts.
+- Psy-Q 4.6 is the selected SDK version based on the user's independent
+  multi-tool verification. Its Win32 tools use GCC 2.8.1, while the bundled DOS
+  tools use GCC 2.7.2. Always try 2.8.1 first and retain 2.7.2 as the fallback.
+  The unusual `LIBDS.LIB` was an online patch distributed before Psy-Q 4.7,
+  which explains why library-only identification can associate it with 4.7.
 
 ## Current state
 
@@ -66,9 +70,10 @@ with full-file comparison as the merge gate.
   1,792-function inventory.
 - `make match` reproduces the target SHA-256 exactly, and `make audit` verifies
   repository policy and clean deterministic regeneration.
-- One 64-byte game function at `0x800736C4` is matching C using the GCC 2.8.1
-  probe with `-O2 -G8` and maspsx 2.81. Broader conversion remains gated on
-  additional probe matches and comparison with Psy-Q 4.6.1 artifacts.
+- Four game functions totaling 244 bytes are matching C using the GCC 2.8.1
+  probe. Broader conversion uses 2.8.1 first, falls back to GCC 2.7.2 when the
+  six-attempt budget is exhausted or compiler evidence points to the DOS
+  cohort, and still compares against Psy-Q 4.6 artifacts when available.
 
 ### Target executable
 
@@ -325,9 +330,9 @@ Treat toolchain identification as a measured investigation:
   signed/unsigned arithmetic, structure accesses, and call-heavy routines.
 - Document prologue/epilogue forms, delay-slot scheduling, register allocation,
   branch idioms, switch-table layout, small-data use, and emitted helper calls.
-- Build a small local compiler probe corpus with Psy-Q 4.6.1 first when
-  lawfully available. Retain 4.6, 4.7, and reproducible open-source
-  GCC/binutils combinations as controls.
+- Build a small local compiler probe corpus with the Psy-Q 4.6 Win32 GCC 2.8.1
+  toolchain first. Keep the Psy-Q 4.6 DOS GCC 2.7.2 toolchain ready as the
+  fallback, together with reproducible open-source equivalents.
 - Compare generated instruction sequences and object/link behavior rather than
   relying on game release dates or SDK library RCS dates.
 - Identify likely PsyQ library functions separately from game-owned code and
@@ -505,7 +510,7 @@ Final acceptance criteria:
 
 | Risk | Handling |
 |---|---|
-| Psy-Q 4.6.1 is correct at the package level but shared 4.6.1/4.7 libraries or mixed object cohorts obscure provenance | Hash every supplied tool/library, treat the shared `LIBDS.LIB` as non-unique evidence, probe representative objects independently, and retain exact assembly until each cohort is matched. |
+| Psy-Q 4.6 contains Win32 GCC 2.8.1 and DOS GCC 2.7.2 cohorts, while the pre-4.7 `LIBDS.LIB` patch obscures library provenance | Keep both compilers available, try 2.8.1 first, switch to 2.7.2 only after recorded evidence, hash supplied artifacts, and retain exact assembly until each cohort is matched. |
 | SDK library dates are mistaken for game compiler dates | Treat RCS strings only as library evidence and corroborate with generated code/object behavior. |
 | No map or symbols exist | Use conservative address-based names, cross-references, string anchors, signatures, and documented evidence-based renames. |
 | Section/BSS boundaries are not explicit in the PS-X header | Infer them from address references, initialization loops, alignment, linker experiments, and complete byte accounting. |

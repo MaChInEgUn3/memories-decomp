@@ -81,6 +81,13 @@ be corroborated before being treated as final.
 - Keep probe sources, generated objects, and diffs under `tmp/`.
 - Record durable compiler/version/flag conclusions in `notes/toolchain.md`.
 - Require multiple independent matching samples before selecting a compiler.
+- Try GCC 2.8.1 first. Use GCC 2.7.2 only after the 2.8.1 attempts are recorded
+  and exhausted or when code evidence specifically indicates the DOS cohort.
+- Attempt no more than six distinct variants for one function.
+- Record every attempt in `config/slus_01411/attempts.csv` with compiler, flags,
+  outcome, and the exact mismatch reason.
+- After the sixth nonmatching attempt, leave the assembly fallback intact and
+  defer the function so future sessions do not repeat the same work.
 - Do not infer the compiler solely from the North American release year.
 - Do not download or commit proprietary PsyQ binaries. Any user-supplied
   candidate remains ignored under `tools/toolchains/`.
@@ -95,3 +102,5 @@ be corroborated before being treated as final.
   they are independently valid.
 - Never amend or rewrite completed commits unless the user explicitly requests
   it.
+- Push committed work to `origin/master` at least every 30 minutes while
+  decompilation is active.

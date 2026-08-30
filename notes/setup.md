@@ -67,11 +67,11 @@ candidate may be placed beneath an ignored directory in `tools/toolchains/`.
 Record its exact hash and provenance in `notes/toolchain.md` before using it.
 
 The current evidence requires testing late ASPSX behavior and likely CCPSX
-`-O2`/`-G8` output. The user independently verified Psy-Q 4.6.1 with multiple
-tools, so 4.6.1 is the selected SDK version. Its `LIBDS.LIB` was also
-distributed with Psy-Q 4.7, so that library alone cannot distinguish the two
-packages. Exact compiler and library binaries must still be recorded by hash
-when added to the workspace.
+`-O2`/`-G8` output. The user independently verified Psy-Q 4.6. Its Win32 tools
+use GCC 2.8.1 and its DOS tools use GCC 2.7.2. Use 2.8.1 first and keep 2.7.2
+available as a fallback. The unusual `LIBDS.LIB` was an online patch
+distributed before Psy-Q 4.7, so library-only identification may associate it
+with 4.7. Exact compiler and library binaries must still be recorded by hash.
 
 The bootstrapped GCC 2.8.1 PSX compiler is a reproducible diagnostic stand-in,
 not Sony CCPSX. The build always supplies explicit PSX target flags as recorded

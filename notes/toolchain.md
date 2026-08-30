@@ -8,13 +8,11 @@ behavior class**. The available binary does not distinguish 2.81 from 2.86 and
 does not independently identify the complete SDK package.
 
 The user independently evaluated the SDK with multiple tools and selected
-**Psy-Q 4.6.1**, a minor 4.6 release with limited distribution. Its
-`LIBDS.LIB` was also shipped with Psy-Q 4.7, explaining the earlier apparent
-4.7 identification. `LIBDS.LIB` therefore constrains the library cohort but is
-not unique package evidence. Package version and assembler executable version
-remain separate claims: the 4.6.1 conclusion is compatible with the late
-assembler fingerprint, while instruction-level matching still determines exact
-flags and mixed object cohorts.
+**Psy-Q 4.6**. Its Win32 toolset contains GCC 2.8.1, while its DOS toolset
+contains GCC 2.7.2. GCC 2.8.1 is the primary compiler and GCC 2.7.2 must remain
+available as the fallback. The unusual `LIBDS.LIB` was an online patch
+distributed before Psy-Q 4.7, explaining the apparent 4.7 association without
+changing the SDK version.
 
 The working hypotheses are:
 
@@ -47,7 +45,7 @@ The project pins the public decompals/old-gcc PSX branch:
 | Local prefix | `tools/toolchains/gcc-2.8.1-psx/` |
 
 This is stock GNU GCC 2.8.1 patched for the PSX target. It is not Sony CCPSX
-and does not replace the selected Psy-Q 4.6.1 SDK identity.
+and does not replace the selected Psy-Q 4.6 SDK identity.
 
 The historical patch has two important defects:
 
@@ -72,7 +70,7 @@ maspsx --aspsx-version=2.81 --expand-div -G8
 The compiler is built as a native 64-bit host executable because this
 environment lacks 32-bit multilib headers and static libraries. It is suitable
 for matching probes, but broader compiler selection still requires comparison
-with genuine Psy-Q 4.6.1 tools or a verified 32-bit build.
+with genuine Psy-Q 4.6 tools or a verified 32-bit build.
 
 `func_800736C4` is the first confirmed match: GCC 2.8.1 with the explicit flags
 above and maspsx emits its exact 64-byte instruction sequence, and the complete
@@ -190,15 +188,14 @@ Probe cases:
 7. Synthetic `.rdata`, `.text`, `.data`, `.sdata`, `.sbss`, and `.bss`
    objects linked around `_gp = 0x8009AF08`.
 
-Test the lawful Psy-Q 4.6.1 compiler and libraries first, then 4.6 and 4.7 as
-diagnostic controls, across `-O1`/`-O2`,
-`-G0`/`-G4`/`-G8`/`-G16`, and ASPSX 2.81/2.86 behavior. Preserve
-compiler-generated assembly before maspsx so compiler and assembler differences
-remain separable. Record complete hashes for every supplied 4.6.1 compiler,
-assembler, linker, and library artifact. Compare individual members against the
-anchored resident SDK code, but do not use the shared `LIBDS.LIB` alone to
-differentiate 4.6.1 from 4.7.
+Test the Psy-Q 4.6 Win32 GCC 2.8.1 path first across `-O1`/`-O2`,
+`-G0`/`-G4`/`-G8`/`-G16`, and ASPSX 2.81/2.86 behavior. If six recorded
+attempts do not match or the code shape indicates the DOS cohort, retry with
+GCC 2.7.2. Preserve compiler-generated assembly before maspsx so compiler and
+assembler differences remain separable. Record complete hashes for every
+supplied compiler, assembler, linker, and library artifact. Treat the patched
+`LIBDS.LIB` as supporting library evidence rather than a 4.7 package marker.
 
-The GCC probe has passed one independent function. Exact assembly remains the
-fallback until the candidate passes multiple function shapes and genuine
-Psy-Q 4.6.1 artifacts are compared.
+The GCC 2.8.1 probe has passed four functions totaling 244 bytes. Exact assembly
+remains the fallback, and GCC 2.7.2 remains the secondary compiler for
+documented dead ends or DOS-cohort evidence.
