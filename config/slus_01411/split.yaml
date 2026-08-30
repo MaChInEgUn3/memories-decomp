@@ -65,6 +65,8 @@ segments:
     subsegments:
       - [0x800, data, initial_data]
       - [0x31d8, asm, entry]
+      - [0x63e24, c, game/check_point_add]
+      - [0x63e8c, asm, game/check_point_index]
       - [0x63ec4, c, game/check_point]
       - [0x63f04, asm, sdk]
       - [0x80ed4, pad]
