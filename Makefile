@@ -17,7 +17,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain compiler check-tools info extract map split build match inventory classify-functions progress audit clean
+.PHONY: help workspace verify-inputs tools python-tools toolchain compiler check-tools info extract map split build match inventory classify-functions progress disc-layout verify-disc audit clean
 
 help:
 	@printf '%s\n' \
@@ -33,6 +33,8 @@ help:
 		'  inventory      Update the tracked resident-function inventory' \
 		'  classify-functions  Apply verified ownership classifications' \
 		'  progress       Generate current resident-code progress metrics' \
+		'  disc-layout    Regenerate the tracked ISO9660 LBA manifest' \
+		'  verify-disc    Verify BIN/CUE layout and extracted file contents' \
 		'  audit          Verify exact output, metadata, and repository policy' \
 		'  clean          Remove known generated project output under tmp/' \
 		'  verify-inputs  Validate the SLUS-01411 executable and DATA files' \
@@ -89,7 +91,13 @@ classify-functions: inventory
 progress: split
 	@$(PYTHON) tools/project/progress.py
 
-audit: match
+disc-layout: verify-inputs
+	@$(PYTHON) tools/project/disc_image.py write
+
+verify-disc: verify-inputs
+	@$(PYTHON) tools/project/disc_image.py verify
+
+audit: match verify-disc
 	@$(PYTHON) tools/project/function_inventory.py
 	@$(PYTHON) tools/project/classify_functions.py
 	@$(PYTHON) tools/project/progress.py
