@@ -39,3 +39,4 @@ address,attempt,compiler,flags,result,summary
 0x8004036C,1,gcc_2_8_1_g8,-O2 -G8,matched,Nullable-object conditional call matched exact branch and frame scheduling.
 0x800403F0,1,gcc_2_8_1_g8,-O2 -G8,matched,No-argument call wrapper matched exactly.
 0x80040410,1,gcc_2_8_1_g8,-O2 -G8,matched,Byte assignment followed by flags clear matched exact scheduling.
+0x8004044C,1,gcc_2_8_1_g8,-O2 -G8,matched,Three byte assignments followed by flags clear matched exactly.
