@@ -955,7 +955,7 @@ address,size,name,status,module,notes
 0x80059C24,0x64,func_80059C24,unmatched_asm,game,
 0x80059C88,0x14,func_80059C88,matching_c,game,1 pre-policy variants: Signed-byte comparison against -2 matched linked bytes and GPREL16 relocation.
 0x80059C9C,0x34,func_80059C9C,unmatched_asm,game,
-0x80059CD0,0x14,func_80059CD0,unmatched_asm,game,
+0x80059CD0,0x14,func_80059CD0,matching_c,game,1 pre-policy variants: Signed-byte comparison against -2 matched linked bytes and GPREL16 relocation.
 0x80059CE4,0xF4,func_80059CE4,unmatched_asm,game,
 0x80059DD8,0xE4,func_80059DD8,unmatched_asm,game,
 0x80059EBC,0x5C,func_80059EBC,unmatched_asm,game,
