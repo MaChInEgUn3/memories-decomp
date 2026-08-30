@@ -71,3 +71,4 @@ address,attempt,compiler,flags,result,summary
 0x8003134C,1,gcc_2_8_1_g8,-O2 -G8,matched,First empty-function candidate matched.
 0x80033C90,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 mixed GPREL/absolute-store candidate matched.
 0x80033CA8,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 mixed GPREL/absolute-store candidate matched.
+0x80035668,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 constant/global-store candidate matched.

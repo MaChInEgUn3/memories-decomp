@@ -409,7 +409,7 @@ address,size,name,status,module,notes
 0x80034830,0xD68,func_80034830,handwritten_asm,game,
 0x80035598,0x30,func_80035598,unmatched_asm,game,
 0x800355C8,0xA0,func_800355C8,unmatched_asm,game,
-0x80035668,0x18,func_80035668,unmatched_asm,game,
+0x80035668,0x18,func_80035668,matching_c,game,First -O2 -G8 constant/global-store candidate matched.
 0x80035680,0x20,func_80035680,unmatched_asm,game,
 0x800356A0,0xA8,func_800356A0,unmatched_asm,game,
 0x80035748,0xA0,func_80035748,unmatched_asm,game,
