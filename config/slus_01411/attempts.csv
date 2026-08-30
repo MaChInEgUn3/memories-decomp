@@ -144,3 +144,8 @@ address,attempt,compiler,flags,result,summary
 0x800134E0,2,gcc-2.8.1-psx,-O2 -G8 local-vector-pointer,matched,Local vector pointer reproduced the exact nineteen-instruction sequence
 0x80013898,1,gcc-2.8.1-psx,-O2 -G8 ordered-globals,matched,Direct ordered GP-relative assignments and polling loop matched all twenty-three instructions
 0x800138F4,1,gcc-2.8.1-psx,-O2 -G8 DiscFile[24],matched,Twenty-four-byte local disc descriptor reproduced the search loop and converted-location store exactly
+0x80013940,1,gcc-2.8.1-psx,-O2 -G8 direct-fields,nonmatch,Compiler moved the vertical store into the branch delay and reordered LBA address formation
+0x80013940,2,gcc-2.8.1-psx,-O2 -G8 volatile-field,nonmatch,Volatile vertical field fixed the first store but retained the wrong branch delay and positive-path order
+0x80013940,3,gcc-2.8.1-psx,-O2 -G8 early-mask,nonmatch,Moving the file-index mask fixed both branch delays but left LBA base construction after the sector store
+0x80013940,4,gcc-2.8.1-psx,-O2 -G8 volatile-v1-wrong-symbol,nonmatch,Instruction shape matched but the misidentified 0x800F9EA8 symbol produced a HI16 carry mismatch
+0x80013940,5,gcc-2.8.1-psx,-O2 -G8 volatile-v1-correct-lba,matched,Correcting the runtime LBA table to 0x800E9EA8 reproduced all instructions and relocations exactly
