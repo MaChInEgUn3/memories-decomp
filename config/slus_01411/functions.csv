@@ -494,7 +494,7 @@ address,size,name,status,module,notes
 0x80038B4C,0x5C,func_80038B4C,unmatched_asm,game,
 0x80038BA8,0x48,func_80038BA8,unmatched_asm,game,
 0x80038BF0,0x124,func_80038BF0,unmatched_asm,game,
-0x80038D14,0x18,func_80038D14,unmatched_asm,game,
+0x80038D14,0x18,func_80038D14,matching_c,game,First -O2 -G8 byte/global-store candidate matched.
 0x80038D2C,0x8C,func_80038D2C,unmatched_asm,game,
 0x80038DB8,0x64,func_80038DB8,unmatched_asm,game,
 0x80038E1C,0x60,func_80038E1C,unmatched_asm,game,
