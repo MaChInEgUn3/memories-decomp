@@ -7,6 +7,11 @@ According to the user-supplied research, the original build scripts **merged**
 input files by concatenation and generated offsets that were compiled into a C
 header or equivalent source table.
 
+`WA_MRG.MRG` is the leading hypothesis for the runtime overlays loaded into the
+high-memory slots documented in `notes/memory-map.md`. This remains a hypothesis
+until compiled offset tables and load calls are tied to specific WA_MRG byte
+ranges.
+
 Consequences:
 
 - Do not infer an archive header merely because the first words resemble
@@ -39,14 +44,16 @@ module responsible for generated offset tables.
 ## Investigation workflow
 
 1. Find all code and data references associated with each MRG filename.
-2. Identify the seek/read routine arguments and the tables supplying offsets
+2. Prioritize `WA_MRG.MRG` references that target overlay slot addresses such
+   as `0x8013A000`, `0x80146000`, `0x80168000`, or `0x80180000`.
+3. Identify the seek/read routine arguments and the tables supplying offsets
    and lengths.
-3. Classify table element widths, sentinels, alignment, and whether lengths are
+4. Classify table element widths, sentinels, alignment, and whether lengths are
    explicit or derived from the next offset.
-4. Verify every proposed boundary against the MRG bytes.
-5. Record recovered entries and evidence under `notes/`; keep transient
+5. Verify every proposed boundary against the MRG bytes.
+6. Record recovered entries and evidence under `notes/`; keep transient
    extraction output under `tmp/`.
-6. Only create extraction/repacking tools when executable analysis requires
+7. Only create extraction/repacking tools when executable analysis requires
    them, because asset-format reversal remains outside the primary executable
    matching target.
 

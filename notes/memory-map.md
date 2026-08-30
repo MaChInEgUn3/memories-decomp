@@ -102,3 +102,8 @@ zero. Resident code contains unresolved calls into several of these ranges.
 They are therefore treated as runtime-loaded overlay or module destinations,
 not resident executable functions. Recovering their source archives is outside
 the current executable-only matching scope.
+
+The current leading hypothesis is that these payloads come from
+`DATA/WA_MRG.MRG`. Verification requires recovering the generated WA_MRG offset
+tables from executable data and matching their read destinations to these slot
+addresses.

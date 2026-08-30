@@ -57,6 +57,7 @@ The bootstrap is pinned by:
 - `tools/bootstrap/bootstrap-requirements.lock`
 - `tools/bootstrap/binutils.json`
 - `tools/bootstrap/old_gcc.json`
+- `tools/bootstrap/old_gcc_272.json`
 
 The installed state is ignored by Git. The bootstrap does not install global or
 user-level packages.
@@ -88,4 +89,5 @@ with 4.7. Exact compiler and library binaries must still be recorded by hash.
 
 The bootstrapped GCC 2.8.1 PSX compiler is a reproducible diagnostic stand-in,
 not Sony CCPSX. The build always supplies explicit PSX target flags as recorded
-in `notes/toolchain.md`.
+in `notes/toolchain.md`. A separately pinned GCC 2.7.2 MIPS compiler is kept
+available only as the DOS-era fallback.

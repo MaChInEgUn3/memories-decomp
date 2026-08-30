@@ -29,6 +29,9 @@ with full-file comparison as the merge gate.
   to a full-disc rebuild.
 - Treat MRG files as script-concatenated data whose generated offsets are
   expected in compiled executable tables, not as self-describing archives.
+- Treat `WA_MRG.MRG` as the leading overlay-container hypothesis and verify it
+  by connecting compiled offset tables and read destinations to the known
+  overlay slots.
 - Put all project scripts, downloaded tools, compilers, runtimes, environments,
   and third-party sources under `tools/`.
 - Put all documentation, research, naming notes, and curated reports under
@@ -75,8 +78,8 @@ with full-file comparison as the merge gate.
   1,792-function inventory.
 - `make match` reproduces the target SHA-256 exactly, and `make audit` verifies
   repository policy and clean deterministic regeneration.
-- Four game functions totaling 244 bytes are matching C using the GCC 2.8.1
-  probe. Broader conversion uses 2.8.1 first, falls back to GCC 2.7.2 when the
+- Twenty-six game functions totaling 840 bytes are matching C using the GCC
+  2.8.1 probe. Broader conversion uses 2.8.1 first, falls back to GCC 2.7.2 when the
   six-attempt budget is exhausted or compiler evidence points to the DOS
   cohort, and still compares against Psy-Q 4.6 artifacts when available.
 

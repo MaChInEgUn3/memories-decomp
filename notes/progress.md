@@ -23,10 +23,10 @@ SHA-256: 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 | PsyQ CRT/SDK function bytes | 117,332 (`0x1CA54`) |
 | Game functions heuristically marked handwritten | 63 |
 | Game handwritten-function bytes | 46,236 (`0xB49C`) |
-| Remaining game assembly-function bytes | 349,600 (`0x555A0`) |
+| Remaining game assembly-function bytes | 349,136 (`0x553D0`) |
 | Embedded/unassigned text bytes | 1,780 (`0x6F4`) |
-| Matching C functions | 6 |
-| Matching C bytes | 376 (`0x178`) |
+| Matching C functions | 26 |
+| Matching C bytes | 840 (`0x348`) |
 
 SDK classification is based on verified ownership boundaries. Handwritten
 classifications inside the game region remain provisional Splat/spimdisasm
@@ -62,3 +62,7 @@ indices.
 
 `func_800735A0` reads a 16-bit immediate and stores it into a checkpoint table
 entry selected by the next bytecode index.
+
+Twenty additional small game functions from `0x8003B714` through `0x80043178`
+now match as C, covering wrappers, getters, field updates, little-endian
+decoders, and empty functions.

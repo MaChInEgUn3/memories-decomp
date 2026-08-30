@@ -76,6 +76,32 @@ with genuine Psy-Q 4.6 tools or a verified 32-bit build.
 above and maspsx emits its exact 64-byte instruction sequence, and the complete
 PS-X EXE retains the target SHA-256.
 
+## GCC 2.7.2 fallback
+
+The Psy-Q 4.6 DOS-era fallback is represented by a separately pinned public
+GCC 2.7.2 MIPS build:
+
+| Property | Value |
+|---|---|
+| Upstream source | `https://ftp.gnu.org/old-gnu/gcc/gcc-2.7.2.tar.gz` |
+| Source SHA-256 | `7cd8bce5c3aeec59a72ecc2d3d5123864a817b14cdbd0680b1a969c3bccc5da5` |
+| Target | `mips-linux-gnu` |
+| GCC version | `2.7.2` |
+| Local prefix | `tools/toolchains/gcc-2.7.2-mips/` |
+
+This public recipe is not a genuine `mips-sony-psx` DOS compiler. It requires:
+
+- Explicit little-endian, R3000, MIPS-I, soft-float, no-ABI-call flags.
+- Removal of inherited Unix/BSD target macros and explicit PSX macros.
+- A tracked modern-glibc host patch for the removed `sys_nerr` symbol.
+- A narrow assembly filter that moves GCC 2.7.2 stack restoration into the
+  return delay slot before maspsx.
+
+The fallback profile reproduces `func_800736C4` and the complete executable
+when selected temporarily, but 2.8.1 remains the default for every committed C
+function. Use 2.7.2 only after recorded 2.8.1 attempts fail or DOS-cohort
+evidence exists.
+
 ## Address conversion
 
 For the supplied executable:
@@ -196,6 +222,6 @@ assembler differences remain separable. Record complete hashes for every
 supplied compiler, assembler, linker, and library artifact. Treat the patched
 `LIBDS.LIB` as supporting library evidence rather than a 4.7 package marker.
 
-The GCC 2.8.1 probe has passed four functions totaling 244 bytes. Exact assembly
+The GCC 2.8.1 probe has passed 26 functions totaling 840 bytes. Exact assembly
 remains the fallback, and GCC 2.7.2 remains the secondary compiler for
 documented dead ends or DOS-cohort evidence.
