@@ -134,3 +134,4 @@ address,attempt,compiler,flags,result,summary
 0x8006C2FC,1,gcc_2_8_1_g0,pre-policy-1 final -O2 -G0,matched,1 pre-policy variants: Three byte stores through the output pointer matched including the return delay slot.
 0x80070FF8,1,gcc_2_8_1_g0,pre-policy-1 final -O2 -G0,matched,1 pre-policy variants: Empty function matched jr-ra and nop exactly.
 0x80071000,1,gcc_2_8_1_g0,pre-policy-1 final -O2 -G0,matched,1 pre-policy variants: Empty function matched jr-ra and nop exactly.
+0x80073300,1,gcc_2_8_1_g0,pre-policy-1 final -O2 -G0,matched,1 pre-policy variants: Empty function matched jr-ra and nop exactly.
