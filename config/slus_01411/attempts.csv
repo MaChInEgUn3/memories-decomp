@@ -172,3 +172,6 @@ address,attempt,compiler,flags,result,summary
 0x800157DC,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,"Large State plus ordered field updates matched both calls, address relocations, and delay-slot store."
 0x80015904,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Eight-byte stand-in State was classified as small data instead of the target absolute address.
 0x80015904,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,"Large State plus ordered field updates matched both calls, address relocations, and delay-slot store."
+0x80015998,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Small stand-in State selected an invalid GPREL16 global access.
+0x80015998,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Large State matched the loop shape but formed both address halves in $s0 and changed prologue scheduling.
+0x80015998,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,"GAS split-address profile formed HI16 in $v0 and LO16 in $s0, matching bytes and relocations."
