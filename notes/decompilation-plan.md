@@ -78,7 +78,7 @@ with full-file comparison as the merge gate.
   1,792-function inventory.
 - `make match` reproduces the target SHA-256 exactly, and `make audit` verifies
   repository policy and clean deterministic regeneration.
-- Twenty-six game functions totaling 840 bytes are matching C using the GCC
+- One hundred fifteen game functions totaling 2,460 bytes are matching C using the GCC
   2.8.1 probe. Broader conversion uses 2.8.1 first, falls back to GCC 2.7.2 when the
   six-attempt budget is exhausted or compiler evidence points to the DOS
   cohort, and still compares against Psy-Q 4.6 artifacts when available.

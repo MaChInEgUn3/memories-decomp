@@ -222,6 +222,6 @@ assembler differences remain separable. Record complete hashes for every
 supplied compiler, assembler, linker, and library artifact. Treat the patched
 `LIBDS.LIB` as supporting library evidence rather than a 4.7 package marker.
 
-The GCC 2.8.1 probe has passed 26 functions totaling 840 bytes. Exact assembly
+The GCC 2.8.1 probe has passed 115 functions totaling 2,460 bytes. Exact assembly
 remains the fallback, and GCC 2.7.2 remains the secondary compiler for
 documented dead ends or DOS-cohort evidence.

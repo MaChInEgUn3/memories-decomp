@@ -23,10 +23,10 @@ SHA-256: 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 | PsyQ CRT/SDK function bytes | 117,332 (`0x1CA54`) |
 | Game functions heuristically marked handwritten | 63 |
 | Game handwritten-function bytes | 46,236 (`0xB49C`) |
-| Remaining game assembly-function bytes | 349,136 (`0x553D0`) |
+| Remaining game assembly-function bytes | 347,516 (`0x54D7C`) |
 | Embedded/unassigned text bytes | 1,780 (`0x6F4`) |
-| Matching C functions | 26 |
-| Matching C bytes | 840 (`0x348`) |
+| Matching C functions | 115 |
+| Matching C bytes | 2,460 (`0x99C`) |
 
 SDK classification is based on verified ownership boundaries. Handwritten
 classifications inside the game region remain provisional Splat/spimdisasm
@@ -63,6 +63,9 @@ indices.
 `func_800735A0` reads a 16-bit immediate and stores it into a checkpoint table
 entry selected by the next bytecode index.
 
-Twenty additional small game functions from `0x8003B714` through `0x80043178`
-now match as C, covering wrappers, getters, field updates, little-endian
-decoders, and empty functions.
+The current matching set covers bytecode readers, checkpoint helpers, wrappers,
+getters/setters, field updates, little-endian decoders, address-return helpers,
+and empty functions across the resident game region.
+
+The attempt ledger currently records 141 outcomes: 115 matches, 23 nonmatches,
+and three deferred functions whose search budgets are exhausted.
