@@ -78,7 +78,7 @@ address,size,name,status,module,notes
 0x80015C84,0x3C,func_80015C84,unmatched_asm,game,
 0x80015CC0,0x3C,func_80015CC0,unmatched_asm,game,
 0x80015CFC,0x10,func_80015CFC,matching_c,game,4 pre-policy variants: direct small-data byte assignment to one reproduced the exact four-instruction sequence.
-0x80015D0C,0xC,func_80015D0C,unmatched_asm,game,
+0x80015D0C,0xC,func_80015D0C,matching_c,game,4 pre-policy variants: direct small-data byte assignment to zero reproduced the exact three-instruction sequence.
 0x80015D18,0xA0,func_80015D18,unmatched_asm,game,
 0x80015DB8,0x44,func_80015DB8,unmatched_asm,game,
 0x80015DFC,0xF8,func_80015DFC,unmatched_asm,game,
