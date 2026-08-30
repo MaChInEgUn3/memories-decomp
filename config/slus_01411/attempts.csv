@@ -51,3 +51,4 @@ address,attempt,compiler,flags,result,summary
 0x80028260,1,gcc_2_8_1_g8,-O2 -G8,matched,High-bit conditional adjustment matched first variant.
 0x800283EC,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty function matched exactly.
 0x800289AC,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty function matched exactly.
+0x800289B4,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty function matched exactly.

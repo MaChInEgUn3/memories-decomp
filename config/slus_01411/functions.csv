@@ -240,7 +240,7 @@ address,size,name,status,module,notes
 0x800283F4,0x538,func_800283F4,unmatched_asm,game,
 0x8002892C,0x80,func_8002892C,unmatched_asm,game,
 0x800289AC,0x8,func_800289AC,matching_c,game,Empty function matched exactly.
-0x800289B4,0x8,func_800289B4,unmatched_asm,game,
+0x800289B4,0x8,func_800289B4,matching_c,game,Empty function matched exactly.
 0x800289BC,0x14C,func_800289BC,unmatched_asm,game,
 0x80028B08,0x600,func_80028B08,unmatched_asm,game,
 0x80029108,0x5C,func_80029108,unmatched_asm,game,
