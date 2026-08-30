@@ -58,7 +58,7 @@ address,size,name,status,module,notes
 0x8001581C,0x54,func_8001581C,unmatched_asm,game,
 0x80015870,0x48,func_80015870,unmatched_asm,game,
 0x800158B8,0x4C,func_800158B8,unmatched_asm,game,
-0x80015904,0x40,func_80015904,unmatched_asm,game,
+0x80015904,0x40,func_80015904,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80015944,0x54,func_80015944,unmatched_asm,game,
 0x80015998,0x40,func_80015998,unmatched_asm,game,
 0x800159D8,0x28,func_800159D8,unmatched_asm,game,
