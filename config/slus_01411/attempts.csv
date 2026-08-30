@@ -143,3 +143,4 @@ address,attempt,compiler,flags,result,summary
 0x800134E0,1,gcc-2.8.1-psx,-O2 -G8 direct-fields,nonmatch,Direct fields reordered loads and stores and produced a function eight bytes short
 0x800134E0,2,gcc-2.8.1-psx,-O2 -G8 local-vector-pointer,matched,Local vector pointer reproduced the exact nineteen-instruction sequence
 0x80013898,1,gcc-2.8.1-psx,-O2 -G8 ordered-globals,matched,Direct ordered GP-relative assignments and polling loop matched all twenty-three instructions
+0x800138F4,1,gcc-2.8.1-psx,-O2 -G8 DiscFile[24],matched,Twenty-four-byte local disc descriptor reproduced the search loop and converted-location store exactly
