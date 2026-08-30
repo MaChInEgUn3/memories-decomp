@@ -31,6 +31,30 @@
       "data_limit": 0
     },
     {
+      "kind": "c",
+      "source": "src/game/read_u16.c",
+      "object": "read_u16.o",
+      "compiler": "tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc",
+      "compiler_flags": [
+        "-O2",
+        "-G0",
+        "-mel",
+        "-mips1",
+        "-mcpu=R3000",
+        "-msoft-float",
+        "-fno-builtin",
+        "-Dpsx",
+        "-D__psx__",
+        "-D__psx"
+      ],
+      "aspsx_version": "2.81",
+      "maspsx_flags": [
+        "--expand-div",
+        "-G0"
+      ],
+      "data_limit": 0
+    },
+    {
       "kind": "asm",
       "source": "tmp/splat/asm/game/bytecode.s",
       "object": "bytecode.o"

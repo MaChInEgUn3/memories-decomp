@@ -23,10 +23,10 @@ SHA-256: 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 | PsyQ CRT/SDK function bytes | 117,332 (`0x1CA54`) |
 | Game functions heuristically marked handwritten | 63 |
 | Game handwritten-function bytes | 46,236 (`0xB49C`) |
-| Remaining game assembly-function bytes | 349,776 (`0x55650`) |
+| Remaining game assembly-function bytes | 349,732 (`0x55624`) |
 | Embedded/unassigned text bytes | 1,780 (`0x6F4`) |
-| Matching C functions | 3 |
-| Matching C bytes | 200 (`0xC8`) |
+| Matching C functions | 4 |
+| Matching C bytes | 244 (`0xF4`) |
 
 SDK classification is based on verified ownership boundaries. Handwritten
 classifications inside the game region remain provisional Splat/spimdisasm
@@ -53,3 +53,6 @@ the sum of two table entries into the third.
 
 `func_8007058C` reads one byte from the current bytecode stream and advances
 the stream pointer.
+
+`func_800705AC` reads a little-endian 16-bit value and advances the stream by
+two bytes.
