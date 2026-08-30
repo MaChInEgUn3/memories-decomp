@@ -4,7 +4,7 @@ address,size,name,status,module,notes
 0x80012AE8,0x68,func_80012AE8,sdk_asm,psyq/crt,
 0x80012B50,0x184,func_80012B50,unmatched_asm,game,
 0x80012CD4,0x78,func_80012CD4,unmatched_asm,game,
-0x80012D4C,0x38,func_80012D4C,unmatched_asm,game,
+0x80012D4C,0x38,func_80012D4C,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80012D84,0x30,func_80012D84,unmatched_asm,game,
 0x80012DB4,0xA8,func_80012DB4,unmatched_asm,game,
 0x80012E5C,0x210,func_80012E5C,unmatched_asm,game,

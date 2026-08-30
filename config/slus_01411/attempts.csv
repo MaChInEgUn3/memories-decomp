@@ -158,3 +158,4 @@ address,attempt,compiler,flags,result,summary
 0x80013B04,5,gcc-2.7.2-mips,-O2 -G8 straightforward,nonmatch,Fallback compiler changed branch orientation and duplicated descriptor address relocations
 0x80013B04,6,gcc-2.8.1-psx,-O1 -G8 straightforward,deferred,Lower optimization still inverted the busy branch and changed register scheduling; six-attempt budget exhausted
 0x800137E4,1,gcc-2.8.1-psx,-O2 -G0 structured-loops,nonmatch,Compiler hoisted the loop mask and collapsed initial condition checks producing a function twenty bytes short
+0x80012D4C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Straight four-call wrapper matched all linked bytes and four R_MIPS_26 relocations.
