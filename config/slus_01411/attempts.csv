@@ -32,3 +32,4 @@ address,attempt,compiler,flags,result,summary
 0x8003E46C,2,gcc_2_8_1_g8,-O2 -G8 volatile-flags,matched,Variant 1 merged two flag stores and was four bytes short; volatile flags plus a local value preserved the intermediate store.
 0x8003EEC8,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty void function matched the return-and-nop sequence.
 0x8003F740,1,gcc_2_8_1_g8,-O2 -G8,matched,Ordered small-data flag and byte assignments matched exactly.
+0x8003FE70,1,gcc_2_8_1_g8,-O2 -G8,matched,Ordered stores to the two small-data globals matched exactly.
