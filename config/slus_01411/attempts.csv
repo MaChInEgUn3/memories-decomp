@@ -131,3 +131,4 @@ address,attempt,compiler,flags,result,summary
 0x8005F1A4,1,gcc_2_8_1_g0,pre-policy-1 final -O2 -G0,matched,1 pre-policy variants: Indexing an eight-byte struct array matched shifts address formation delay slot and HI16/LO16 relocations.
 0x8005FB08,1,gcc_2_8_1_g8,pre-policy-1 final -O2 -G8,matched,1 pre-policy variants: Zero comparison of the G8 byte flag matched linked bytes and GPREL16 relocation.
 0x8005FB14,1,gcc_2_8_1_g8,pre-policy-1 final -O2 -G8,matched,1 pre-policy variants: Conditional G8 word return matched branch scheduling and both GPREL16 relocations.
+0x8006C2FC,1,gcc_2_8_1_g0,pre-policy-1 final -O2 -G0,matched,1 pre-policy variants: Three byte stores through the output pointer matched including the return delay slot.
