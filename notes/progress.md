@@ -23,10 +23,10 @@ SHA-256: 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 | PsyQ CRT/SDK function bytes | 117,332 (`0x1CA54`) |
 | Game functions heuristically marked handwritten | 63 |
 | Game handwritten-function bytes | 46,236 (`0xB49C`) |
-| Remaining game assembly-function bytes | 349,660 (`0x555DC`) |
+| Remaining game assembly-function bytes | 349,600 (`0x555A0`) |
 | Embedded/unassigned text bytes | 1,780 (`0x6F4`) |
-| Matching C functions | 5 |
-| Matching C bytes | 316 (`0x13C`) |
+| Matching C functions | 6 |
+| Matching C bytes | 376 (`0x178`) |
 
 SDK classification is based on verified ownership boundaries. Handwritten
 classifications inside the game region remain provisional Splat/spimdisasm
@@ -59,3 +59,6 @@ two bytes.
 
 `func_800735DC` copies one checkpoint table entry to another using two bytecode
 indices.
+
+`func_800735A0` reads a 16-bit immediate and stores it into a checkpoint table
+entry selected by the next bytecode index.

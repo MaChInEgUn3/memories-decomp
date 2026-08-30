@@ -1191,7 +1191,7 @@ address,size,name,status,module,notes
 0x80073474,0xC,func_80073474,unmatched_asm,game,
 0x80073480,0x5C,func_80073480,unmatched_asm,game,
 0x800734DC,0xC4,func_800734DC,unmatched_asm,game,
-0x800735A0,0x3C,func_800735A0,unmatched_asm,game,
+0x800735A0,0x3C,func_800735A0,matching_c,game,Immediate checkpoint table store using GCC 2.8.1 PSX -O2 -G0
 0x800735DC,0x48,func_800735DC,matching_c,game,Checkpoint table copy using GCC 2.8.1 PSX -O2 -G0 with ordered volatile pointers
 0x80073624,0x68,func_80073624,matching_c,game,Three-index addition helper using GCC 2.8.1 PSX -O2 -G0 and maspsx 2.81
 0x8007368C,0x38,func_8007368C,unmatched_asm,game,

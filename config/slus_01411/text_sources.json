@@ -25,6 +25,12 @@
     },
     {
       "kind": "c",
+      "source": "src/game/check_point_immediate.c",
+      "object": "check_point_immediate.o",
+      "profile": "gcc_2_8_1_g0"
+    },
+    {
+      "kind": "c",
       "source": "src/game/check_point_copy.c",
       "object": "check_point_copy.o",
       "profile": "gcc_2_8_1_g0"

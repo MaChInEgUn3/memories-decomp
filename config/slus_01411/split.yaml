@@ -68,6 +68,7 @@ segments:
       - [0x60d8c, c, game/read_byte]
       - [0x60dac, c, game/read_u16]
       - [0x60dd8, asm, game/bytecode]
+      - [0x63da0, c, game/check_point_immediate]
       - [0x63ddc, c, game/check_point_copy]
       - [0x63e24, c, game/check_point_add]
       - [0x63e8c, asm, game/check_point_index]
