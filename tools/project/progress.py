@@ -110,6 +110,14 @@ def calculate(root: Path) -> dict[str, Any]:
     sdk_bytes = sum(function.size for function in sdk)
     matching = [function for function in functions if function.status == "matching_c"]
     matching_bytes = sum(function.size for function in matching)
+    modules: dict[str, dict[str, int]] = {}
+    for function in functions:
+        module = modules.setdefault(
+            function.module,
+            {"function_count": 0, "function_bytes": 0},
+        )
+        module["function_count"] += 1
+        module["function_bytes"] += function.size
     if function_bytes > text_bytes:
         raise ProgressError(
             f"function bytes {function_bytes:#x} exceed text size {text_bytes:#x}"
@@ -128,6 +136,7 @@ def calculate(root: Path) -> dict[str, Any]:
         "sdk_function_bytes": sdk_bytes,
         "matching_c_function_count": len(matching),
         "matching_c_bytes": matching_bytes,
+        "modules": modules,
         "unassigned_text_bytes": text_bytes - function_bytes,
     }
 
@@ -158,6 +167,11 @@ def main() -> int:
         "handwritten:        "
         f"{progress['handwritten_function_count']} functions, "
         f"{progress['handwritten_function_bytes']:#x} bytes"
+    )
+    print(
+        "SDK/startup:        "
+        f"{progress['sdk_function_count']} functions, "
+        f"{progress['sdk_function_bytes']:#x} bytes"
     )
     print(f"assembly functions: {progress['assembly_function_bytes']:#x} bytes")
     print(f"matching C:         {progress['matching_c_bytes']:#x} bytes")
