@@ -1,5 +1,7 @@
-PYTHON ?= python3
 ROOT := $(CURDIR)
+LOCAL_PYTHON := $(ROOT)/tools/environments/python/bin/python
+PYTHON ?= $(if $(wildcard $(LOCAL_PYTHON)),$(LOCAL_PYTHON),python3)
+BOOTSTRAP_PYTHON ?= python3
 
 export HOME := $(ROOT)/tmp/home
 export TMPDIR := $(ROOT)/tmp
@@ -14,11 +16,13 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs
+.PHONY: help workspace verify-inputs tools check-tools
 
 help:
 	@printf '%s\n' \
 		'Available targets:' \
+		'  tools          Install pinned project tools beneath tools/' \
+		'  check-tools    Verify pinned local project tools' \
 		'  verify-inputs  Validate the SLUS-01411 executable and DATA files' \
 		'  workspace      Validate that commands are running from the project root'
 
@@ -27,3 +31,9 @@ workspace:
 
 verify-inputs: workspace
 	@$(PYTHON) tools/project/verify_inputs.py
+
+tools: verify-inputs
+	@$(BOOTSTRAP_PYTHON) tools/bootstrap/bootstrap.py
+
+check-tools: workspace
+	@$(PYTHON) tools/bootstrap/bootstrap.py --check
