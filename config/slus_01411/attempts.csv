@@ -151,3 +151,4 @@ address,attempt,compiler,flags,result,summary
 0x80013940,5,gcc-2.8.1-psx,-O2 -G8 volatile-v1-correct-lba,matched,Correcting the runtime LBA table to 0x800E9EA8 reproduced all instructions and relocations exactly
 0x80013B04,1,gcc-2.8.1-psx,-O2 -G8 early-return,nonmatch,Compiler placed the busy return at the end and reordered descriptor and LBA address formation
 0x80013B04,2,gcc-2.8.1-psx,-O2 -G8 forced-register-body,nonmatch,Forced registers still inverted the branch layout and changed mask and return scheduling
+0x80013B04,3,gcc-2.8.1-psx,-O2 -G8 forward-goto,nonmatch,Compiler still inverted the busy branch and moved the null return to the shared epilogue
