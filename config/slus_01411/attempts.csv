@@ -86,3 +86,4 @@ address,attempt,compiler,flags,result,summary
 0x80015BF0,1,gcc_2_8_1_g8,pre-policy-17 final -O2 -G8,matched,17 pre-policy variants: shared state pointer and ordered assignments reproduced the exact three-byte store sequence.
 0x80015CFC,1,gcc_2_8_1_g8,pre-policy-4 final -O2 -G8,matched,4 pre-policy variants: direct small-data byte assignment to one reproduced the exact four-instruction sequence.
 0x80015D0C,1,gcc_2_8_1_g8,pre-policy-4 final -O2 -G8,matched,4 pre-policy variants: direct small-data byte assignment to zero reproduced the exact three-instruction sequence.
+0x80016778,1,gcc_2_8_1_g8,pre-policy-4 final -O2 -G8,matched,4 pre-policy variants: unsigned top-bit extraction stored to byte offset 0x69 reproduced the exact three-instruction sequence.
