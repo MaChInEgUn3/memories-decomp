@@ -137,3 +137,4 @@ address,attempt,compiler,flags,result,summary
 0x80073300,1,gcc_2_8_1_g0,pre-policy-1 final -O2 -G0,matched,1 pre-policy variants: Empty function matched jr-ra and nop exactly.
 0x80073308,1,gcc_2_8_1_g0,pre-policy-1 final -O2 -G0,matched,1 pre-policy variants: Empty function matched jr-ra and nop exactly.
 0x80073448,1,gcc_2_8_1_g0_split,pre-policy-4 final -O2 -G0 -mgas -msplit-addresses,matched,4 pre-policy variants: Direct assignment and split-only failed; GAS split matched; a pre-rule no-gpopt probe was distinct but byte-equivalent.
+0x80073458,1,gcc_2_8_1_g0_split,pre-policy-3 final -O2 -G0 -mgas -msplit-addresses,matched,3 pre-policy variants: Direct assignment and split-only failed; -mgas -msplit-addresses selected the target base register and delay-slot store.
