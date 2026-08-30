@@ -1,0 +1,19 @@
+address,attempt,compiler,flags,result,summary
+0x8007058C,1,gcc-2.8.1-psx,-O2 -G0,nonmatch,Global struct access folded the field offset into the symbol address
+0x8007058C,2,gcc-2.8.1-psx,-O2 -G0 volatile,nonmatch,Volatile access changed store and return scheduling
+0x8007058C,3,gcc-2.8.1-psx,-O2 -G0 array,nonmatch,Array form still folded the field offset
+0x8007058C,4,gcc-2.8.1-psx,-O1 -G0,nonmatch,Lower optimization retained the same folded address form
+0x8007058C,5,gcc-2.8.1-psx,-O2 -G0 register-v1,matched,Explicit stream base in v1 reproduced all eight instructions
+0x800705AC,1,gcc-2.8.1-psx,-O2 -G0,nonmatch,Default allocation swapped the stream base and increment registers
+0x800705AC,2,gcc-2.8.1-psx,-O2 -G0 register-v0-a0,matched,Explicit stream and increment registers reproduced all eleven instructions
+0x800735DC,1,gcc-2.8.1-psx,-O2 -G0 shared-base,nonmatch,Instruction shape matched but base and loaded-value registers were swapped
+0x800735DC,2,gcc-2.8.1-psx,-O2 -G0 direct-index,nonmatch,Direct indexing duplicated absolute address formation and changed scheduling
+0x80073624,1,gcc-2.8.1-psx,-O2 -G0 direct-index,nonmatch,Direct global indexing emitted three separate absolute address sequences
+0x80073624,2,gcc-2.8.1-psx,-O2 -G0 shared-base,matched,Local table base reproduced the exact register allocation and instruction order
+0x8007368C,1,gcc-2.8.1-psx,-O2 -G8 direct-index,nonmatch,GP-relative output and assembler-temporary indexing differed from the target
+0x8007368C,2,gcc-2.8.1-psx,-O2 -G0 direct-index,nonmatch,Absolute expansions used the assembler temporary and wrong value register
+0x8007368C,3,gcc-2.8.1-psx,-O1 -G0 optimization-matrix,nonmatch,Optimization variants did not reproduce restore and store scheduling
+0x8007368C,4,gcc-2.8.1-psx,-O2 -G0 volatile-table,nonmatch,Materialized the table base but loaded into the wrong register
+0x8007368C,5,gcc-2.8.1-psx,-O2 -G0 register-v1,nonmatch,Matched the table and value registers but kept assembler-temporary output addressing
+0x8007368C,6,gcc-2.8.1-psx,-O2 -G0 register-v1-v0,deferred,Matched key registers but changed restore scheduling and function size
+0x800736C4,1,gcc-2.8.1-psx,-O2 -G8,matched,Straightforward checkpoint diagnostic source reproduced all sixteen instructions
