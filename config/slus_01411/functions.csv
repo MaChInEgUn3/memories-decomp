@@ -1185,7 +1185,7 @@ address,size,name,status,module,notes
 0x80073380,0x28,func_80073380,unmatched_asm,game,
 0x800733A8,0x78,func_800733A8,unmatched_asm,game,
 0x80073420,0x28,func_80073420,unmatched_asm,game,
-0x80073448,0x10,func_80073448,unmatched_asm,game,
+0x80073448,0x10,func_80073448,matching_c,game,4 pre-policy variants: Direct assignment and split-only failed; GAS split matched; a pre-rule no-gpopt probe was distinct but byte-equivalent.
 0x80073458,0xC,func_80073458,unmatched_asm,game,
 0x80073464,0x10,func_80073464,unmatched_asm,game,
 0x80073474,0xC,func_80073474,unmatched_asm,game,
