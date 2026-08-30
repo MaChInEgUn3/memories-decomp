@@ -16,7 +16,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools check-tools
+.PHONY: help workspace verify-inputs tools python-tools toolchain check-tools
 
 help:
 	@printf '%s\n' \
@@ -32,8 +32,14 @@ workspace:
 verify-inputs: workspace
 	@$(PYTHON) tools/project/verify_inputs.py
 
-tools: verify-inputs
+tools: python-tools toolchain
+
+python-tools: verify-inputs
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/bootstrap.py
+
+toolchain: verify-inputs
+	@$(BOOTSTRAP_PYTHON) tools/bootstrap/binutils.py
 
 check-tools: workspace
 	@$(PYTHON) tools/bootstrap/bootstrap.py --check
+	@$(PYTHON) tools/bootstrap/binutils.py --check
