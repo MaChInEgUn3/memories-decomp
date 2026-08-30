@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "regions": [
+    {
+      "name": "startup",
+      "start": "0x800129D8",
+      "end": "0x80012B50",
+      "module": "psyq/crt",
+      "status": "sdk_asm",
+      "evidence": "PS-X startup clears BSS, establishes stack and GP, runs constructor tables, and transfers control to the game entry routine."
+    },
+    {
+      "name": "game",
+      "start": "0x80012B50",
+      "end": "0x80073704",
+      "module": "game",
+      "evidence": "Game and engine code, bounded by the startup transfer and the first SN/PsyQ host-I/O break wrapper."
+    },
+    {
+      "name": "sdk",
+      "start": "0x80073704",
+      "end": "0x800906D4",
+      "module": "psyq/sdk",
+      "status": "sdk_asm",
+      "evidence": "SN host-I/O wrappers, anchored PsyQ library RCS strings, Sony library data, hardware APIs, GTE routines, libc, memory-card, CD, GPU, SPU, and MDEC code."
+    }
+  ]
+}
