@@ -37,3 +37,4 @@ address,attempt,compiler,flags,result,summary
 0x8003FFB4,1,gcc_2_8_1_g8,-O2 -G8,matched,16-bit mask and 0x8000 call wrapper matched exactly.
 0x8003FFD8,1,gcc_2_8_1_g8,-O2 -G8,matched,16-bit mask and 0xA000 call wrapper matched exactly.
 0x8004036C,1,gcc_2_8_1_g8,-O2 -G8,matched,Nullable-object conditional call matched exact branch and frame scheduling.
+0x800403F0,1,gcc_2_8_1_g8,-O2 -G8,matched,No-argument call wrapper matched exactly.
