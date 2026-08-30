@@ -72,8 +72,9 @@ map: verify-inputs
 	@$(PYTHON) tools/project/validate_image_map.py
 
 split: map check-tools
-	@$(PYTHON) tools/project/clean.py splat
-	@$(SPLAT) split config/slus_01411/split.yaml
+	@$(PYTHON) tools/project/clean.py generated splat
+	@$(PYTHON) tools/project/generate_build_config.py
+	@$(SPLAT) split tmp/generated/slus_01411.split.yaml
 
 build: split
 	@$(PYTHON) tools/project/clean.py project-build
@@ -104,4 +105,4 @@ audit: match verify-disc
 	@$(PYTHON) tools/project/audit_repository.py
 
 clean: workspace
-	@$(PYTHON) tools/project/clean.py extract splat project-build reports
+	@$(PYTHON) tools/project/clean.py extract generated splat project-build reports

@@ -194,15 +194,11 @@ def compile_c(
 
 
 def load_text_segments(root: Path) -> list[dict[str, object]]:
-    manifest = resolve_within(root, "config/slus_01411/text_sources.json")
-    if not manifest.exists():
-        return [
-            {
-                "kind": "asm",
-                "source": "tmp/splat/asm/entry.s",
-                "object": "text.o",
-            }
-        ]
+    manifest = resolve_within(
+        root,
+        "tmp/generated/text_sources.json",
+        must_exist=True,
+    )
     with manifest.open("r", encoding="utf-8") as handle:
         configuration = json.load(handle)
     if configuration.get("schema") != 1:

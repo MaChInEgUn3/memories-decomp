@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "functions": [
+    {
+      "address": "0x8007058C",
+      "size": "0x20",
+      "source": "src/game/read_byte.c",
+      "profile": "gcc_2_8_1_g0"
+    },
+    {
+      "address": "0x800705AC",
+      "size": "0x2C",
+      "source": "src/game/read_u16.c",
+      "profile": "gcc_2_8_1_g0"
+    },
+    {
+      "address": "0x800735A0",
+      "size": "0x3C",
+      "source": "src/game/check_point_immediate.c",
+      "profile": "gcc_2_8_1_g0"
+    },
+    {
+      "address": "0x800735DC",
+      "size": "0x48",
+      "source": "src/game/check_point_copy.c",
+      "profile": "gcc_2_8_1_g0"
+    },
+    {
+      "address": "0x80073624",
+      "size": "0x68",
+      "source": "src/game/check_point_add.c",
+      "profile": "gcc_2_8_1_g0"
+    },
+    {
+      "address": "0x800736C4",
+      "size": "0x40",
+      "source": "src/game/check_point.c",
+      "profile": "gcc_2_8_1_g8"
+    }
+  ]
+}
