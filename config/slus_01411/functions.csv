@@ -350,7 +350,7 @@ address,size,name,status,module,notes
 0x8002FED8,0xFC,func_8002FED8,unmatched_asm,game,
 0x8002FFD4,0x7C,func_8002FFD4,unmatched_asm,game,
 0x80030050,0x1C,func_80030050,matching_c,game,First -O2 -G8 candidate matched linked bytes and relocations.
-0x8003006C,0x24,func_8003006C,unmatched_asm,game,
+0x8003006C,0x24,func_8003006C,matching_c,game,First -O2 -G8 candidate matched linked bytes and relocations.
 0x80030090,0x1C,func_80030090,unmatched_asm,game,
 0x800300AC,0x1C,func_800300AC,unmatched_asm,game,
 0x800300C8,0xD0,func_800300C8,unmatched_asm,game,

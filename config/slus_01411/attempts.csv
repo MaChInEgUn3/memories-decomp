@@ -63,3 +63,4 @@ address,attempt,compiler,flags,result,summary
 0x8002CDE8,1,gcc_2_8_1_g8,-O2 -G8,matched,Direct call matched the exact R_MIPS_26 relocation.
 0x8002D7C4,1,gcc_2_8_1_g8,-O2 -G8,matched,Empty function matched exactly.
 0x80030050,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 candidate matched linked bytes and relocations.
+0x8003006C,1,gcc_2_8_1_g8,-O2 -G8,matched,First -O2 -G8 candidate matched linked bytes and relocations.
