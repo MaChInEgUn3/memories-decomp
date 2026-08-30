@@ -155,3 +155,5 @@ address,attempt,compiler,flags,result,summary
 0x8003FE80,1,gcc-2.8.1-psx,-O2 -G8 volatile-v0-lba-base,matched,Runtime LBA entries four through six and transfer polling matched all twenty-four instructions
 0x80013A94,1,gcc-2.8.1-psx,-O2 -G8 transfer-descriptor,matched,Straight transfer descriptor initialization matched all twenty-eight instructions and relocations
 0x80013B04,4,gcc-2.8.1-psx,-O2 -G8 -fno-reorder-blocks,nonmatch,GCC 2.8.1 does not support the requested block-reordering control flag
+0x80013B04,5,gcc-2.7.2-mips,-O2 -G8 straightforward,nonmatch,Fallback compiler changed branch orientation and duplicated descriptor address relocations
+0x80013B04,6,gcc-2.8.1-psx,-O1 -G8 straightforward,deferred,Lower optimization still inverted the busy branch and changed register scheduling; six-attempt budget exhausted
