@@ -1,6 +1,12 @@
 {
   "functions": [
     {
+      "address": "0x800134E0",
+      "profile": "gcc_2_8_1_g8",
+      "size": "0x4C",
+      "source": "src/game/func_800134E0.c"
+    },
+    {
       "address": "0x800136D4",
       "profile": "gcc_2_8_1_g8",
       "size": "0x10",
