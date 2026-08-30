@@ -10,49 +10,13 @@
       "kind": "c",
       "source": "src/game/read_byte.c",
       "object": "read_byte.o",
-      "compiler": "tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc",
-      "compiler_flags": [
-        "-O2",
-        "-G0",
-        "-mel",
-        "-mips1",
-        "-mcpu=R3000",
-        "-msoft-float",
-        "-fno-builtin",
-        "-Dpsx",
-        "-D__psx__",
-        "-D__psx"
-      ],
-      "aspsx_version": "2.81",
-      "maspsx_flags": [
-        "--expand-div",
-        "-G0"
-      ],
-      "data_limit": 0
+      "profile": "gcc_2_8_1_g0"
     },
     {
       "kind": "c",
       "source": "src/game/read_u16.c",
       "object": "read_u16.o",
-      "compiler": "tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc",
-      "compiler_flags": [
-        "-O2",
-        "-G0",
-        "-mel",
-        "-mips1",
-        "-mcpu=R3000",
-        "-msoft-float",
-        "-fno-builtin",
-        "-Dpsx",
-        "-D__psx__",
-        "-D__psx"
-      ],
-      "aspsx_version": "2.81",
-      "maspsx_flags": [
-        "--expand-div",
-        "-G0"
-      ],
-      "data_limit": 0
+      "profile": "gcc_2_8_1_g0"
     },
     {
       "kind": "asm",
@@ -63,25 +27,7 @@
       "kind": "c",
       "source": "src/game/check_point_add.c",
       "object": "check_point_add.o",
-      "compiler": "tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc",
-      "compiler_flags": [
-        "-O2",
-        "-G0",
-        "-mel",
-        "-mips1",
-        "-mcpu=R3000",
-        "-msoft-float",
-        "-fno-builtin",
-        "-Dpsx",
-        "-D__psx__",
-        "-D__psx"
-      ],
-      "aspsx_version": "2.81",
-      "maspsx_flags": [
-        "--expand-div",
-        "-G0"
-      ],
-      "data_limit": 0
+      "profile": "gcc_2_8_1_g0"
     },
     {
       "kind": "asm",
@@ -92,25 +38,7 @@
       "kind": "c",
       "source": "src/game/check_point.c",
       "object": "check_point.o",
-      "compiler": "tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc",
-      "compiler_flags": [
-        "-O2",
-        "-G8",
-        "-mel",
-        "-mips1",
-        "-mcpu=R3000",
-        "-msoft-float",
-        "-fno-builtin",
-        "-Dpsx",
-        "-D__psx__",
-        "-D__psx"
-      ],
-      "aspsx_version": "2.81",
-      "maspsx_flags": [
-        "--expand-div",
-        "-G8"
-      ],
-      "data_limit": 8
+      "profile": "gcc_2_8_1_g8"
     },
     {
       "kind": "asm",

@@ -109,9 +109,14 @@ def compile_c(
     root: Path,
     assembler: Path,
     segment: dict[str, object],
+    profiles: dict[str, dict[str, object]],
 ) -> Path:
     source = resolve_within(root, str(segment["source"]), must_exist=True)
-    compiler = resolve_within(root, str(segment["compiler"]), must_exist=True)
+    profile_name = segment.get("profile")
+    if not isinstance(profile_name, str) or profile_name not in profiles:
+        raise BuildError(f"invalid compiler profile for {source}")
+    profile = profiles[profile_name]
+    compiler = resolve_within(root, str(profile["compiler"]), must_exist=True)
     maspsx = resolve_within(
         root, "tools/vendor/maspsx/maspsx.py", must_exist=True
     )
@@ -128,10 +133,10 @@ def compile_c(
     )
     raw_assembly.parent.mkdir(parents=True, exist_ok=True)
 
-    compiler_flags = segment.get("compiler_flags")
-    maspsx_flags = segment.get("maspsx_flags")
-    aspsx_version = segment.get("aspsx_version")
-    data_limit = segment.get("data_limit")
+    compiler_flags = profile.get("compiler_flags")
+    maspsx_flags = profile.get("maspsx_flags")
+    aspsx_version = profile.get("aspsx_version")
+    data_limit = profile.get("data_limit")
     if (
         not isinstance(compiler_flags, list)
         or not all(isinstance(flag, str) for flag in compiler_flags)
@@ -208,9 +213,29 @@ def load_text_segments(root: Path) -> list[dict[str, object]]:
     return segments
 
 
+def load_compiler_profiles(root: Path) -> dict[str, dict[str, object]]:
+    manifest = resolve_within(
+        root,
+        "config/slus_01411/compiler_profiles.json",
+        must_exist=True,
+    )
+    with manifest.open("r", encoding="utf-8") as handle:
+        configuration = json.load(handle)
+    if configuration.get("schema") != 1:
+        raise BuildError(f"{manifest}: unsupported compiler-profile schema")
+    profiles = configuration.get("profiles")
+    if not isinstance(profiles, dict) or not profiles:
+        raise BuildError(f"{manifest}: profiles must be a non-empty object")
+    for name, profile in profiles.items():
+        if not isinstance(name, str) or not isinstance(profile, dict):
+            raise BuildError(f"{manifest}: invalid compiler profile")
+    return profiles
+
+
 def build_text_objects(root: Path, assembler: Path) -> list[Path]:
     objects: list[Path] = []
     seen_objects: set[str] = set()
+    profiles = load_compiler_profiles(root)
     for index, segment in enumerate(load_text_segments(root)):
         if not isinstance(segment, dict):
             raise BuildError(f"text segment {index} must be an object")
@@ -237,7 +262,7 @@ def build_text_objects(root: Path, assembler: Path) -> list[Path]:
                 )
             )
         else:
-            objects.append(compile_c(root, assembler, segment))
+            objects.append(compile_c(root, assembler, segment, profiles))
     return objects
 
 
