@@ -17,3 +17,7 @@ address,attempt,compiler,flags,result,summary
 0x8007368C,5,gcc-2.8.1-psx,-O2 -G0 register-v1,nonmatch,Matched the table and value registers but kept assembler-temporary output addressing
 0x8007368C,6,gcc-2.8.1-psx,-O2 -G0 register-v1-v0,deferred,Matched key registers but changed restore scheduling and function size
 0x800736C4,1,gcc-2.8.1-psx,-O2 -G8,matched,Straightforward checkpoint diagnostic source reproduced all sixteen instructions
+0x800705D8,1,gcc-2.8.1-psx,-O2 -G0 struct,nonmatch,Compiler kept one base register and produced a smaller frame than the target
+0x800705D8,2,gcc-2.8.1-psx,-O2 -G0 fixed-region-registers,nonmatch,Hardcoded region duplicated address materialization and changed call ordering
+0x800705D8,3,gcc-2.8.1-psx,-O2 -G0 region-symbol,nonmatch,Nearly matched but emitted an extra low-zero addiu for the region symbol
+0x800705D8,4,gcc-2.8.1-psx,-O2 -G0 register-barrier,nonmatch,Forced registers introduced move and ori instructions plus duplicate stream addressing
