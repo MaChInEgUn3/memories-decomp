@@ -17,7 +17,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions progress disc-layout verify-disc audit clean
+.PHONY: help workspace verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
 
 help:
 	@printf '%s\n' \
@@ -35,6 +35,8 @@ help:
 		'  progress       Generate current resident-code progress metrics' \
 		'  disc-layout    Regenerate the tracked ISO9660 LBA manifest' \
 		'  verify-disc    Verify BIN/CUE layout and extracted file contents' \
+		'  runtime-files  Regenerate executable file-index/LBA metadata' \
+		'  verify-runtime-files  Verify runtime file order against disc LBAs' \
 		'  audit          Verify exact output, metadata, and repository policy' \
 		'  clean          Remove known generated project output under tmp/' \
 		'  verify-inputs  Validate the SLUS-01411 executable and DATA files' \
@@ -104,7 +106,13 @@ disc-layout: verify-inputs
 verify-disc: verify-inputs
 	@$(PYTHON) tools/project/disc_image.py verify
 
-audit: match verify-disc
+runtime-files: verify-disc
+	@$(PYTHON) tools/project/runtime_files.py write
+
+verify-runtime-files: verify-disc
+	@$(PYTHON) tools/project/runtime_files.py verify
+
+audit: match verify-runtime-files
 	@$(PYTHON) tools/project/function_inventory.py
 	@$(PYTHON) tools/project/classify_functions.py
 	@$(PYTHON) tools/project/progress.py
