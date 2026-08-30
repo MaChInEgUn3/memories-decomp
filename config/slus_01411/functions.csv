@@ -611,7 +611,7 @@ address,size,name,status,module,notes
 0x8003FF34,0x24,func_8003FF34,matching_c,game,Constant -8 and zero-argument call wrapper matched exactly.
 0x8003FF58,0x30,func_8003FF58,unmatched_asm,game,
 0x8003FF88,0x2C,func_8003FF88,unmatched_asm,game,
-0x8003FFB4,0x24,func_8003FFB4,unmatched_asm,game,
+0x8003FFB4,0x24,func_8003FFB4,matching_c,game,16-bit mask and 0x8000 call wrapper matched exactly.
 0x8003FFD8,0x24,func_8003FFD8,unmatched_asm,game,
 0x8003FFFC,0x30,func_8003FFFC,unmatched_asm,game,
 0x8004002C,0x40,func_8004002C,unmatched_asm,game,

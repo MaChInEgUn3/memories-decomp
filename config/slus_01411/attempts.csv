@@ -34,3 +34,4 @@ address,attempt,compiler,flags,result,summary
 0x8003F740,1,gcc_2_8_1_g8,-O2 -G8,matched,Ordered small-data flag and byte assignments matched exactly.
 0x8003FE70,1,gcc_2_8_1_g8,-O2 -G8,matched,Ordered stores to the two small-data globals matched exactly.
 0x8003FF34,1,gcc_2_8_1_g8,-O2 -G8,matched,Constant -8 and zero-argument call wrapper matched exactly.
+0x8003FFB4,1,gcc_2_8_1_g8,-O2 -G8,matched,16-bit mask and 0x8000 call wrapper matched exactly.
