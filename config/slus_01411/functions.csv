@@ -448,7 +448,7 @@ address,size,name,status,module,notes
 0x800375A4,0xD8,func_800375A4,unmatched_asm,game,
 0x8003767C,0xA0,func_8003767C,unmatched_asm,game,
 0x8003771C,0x90,func_8003771C,unmatched_asm,game,
-0x800377AC,0x1C,func_800377AC,unmatched_asm,game,
+0x800377AC,0x1C,func_800377AC,matching_c,game,First -O2 -G8 conditional-byte-store candidate matched.
 0x800377C8,0xB4,func_800377C8,unmatched_asm,game,
 0x8003787C,0x5C,func_8003787C,unmatched_asm,game,
 0x800378D8,0x3C,func_800378D8,unmatched_asm,game,
