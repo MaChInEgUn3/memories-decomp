@@ -165,3 +165,4 @@ address,attempt,compiler,flags,result,summary
 0x800134B4,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,Split-address profile still folded +12 into the LO16 relocation.
 0x800134B4,4,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Fixed $v0 pointer plus an empty barrier separated base materialization from +12 and matched bytes/relocations.
 0x80015010,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Volatile halfword clear/set operations preserved both loads and stores exactly.
+0x80015038,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,"Volatile short-circuit tests reproduced both global loads, branches, and the call relocation."
