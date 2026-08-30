@@ -21,6 +21,19 @@ The expected executable SHA-256 is:
 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 ```
 
+The original disc reference is also required:
+
+```text
+game/rpg-yfm.cue
+game/rpg-yfm.bin
+```
+
+Validate its ISO9660 LBAs and extracted file contents with:
+
+```sh
+make verify-disc
+```
+
 ## Workspace rule
 
 Run all commands from the repository root. Project scripts reject execution

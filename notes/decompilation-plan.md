@@ -24,6 +24,11 @@ with full-file comparison as the merge gate.
   instructions needed to validate user-supplied files.
 - Do not rebuild a disc image or reverse the data archives as project goals.
   Inspect a data format only when executable analysis requires it.
+- Use the original BIN/CUE as an immutable LBA and streaming-layout reference.
+  Verify extracted files against their ISO9660 extents without expanding scope
+  to a full-disc rebuild.
+- Treat MRG files as script-concatenated data whose generated offsets are
+  expected in compiled executable tables, not as self-describing archives.
 - Put all project scripts, downloaded tools, compilers, runtimes, environments,
   and third-party sources under `tools/`.
 - Put all documentation, research, naming notes, and curated reports under
@@ -112,9 +117,17 @@ The extracted data set contains:
 - `game/DATA/SU.MRG`
 - `game/DATA/WA_MRG.MRG`
 
+The original disc reference also contains:
+
+- `game/rpg-yfm.bin`
+- `game/rpg-yfm.cue`
+
 Their sizes and SHA-256 hashes should be recorded in the target manifest even
 though only the executable is rebuilt. The executable's references to these
 files make their identity useful for validating the local game version.
+
+The BIN/CUE additionally anchors ISO9660 LBAs and verifies that each extracted
+file is byte-identical to its original disc extent.
 
 ## Intended repository layout
 

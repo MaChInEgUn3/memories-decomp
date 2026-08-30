@@ -53,6 +53,7 @@ make split
 make inventory
 make classify-functions
 make progress
+make verify-disc
 ```
 
 - `info` prints the verified PS-X EXE header.
@@ -68,6 +69,8 @@ make progress
   without overwriting a future `matching_c` status.
 - `progress` writes current status and ownership metrics to
   `tmp/reports/progress.json`.
+- `verify-disc` verifies the original MODE2/2352 BIN/CUE, tracked ISO9660 LBAs,
+  and every extracted file against its disc extent.
 
 The Splat linker script under `tmp/splat/` is diagnostic. The exact build uses
 the project linker script at `linker/slus_01411.ld`, which preserves the
