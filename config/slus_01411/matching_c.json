@@ -1,41 +1,47 @@
 {
-  "schema": 1,
   "functions": [
     {
-      "address": "0x8007058C",
+      "address": "0x8003B714",
+      "profile": "gcc_2_8_1_g8",
       "size": "0x20",
-      "source": "src/game/read_byte.c",
-      "profile": "gcc_2_8_1_g0"
+      "source": "src/game/func_8003B714.c"
+    },
+    {
+      "address": "0x8007058C",
+      "profile": "gcc_2_8_1_g0",
+      "size": "0x20",
+      "source": "src/game/read_byte.c"
     },
     {
       "address": "0x800705AC",
+      "profile": "gcc_2_8_1_g0",
       "size": "0x2C",
-      "source": "src/game/read_u16.c",
-      "profile": "gcc_2_8_1_g0"
+      "source": "src/game/read_u16.c"
     },
     {
       "address": "0x800735A0",
+      "profile": "gcc_2_8_1_g0",
       "size": "0x3C",
-      "source": "src/game/check_point_immediate.c",
-      "profile": "gcc_2_8_1_g0"
+      "source": "src/game/check_point_immediate.c"
     },
     {
       "address": "0x800735DC",
+      "profile": "gcc_2_8_1_g0",
       "size": "0x48",
-      "source": "src/game/check_point_copy.c",
-      "profile": "gcc_2_8_1_g0"
+      "source": "src/game/check_point_copy.c"
     },
     {
       "address": "0x80073624",
+      "profile": "gcc_2_8_1_g0",
       "size": "0x68",
-      "source": "src/game/check_point_add.c",
-      "profile": "gcc_2_8_1_g0"
+      "source": "src/game/check_point_add.c"
     },
     {
       "address": "0x800736C4",
+      "profile": "gcc_2_8_1_g8",
       "size": "0x40",
-      "source": "src/game/check_point.c",
-      "profile": "gcc_2_8_1_g8"
+      "source": "src/game/check_point.c"
     }
-  ]
+  ],
+  "schema": 1
 }
