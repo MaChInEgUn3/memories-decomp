@@ -252,3 +252,4 @@ address,attempt,compiler,flags,result,summary
 0x8002E3B4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
 0x8002E3DC,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
 0x8002EB48,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
+0x8002EE20,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
