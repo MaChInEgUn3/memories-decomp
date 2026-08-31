@@ -25,7 +25,7 @@ void func_80013940(
         object->field_14 = 0;
         object->field_24 = -sector_offset;
     } else {
-        register volatile int *lbas asm("$3") = D_800E9EA8;
+        register volatile int *lbas = D_800E9EA8;
 
         object->field_14 = sector_offset << 11;
         object->field_24 = lbas[file_index] + sector_offset;
