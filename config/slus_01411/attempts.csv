@@ -1526,3 +1526,9 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80014A5C,4,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x0: 1c!=0a; word +0x0: 1c028297!=0a80033c; relocations differ
 0x80014A5C,5,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x14: c8!=cd; word +0x14: c8520008!=cd520008; relocations differ
 0x80014A5C,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,deferred,byte +0x14: c8!=cc; word +0x14: c8520008!=cc520008; relocations differ
+0x80014E1C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: ec!=d8; word +0x0: ec01828f!=d8ffbd27; relocations differ
+0x80014E1C,2,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x0: ec!=d8; word +0x0: ec01828f!=d8ffbd27; relocations differ
+0x80014E1C,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: ec!=d8; word +0x0: ec01828f!=d8ffbd27; relocations differ
+0x80014E1C,4,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x0: ec!=d8; word +0x0: ec01828f!=d8ffbd27; relocations differ
+0x80014E1C,5,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: ec!=d8; word +0x0: ec01828f!=d8ffbd27; relocations differ
+0x80014E1C,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,deferred,byte +0x0: ec!=d8; word +0x0: ec01828f!=d8ffbd27; relocations differ
