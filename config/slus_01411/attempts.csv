@@ -410,3 +410,4 @@ address,attempt,compiler,flags,result,summary
 0x80073050,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0xc: 14!=98; word +0xc: 1400bfaf!=985b1026; relocations differ; size 0x40/0x3c
 0x80073050,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x6: b0!=bf; word +0x4: 1000b0af!=1000bfaf; relocations differ; size 0x34/0x3c
 0x80073050,6,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,deferred,byte +0x23: 8c!=90; word +0x20: 0000438c!=00004390
+0x80044CD4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
