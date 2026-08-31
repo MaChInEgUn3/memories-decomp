@@ -3666,3 +3666,4 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8002ACA4,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=relocation-side-effect-spine source=tmp/agents/first-pass-c6/variants/func_8002ACA4_a1.c,nonmatch,byte +0x0: b8!=e0; word +0x0: b8ffbd27!=e0ffbd27; relocations differ
 0x8004EB00,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=relocation-side-effect-spine source=tmp/agents/first-pass-c6/variants/func_8004EB00_a1.c,nonmatch,byte +0x0: c0!=e0; word +0x0: c0ffbd27!=e0ffbd27; relocations differ
 0x8001F55C,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=relocation-side-effect-spine source=tmp/agents/first-pass-c6/variants/func_8001F55C_a1.c,nonmatch,byte +0x0: 32!=e0; word +0x0: 32038397!=e0ffbd27; relocations differ
+0x80019D18,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=relocation-side-effect-spine source=tmp/agents/first-pass-c6/variants/func_80019D18_a1.c,nonmatch,byte +0x0: cd!=e0; word +0x0: cd028293!=e0ffbd27; relocations differ
