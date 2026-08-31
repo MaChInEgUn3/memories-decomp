@@ -570,3 +570,8 @@ address,attempt,compiler,flags,result,summary
 0x8001EF78,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x10: 18!=21; word +0x10: 1800bfaf!=2188a000; relocations differ
 0x8001EF78,3,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
 0x80020EE8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x80021894,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x2: 02!=05; word +0x0: 1d80023c!=1d80053c; relocations differ
+0x80021894,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x2: 02!=05; word +0x0: 1d80023c!=1d80053c
+0x80021894,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x2: 02!=06; word +0x0: 1d80023c!=1d80063c
+0x80021894,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x2: 02!=06; word +0x0: 1d80023c!=1d80063c
+0x80021894,5,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
