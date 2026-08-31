@@ -490,3 +490,4 @@ address,attempt,compiler,flags,result,summary
 0x800716C4,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x12: 04!=03; word +0x10: 0f80043c!=0f80033c; relocations differ; size 0x34/0x3c
 0x800716C4,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x12: 04!=03; word +0x10: 0f80043c!=0f80033c; relocations differ; size 0x38/0x3c
 0x800716C4,3,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x80072F1C,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
