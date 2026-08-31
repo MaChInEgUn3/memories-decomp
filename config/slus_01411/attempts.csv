@@ -282,3 +282,9 @@ address,attempt,compiler,flags,result,summary
 0x80035598,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0x17 byte 10!=14; word 04006010!=04006014; relocations matched.
 0x80035598,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; The greater-or-equal second test produced the target branch polarity.
 0x80035AB8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; A 100-byte struct array reproduced index arithmetic and four halfword stores.
+0x80035CA8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0x0 byte 0F!=01; word 0f80023c!=01008424; relocations differed.
+0x80035CA8,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 2: +0x2 byte 02!=03; word 0f80023c!=0f80033c; relocations matched.
+0x80035CA8,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 3: +0x2 byte 02!=03; word 0f80023c!=0f80033c; relocations matched.
+0x80035CA8,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,Variant 3: +0x2 byte 02!=03; word 0f80023c!=0f80033c; relocations matched.
+0x80035CA8,5,gcc_2_7_2_g8,gcc_2_7_2_g8,nonmatch,Variant 2: +0x2 byte 02!=03; word 0f80023c!=0f80033c; relocations matched.
+0x80035CA8,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,Variant 2: linked bytes and relocations matched exactly; Explicit pointer/count loop matched after enabling GAS split addresses.
