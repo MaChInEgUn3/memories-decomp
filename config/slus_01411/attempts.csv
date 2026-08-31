@@ -2826,3 +2826,16 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80031CD4,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x4: 18!=20; word +0x4: 1800b0af!=2000b2af
 0x80031CD4,5,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x4: 18!=20; word +0x4: 1800b0af!=2000b2af
 0x80031CD4,6,gcc_2_8_1_g0,gcc_2_8_1_g0,deferred,byte +0x4: 18!=20; word +0x4: 1800b0af!=2000b2af
+0x80036C14,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,"/home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/80036C14/v1.c: In function `func_80036C14':
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/80036C14/v1.c:2: parse error before `unsigned'
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/80036C14/v1.c:2: `f' undeclared (first use in this function)
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/80036C14/v1.c:2: (Each undeclared identifier is reported only once
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/80036C14/v1.c:2: for each function it appears in.)
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/80036C14/v1.c:2: `rec' undeclared (first use in this function)
+"
+0x80036C14,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x18: 1e!=15; word +0x18: 1e80023c!=1500c0a0
+0x80036C14,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x18: 1e!=15; word +0x18: 1e80023c!=1500c0a0
+0x80036C14,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: 57!=1e; word +0x0: 57008290!=1e80073c
+0x80036C14,5,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x22: 83!=88; word +0x20: 34008394!=34008894
+0x80036C14,6,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,deferred,byte +0x0: 57!=21; word +0x0: 57008290!=21408000
