@@ -23,11 +23,11 @@ SHA-256: 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 | PsyQ CRT/SDK function bytes | 117,332 (`0x1CA54`) |
 | Game functions heuristically marked handwritten | 63 |
 | Game handwritten-function bytes | 46,236 (`0xB49C`) |
-| Remaining game assembly functions | 528 |
-| Remaining game assembly-function bytes | 298,696 (`0x48EC8`) |
+| Remaining game assembly functions | 523 |
+| Remaining game assembly-function bytes | 296,276 (`0x48554`) |
 | Embedded/unassigned text bytes | 1,780 (`0x6F4`) |
-| Matching C functions | 603 |
-| Matching C bytes | 51,280 (`0xC850`) |
+| Matching C functions | 608 |
+| Matching C bytes | 53,700 (`0xD1C4`) |
 
 SDK classification is based on verified ownership boundaries. Handwritten
 classifications inside the game region remain provisional Splat/spimdisasm
@@ -52,24 +52,23 @@ spans the full resident game address range and includes bytecode readers,
 checkpoint helpers, wrappers, getters/setters, field updates, little-endian
 decoders, address-return helpers, transfer helpers, and control-flow routines.
 
-All 603 matching functions currently use the GCC 2.8.1 PSX probe:
+All 608 matching functions currently use the GCC 2.8.1 PSX probe:
 
 | Compiler profile | Functions |
 |---|---:|
-| `gcc_2_8_1_g8` | 315 |
-| `gcc_2_8_1_g8_split` | 62 |
-| `gcc_2_8_1_g0` | 188 |
+| `gcc_2_8_1_g8` | 317 |
+| `gcc_2_8_1_g8_split` | 64 |
+| `gcc_2_8_1_g0` | 189 |
 | `gcc_2_8_1_g0_split` | 38 |
 
-The attempt ledger currently records 2,984 outcomes: 603 matches, 2,090
-nonmatches, and 291 deferred functions whose six-attempt search budgets are
+The attempt ledger currently records 3,128 outcomes: 608 matches, 2,209
+nonmatches, and 311 deferred functions whose six-attempt search budgets are
 exhausted. Deferred functions remain exact assembly and are not retried without
 genuinely new evidence.
 
-Among the 528 remaining compiler-generated game functions, 237 have no
-recorded attempt and 291 are terminal deferrals. There are no partially
-attempted nonterminal functions. The untouched pool totals `0x395A4` bytes;
-the deferred pool totals `0xF924` bytes.
+Among the 523 remaining compiler-generated game functions, 212 have no
+recorded attempt and 311 are terminal deferrals. There are no partially
+attempted nonterminal functions.
 
 The Wave 4 audit found that `func_800137E4` already had one historical attempt
 before a six-variant batch was run. Its canonical ledger was corrected to the
