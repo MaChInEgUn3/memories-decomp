@@ -1032,7 +1032,7 @@ address,size,name,status,module,notes
 0x8005FB08,0xC,func_8005FB08,matching_c,game,1 pre-policy variants: Zero comparison of the G8 byte flag matched linked bytes and GPREL16 relocation.
 0x8005FB14,0x1C,func_8005FB14,matching_c,game,1 pre-policy variants: Conditional G8 word return matched branch scheduling and both GPREL16 relocations.
 0x8005FB30,0x94,func_8005FB30,unmatched_asm,game,
-0x8005FBC4,0x58,func_8005FBC4,unmatched_asm,game,
+0x8005FBC4,0x58,func_8005FBC4,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8005FC1C,0x228,func_8005FC1C,unmatched_asm,game,
 0x8005FE44,0x32C,func_8005FE44,unmatched_asm,game,
 0x80060170,0x60,func_80060170,unmatched_asm,game,
