@@ -2790,3 +2790,15 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8002D458,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x18: 40!=3f; word +0x18: 40004010!=3f004010
 0x8002D458,5,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x18: 40!=3f; word +0x18: 40004010!=3f004010
 0x8002D458,6,gcc_2_8_1_g8,gcc_2_8_1_g8,deferred,byte +0x18: 40!=3f; word +0x18: 40004010!=3f004010
+0x8002DC38,1,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,"/home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/8002DC38/v1.c: In function `func_8002DC38':
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/8002DC38/v1.c:2: parse error before `int'
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/8002DC38/v1.c:2: `r' undeclared (first use in this function)
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/8002DC38/v1.c:2: (Each undeclared identifier is reported only once
+/home/superconta/data/share/yugioh/tmp/agents/wave7-mid/variants/8002DC38/v1.c:2: for each function it appears in.)
+"
+0x8002DC38,2,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x10: 2c!=26; word +0x10: 2c004014!=26004014
+0x8002DC38,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x10: 2c!=27; word +0x10: 2c004014!=27004014
+0x8002DC38,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x10: 2c!=26; word +0x10: 2c004014!=26004014
+0x8002DC38,5,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x10: 2c!=27; word +0x10: 2c004014!=27004014
+0x8002DC38,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,deferred,byte +0x10: 2c!=26; word +0x10: 2c004014!=26004014
