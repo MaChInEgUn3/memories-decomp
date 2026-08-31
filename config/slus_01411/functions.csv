@@ -959,7 +959,7 @@ address,size,name,status,module,notes
 0x80059CE4,0xF4,func_80059CE4,unmatched_asm,game,
 0x80059DD8,0xE4,func_80059DD8,unmatched_asm,game,
 0x80059EBC,0x5C,func_80059EBC,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80059F18,0x94,func_80059F18,unmatched_asm,game,
+0x80059F18,0x94,func_80059F18,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80059FAC,0x64,func_80059FAC,unmatched_asm,game,
 0x8005A010,0x64,func_8005A010,unmatched_asm,game,
 0x8005A074,0x68,func_8005A074,unmatched_asm,game,
