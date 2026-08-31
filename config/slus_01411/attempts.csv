@@ -963,3 +963,7 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80014FA4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0xa: 83!=84; word +0x8: ec01838f!=ec01848f; relocations differ
 0x80014FA4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
 0x8001513C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x80015D18,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,/home/superconta/data/share/yugioh/tools/toolchains/binutils-2.42/bin/mipsel-none-elf-as failed (1): /home/superconta/data/share/yugioh/tmp/agents/wave3-early/build/80015D18/v1/maspsx.s: Assembler messages: /home/superconta/data/share/yugioh/tmp/agents/wave3-early/build/80015D18/v1/maspsx.s:44: Error: unrecognized opcode `rtps' 
+0x80015D18,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x28: 74!=48; word +0x28: 7415020c!=48e18424; relocations differ
+0x80015D18,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x34: 28!=e0; word +0x34: 28000296!=e0036334; relocations differ
+0x80015D18,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
