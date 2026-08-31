@@ -333,3 +333,5 @@ address,attempt,compiler,flags,result,summary
 0x80039AD4,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,Variant 2: size 44/40; +0x4 byte 10!=08; word 10008390!=08af4224; relocations differed.
 0x80039AD4,5,gcc_2_7_2_g8,gcc_2_7_2_g8,nonmatch,Variant 1: size 36/40; +0x0 byte 0F!=10; word 0f80023c!=10008290; relocations differed.
 0x80039AD4,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,Variant 1: linked bytes and relocations matched exactly; The direct indexed clear matched under GAS split addresses.
+0x80039F1C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0xC byte 03!=04; word 03004010!=04004014; relocations matched.
+0x80039F1C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Inverting the flag branch retained the target early return layout.
