@@ -3207,3 +3207,7 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8001D3C4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x10c: 0d!=0f; word +0x10c: 0d004014!=0f004014
 0x8001D3C4,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x11c: 21!=ff; word +0x11c: 210002a2!=ff004430
 0x8001D3C4,4,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x80022D94,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,/home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1): cc1: /home/superconta/data/share/yugioh/tmp/agents/wave9-early/tool-tmp/ctrAiU8K: No such file or directory 
+0x80022D94,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x6: 4a!=42; word +0x4: 48284a84!=48284224; relocations differ
+0x80022D94,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x6: 4a!=42; word +0x4: 48284a84!=48284224; relocations differ
+0x80022D94,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
