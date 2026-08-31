@@ -429,7 +429,7 @@ address,size,name,status,module,notes
 0x80035CE4,0x2C,func_80035CE4,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80035D10,0xA8,func_80035D10,unmatched_asm,game,
 0x80035DB8,0x3C,func_80035DB8,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x80035DF4,0x2C,func_80035DF4,unmatched_asm,game,
+0x80035DF4,0x2C,func_80035DF4,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80035E20,0xDAC,func_80035E20,unmatched_asm,game,
 0x80036BCC,0x48,func_80036BCC,unmatched_asm,game,
 0x80036C14,0x128,func_80036C14,unmatched_asm,game,

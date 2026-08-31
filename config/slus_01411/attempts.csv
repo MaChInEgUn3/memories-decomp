@@ -294,3 +294,5 @@ address,attempt,compiler,flags,result,summary
 0x80035DB8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: size 56/60; +0xA byte 02!=03; word 0f80023c!=0f80033c; relocations matched.
 0x80035DB8,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 2: +0x4 byte 01!=0F; word 01008424!=0f80023c; relocations differed.
 0x80035DB8,3,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 3: linked bytes and relocations matched exactly; Separating the base and field pointer while incrementing the key first matched.
+0x80035DF4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: size 40/44; +0x8 byte 88!=A0; word 88b24224!=a0b24224; relocations matched.
+0x80035DF4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; A hard base register preserved the separate base and +0x18 address steps.
