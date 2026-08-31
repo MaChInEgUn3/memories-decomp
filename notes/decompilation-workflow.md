@@ -109,6 +109,8 @@ be corroborated before being treated as final.
 
 - Keep probe sources, generated objects, and diffs under `tmp/`.
 - Record durable compiler/version/flag conclusions in `notes/toolchain.md`.
+- Reuse curated width, stride, signedness, and code-shape evidence from
+  `notes/research/matching-evidence.md`.
 - Require multiple independent matching samples before selecting a compiler.
 - Try GCC 2.8.1 first. Use GCC 2.7.2 only after the 2.8.1 attempts are recorded
   and exhausted or when code evidence specifically indicates the DOS cohort.
