@@ -443,3 +443,5 @@ address,attempt,compiler,flags,result,summary
 0x80058E3C,2,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,matched,exact linked bytes and relocations
 0x80058E68,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: 0f!=c0; word +0x0: 0f80033c!=c0100400; relocations differ; size 0x28/0x2c
 0x80058E68,2,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,matched,exact linked bytes and relocations
+0x80058E94,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: 0f!=c0; word +0x0: 0f80033c!=c0100400; relocations differ; size 0x28/0x2c
+0x80058E94,2,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,matched,exact linked bytes and relocations
