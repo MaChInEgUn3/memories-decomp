@@ -544,3 +544,7 @@ address,attempt,compiler,flags,result,summary
 0x80015870,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0xe: 03!=02; word +0xc: ff00033c!=ff00023c; relocations differ
 0x80015870,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
 0x800158B8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x80015944,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,/home/superconta/data/share/yugioh/tools/toolchains/binutils-2.42/bin/mipsel-none-elf-ld failed (1): /home/superconta/data/share/yugioh/tools/toolchains/binutils-2.42/bin/mipsel-none-elf-ld: small-data section too large; lower small-data size limit (see option -G) /home/superconta/data/share/yugioh/tmp/agents/wave2-early/build/80015944/v1/candidate.o: in function `func_80015944': (.text+0x1c): relocation truncated to fit: R_MIPS_GPREL16 against `D_800E9EC8' (.text+0x28): relocation truncated to fit: R_MIPS_GPREL16 against `D_800E9EC8' 
+0x80015944,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x26: 04!=10; word +0x24: c89e04ae!=c89e1026; relocations differ
+0x80015944,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x26: 04!=10; word +0x24: c89e04ae!=c89e1026; relocations differ
+0x80015944,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
