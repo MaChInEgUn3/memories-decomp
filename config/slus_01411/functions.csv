@@ -1189,7 +1189,7 @@ address,size,name,status,module,notes
 0x80073458,0xC,func_80073458,matching_c,game,3 pre-policy variants: Direct assignment and split-only failed; -mgas -msplit-addresses selected the target base register and delay-slot store.
 0x80073464,0x10,func_80073464,matching_c,game,3 pre-policy variants: Direct assignment and split-only failed; -mgas -msplit-addresses selected the target base register and delay-slot store.
 0x80073474,0xC,func_80073474,matching_c,game,3 pre-policy variants: Direct assignment and split-only failed; -mgas -msplit-addresses selected the target base register and delay-slot store.
-0x80073480,0x5C,func_80073480,unmatched_asm,game,
+0x80073480,0x5C,func_80073480,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.
 0x800734DC,0xC4,func_800734DC,unmatched_asm,game,
 0x800735A0,0x3C,func_800735A0,matching_c,game,Immediate checkpoint table store using GCC 2.8.1 PSX -O2 -G0
 0x800735DC,0x48,func_800735DC,matching_c,game,Checkpoint table copy using GCC 2.8.1 PSX -O2 -G0 with ordered volatile pointers
