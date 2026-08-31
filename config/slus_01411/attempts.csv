@@ -3473,3 +3473,4 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80048768,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=m2c-semantic-baseline source=tmp/agents/first-pass-c1/variants/func_80048768_v1.c,nonmatch,tool error: unresolved mips_to_c pointer type prevented GCC compilation
 0x8004D75C,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=m2c-semantic-baseline source=tmp/agents/first-pass-c1/variants/func_8004D75C_v1.c,nonmatch,tool error: generated C used NULL without a compatible local definition
 0x80060220,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=m2c-semantic-baseline source=tmp/agents/first-pass-c1/variants/func_80060220_v1.c,nonmatch,byte +0x4: 10!=21; word +0x4: 1000b0af!=21580000; size 444/444; relocations_match=False
+0x8002FD10,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=m2c-semantic-baseline source=tmp/agents/first-pass-c1/variants/func_8002FD10_v1.c,nonmatch,tool error: inferred scalar global produced out-of-range GPREL16 relocation under G8
