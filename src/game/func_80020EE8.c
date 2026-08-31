@@ -1,0 +1,23 @@
+typedef unsigned char u8;
+typedef unsigned short u16;
+
+typedef struct {
+    u8 pad_00[8];
+    u16 flags;
+    u8 pad_0A[0x17];
+    u8 field_21;
+} Object;
+
+extern int func_80042B98(Object *);
+extern void func_8004036C(Object *);
+
+void func_80020EE8(Object *object)
+{
+    if (func_80042B98(object) == 0) {
+        object->flags |= 4;
+    }
+    object->field_21 -= 2;
+    if (object->field_21 < 0xC0) {
+        func_8004036C(object);
+    }
+}

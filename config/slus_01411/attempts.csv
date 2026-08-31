@@ -569,3 +569,4 @@ address,attempt,compiler,flags,result,summary
 0x8001EF78,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x10: 18!=21; word +0x10: 1800bfaf!=2188a000; relocations differ
 0x8001EF78,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x10: 18!=21; word +0x10: 1800bfaf!=2188a000; relocations differ
 0x8001EF78,3,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x80020EE8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
