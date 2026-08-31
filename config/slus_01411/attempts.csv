@@ -260,3 +260,4 @@ address,attempt,compiler,flags,result,summary
 0x8002F430,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
 0x8002F438,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
 0x8002F930,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
+0x8002F94C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
