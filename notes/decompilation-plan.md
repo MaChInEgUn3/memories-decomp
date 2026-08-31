@@ -80,9 +80,9 @@ with full-file comparison as the merge gate.
   1,792-function inventory.
 - `make match` reproduces the target SHA-256 exactly, and `make audit` verifies
   repository policy and clean deterministic regeneration.
-- Four hundred fifteen game functions totaling 21,364 bytes (`0x5374`) are
-  matching C using the GCC 2.8.1 probe. Seven hundred sixteen
-  compiler-generated game functions totaling 328,612 bytes (`0x503A4`) remain
+- Five hundred six game functions totaling 32,160 bytes (`0x7DA0`) are
+  matching C using the GCC 2.8.1 probe. Six hundred twenty-five
+  compiler-generated game functions totaling 317,816 bytes (`0x4D978`) remain
   in exact assembly. Broader conversion uses 2.8.1 first and falls back to GCC
   2.7.2 only when recorded evidence points to the DOS cohort; a function is
   deferred after six unsuccessful variants.
