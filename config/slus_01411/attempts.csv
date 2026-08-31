@@ -3412,3 +3412,4 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x800164FC,4,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=a4 source=tmp/agents/wave10-cross/variants/func_800164FC_a4.c,nonmatch,byte +0x66: 04!=05; word +0x64: 0a80043c!=0a80053c; relocations differ
 0x800164FC,5,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=a5 source=tmp/agents/wave10-cross/variants/func_800164FC_a5.c,nonmatch,byte +0xec: 09!=21; word +0xec: 09000224!=21900000; relocations differ
 0x800164FC,6,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=a6 source=tmp/agents/wave10-cross/variants/func_800164FC_a6.c,deferred,byte +0x118: 80!=0e; word +0x118: 80000324!=0e0022a6
+0x80020D4C,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=a1 source=tmp/agents/wave10-cross/variants/func_80020D4C_a1.c,matched,exact linked bytes and normalized relocations
