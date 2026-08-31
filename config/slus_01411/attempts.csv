@@ -206,3 +206,9 @@ address,attempt,compiler,flags,result,summary
 0x80021558,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80021558,5,gcc_2_8_1_o1_g8,gcc_2_8_1_o1_g8,nonmatch,mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80021558,6,gcc_2_7_2_g8,gcc_2_7_2_g8,deferred,mips-linux-gnu-gcc: Internal compiler error: program cc1 got fatal signal 11
+0x8002CCA8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":130,""expected"":131,""offset"":2}"
+0x8002CCA8,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":130,""expected"":131,""offset"":2}"
+0x8002CCA8,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":128,""expected"":255,""offset"":0}"
+0x8002CCA8,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,"{""actual"":29,""expected"":255,""offset"":0}"
+0x8002CCA8,5,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":130,""expected"":131,""offset"":2}"
+0x8002CCA8,6,gcc_2_7_2_g8,gcc_2_7_2_g8,deferred,"{""actual"":130,""expected"":131,""offset"":2}"
