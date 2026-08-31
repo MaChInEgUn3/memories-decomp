@@ -812,7 +812,7 @@ address,size,name,status,module,notes
 0x80049C40,0x70,func_80049C40,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80049CB0,0x48,func_80049CB0,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80049CF8,0xE0,func_80049CF8,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80049DD8,0xF0,func_80049DD8,unmatched_asm,game,
+0x80049DD8,0xF0,func_80049DD8,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80049EC8,0x48,func_80049EC8,unmatched_asm,game,
 0x80049F10,0x40,func_80049F10,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80049F50,0x64,func_80049F50,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
