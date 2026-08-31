@@ -250,7 +250,7 @@ address,size,name,status,module,notes
 0x80029574,0x1C,func_80029574,matching_c,game,Local entry pointer reproduced exact stores and relocations
 0x80029590,0xF4,func_80029590,unmatched_asm,game,
 0x80029684,0x158,func_80029684,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x800297DC,0x158,func_800297DC,unmatched_asm,game,
+0x800297DC,0x158,func_800297DC,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80029934,0x57C,func_80029934,unmatched_asm,game,
 0x80029EB0,0x14,func_80029EB0,matching_c,game,Explicit base increment reproduced the exact byte load
 0x80029EC4,0x430,func_80029EC4,unmatched_asm,game,
