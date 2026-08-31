@@ -323,3 +323,5 @@ address,attempt,compiler,flags,result,summary
 0x80038388,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct read-helper call and halfword store matched.
 0x800383B0,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct two-byte field assignment scheduled the clear in the call delay slot.
 0x80038690,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Nested helper calls with a 16-bit cast matched.
+0x80038898,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0x12 byte 82!=83; word 0000828c!=0000838c; relocations differed.
+0x80038898,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Explicit post-increment byte value fixed load/store order and relocations.
