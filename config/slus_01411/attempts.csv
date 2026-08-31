@@ -561,3 +561,5 @@ address,attempt,compiler,flags,result,summary
 0x80015DB8,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
 0x8001755C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,/home/superconta/data/share/yugioh/tools/toolchains/binutils-2.42/bin/mipsel-none-elf-ld failed (1): /home/superconta/data/share/yugioh/tools/toolchains/binutils-2.42/bin/mipsel-none-elf-ld: small-data section too large; lower small-data size limit (see option -G) /home/superconta/data/share/yugioh/tmp/agents/wave2-early/build/8001755C/v1/candidate.o: in function `func_8001755C': (.text+0x24): relocation truncated to fit: R_MIPS_GPREL16 against `D_80010000' 
 0x8001755C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x80019CC8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x8: 0d!=0b; word +0x8: 0d004014!=0b004014; relocations differ
+0x80019CC8,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
