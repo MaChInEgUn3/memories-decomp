@@ -606,7 +606,7 @@ address,size,name,status,module,notes
 0x8003FE14,0x5C,func_8003FE14,unmatched_asm,game,
 0x8003FE70,0x10,func_8003FE70,matching_c,game,Ordered stores to the two small-data globals matched exactly.
 0x8003FE80,0x60,func_8003FE80,matching_c,game,Audio transfer setup using runtime LBA entries 4 through 6
-0x8003FEE0,0x28,func_8003FEE0,unmatched_asm,game,
+0x8003FEE0,0x28,func_8003FEE0,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003FF08,0x2C,func_8003FF08,unmatched_asm,game,
 0x8003FF34,0x24,func_8003FF34,matching_c,game,Constant -8 and zero-argument call wrapper matched exactly.
 0x8003FF58,0x30,func_8003FF58,unmatched_asm,game,
