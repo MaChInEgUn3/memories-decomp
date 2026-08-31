@@ -3614,3 +3614,5 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x800330BC,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_800330BC_attempt1.c,nonmatch,G8 main-game cohort baseline; O2/MASPSX 2.81.
 0x8006041C,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_8006041C_attempt1.c,nonmatch,G0 late-game cohort baseline; O2/MASPSX 2.81.
 0x8006041C,2,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=attempt-2 source=tmp/agents/first-pass-c4/sources/func_8006041C_attempt2.c,nonmatch,Evidence-driven repair of attempt-1 m2c invalid control flow/prototypes; goto form preserves analyzed branches.
+0x8004D134,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_8004D134_attempt1.c,nonmatch,G8 main-game cohort baseline; O2/MASPSX 2.81.
+0x8004D134,2,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-2 source=tmp/agents/first-pass-c4/sources/func_8004D134_attempt2.c,nonmatch,Evidence-driven repair of attempt-1 m2c invalid control flow/prototypes; goto form preserves analyzed branches.
