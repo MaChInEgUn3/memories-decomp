@@ -2023,6 +2023,12 @@
       "source": "src/game/func_80058F10.c"
     },
     {
+      "address": "0x80058F20",
+      "profile": "gcc_2_8_1_g0",
+      "size": "0x54",
+      "source": "src/game/func_80058F20.c"
+    },
+    {
       "address": "0x80058F74",
       "profile": "gcc_2_8_1_g0",
       "size": "0x3C",
