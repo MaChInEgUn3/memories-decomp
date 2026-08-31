@@ -313,3 +313,7 @@ address,attempt,compiler,flags,result,summary
 0x80037D6C,3,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 3: linked bytes and relocations matched exactly; Loading the byte before updating the stream pointer fixed store order.
 0x80038094,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: size 68/64; +0xA byte 83!=82; word 58008380!=58008280; relocations differed.
 0x80038094,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Post-increment in the call argument placed the pointer store in the call delay slot.
+0x800380D4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0x2 byte 83!=82; word 58008380!=58008280; relocations matched.
+0x800380D4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 2: size 56/60; +0x2 byte 83!=86; word 58008380!=58008680; relocations matched.
+0x800380D4,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 3: size 64/60; +0x4 byte 38!=00; word 380080a4!=00000000; relocations matched.
+0x800380D4,4,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 4: linked bytes and relocations matched exactly; Uninitialized hard registers let the clear fill the index-load delay slot.
