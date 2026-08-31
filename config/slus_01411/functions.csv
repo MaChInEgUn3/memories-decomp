@@ -661,7 +661,7 @@ address,size,name,status,module,notes
 0x800429A8,0x14,func_800429A8,matching_c,game,Little-endian two-byte load expression matched exactly.
 0x800429BC,0x1C,func_800429BC,matching_c,game,Base pointer plus little-endian two-byte offset matched exactly.
 0x800429D8,0x28,func_800429D8,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x80042A00,0x28,func_80042A00,unmatched_asm,game,
+0x80042A00,0x28,func_80042A00,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80042A28,0x28,func_80042A28,unmatched_asm,game,
 0x80042A50,0x28,func_80042A50,unmatched_asm,game,
 0x80042A78,0x2C,func_80042A78,unmatched_asm,game,
