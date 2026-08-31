@@ -18,8 +18,8 @@ int func_80047AD0(int value)
     func_80047A68();
     func_8004763C();
     {
-        register u8 *final asm("$3") = D_8009B45C;
-        register int call_value asm("$4") = index;
+        register u8 *final = D_8009B45C;
+        register int call_value = index;
         *(u16 *)(final + 0x442) = value;
         *(u16 *)(final + 0x40) |= 2;
         func_80047788(call_value);
