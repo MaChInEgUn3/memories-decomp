@@ -15,13 +15,13 @@ extern void func_80044D34(void);
 
 void func_80043EBC(void)
 {
-    register void **items asm("$20");
-    register void *cb0 asm("$19");
-    register void *cb1 asm("$18");
-    register void *cb2 asm("$17");
+    register void **items;
+    register void *cb0;
+    register void *cb1;
+    register void *cb2;
     int count;
     {
-        register void **base asm("$16") = D_800F2AE0;
+        register void **base = D_800F2AE0;
         D_8009B43E = -1;
         D_8009B44E = 0;
         D_8009B444 = 0;
@@ -35,7 +35,7 @@ void func_80043EBC(void)
     cb2 = func_80044D20;
     items[2] = func_80073860(0xF4000001, 0x8000, 0x1000, cb2);
     {
-        register void *cb3 asm("$16") = func_80044D34;
+        register void *cb3 = func_80044D34;
         items[3] = func_80073860(0xF4000001, 0x2000, 0x1000, cb3);
         items[4] = func_80073860(0xF0000011, 4, 0x1000, cb0);
         items[5] = func_80073860(0xF0000011, 0x100, 0x1000, cb1);
