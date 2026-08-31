@@ -1,3 +1,7 @@
+typedef signed char s8;
+typedef signed int s32;
+typedef unsigned int u32;
+
 typedef unsigned char u8;
 typedef signed short s16;
 typedef unsigned short u16;
@@ -7,22 +11,25 @@ typedef struct {
     char p2C[0x40]; u8 active;
 } Object;
 
-void func_80019B2C(Object *object)
-{
-    int current = object->current + (u8)object->step;
-    int difference;
-    object->current = current;
-    if (object->step >= 0) difference = object->target - current;
-    else difference = current - object->target;
-    if ((signed char)difference < 0) {
-        register int target asm("$2") = object->target;
-        object->active = 0;
-        object->callback = 0;
-        __asm__ volatile(
-            "sb %0, 33(%1)\n"
-            "andi %0, %0, 0xFF"
-            : "+r"(target) : "r"(object) : "memory"
-        );
-        if (target == 0) object->flags &= ~4;
+void func_80019B2C(u8 *arg0) {
+    s32 n = arg0[0x21] + arg0[0x2A];
+    s32 d;
+
+    arg0[0x21] = n;
+    if (*(s16 *)(arg0 + 0x2A) >= 0) {
+        d = arg0[0x28] - n;
+    } else {
+        d = n - arg0[0x28];
+    }
+
+    if ((s8)d < 0) {
+        u8 c = arg0[0x28];
+
+        arg0[0x6C] = 0;
+        *(s32 *)(arg0 + 0x24) = 0;
+        arg0[0x21] = c;
+        if (c == 0) {
+            *(u16 *)(arg0 + 8) &= 0xFFFB;
+        }
     }
 }
