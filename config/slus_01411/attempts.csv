@@ -460,3 +460,4 @@ address,attempt,compiler,flags,result,summary
 0x80059AA8,5,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x80059C9C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
 0x8005B5FC,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x8005B620,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
