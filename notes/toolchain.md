@@ -227,6 +227,21 @@ The decision is supported by 615 independent full-executable matches totaling
 GCC 2.7.2 remains installed solely as the required Psy-Q 4.6 DOS-cohort
 fallback. No committed matching function currently requires it.
 
+The profile manifest also exposes measured GCC 2.8.1 experiments for untouched
+functions whose target code provides specific evidence:
+
+| Profile family | Measured knob |
+|---|---|
+| `gcc_2_8_1_o1_g*` | Lower optimization level |
+| `gcc_2_8_1_g*_no_sched2` | Disable the second instruction-scheduling pass |
+| `gcc_2_8_1_cc_g8_as_g0` | Compiler small-data threshold 8, assembler threshold 0 |
+| `gcc_2_8_1_cc_g0_as_g8` | Compiler small-data threshold 0, assembler threshold 8 |
+| `gcc_2_8_1_g*_no_split` | Explicit `-mgas -mno-split-addresses` |
+
+These are not new defaults and do not change the Psy-Q 4.6 or ASPSX 2.81
+selection. Use one only when instruction scheduling or relocation shape points
+to that knob, and count it toward the function's six-variant budget.
+
 Continuing compiler probes should still cover multiple independent code shapes,
 including relocation and section behavior:
 
