@@ -472,3 +472,6 @@ address,attempt,compiler,flags,result,summary
 0x8006C30C,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x80070988,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x14: e8!=f0; word +0x14: e85b6324!=f05b6324
 0x80070988,2,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x80071424,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x10: 0f!=0a; word +0x10: 0f80033c!=0a80033c; relocations differ; size 0x34/0x3c
+0x80071424,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x10: 0f!=0a; word +0x10: 0f80033c!=0a80043c; relocations differ; size 0x38/0x3c
+0x80071424,3,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
