@@ -281,3 +281,4 @@ address,attempt,compiler,flags,result,summary
 0x80033CC4,4,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 4: linked bytes and relocations matched exactly; Hard registers plus upper-index-first arithmetic matched table addressing and scheduling.
 0x80035598,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0x17 byte 10!=14; word 04006010!=04006014; relocations matched.
 0x80035598,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; The greater-or-equal second test produced the target branch polarity.
+0x80035AB8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; A 100-byte struct array reproduced index arithmetic and four halfword stores.
