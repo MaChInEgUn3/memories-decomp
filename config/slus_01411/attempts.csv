@@ -591,3 +591,4 @@ address,attempt,compiler,flags,result,summary
 0x8002348C,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
 0x800245A0,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: e0!=e8; word +0x0: e0ffbd27!=e8ffbd27; relocations differ
 0x800245A0,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x80024DC8,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
