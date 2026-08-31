@@ -506,3 +506,9 @@ address,attempt,compiler,flags,result,summary
 0x80019A08,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x2: 02!=03; word +0x0: 1880023c!=1880033c; relocations differ
 0x80019A08,5,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x6: 43!=47; word +0x4: d8a14324!=d8a14794; relocations differ
 0x80019A08,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,deferred,byte +0x2: 02!=03; word +0x0: 1880023c!=1880033c; relocations differ
+0x80019BA0,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x8: 02!=08; word +0x8: 0280023c!=08008294; relocations differ
+0x80019BA0,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x8: 02!=08; word +0x8: 0280023c!=08008294; relocations differ
+0x80019BA0,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: 01!=08; word +0x0: 01000224!=08008394; relocations differ
+0x80019BA0,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x8: 02!=08; word +0x8: 0280023c!=08008294; relocations differ
+0x80019BA0,5,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: 01!=08; word +0x0: 01000224!=08008394; relocations differ
+0x80019BA0,6,gcc_2_8_1_g8,gcc_2_8_1_g8,deferred,byte +0x0: 01!=08; word +0x0: 01000224!=08008394; relocations differ
