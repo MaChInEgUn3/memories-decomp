@@ -415,7 +415,7 @@ address,size,name,status,module,notes
 0x80035680,0x20,func_80035680,matching_c,game,First -O2 -G8 global-update candidate matched.
 0x800356A0,0xA8,func_800356A0,unmatched_asm,game,
 0x80035748,0xA0,func_80035748,unmatched_asm,game,
-0x800357E8,0xB8,func_800357E8,unmatched_asm,game,
+0x800357E8,0xB8,func_800357E8,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800358A0,0x5C,func_800358A0,unmatched_asm,game,
 0x800358FC,0x50,func_800358FC,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8003594C,0x64,func_8003594C,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.

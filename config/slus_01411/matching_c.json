@@ -1489,6 +1489,12 @@
       "source": "src/game/func_80035680.c"
     },
     {
+      "address": "0x800357E8",
+      "profile": "gcc_2_8_1_g0_split",
+      "size": "0xB8",
+      "source": "src/game/func_800357E8.c"
+    },
+    {
       "address": "0x800358FC",
       "profile": "gcc_2_8_1_g0",
       "size": "0x50",
