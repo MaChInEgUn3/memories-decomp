@@ -3586,3 +3586,4 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80018608,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_80018608_attempt1.c,nonmatch,G8 required by target GP-relative relocations; O2/MASPSX 2.81 baseline.
 0x80052D2C,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_80052D2C_attempt1.c,nonmatch,G8 required by target GP-relative relocations; O2/MASPSX 2.81 baseline.
 0x80052D2C,2,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-2 source=tmp/agents/first-pass-c4/sources/func_80052D2C_attempt2.c,nonmatch,Evidence-driven repair of attempt-1 m2c invalid control flow/prototypes; goto form preserves analyzed branches.
+0x800229F4,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_800229F4_attempt1.c,nonmatch,G8 required by target GP-relative relocations; O2/MASPSX 2.81 baseline.
