@@ -288,3 +288,6 @@ address,attempt,compiler,flags,result,summary
 0x80035CA8,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,Variant 3: +0x2 byte 02!=03; word 0f80023c!=0f80033c; relocations matched.
 0x80035CA8,5,gcc_2_7_2_g8,gcc_2_7_2_g8,nonmatch,Variant 2: +0x2 byte 02!=03; word 0f80023c!=0f80033c; relocations matched.
 0x80035CA8,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,Variant 2: linked bytes and relocations matched exactly; Explicit pointer/count loop matched after enabling GAS split addresses.
+0x80035CE4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0x2 byte 02!=03; word 0f80023c!=0f80033c; relocations matched.
+0x80035CE4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 2: +0x2 byte 02!=03; word 0f80023c!=0f80033c; relocations matched.
+0x80035CE4,3,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 3: linked bytes and relocations matched exactly; Hard-register pointer and counter assignments fixed the swapped allocation.
