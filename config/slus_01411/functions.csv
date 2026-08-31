@@ -1137,7 +1137,7 @@ address,size,name,status,module,notes
 0x80070C60,0xA0,func_80070C60,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.
 0x80070D00,0xA8,func_80070D00,matching_c,game,4 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.
 0x80070DA8,0x78,func_80070DA8,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.
-0x80070E20,0x94,func_80070E20,unmatched_asm,game,
+0x80070E20,0x94,func_80070E20,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070EB4,0x68,func_80070EB4,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070F1C,0xDC,func_80070F1C,unmatched_asm,game,
 0x80070FF8,0x8,func_80070FF8,matching_c,game,1 pre-policy variants: Empty function matched jr-ra and nop exactly.
