@@ -243,7 +243,7 @@ address,size,name,status,module,notes
 0x800289B4,0x8,func_800289B4,matching_c,game,Empty function matched exactly.
 0x800289BC,0x14C,func_800289BC,unmatched_asm,game,
 0x80028B08,0x600,func_80028B08,unmatched_asm,game,
-0x80029108,0x5C,func_80029108,unmatched_asm,game,
+0x80029108,0x5C,func_80029108,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80029164,0x7C,func_80029164,unmatched_asm,game,
 0x800291E0,0x348,func_800291E0,unmatched_asm,game,
 0x80029528,0x4C,func_80029528,unmatched_asm,game,
