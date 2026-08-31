@@ -942,7 +942,7 @@ address,size,name,status,module,notes
 0x80059700,0xC8,func_80059700,unmatched_asm,game,
 0x800597C8,0xC4,func_800597C8,unmatched_asm,game,
 0x8005988C,0x58,func_8005988C,unmatched_asm,game,
-0x800598E4,0x24,func_800598E4,unmatched_asm,game,
+0x800598E4,0x24,func_800598E4,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80059908,0xF4,func_80059908,unmatched_asm,game,
 0x800599FC,0x54,func_800599FC,unmatched_asm,game,
 0x80059A50,0x58,func_80059A50,unmatched_asm,game,
