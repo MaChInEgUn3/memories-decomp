@@ -1,0 +1,2 @@
+typedef unsigned char u8;typedef unsigned short u16;extern int func_8008E590(void);
+void func_80039F44(u8*o){*(u16*)(o+0x34)=0x68;o[0x32]=0;o[0x33]=0;o[0x31]=0;*(u16*)(o+0x36)=0xB2;*(u16*)(o+0x3E)=(func_8008E590()&0xFF)+0x3C;}
