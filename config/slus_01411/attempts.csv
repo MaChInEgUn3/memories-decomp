@@ -430,3 +430,6 @@ address,attempt,compiler,flags,result,summary
 0x800498F8,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x2: 03!=04; word +0x0: 0a80033c!=0a80043c; size 0x30/0x28
 0x800498F8,2,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x80049F10,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x8004B6E8,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x19: 18!=10; word +0x18: 21186200!=21104300
+0x8004B6E8,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x19: 18!=10; word +0x18: 21186200!=21104300
+0x8004B6E8,3,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
