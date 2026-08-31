@@ -1999,6 +1999,12 @@
       "source": "src/game/func_8003F740.c"
     },
     {
+      "address": "0x8003F810",
+      "profile": "gcc_2_8_1_g0",
+      "size": "0x6C",
+      "source": "src/game/func_8003F810.c"
+    },
+    {
       "address": "0x8003F87C",
       "profile": "gcc_2_8_1_g8",
       "size": "0x58",
