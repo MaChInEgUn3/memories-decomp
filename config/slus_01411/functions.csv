@@ -950,7 +950,7 @@ address,size,name,status,module,notes
 0x80059AE0,0xC,func_80059AE0,matching_c,game,1 pre-policy variants: Straight unsigned-halfword G8 setter matched linked bytes and GPREL16 relocation.
 0x80059AEC,0xC,func_80059AEC,matching_c,game,1 pre-policy variants: Straight unsigned-byte G8 setter matched linked bytes and GPREL16 relocation.
 0x80059AF8,0x98,func_80059AF8,unmatched_asm,game,
-0x80059B90,0x88,func_80059B90,unmatched_asm,game,
+0x80059B90,0x88,func_80059B90,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.
 0x80059C18,0xC,func_80059C18,matching_c,game,1 pre-policy variants: Straight unsigned-halfword G8 setter matched linked bytes and GPREL16 relocation.
 0x80059C24,0x64,func_80059C24,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80059C88,0x14,func_80059C88,matching_c,game,1 pre-policy variants: Signed-byte comparison against -2 matched linked bytes and GPREL16 relocation.
