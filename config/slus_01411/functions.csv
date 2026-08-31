@@ -1130,7 +1130,7 @@ address,size,name,status,module,notes
 0x80070870,0x54,func_80070870,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800708C4,0x5C,func_800708C4,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80070920,0x68,func_80070920,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80070988,0x38,func_80070988,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
+0x80070988,0x38,func_80070988,matching_c,game,Pure-C inline refinement matched the full executable.
 0x800709C0,0x80,func_800709C0,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070A40,0x80,func_80070A40,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070AC0,0x7C,func_80070AC0,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
