@@ -19,6 +19,8 @@ with full-file comparison as the merge gate.
 - The primary acceptance target is a byte-identical rebuilt PS-X EXE.
 - Incremental unmatched assembly is allowed until functions are converted to
   matching C.
+- Do not decompile the 598 PsyQ CRT/SDK functions. Keep them as exact assembly
+  and exclude their addresses from the attempt ledger.
 - Treat every file under `game/` as an immutable, user-supplied input.
 - Keep game binaries local and untracked; commit only hashes, metadata, and
   instructions needed to validate user-supplied files.
@@ -80,12 +82,17 @@ with full-file comparison as the merge gate.
   1,792-function inventory.
 - `make match` reproduces the target SHA-256 exactly, and `make audit` verifies
   repository policy and clean deterministic regeneration.
-- Six hundred fifteen game functions totaling 56,368 bytes (`0xDC30`) are
-  matching C using the GCC 2.8.1 probe. Five hundred sixteen
-  compiler-generated game functions totaling 293,608 bytes (`0x47AE8`) remain
-  in exact assembly. Broader conversion uses 2.8.1 first and falls back to GCC
-  2.7.2 only when recorded evidence points to the DOS cohort; a function is
-  deferred after six unsuccessful variants.
+- Six hundred twenty-three game functions totaling 60,596 bytes (`0xECB4`)
+  are matching C using the GCC 2.8.1 probe. Five hundred eight
+  compiler-generated game functions totaling 289,380 bytes (`0x46A64`) and 63
+  handwritten game functions totaling 46,236 bytes (`0xB49C`) remain in exact
+  assembly.
+- The first pass is complete: all 1,194 game functions have at least one
+  tracked attempt, comprising 623 matches, 349 terminal deferrals, and 222
+  partial histories with remaining budget. No PsyQ function has an attempt.
+- Further conversion uses 2.8.1 first and falls back to GCC 2.7.2 only when
+  recorded evidence points to the DOS cohort; a function is deferred after six
+  unsuccessful variants.
 
 ### Target executable
 
