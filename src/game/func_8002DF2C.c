@@ -13,7 +13,7 @@ void func_8002DF2C(volatile unsigned char *owner, int value)
     if (owner) {
         *(short *)(owner + 0x3C) = value;
     }
-    __asm__ volatile("" ::: "memory");
+    
     index = ((value >> 4) & 15) * 10 + (value & 15);
     mode = value >> 8;
     switch (mode) {
