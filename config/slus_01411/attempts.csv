@@ -3572,3 +3572,5 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80057AF4,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=v1 source=tmp/agents/first-pass-c3/attempt-sources/80057AF4/v1.c,nonmatch,tool error: /home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
 0x80057AF4,2,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=v2 source=tmp/agents/first-pass-c3/attempt-sources/80057AF4/v2.c,nonmatch,byte +0x0: d0!=c0; word +0x0: d0ffbd27!=c0ffbd27; relocations differ; size 0x2A8/0x32C
 0x8005FE44,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_8005FE44_attempt1.c,nonmatch,G0 late-game cohort baseline; O2/MASPSX 2.81.
+0x80060B38,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_80060B38_attempt1.c,nonmatch,G0 late-game cohort baseline; O2/MASPSX 2.81.
+0x80060B38,2,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=attempt-2 source=tmp/agents/first-pass-c4/sources/func_80060B38_attempt2.c,nonmatch,Evidence-driven repair of attempt-1 m2c invalid control flow/prototypes; goto form preserves analyzed branches.
