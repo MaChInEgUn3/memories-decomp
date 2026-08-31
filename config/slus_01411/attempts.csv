@@ -263,3 +263,9 @@ address,attempt,compiler,flags,result,summary
 0x8002F94C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
 0x8002FA28,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
 0x8002FED0,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
+0x80030FA0,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Direct arrays: 0x2C bytes; compiler started with the GP-relative index load and folded the table index into HI16/LO16.
+0x80030FA0,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Hard table/index registers: 0x34 bytes; full table address preceded the index load and introduced a load-delay nop.
+0x80030FA0,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Hard-register arithmetic without a barrier: 0x2C bytes; optimizer returned to folded symbolic indexing.
+0x80030FA0,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,Hard registers with GAS splitting: 0x2C bytes; stores and relocations remained shifted and the return-delay store differed.
+0x80030FA0,5,gcc_2_7_2_g8,gcc_2_7_2_g8,nonmatch,GCC 2.7.2 fallback: same 0x2C folded-index result as the first GCC 2.8.1 form.
+0x80030FA0,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,deferred,Direct arrays with GAS splitting: 0x2C bytes; absolute stores moved ahead of the required table setup.
