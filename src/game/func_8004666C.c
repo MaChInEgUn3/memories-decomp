@@ -1,0 +1,19 @@
+typedef unsigned char u8;
+typedef unsigned short u16;
+
+extern u8 * volatile D_8009B45C;
+
+void func_8004666C(void)
+{
+    u8 *first = D_8009B45C;
+    u8 *state;
+    first[0x49] = 255;
+    state = D_8009B45C;
+    *(short *)(first + 0x512) = 64;
+    *(u16 *)(state + 0x40) = (*(u16 *)(state + 0x40) & 0xFFFC) | 4;
+    if ((*(u16 *)(state + 0x40) & 0x80) &&
+        *(short *)(state + 0x1588) >= 0) {
+        *(short *)(state + 0x1588) = -16;
+        state[0x1584] = 220;
+    }
+}
