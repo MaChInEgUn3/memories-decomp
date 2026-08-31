@@ -310,7 +310,8 @@ address,size,name,status,module,notes
 0x8002D7CC,0x250,func_8002D7CC,unmatched_asm,game,
 0x8002DA1C,0x21C,func_8002DA1C,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8002DC38,0x13C,func_8002DC38,unmatched_asm,game,
-0x8002DD74,0x1B8,func_8002DD74,unmatched_asm,game,
+0x8002DD74,0x88,func_8002DD74,unmatched_asm,game,Boundary corrected from a merged 0x1B8 span; its existing attempt predates the split.
+0x8002DDFC,0x130,func_8002DDFC,unmatched_asm,game,Recovered callback boundary referenced by func_8002DF2C.
 0x8002DF2C,0xE0,func_8002DF2C,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8002E00C,0x54,func_8002E00C,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8002E060,0xC8,func_8002E060,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
@@ -368,7 +369,8 @@ address,size,name,status,module,notes
 0x80030F40,0x40,func_80030F40,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80030F80,0x20,func_80030F80,matching_c,game,First -O2 -G8 call-wrapper candidate matched linked bytes and relocations.
 0x80030FA0,0x30,func_80030FA0,unmatched_asm,game,
-0x80030FD0,0xA8,func_80030FD0,unmatched_asm,game,
+0x80030FD0,0x30,func_80030FD0,unmatched_asm,game,Boundary corrected from a merged 0xA8 span; its six existing attempts predate the split.
+0x80031000,0x78,func_80031000,unmatched_asm,game,Recovered function-pointer target stored at 0x80090D80.
 0x80031078,0xC,func_80031078,matching_c,game,First -O2 -G8 global-byte assignment candidate matched.
 0x80031084,0x2C8,func_80031084,unmatched_asm,game,
 0x8003134C,0x8,func_8003134C,matching_c,game,First empty-function candidate matched.
