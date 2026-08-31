@@ -272,3 +272,5 @@ address,attempt,compiler,flags,result,summary
 0x80030F40,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct global stores and four-argument call wrapper matched.
 0x80032B38,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0xC byte 03!=04; word 03004010!=04004014; relocations matched.
 0x80032B38,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Inverting the source branch retained the target early return layout.
+0x80033500,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: size 52/60; +0x20 byte 04!=02; word 04004010!=02004010; relocations matched.
+0x80033500,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Zero-first source order retained the separate zero-return epilogue.
