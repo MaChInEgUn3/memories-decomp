@@ -325,3 +325,5 @@ address,attempt,compiler,flags,result,summary
 0x80038690,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Nested helper calls with a 16-bit cast matched.
 0x80038898,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0x12 byte 82!=83; word 0000828c!=0000838c; relocations differed.
 0x80038898,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Explicit post-increment byte value fixed load/store order and relocations.
+0x80039AAC,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0xC byte 03!=04; word 03004010!=04004014; relocations matched.
+0x80039AAC,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Inverting the flag branch retained the target early return layout.
