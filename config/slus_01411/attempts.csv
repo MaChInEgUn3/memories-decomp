@@ -388,3 +388,4 @@ address,attempt,compiler,flags,result,summary
 0x80042A78,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
 0x80042AA4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
 0x80042AD8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
+0x80042B08,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
