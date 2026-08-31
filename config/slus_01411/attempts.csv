@@ -226,3 +226,7 @@ address,attempt,compiler,flags,result,summary
 0x80028220,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
 0x800282E8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":4,""expected"":3,""offset"":12}"
 0x800282E8,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
+0x8002C4DC,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":33,""expected"":29,""offset"":0}"
+0x8002C4DC,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":5,""expected"":2,""offset"":2}"
+0x8002C4DC,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":5,""expected"":2,""offset"":2}"
+0x8002C4DC,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,Linked bytes and relocations matched exactly.
