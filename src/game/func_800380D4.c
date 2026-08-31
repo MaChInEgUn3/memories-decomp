@@ -6,9 +6,9 @@ typedef unsigned int u32;
 typedef signed int s32;
 void func_800380D4(u8 *object)
 {
-    register u8 **stream asm("$3");
-    register u8 *current asm("$2");
-    register u32 value asm("$5");
+    register u8 **stream;
+    register u8 *current;
+    register u32 value;
     *(u16 *)(object + 0x38) = 0;
     stream = &((u8 **)object)[*(s8 *)(object + 0x58)];
     current = *stream;
