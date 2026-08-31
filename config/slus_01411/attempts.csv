@@ -2299,3 +2299,8 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8002DF2C,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,"{""actual"": [[80, ""R_MIPS_26"", "".text""], [100, ""R_MIPS_26"", "".text""], [108, ""R_MIPS_26"", "".text""], [120, ""R_MIPS_26"", "".text""], [136, ""R_MIPS_HI16"", ""func_8002DDFC""], [140, ""R_MIPS_LO16"", ""func_8002DDFC""], [176, ""R_MIPS_26"", ""func_80014EEC""], [200, ""R_MIPS_HI16"", ""D_8009B0F4""], [204, ""R_MIPS_LO16"", ""D_8009B0F4""]], ""expected"": [[80, ""R_MIPS_26"", "".text""], [100, ""R_MIPS_26"", "".text""], [108, ""R_MIPS_26"", "".text""], [120, ""R_MIPS_26"", "".text""], [136, ""R_MIPS_HI16"", ""D_8002DDFC""], [140, ""R_MIPS_LO16"", ""D_8002DDFC""], [176, ""R_MIPS_26"", ""func_80014EEC""], [200, ""R_MIPS_HI16"", ""D_8009B0F4""], [204, ""R_MIPS_LO16"", ""D_8009B0F4""]]}"
 0x8002DF2C,6,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x8002E060,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x80030D5C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x2: 83!=85; word +0x0: e3038393!=e3038593
+0x80030D5C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x61: 00!=02; word +0x60: 00000000!=0002033c
+0x80030D5C,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x5c: 09!=0a; word +0x5c: 09004010!=0a004010
+0x80030D5C,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x5c: 09!=0a; word +0x5c: 09004010!=0a004010
+0x80030D5C,5,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
