@@ -1145,7 +1145,7 @@ address,size,name,status,module,notes
 0x80070FF8,0x8,func_80070FF8,matching_c,game,1 pre-policy variants: Empty function matched jr-ra and nop exactly.
 0x80071000,0x8,func_80071000,matching_c,game,1 pre-policy variants: Empty function matched jr-ra and nop exactly.
 0x80071008,0x18C,func_80071008,unmatched_asm,game,
-0x80071194,0xB4,func_80071194,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.
+0x80071194,0xB4,func_80071194,matching_c,game,Pure-C inline refinement matched the full executable.
 0x80071248,0x6C,func_80071248,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800712B4,0x6C,func_800712B4,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80071320,0x98,func_80071320,unmatched_asm,game,
