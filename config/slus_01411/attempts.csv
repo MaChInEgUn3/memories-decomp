@@ -376,3 +376,4 @@ address,attempt,compiler,flags,result,summary
 0x8004006C,2,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked text and relocation sequence
 0x80040424,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,first byte +0x2; word 69008290 != 69008390
 0x80040424,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
+0x8004143C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
