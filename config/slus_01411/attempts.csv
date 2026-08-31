@@ -270,3 +270,5 @@ address,attempt,compiler,flags,result,summary
 0x80030FA0,5,gcc_2_7_2_g8,gcc_2_7_2_g8,nonmatch,GCC 2.7.2 fallback: same 0x2C folded-index result as the first GCC 2.8.1 form.
 0x80030FA0,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,deferred,Direct arrays with GAS splitting: 0x2C bytes; absolute stores moved ahead of the required table setup.
 0x80030F40,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct global stores and four-argument call wrapper matched.
+0x80032B38,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0xC byte 03!=04; word 03004010!=04004014; relocations matched.
+0x80032B38,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Inverting the source branch retained the target early return layout.
