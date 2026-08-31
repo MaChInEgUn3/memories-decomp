@@ -190,3 +190,7 @@ address,attempt,compiler,flags,result,summary
 0x80015CC0,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Seven-byte stand-in State selected an invalid GPREL16 global access.
 0x80015CC0,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,"Large State reproduced the absolute address, OR mask, call order, and delay-slot store."
 0x80016D04,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Signed halfword field forwarding reproduced the four-argument call exactly.
+0x8001700C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Initial both-bits-set interpretation optimized to a six-instruction combined-mask test and had wrong semantics.
+0x8001700C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Nested both-bits-set form still had wrong semantics and used an early-return/sltu layout.
+0x8001700C,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Correct set/clear semantics with a result variable allocated the result in $a0 and used sltiu.
+0x8001700C,4,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Direct nested early return for bit 15 set and bit 14 clear matched branch targets and delay slots.
