@@ -297,3 +297,4 @@ address,attempt,compiler,flags,result,summary
 0x80035DF4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: size 40/44; +0x8 byte 88!=A0; word 88b24224!=a0b24224; relocations matched.
 0x80035DF4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; A hard base register preserved the separate base and +0x18 address steps.
 0x80036D3C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct dynamic-stream little-endian halfword read matched.
+0x800378D8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Straight conditional flag set and global-state clear matched.
