@@ -40,6 +40,20 @@ The inventory records address, size, current name, status, module ownership,
 and durable notes. Its address and size fields must continue to agree with the
 generated split.
 
+Select untouched candidates with the guarded project command:
+
+```sh
+make candidates
+make candidates \
+  CANDIDATE_ARGS="--start 0x80028000 --end 0x80038000 --limit 30 --format addresses"
+```
+
+The default deliberately excludes every function with any existing attempt
+history, not only terminal deferrals. This prevents an automated batch from
+silently exceeding the six-variant limit when an older partial attempt exists.
+Use `--include-partial` only when intentionally continuing a reviewed,
+nonterminal history; the output reports its remaining budget.
+
 After a candidate has a terminal `matched` row in
 `config/slus_01411/attempts.csv`, promote it with:
 

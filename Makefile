@@ -17,7 +17,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
+.PHONY: help workspace verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions candidates progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
 
 help:
 	@printf '%s\n' \
@@ -32,6 +32,7 @@ help:
 		'  match          Build and compare the complete target executable' \
 		'  inventory      Update the tracked resident-function inventory' \
 		'  classify-functions  Apply verified ownership classifications' \
+		'  candidates     List smallest zero-attempt game functions' \
 		'  progress       Generate current resident-code progress metrics' \
 		'  disc-layout    Regenerate the tracked ISO9660 LBA manifest' \
 		'  verify-disc    Verify BIN/CUE layout and extracted file contents' \
@@ -96,6 +97,9 @@ inventory: split
 
 classify-functions: inventory
 	@$(PYTHON) tools/project/classify_functions.py
+
+candidates: workspace
+	@$(PYTHON) tools/project/select_candidates.py $(CANDIDATE_ARGS)
 
 progress: split
 	@$(PYTHON) tools/project/progress.py
