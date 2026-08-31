@@ -1338,3 +1338,5 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80047864,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x8: 21!=10; word +0x8: 21288000!=1000033c; relocations differ
 0x80047864,6,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x80047EC4,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x80047F38,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x26: c3!=66; word +0x24: 2110c300!=21106600
+0x80047F38,2,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
