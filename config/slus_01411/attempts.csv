@@ -594,3 +594,9 @@ address,attempt,compiler,flags,result,summary
 0x80024DC8,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x80025EE0,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
 0x80029108,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x8002A660,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x2: 82!=83; word +0x0: 0a008284!=0a008384
+0x8002A660,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x2: 82!=83; word +0x0: 0a008284!=0a008384
+0x8002A660,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x1: 00!=80; word +0x0: 0a008284!=0a80033c
+0x8002A660,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x1: 00!=80; word +0x0: 0a008284!=0a80033c
+0x8002A660,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0xc: 0a!=00; word +0xc: 0a80013c!=00000000
+0x8002A660,6,gcc_2_8_1_g0,gcc_2_8_1_g0,deferred,byte +0x18: 40!=0a; word +0x18: 4000a228!=0a008394
