@@ -5,7 +5,7 @@ typedef struct{Spawned*base;Spawned*child;char p8;u8 active;char pA[2];}Slot;
 extern Slot D_800EA030[5];extern void*func_8004002C(void);extern Spawned*func_800400AC(void*,int);extern void func_80040510(),func_80042918(Spawned*),func_800428EC(Spawned*,int),func_8003FEE0(int);
 void func_8001B7AC(Object*arg)
 {
- register Object*object asm("$18")=arg;register Slot*slot asm("$16")=&D_800EA030[object->index];register Spawned*child asm("$17");
+ register Object*object=arg;register Slot*slot=&D_800EA030[object->index];register Spawned*child;
  slot->base->y-=4;child=func_800400AC(func_8004002C(),1);func_80040510(child,slot->base->x,slot->base->y,0x10,0x10,object->count<<4,0xB8,0xB,0x250,0xFC);
  func_80042918(child);func_800428EC(child,(s8)(((u8*)slot->base)[0x16]+1));slot->child=child;object->count++;slot->active=object->count;func_8003FEE0(0x2F);
 }
