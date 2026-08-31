@@ -826,7 +826,7 @@ address,size,name,status,module,notes
 0x8004A6D8,0x20,func_8004A6D8,matching_c,game,2 pre-policy variants: exact under -G0 and -G8; selected -G0 call wrapper
 0x8004A6F8,0x6C,func_8004A6F8,unmatched_asm,game,
 0x8004A764,0x5C,func_8004A764,unmatched_asm,game,
-0x8004A7C0,0x94,func_8004A7C0,unmatched_asm,game,
+0x8004A7C0,0x94,func_8004A7C0,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.
 0x8004A854,0x90,func_8004A854,unmatched_asm,game,
 0x8004A8E4,0x5C,func_8004A8E4,unmatched_asm,game,
 0x8004A940,0x1BC,func_8004A940,unmatched_asm,game,
