@@ -29,8 +29,8 @@ extern void func_8002CD8C(void);
 
 void func_80043960(int mode)
 {
-    register u8 *object asm("$16");
-    register u8 *first asm("$17");
+    register u8 *object;
+    register u8 *first;
     D_8009B428 = 0;
     if (mode == 0) {
         func_80014E1C(0, 0, 0x1F85, 0x22, func_800434F4, 0, 0);
