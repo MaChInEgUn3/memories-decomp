@@ -279,3 +279,5 @@ address,attempt,compiler,flags,result,summary
 0x80033CC4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 2: size 56/52; +0x11 byte 29!=00; word 00290500!=00000000; relocations matched.
 0x80033CC4,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 3: +0x8 byte 47!=46; word 472d8590!=462d8380; relocations matched.
 0x80033CC4,4,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 4: linked bytes and relocations matched exactly; Hard registers plus upper-index-first arithmetic matched table addressing and scheduling.
+0x80035598,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0x17 byte 10!=14; word 04006010!=04006014; relocations matched.
+0x80035598,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; The greater-or-equal second test produced the target branch polarity.
