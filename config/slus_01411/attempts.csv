@@ -337,3 +337,9 @@ address,attempt,compiler,flags,result,summary
 0x80039F1C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Inverting the flag branch retained the target early return layout.
 0x80039FD4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct signed-byte assignment and cleanup call matched.
 0x80039FF8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Straight conditional flag/mode update matched.
+0x8003F7D4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,first byte +0x8; word 0180063c != 00328424; relocation sequence differs (7 expected/7 actual)
+0x8003F7D4,2,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,first byte +0x4; word 1d80043c != 0a80023c; relocation sequence differs (7 expected/7 actual)
+0x8003F7D4,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,first byte +0x4; word 1d80043c != 1000bfaf; relocation sequence differs (7 expected/7 actual)
+0x8003F7D4,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,first byte +0x8; word 0180063c != 00328424; relocation sequence differs (7 expected/7 actual)
+0x8003F7D4,5,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,first byte +0x8; word 0180063c != 00328424; relocation sequence differs (7 expected/7 actual)
+0x8003F7D4,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,deferred,first byte +0x4; word 1d80043c != 0a80023c; relocation sequence differs (7 expected/7 actual)
