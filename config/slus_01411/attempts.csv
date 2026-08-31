@@ -496,3 +496,7 @@ address,attempt,compiler,flags,result,summary
 0x80073380,2,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x2: 03!=04; word +0x0: 1f000324!=1f000424; size 0x2c/0x28
 0x80073380,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x8: e8!=26; word +0x8: e85b4224!=265c4224; size 0x2c/0x28
 0x80073380,4,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x80073420,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x2: 03!=02; word +0x0: 18000324!=18000224; relocations differ; size 0x24/0x28
+0x80073420,2,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0xa: 42!=44; word +0x8: e85b4224!=e85b4424; size 0x24/0x28
+0x80073420,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0xe: 43!=62; word +0xc: 21104300!=21106200; size 0x30/0x28
+0x80073420,4,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
