@@ -1555,6 +1555,12 @@
       "source": "src/game/read_u16.c"
     },
     {
+      "address": "0x80070988",
+      "profile": "gcc_2_8_1_g0",
+      "size": "0x38",
+      "source": "src/game/func_80070988.c"
+    },
+    {
       "address": "0x80070FF8",
       "profile": "gcc_2_8_1_g0",
       "size": "0x8",
