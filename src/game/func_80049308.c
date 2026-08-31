@@ -18,8 +18,8 @@ void func_80049308(void)
         }
     }
     {
-        register u8 *final asm("$2") = D_8009B45C;
-        register u16 *entry asm("$3") = *(u16 **)(final + 0x1564);
+        register u8 *final = D_8009B45C;
+        register u16 *entry = *(u16 **)(final + 0x1564);
         *(u16 *)(final + 0x1578) = *entry;
     }
 }
