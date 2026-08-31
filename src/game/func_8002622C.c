@@ -1,0 +1,5 @@
+typedef unsigned short u16;typedef signed short s16;typedef struct{u16 x,y;char p4[0x16];u16 one;}Obj;
+extern s16 D_8009B1D2,D_8009B1A0;extern u16 D_8009B220;extern int D_8009B0F4[3],D_8009B134[3];
+extern int func_80024E24(void),func_8002C7E8(int,int);extern Obj*func_8002C68C(int);extern void func_8003FEE0(int),func_80029164(int,int);
+void func_8002622C(void){if(!func_80024E24()){D_8009B1A0=func_8002C7E8(0,D_8009B1D2);if(D_8009B1A0){Obj*o=func_8002C68C(0x12);o->x=0xA0;o->y=0x78;o->one=1;func_8003FEE0(2);func_80029164(1,D_8009B1A0);}}
+ else if(!((D_8009B0F4[0]&0x2000030)|D_8009B134[0]))D_8009B220=0;}
