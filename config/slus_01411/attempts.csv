@@ -3577,3 +3577,4 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8003E490,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_8003E490_attempt1.c,nonmatch,G8 required by target GP-relative relocations; O2/MASPSX 2.81 baseline.
 0x8003E490,2,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-2 source=tmp/agents/first-pass-c4/sources/func_8003E490_attempt2.c,nonmatch,Evidence-driven repair of attempt-1 m2c invalid control flow/prototypes; goto form preserves analyzed branches.
 0x8003E490,3,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-3 source=tmp/agents/first-pass-c4/sources/func_8003E490_attempt3.c,nonmatch,Attempt 2 proved only orphaned jump-table case labels blocked GCC; preserve blocks as unique labels.
+0x800577B0,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=attempt-1 source=tmp/agents/first-pass-c4/sources/func_800577B0_attempt1.c,nonmatch,G8 main-game cohort baseline; O2/MASPSX 2.81.
