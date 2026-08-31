@@ -1,0 +1,27 @@
+typedef signed char s8;
+typedef unsigned char u8;
+typedef signed short s16;
+typedef unsigned short u16;
+typedef signed int s32;
+typedef unsigned int u32;
+
+extern u8 D_80090E58[];
+extern u8 D_800EB288[];
+
+void func_8003B6AC(s32 arg0, s32 arg1)
+{
+    u8 *t = D_80090E58;
+    u8 *lo = t + arg0 * 2;
+    u8 *hi = t + (arg0 + 1) * 2;
+    s32 i = *(u16 *)lo;
+
+    if (i < *(u16 *)hi) {
+        u8 *base = D_800EB288;
+        u8 *p = base + i * 28;
+        do {
+            p[0x18] = arg1;
+            p += 0x1C;
+            i++;
+        } while (i < *(u16 *)hi);
+    }
+}

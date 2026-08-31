@@ -536,7 +536,7 @@ address,size,name,status,module,notes
 0x8003B378,0x194,func_8003B378,unmatched_asm,game,
 0x8003B50C,0xBC,func_8003B50C,unmatched_asm,game,
 0x8003B5C8,0xE4,func_8003B5C8,unmatched_asm,game,
-0x8003B6AC,0x68,func_8003B6AC,unmatched_asm,game,
+0x8003B6AC,0x68,func_8003B6AC,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x8003B714,0x20,func_8003B714,matching_c,game,Zero-valued third-argument call wrapper matched exactly.
 0x8003B734,0x10,func_8003B734,matching_c,game,Incomplete-array halfword declaration produced the required absolute masked getter.
 0x8003B744,0x9C,func_8003B744,unmatched_asm,game,
