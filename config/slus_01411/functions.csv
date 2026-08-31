@@ -736,7 +736,7 @@ address,size,name,status,module,notes
 0x80046A08,0x3E0,func_80046A08,unmatched_asm,game,
 0x80046DE8,0x170,func_80046DE8,unmatched_asm,game,
 0x80046F58,0x48,func_80046F58,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x80046FA0,0x68,func_80046FA0,unmatched_asm,game,
+0x80046FA0,0x68,func_80046FA0,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80047008,0x14,func_80047008,matching_c,game,2 pre-policy variants: exact -G8; -G0 used absolute global access
 0x8004701C,0x20,func_8004701C,matching_c,game,4 pre-policy variants: exact -G8; -G0 used absolute global access
 0x8004703C,0x14,func_8004703C,matching_c,game,2 pre-policy variants: exact -G8; -G0 used absolute global access
