@@ -1132,7 +1132,7 @@ address,size,name,status,module,notes
 0x800709C0,0x80,func_800709C0,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070A40,0x80,func_80070A40,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070AC0,0x7C,func_80070AC0,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80070B3C,0x7C,func_80070B3C,unmatched_asm,game,
+0x80070B3C,0x7C,func_80070B3C,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070BB8,0xA8,func_80070BB8,unmatched_asm,game,
 0x80070C60,0xA0,func_80070C60,unmatched_asm,game,
 0x80070D00,0xA8,func_80070D00,unmatched_asm,game,
