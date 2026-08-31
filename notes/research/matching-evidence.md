@@ -140,20 +140,56 @@ Exact `func_8003D614` confirms a controller with:
 - `0x64`-byte records rooted at `D_800EB0F8`.
 - Signed 16-bit motion fields.
 
+### Transfer and animation anchors
+
+Exact `func_80013998` confirms the `0x48`-byte transfer descriptor constructor
+used by `func_80013940`. Public arguments five through eight arrive on the
+stack, and the vertical/configuration argument selects direct, negative, or
+fixed-point initialization behavior.
+
+Exact `func_80019BD0` confirms animation-object fields including:
+
+- Flags at `+8`.
+- Current and mode bytes at `+0x21/+0x22`.
+- Callback pointer at `+0x24`.
+- Threshold halfword at `+0x2E`.
+- Object index at `+0x6A`.
+- State field at `+0x6C`.
+
+Exact `func_8001B7AC` confirms that `D_800EA030` uses `0x0C`-byte entries
+selected by a signed byte.
+
+### Coordinate and constructor anchors
+
+Exact `func_8005A1F4` and `func_8005A2E0` confirm two unsigned-halfword
+coordinate triplets in `D_800F56F0`, at offsets `0/4/8` and `0xC/0x10/0x14`.
+Both functions copy an alignment-one eight-byte vector packet, accumulate
+three signed square terms, and call `func_80086E50`.
+
+Exact `func_800610E0` and `func_800611D0` reinforce the `0x70`-byte allocator
+object model through two related parent/child constructors.
+
 ## Matching anchors from the deep wave
 
 | Function | Reusable evidence |
 |---:|---|
+| `func_80013998` | Transfer-descriptor constructor and stack argument order |
 | `func_8001306C` | Nullable callback array, GP-relative callback, pacing counters, and 60-tick countdown |
 | `func_8001EE44` | Signed card ID indexing and conditional 4-bit property extraction |
 | `func_80021480` | Ten-child object iteration and bit `0x40` state updates |
+| `func_80019BD0` | Animation object field widths and callback layout |
+| `func_8001B7AC` | `0x0C`-byte global entry selection and child linkage |
 | `func_80028310` | G8 state transition with child creation and cleanup |
+| `func_8002ABB4` | `0x70`-byte object clone/initialization wrapper |
 | `func_8002DF2C` | Three archive layouts selected by high byte; packed decimal index calculation |
 | `func_8002E060` | Object creation wrapper with signed mode byte |
+| `func_8002EB78` | G8 stream state with split absolute `0x4C`-byte table entries |
 | `func_80030D5C` | G8 state machine mixing GP-relative state and absolute flag word |
 | `func_800375A4` | Signed countdown state and object cleanup |
+| `func_80037A58` | Signed duration, randomized coordinate snapshot, and restoration |
 | `func_80038530` | Four direct byte-stream reads with absolute G0 globals |
 | `func_8003D614` | Two-slot controller and `0x64`-byte object records |
+| `func_80043230` | G0 pointer-rooted queue/object state |
 | `func_80044DC0` | Signed 16-bit argument, four-byte stack packet, and byte-order selection |
 | `func_80049010` | Shared sequence-state cleanup |
 | `func_800497E0` | Transfer ID validation, clamped read length, and accumulated byte count |
@@ -161,7 +197,11 @@ Exact `func_8003D614` confirms a controller with:
 | `func_8004C77C` | `0x2C`-byte record initialization and variable-length decoding |
 | `func_80058A7C` | Mixed signed comparisons and unsigned halfword bit extraction |
 | `func_80059000` | `0xE20` record stride and unaligned eight-byte copy |
+| `func_80059CE4` | G8-gated teardown while preserving an absolute state pointer |
+| `func_8005A1F4` / `func_8005A2E0` | Coordinate triplets, packed vector copy, and signed square accumulation |
 | `func_8005C6A0` | Relocation enumeration and translated handler count |
+| `func_8005F828` | Nullable eight-byte record iteration and repeated throttle-byte loads |
+| `func_800610E0` / `func_800611D0` | Related constructors using `0x70`-byte allocator objects |
 
 ## Deferred-function guidance
 
@@ -180,6 +220,10 @@ variant. Deferred functions remain terminal under the six-attempt policy.
 - Future untouched allocator/list users in the module surrounding deferred
   `func_800400AC` should begin with the provisional `0x70`-byte layout and a
   G8 split-address profile.
+- Four-state callbacks in the `0x8003Bxxx` module use nested branch trees,
+  while five- and six-state callbacks use explicit jump tables. Absolute
+  destination tables in those callbacks require G0; G8 produces truncated
+  `R_MIPS_GPREL16` relocations.
 
 If a new exact neighbor, original type declaration, or compiler artifact later
 changes one of these conclusions, record that evidence before revisiting any
