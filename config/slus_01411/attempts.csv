@@ -1644,3 +1644,14 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8002BF3C,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x4: 1d!=14; word +0x4: 1d80023c!=1400b1af
 0x8002BF3C,5,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x4: 1d!=14; word +0x4: 1d80023c!=1400b1af
 0x8002BF3C,6,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,deferred,byte +0x4: 1d!=18; word +0x4: 1d80023c!=1800bfaf
+0x8002CBF4,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,"/home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
+/home/superconta/data/share/yugioh/tmp/agents/wave4-mid/variants/8002CBF4/v1.c: In function `func_8002CBF4':
+/home/superconta/data/share/yugioh/tmp/agents/wave4-mid/variants/8002CBF4/v1.c:2: `return9999' undeclared (first use in this function)
+/home/superconta/data/share/yugioh/tmp/agents/wave4-mid/variants/8002CBF4/v1.c:2: (Each undeclared identifier is reported only once
+/home/superconta/data/share/yugioh/tmp/agents/wave4-mid/variants/8002CBF4/v1.c:2: for each function it appears in.)
+"
+0x8002CBF4,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: e8!=ff; word +0x0: e8ffbd27!=ffff8424
+0x8002CBF4,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x8: 09!=10; word +0x8: 0900a010!=1000b0af
+0x8002CBF4,4,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x4: 14!=21; word +0x4: 1400bfaf!=21308000
+0x8002CBF4,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x8: 09!=10; word +0x8: 0900a010!=1000b0af
+0x8002CBF4,6,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,deferred,byte +0x4: 14!=21; word +0x4: 1400bfaf!=21308000
