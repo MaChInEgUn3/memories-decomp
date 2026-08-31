@@ -2693,3 +2693,8 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80070F1C,4,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x60: 80!=0f; word +0x60: 80100200!=0f80033c; relocations differ
 0x80070F1C,5,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x0: d8!=e8; word +0x0: d8ffbd27!=e8ffbd27; relocations differ
 0x80070F1C,6,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,deferred,byte +0x78: 0b!=08; word +0x78: 0b008014!=08008010; relocations differ
+0x800533D8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x4: 12!=01; word +0x4: 1200a327!=01000424; relocations differ
+0x800533D8,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x6: a3!=a2; word +0x4: 1200a327!=1200a227
+0x800533D8,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x91: 20!=10; word +0x90: 21200000!=21100000; relocations differ
+0x800533D8,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x96: 02!=03; word +0x94: 0f80023c!=0f80033c
+0x800533D8,5,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
