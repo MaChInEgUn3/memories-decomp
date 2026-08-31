@@ -436,3 +436,6 @@ address,attempt,compiler,flags,result,summary
 0x8004B70C,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x1d: 18!=10; word +0x1c: 21186200!=21104300
 0x8004B70C,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x1d: 18!=10; word +0x1c: 21186200!=21104300
 0x8004B70C,3,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x8004BCA8,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x22: 42!=10; word +0x20: ff004230!=ff001032
+0x8004BCA8,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x1c: 21!=ff; word +0x1c: 21804000!=ff005030; size 0x3c/0x40
+0x8004BCA8,3,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
