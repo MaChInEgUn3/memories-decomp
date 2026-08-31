@@ -183,3 +183,5 @@ address,attempt,compiler,flags,result,summary
 0x80015B28,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Two-call wrapper matched exactly.
 0x80015C0C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Seven-byte stand-in State selected an invalid GPREL16 global access.
 0x80015C0C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,"Large State reproduced the absolute address, OR mask, call order, and delay-slot store."
+0x80015C48,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Seven-byte stand-in State selected an invalid GPREL16 global access.
+0x80015C48,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,"Large State reproduced the absolute address, OR mask, call order, and delay-slot store."

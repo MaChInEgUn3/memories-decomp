@@ -74,7 +74,7 @@ address,size,name,status,module,notes
 0x80015BD8,0x18,func_80015BD8,matching_c,game,19 pre-policy variants: shared state pointer reproduced one absolute base load and the ordered value and flagged-byte stores.
 0x80015BF0,0x1C,func_80015BF0,matching_c,game,17 pre-policy variants: shared state pointer and ordered assignments reproduced the exact three-byte store sequence.
 0x80015C0C,0x3C,func_80015C0C,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x80015C48,0x3C,func_80015C48,unmatched_asm,game,
+0x80015C48,0x3C,func_80015C48,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80015C84,0x3C,func_80015C84,unmatched_asm,game,
 0x80015CC0,0x3C,func_80015CC0,unmatched_asm,game,
 0x80015CFC,0x10,func_80015CFC,matching_c,game,4 pre-policy variants: direct small-data byte assignment to one reproduced the exact four-instruction sequence.
