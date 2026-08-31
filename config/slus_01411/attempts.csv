@@ -2164,3 +2164,8 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80070E20,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x64: 0f!=1c; word +0x64: 0f80023c!=1c00bf8f; relocations differ
 0x80070E20,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x64: 0f!=1c; word +0x64: 0f80023c!=1c00bf8f; relocations differ
 0x80070E20,3,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x80071194,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x4: 10!=18; word +0x4: 1000b0af!=1800bfaf; relocations differ
+0x80071194,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x4: 10!=18; word +0x4: 1000b0af!=1800bfaf; relocations differ
+0x80071194,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,tool error: /home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
+0x80071194,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x30: 1d!=21; word +0x30: 1d80043c!=21200000; relocations differ
+0x80071194,5,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,matched,exact linked bytes and relocations

@@ -1,0 +1,1 @@
+extern int D_800F5B98[],D_801D4244[],func_8007058C(void),func_8002CBF4(int,int);void func_80071194(void){register int*values asm("$16")=D_800F5B98;int value=values[func_8007058C()];int dest=func_8007058C(),result;if(((D_801D4244[value-1]>>26)&31)<20){int a=func_8002CBF4(value,0),b=func_8002CBF4(value,1);result=!(b<a);}else result=0;D_800F5B98[dest]=result;}
