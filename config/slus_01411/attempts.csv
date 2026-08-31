@@ -302,3 +302,9 @@ address,attempt,compiler,flags,result,summary
 0x80037950,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct conditional state update with mode four matched.
 0x8003798C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Array declarations forced the required absolute global loads.
 0x800379C4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Call-result check and conditional byte clear matched.
+0x80037D2C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: size 72/64; +0x4 byte 32!=00; word 32048397!=00000000; relocations differed.
+0x80037D2C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 2: size 68/64; +0x4 byte 32!=00; word 32048397!=00000000; relocations differed.
+0x80037D2C,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 3: +0x0 byte 58!=32; word 58008280!=32048397; relocations differed.
+0x80037D2C,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 4: +0x28 byte FF!=25; word ffff0224!=2528a300; relocations differed.
+0x80037D2C,5,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 5: +0x2C byte 25!=48; word 2528a300!=480482af; relocations differed.
+0x80037D2C,6,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 6: linked bytes and relocations matched exactly; Hard registers and empty scheduling barriers reproduced the exact stream/global sequence.
