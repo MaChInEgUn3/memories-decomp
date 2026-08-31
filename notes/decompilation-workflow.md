@@ -54,6 +54,20 @@ silently exceeding the six-variant limit when an older partial attempt exists.
 Use `--include-partial` only when intentionally continuing a reviewed,
 nonterminal history; the output reports its remaining budget.
 
+For a larger untouched function, find exact-C instruction-shape siblings before
+writing a candidate:
+
+```sh
+make siblings \
+  SIBLING_ARGS="0x80058938 0x80050F24 --top 5"
+```
+
+The sibling score compares normalized target instruction n-grams, masks normal
+register-allocation differences, and penalizes large size differences. It does
+not prove shared semantics, but it identifies matching sources whose branch,
+memory, and call shapes are useful starting points. Explicit addresses are
+rejected if they already have any attempt history.
+
 After a candidate has a terminal `matched` row in
 `config/slus_01411/attempts.csv`, promote it with:
 
