@@ -419,6 +419,12 @@ def build_incrementally(root: Path, *, seed: bool) -> Path | None:
         return None
 
     cache = load_cache(root)
+    active_names = set(signatures)
+    cache = {
+        name: signature
+        for name, signature in cache.items()
+        if name in active_names
+    }
     assembler = build_baseline.tool(root, "as")
     objcopy = build_baseline.tool(root, "objcopy")
     objects: list[Path] = []
@@ -441,6 +447,8 @@ def build_incrementally(root: Path, *, seed: bool) -> Path | None:
                 objcopy,
                 profiles,
             )
+            cache[component.object_name] = signatures[component.object_name]
+            write_cache(root, cache)
             rebuilt += 1
         objects.append(output)
 
