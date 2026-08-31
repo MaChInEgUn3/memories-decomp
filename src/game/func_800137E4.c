@@ -1,0 +1,27 @@
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef signed char s8;
+typedef short s16;
+typedef int s32;
+
+extern u32 D_8009B0F4;
+extern u32 D_8009B134;
+extern void func_80015038(void);
+extern void func_80012D4C(void);
+
+void func_800137E4(void) {
+    for (;;) {
+        if (((D_8009B0F4 & 0x02000030) | D_8009B134) == 0) {
+            break;
+        }
+        if ((D_8009B0F4 & 0x20) == 0) {
+            func_80015038();
+        }
+        func_80012D4C();
+    }
+
+    while (D_8009B134 != 0) {
+        func_80012D4C();
+    }
+}
