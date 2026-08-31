@@ -17,7 +17,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions candidates siblings progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
+.PHONY: help workspace verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions candidates siblings external-attempts progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
 
 help:
 	@printf '%s\n' \
@@ -34,6 +34,7 @@ help:
 		'  classify-functions  Apply verified ownership classifications' \
 		'  candidates     List smallest zero-attempt game functions' \
 		'  siblings       Find exact-C functions with similar instruction shapes' \
+		'  external-attempts  Validate external-reference/refinement attempts' \
 		'  progress       Generate current resident-code progress metrics' \
 		'  disc-layout    Regenerate the tracked ISO9660 LBA manifest' \
 		'  verify-disc    Verify BIN/CUE layout and extracted file contents' \
@@ -104,6 +105,9 @@ candidates: workspace
 
 siblings: verify-inputs
 	@$(PYTHON) tools/project/find_siblings.py $(SIBLING_ARGS)
+
+external-attempts: workspace
+	@$(PYTHON) tools/project/record_external_attempt.py --check
 
 progress: split
 	@$(PYTHON) tools/project/progress.py

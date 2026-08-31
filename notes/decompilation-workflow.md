@@ -75,6 +75,52 @@ not prove shared semantics, but it identifies matching sources whose branch,
 memory, and call shapes are useful starting points. Explicit addresses are
 rejected if they already have any attempt history.
 
+## External structural references
+
+External sources under `tmp/references/ygofm-decomp/src/` are source-shape
+evidence only. Do not copy or trust their types, declarations, headers,
+compiler identity, flags, or build documentation. Recover every declaration,
+width, signedness, layout, and profile independently from this project's
+binary, callers, relocations, and matching sources.
+
+Record pure-C reference-derived attempts separately:
+
+```sh
+tools/environments/python/bin/python \
+  tools/project/record_external_attempt.py 0x80012345 \
+  --mode reference_match \
+  --reference tmp/references/ygofm-decomp/src/func_80012345.c \
+  --profile gcc_2_8_1_g8 \
+  --candidate tmp/reference-work/func_80012345.c \
+  --result nonmatch \
+  --summary "Exact structure; local signedness still changes scheduling"
+```
+
+`external_attempts.csv` preserves the terminal canonical history in
+`attempts.csv`. It is game-only, accepts only pure-C prepared candidates, and
+has its own six-attempt terminal budget. Use `inline_refinement` for an already
+matching function whose GCC asm extensions are being removed. A successful
+nonmatching reference candidate is promoted with
+`integrate_verified_match.py --evidence-source reference`.
+
+A successful inline refinement atomically replaces its existing source and
+profile:
+
+```sh
+tools/environments/python/bin/python \
+  tools/project/integrate_verified_match.py 0x80012345 \
+  --source tmp/reference-work/func_80012345.c \
+  --destination src/game/func_80012345.c \
+  --profile gcc_2_8_1_g8 \
+  --note "Pure-C refinement matched from local declarations" \
+  --evidence-source refinement \
+  --replace-existing
+```
+
+Only the latest successful external candidate for an address is bound to the
+current tracked source. Earlier successful reference evidence remains in the
+ledger as history if a later pure-C refinement supersedes it.
+
 After a candidate has a terminal `matched` row in
 `config/slus_01411/attempts.csv`, promote it with:
 

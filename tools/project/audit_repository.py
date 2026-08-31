@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import csv
+import hashlib
+import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -27,6 +30,22 @@ FORBIDDEN_TRACKED_PREFIXES = (
 ATTEMPT_FIELDS = ("address", "attempt", "compiler", "flags", "result", "summary")
 ATTEMPT_RESULTS = {"matched", "nonmatch", "deferred"}
 MAX_FUNCTION_ATTEMPTS = 6
+EXTERNAL_ATTEMPT_FIELDS = (
+    "mode",
+    "address",
+    "attempt",
+    "reference_path",
+    "reference_sha256",
+    "profile",
+    "candidate_source",
+    "candidate_sha256",
+    "result",
+    "summary",
+)
+EXTERNAL_MODES = {"reference_match", "inline_refinement"}
+SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+ASM_PATTERN = re.compile(r"\b(?:asm|__asm|__asm__)\b")
+COMMENT_PATTERN = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
 
 
 def git(root: Path, *arguments: str) -> str:
@@ -129,9 +148,30 @@ def parse_integer(value: str, description: str) -> int:
         raise AuditError(f"{description} is not an integer: {value}") from error
 
 
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def require_tmp_path(value: str, description: str) -> None:
+    path = Path(value)
+    if (
+        path.is_absolute()
+        or not path.parts
+        or path.parts[0] != "tmp"
+        or ".." in path.parts
+    ):
+        raise AuditError(f"{description} must normalize beneath tmp/")
+
+
 def audit_attempts(root: Path) -> None:
     functions_path = root / "config/slus_01411/functions.csv"
     attempts_path = root / "config/slus_01411/attempts.csv"
+    external_path = root / "config/slus_01411/external_attempts.csv"
+    profiles_path = root / "config/slus_01411/compiler_profiles.json"
 
     with functions_path.open("r", encoding="utf-8", newline="") as handle:
         functions_reader = csv.DictReader(handle)
@@ -139,11 +179,31 @@ def audit_attempts(root: Path) -> None:
     function_addresses = {
         parse_integer(row["address"], "function address") for row in functions
     }
+    matching_path = root / "config/slus_01411/matching_c.json"
+    with matching_path.open("r", encoding="utf-8") as handle:
+        matching_value = json.load(handle)
+    matching_rows = matching_value.get("functions")
+    if not isinstance(matching_rows, list):
+        raise AuditError(f"{matching_path}: missing functions list")
+    matching_entries = {
+        parse_integer(str(row["address"]), "matching manifest address"): row
+        for row in matching_rows
+        if isinstance(row, dict)
+    }
     matching_addresses = {
         parse_integer(row["address"], "matching function address")
         for row in functions
         if row["status"] == "matching_c"
     }
+    function_modules = {
+        parse_integer(row["address"], "function address"): row["module"]
+        for row in functions
+    }
+    with profiles_path.open("r", encoding="utf-8") as handle:
+        profiles_value = json.load(handle)
+    profiles = profiles_value.get("profiles")
+    if not isinstance(profiles, dict):
+        raise AuditError(f"{profiles_path}: missing profiles object")
 
     with attempts_path.open("r", encoding="utf-8", newline="") as handle:
         attempts_reader = csv.DictReader(handle)
@@ -164,6 +224,10 @@ def audit_attempts(root: Path) -> None:
             )
         if not row["compiler"] or not row["flags"] or not row["summary"]:
             raise AuditError(f"{address:#010x}: incomplete attempt record")
+        if function_modules[address] != "game":
+            raise AuditError(
+                f"{address:#010x}: canonical attempts are game-only"
+            )
         by_address.setdefault(address, []).append(row)
 
     matched_attempts: set[int] = set()
@@ -190,7 +254,149 @@ def audit_attempts(root: Path) -> None:
             elif row["result"] == "deferred":
                 ended = True
 
-    missing = sorted(matching_addresses - matched_attempts)
+    with external_path.open("r", encoding="utf-8", newline="") as handle:
+        external_reader = csv.DictReader(handle)
+        if tuple(external_reader.fieldnames or ()) != EXTERNAL_ATTEMPT_FIELDS:
+            raise AuditError(f"{external_path}: unexpected CSV fields")
+        external_attempts = list(external_reader)
+
+    external_by_key: dict[tuple[str, int], list[dict[str, str]]] = {}
+    external_matches: set[int] = set()
+    for row in external_attempts:
+        mode = row["mode"]
+        address = parse_integer(row["address"], "external attempt address")
+        if mode not in EXTERNAL_MODES:
+            raise AuditError(
+                f"{address:#010x}: unsupported external mode {mode}"
+            )
+        if address not in function_addresses:
+            raise AuditError(
+                f"external attempt references unknown function {address:#010x}"
+            )
+        if function_modules[address] != "game":
+            raise AuditError(
+                f"{address:#010x}: external attempts are game-only"
+            )
+        if row["profile"] not in profiles:
+            raise AuditError(
+                f"{address:#010x}: unknown external profile {row['profile']}"
+            )
+        if row["result"] not in ATTEMPT_RESULTS:
+            raise AuditError(
+                f"{address:#010x}: unsupported external result {row['result']}"
+            )
+        require_tmp_path(
+            row["candidate_source"],
+            f"{address:#010x}: external candidate",
+        )
+        if not SHA256_PATTERN.fullmatch(row["candidate_sha256"]):
+            raise AuditError(
+                f"{address:#010x}: invalid candidate SHA-256"
+            )
+        if not row["summary"]:
+            raise AuditError(f"{address:#010x}: empty external summary")
+        has_reference = bool(row["reference_path"] or row["reference_sha256"])
+        if bool(row["reference_path"]) != bool(row["reference_sha256"]):
+            raise AuditError(
+                f"{address:#010x}: incomplete reference path/hash pair"
+            )
+        if mode == "reference_match" and not has_reference:
+            raise AuditError(
+                f"{address:#010x}: reference_match lacks reference source"
+            )
+        if has_reference:
+            expected = (
+                "tmp/references/ygofm-decomp/src/"
+                f"func_{address:08X}.c"
+            )
+            if row["reference_path"] != expected:
+                raise AuditError(
+                    f"{address:#010x}: unexpected reference path"
+                )
+            if not SHA256_PATTERN.fullmatch(row["reference_sha256"]):
+                raise AuditError(
+                    f"{address:#010x}: invalid reference SHA-256"
+                )
+        if mode == "inline_refinement" and address not in matching_addresses:
+            raise AuditError(
+                f"{address:#010x}: inline refinement is not matching C"
+            )
+        external_by_key.setdefault((mode, address), []).append(row)
+
+    for (mode, address), rows in external_by_key.items():
+        if len(rows) > MAX_FUNCTION_ATTEMPTS:
+            raise AuditError(
+                f"{address:#010x}: exceeds six {mode} attempts"
+            )
+        ended = False
+        for expected, row in enumerate(rows, start=1):
+            attempt = parse_integer(row["attempt"], "external attempt number")
+            if attempt != expected:
+                raise AuditError(
+                    f"{address:#010x}: expected external attempt {expected}, "
+                    f"found {attempt}"
+                )
+            if ended:
+                raise AuditError(
+                    f"{address:#010x}: external row follows terminal result"
+                )
+            if row["result"] == "matched":
+                if mode == "reference_match":
+                    external_matches.add(address)
+                ended = True
+            elif row["result"] == "deferred":
+                ended = True
+            elif expected == MAX_FUNCTION_ATTEMPTS:
+                raise AuditError(
+                    f"{address:#010x}: sixth external attempt is not deferred"
+                )
+
+    latest_success_by_address: dict[int, dict[str, str]] = {}
+    for row in external_attempts:
+        if row["result"] == "matched":
+            address = parse_integer(
+                row["address"], "external matched address"
+            )
+            latest_success_by_address[address] = row
+
+    for address, row in latest_success_by_address.items():
+        mode = row["mode"]
+        if address not in matching_addresses:
+            raise AuditError(
+                f"{address:#010x}: matched {mode} evidence is not integrated"
+            )
+        entry = matching_entries.get(address)
+        if not isinstance(entry, dict):
+            raise AuditError(
+                f"{address:#010x}: missing matching manifest entry"
+            )
+        if entry.get("profile") != row["profile"]:
+            raise AuditError(
+                f"{address:#010x}: matched external profile differs from manifest"
+            )
+        source_value = entry.get("source")
+        if not isinstance(source_value, str):
+            raise AuditError(
+                f"{address:#010x}: matching manifest source is invalid"
+            )
+        source = root / source_value
+        if not source.is_file():
+            raise AuditError(
+                f"{address:#010x}: matching source does not exist"
+            )
+        if sha256(source) != row["candidate_sha256"]:
+            raise AuditError(
+                f"{address:#010x}: matching source hash differs from external evidence"
+            )
+        source_text = source.read_text(encoding="utf-8")
+        if ASM_PATTERN.search(COMMENT_PATTERN.sub("", source_text)):
+            raise AuditError(
+                f"{address:#010x}: successful external source still uses GCC asm"
+            )
+
+    missing = sorted(
+        matching_addresses - matched_attempts - external_matches
+    )
     if missing:
         formatted = ", ".join(f"{address:#010x}" for address in missing)
         raise AuditError(f"matching C functions lack successful attempts: {formatted}")
@@ -210,6 +416,7 @@ def main() -> int:
         UnicodeError,
         KeyError,
         TypeError,
+        json.JSONDecodeError,
         csv.Error,
     ) as error:
         print(f"error: {error}", file=sys.stderr)

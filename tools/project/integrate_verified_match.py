@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import re
 import sys
@@ -19,6 +20,20 @@ class IntegrationError(RuntimeError):
 
 
 SYMBOL_PATTERN = re.compile(r"\bfunc_[0-9A-Fa-f]{8}\b")
+ASM_PATTERN = re.compile(r"\b(?:asm|__asm|__asm__)\b")
+COMMENT_PATTERN = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
+EXTERNAL_FIELDS = (
+    "mode",
+    "address",
+    "attempt",
+    "reference_path",
+    "reference_sha256",
+    "profile",
+    "candidate_source",
+    "candidate_sha256",
+    "result",
+    "summary",
+)
 
 
 def parse_address(value: str) -> int:
@@ -26,6 +41,14 @@ def parse_address(value: str) -> int:
         return int(value, 0)
     except ValueError as error:
         raise IntegrationError(f"invalid function address: {value}") from error
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -36,18 +59,24 @@ def load_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def require_matched_attempt(path: Path, address: int) -> None:
+def require_matched_attempt(
+    path: Path, address: int, *, mode: str | None = None
+) -> dict[str, str]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
+        if mode is not None and tuple(reader.fieldnames or ()) != EXTERNAL_FIELDS:
+            raise IntegrationError(f"{path}: unexpected external CSV fields")
         rows = [
             row
             for row in reader
             if parse_address(row["address"]) == address
+            and (mode is None or row.get("mode") == mode)
         ]
     if not rows or rows[-1]["result"] != "matched":
         raise IntegrationError(
             f"{address:#010x}: latest recorded attempt is not matched"
         )
+    return rows[-1]
 
 
 def write_json(path: Path, value: dict[str, Any]) -> Path:
@@ -93,14 +122,31 @@ def parse_args() -> argparse.Namespace:
         required=True,
         help="durable inventory note",
     )
+    parser.add_argument(
+        "--evidence-source",
+        choices=("canonical", "reference", "refinement"),
+        default="canonical",
+        help="ledger containing the terminal matched result",
+    )
+    parser.add_argument(
+        "--replace-existing",
+        action="store_true",
+        help="replace an existing matching source after inline refinement",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     temporary_paths: list[Path] = []
+    completed_replacements: list[tuple[Path, bytes | None]] = []
     try:
         root = require_workspace_root()
+        if args.replace_existing != (args.evidence_source == "refinement"):
+            raise IntegrationError(
+                "--replace-existing requires --evidence-source refinement, "
+                "and refinement evidence requires replacement"
+            )
         address = parse_address(args.address)
         source = resolve_within(root, args.source, must_exist=True)
         destination = resolve_within(root, args.destination)
@@ -114,7 +160,12 @@ def main() -> int:
             destination.relative_to(source_root)
         except ValueError as error:
             raise IntegrationError("destination must be beneath src/") from error
-        if destination.exists():
+        if args.replace_existing:
+            if not destination.is_file():
+                raise IntegrationError(
+                    f"replacement destination does not exist: {destination}"
+                )
+        elif destination.exists():
             raise IntegrationError(f"destination already exists: {destination}")
 
         functions_path = resolve_within(
@@ -122,6 +173,11 @@ def main() -> int:
         )
         attempts_path = resolve_within(
             root, "config/slus_01411/attempts.csv", must_exist=True
+        )
+        external_attempts_path = resolve_within(
+            root,
+            "config/slus_01411/external_attempts.csv",
+            must_exist=True,
         )
         matching_path = resolve_within(
             root, "config/slus_01411/matching_c.json", must_exist=True
@@ -132,7 +188,19 @@ def main() -> int:
             must_exist=True,
         )
 
-        require_matched_attempt(attempts_path, address)
+        external_evidence: dict[str, str] | None = None
+        if args.evidence_source == "canonical":
+            require_matched_attempt(attempts_path, address)
+        else:
+            external_evidence = require_matched_attempt(
+                external_attempts_path,
+                address,
+                mode=(
+                    "reference_match"
+                    if args.evidence_source == "reference"
+                    else "inline_refinement"
+                ),
+            )
         profiles = load_json(profiles_path).get("profiles")
         if not isinstance(profiles, dict) or args.profile not in profiles:
             raise IntegrationError(f"unknown compiler profile: {args.profile}")
@@ -146,36 +214,89 @@ def main() -> int:
                 f"{address:#010x}: expected one inventory function"
             )
         function = matches[0]
-        if function.status == "matching_c":
+        if function.module != "game":
+            raise IntegrationError(
+                f"{address:#010x}: only game functions may be integrated"
+            )
+        if args.replace_existing:
+            if function.status != "matching_c":
+                raise IntegrationError(
+                    f"{address:#010x}: refinement target is not matching C"
+                )
+        elif function.status == "matching_c":
             raise IntegrationError(f"{address:#010x}: already matching C")
 
-        source_text = source.read_text(encoding="utf-8")
+        source_bytes = source.read_bytes()
+        source_text = source_bytes.decode("utf-8")
+        if external_evidence is not None:
+            evidence_source = resolve_within(
+                root,
+                external_evidence["candidate_source"],
+                must_exist=True,
+            )
+            if evidence_source != source:
+                raise IntegrationError(
+                    f"{address:#010x}: source differs from matched reference evidence"
+                )
+            if external_evidence["profile"] != args.profile:
+                raise IntegrationError(
+                    f"{address:#010x}: profile differs from matched reference evidence"
+                )
+            if sha256(source) != external_evidence["candidate_sha256"]:
+                raise IntegrationError(
+                    f"{address:#010x}: source hash differs from matched reference evidence"
+                )
+            if ASM_PATTERN.search(COMMENT_PATTERN.sub("", source_text)):
+                raise IntegrationError(
+                    f"{address:#010x}: reference match still contains GCC asm"
+                )
         symbols = set(SYMBOL_PATTERN.findall(source_text))
         if function.name not in symbols:
             raise IntegrationError(
                 f"{source}: does not define expected symbol {function.name}"
             )
-        if not source_text.endswith("\n"):
+        if external_evidence is None and not source_text.endswith("\n"):
             source_text += "\n"
+            output_bytes = source_text.encode("utf-8")
+        else:
+            output_bytes = source_bytes
 
         matching = load_json(matching_path)
         entries = matching.get("functions")
         if not isinstance(entries, list):
             raise IntegrationError(f"{matching_path}: functions must be a list")
-        if any(
-            parse_address(str(entry.get("address"))) == address
+        existing_entries = [
+            entry
             for entry in entries
             if isinstance(entry, dict)
-        ):
-            raise IntegrationError(f"{address:#010x}: already in matching manifest")
-        entries.append(
-            {
-                "address": f"0x{address:08X}",
-                "size": f"0x{function.size:X}",
-                "source": str(destination.relative_to(root)),
-                "profile": args.profile,
-            }
-        )
+            and parse_address(str(entry.get("address"))) == address
+        ]
+        destination_relative = str(destination.relative_to(root))
+        if args.replace_existing:
+            if len(existing_entries) != 1:
+                raise IntegrationError(
+                    f"{address:#010x}: expected one matching manifest entry"
+                )
+            entry = existing_entries[0]
+            if entry.get("source") != destination_relative:
+                raise IntegrationError(
+                    f"{address:#010x}: destination differs from matching manifest"
+                )
+            entry["size"] = f"0x{function.size:X}"
+            entry["profile"] = args.profile
+        else:
+            if existing_entries:
+                raise IntegrationError(
+                    f"{address:#010x}: already in matching manifest"
+                )
+            entries.append(
+                {
+                    "address": f"0x{address:08X}",
+                    "size": f"0x{function.size:X}",
+                    "source": destination_relative,
+                    "profile": args.profile,
+                }
+            )
         entries.sort(key=lambda entry: parse_address(str(entry["address"])))
 
         inventory_rows: list[dict[str, str]] = []
@@ -189,19 +310,22 @@ def main() -> int:
 
         destination.parent.mkdir(parents=True, exist_ok=True)
         source_temporary = destination.with_name(f"{destination.name}.tmp")
-        source_temporary.write_text(source_text, encoding="utf-8")
+        source_temporary.write_bytes(output_bytes)
         temporary_paths.append(source_temporary)
         matching_temporary = write_json(matching_path, matching)
         temporary_paths.append(matching_temporary)
         inventory_temporary = write_inventory(functions_path, inventory_rows)
         temporary_paths.append(inventory_temporary)
 
-        source_temporary.replace(destination)
-        temporary_paths.remove(source_temporary)
-        matching_temporary.replace(matching_path)
-        temporary_paths.remove(matching_temporary)
-        inventory_temporary.replace(functions_path)
-        temporary_paths.remove(inventory_temporary)
+        for temporary, target in (
+            (source_temporary, destination),
+            (matching_temporary, matching_path),
+            (inventory_temporary, functions_path),
+        ):
+            original = target.read_bytes() if target.exists() else None
+            temporary.replace(target)
+            temporary_paths.remove(temporary)
+            completed_replacements.append((target, original))
     except (
         IntegrationError,
         WorkspaceError,
@@ -215,6 +339,11 @@ def main() -> int:
     ) as error:
         for path in temporary_paths:
             path.unlink(missing_ok=True)
+        for path, original in reversed(completed_replacements):
+            if original is None:
+                path.unlink(missing_ok=True)
+            else:
+                path.write_bytes(original)
         print(f"error: {error}", file=sys.stderr)
         return 1
 
