@@ -1,0 +1,84 @@
+typedef signed char s8;
+typedef unsigned char u8;
+typedef signed short s16;
+typedef unsigned short u16;
+typedef signed int s32;
+typedef unsigned int u32;
+typedef signed long long s64;
+typedef unsigned long long u64;
+typedef float f32;
+typedef double f64;
+typedef char M2C_UNK;
+typedef struct { s32 words[9]; } Mtx32;
+typedef u8 State;
+typedef u8 Record;
+typedef u8 Pair;
+typedef u8 Controller;
+typedef u8 Entry;
+typedef u8 Rec;
+typedef u8 Block;
+typedef struct { u32 words[2]; } Blk8;
+
+
+extern s16 D_8009B470;
+extern s16 D_8009B472;
+extern s16 D_8009B474;
+extern s16 D_8009B476;
+extern s32 func_8005AE68();
+extern s32 func_8007FA38();
+extern s32 func_80081DE8();
+extern s32 func_80081ED4();
+extern s32 func_80082324();
+
+void func_800582C0(s32 arg0, s32 arg1, s32 arg2) {
+    u16 buf[0x400];
+    u16 *q;
+    s32 y;
+    s32 i;
+
+    if ((u32)arg0 < 2) {
+        y = 0;
+
+        if (arg1 >= 7 && (arg1 & 8) == 0 && arg2 >= 0x1000) {
+            goto big;
+        }
+
+        D_8009B470 = arg0 << 8;
+        D_8009B472 = 0xF8;
+        D_8009B474 = 0x100;
+        D_8009B476 = 4;
+
+        do {
+            D_8009B472 = y + 0xF8;
+            while (func_80082324(3) != 0) {
+            }
+            while (func_80081ED4(&D_8009B470, buf) != 0) {
+            }
+            while (func_80082324(3) != 0) {
+            }
+
+            q = buf;
+            for (i = 0; i < 0x400; i++, q++) {
+                *q = func_8005AE68(*q, (u8)arg1, (u16)arg2);
+            }
+
+            D_8009B472 = y + 0xF0;
+            while (func_80082324(3) != 0) {
+            }
+            while (func_80081DE8(&D_8009B470, buf) != 0) {
+            }
+            while (func_80082324(3) != 0) {
+            }
+            y += 4;
+        } while (y < 8);
+    }
+
+    return;
+
+big:
+    D_8009B472 = 0xF8;
+    D_8009B474 = 0x100;
+    D_8009B470 = arg0 << 8;
+    D_8009B476 = 8;
+    func_8007FA38(&D_8009B470, arg0 << 8, 0xF0);
+}
