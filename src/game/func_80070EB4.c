@@ -1,0 +1,1 @@
+extern int D_800F5B98[];extern int func_8007058C(void);void func_80070EB4(void){int a=func_8007058C(),b=func_8007058C(),c=func_8007058C();register int*values asm("$4")=D_800F5B98;asm("":"+r"(values));values[c]=values[a]-values[b];}
