@@ -836,7 +836,7 @@ address,size,name,status,module,notes
 0x8004B374,0x128,func_8004B374,unmatched_asm,game,
 0x8004B49C,0x24C,func_8004B49C,unmatched_asm,game,
 0x8004B6E8,0x24,func_8004B6E8,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x8004B70C,0x28,func_8004B70C,unmatched_asm,game,
+0x8004B70C,0x28,func_8004B70C,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8004B734,0x120,func_8004B734,unmatched_asm,game,
 0x8004B854,0xBC,func_8004B854,unmatched_asm,game,
 0x8004B910,0x80,func_8004B910,unmatched_asm,game,
