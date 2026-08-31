@@ -13,7 +13,7 @@ address,size,name,status,module,notes
 0x80013360,0x154,func_80013360,unmatched_asm,game,
 0x800134B4,0x2C,func_800134B4,matching_c,game,4 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x800134E0,0x4C,func_800134E0,matching_c,game,Object vector offset update using GCC 2.8.1 -O2 -G8
-0x8001352C,0xD0,func_8001352C,unmatched_asm,game,
+0x8001352C,0xD0,func_8001352C,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800135FC,0xD8,func_800135FC,unmatched_asm,game,
 0x800136D4,0x10,func_800136D4,matching_c,game,47 pre-policy variants: volatile nine-byte local reproduced the exact stack adjustment and empty return.
 0x800136E4,0x100,func_800136E4,unmatched_asm,game,
