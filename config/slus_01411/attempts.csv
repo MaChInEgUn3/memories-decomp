@@ -1091,3 +1091,10 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8002CB80,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x24: 2a!=06; word +0x24: 2a10a300!=0600a228
 0x8002CB80,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x44: 03!=fe; word +0x44: 03008514!=feff8424
 0x8002CB80,4,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x8002D370,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"/home/superconta/data/share/yugioh/tools/toolchains/binutils-2.42/bin/mipsel-none-elf-ld failed (1):
+/home/superconta/data/share/yugioh/tools/toolchains/binutils-2.42/bin/mipsel-none-elf-ld: small-data section too large; lower small-data size limit (see option -G)
+/home/superconta/data/share/yugioh/tmp/agents/wave3-mid/build/8002D370/v1/candidate.o: in function `func_8002D370':
+(.text+0x20): relocation truncated to fit: R_MIPS_GPREL16 against `D_80010000'
+"
+0x8002D370,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x44: fa!=f9; word +0x44: fab40008!=f9b40008
+0x8002D370,3,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
