@@ -350,3 +350,4 @@ address,attempt,compiler,flags,result,summary
 0x800428EC,5,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,first byte +0x0; word 17008290 != 6c008327; relocation sequence differs (1 expected/1 actual)
 0x800428EC,6,gcc_2_8_1_g8,gcc_2_8_1_g8,deferred,first byte +0x0; word 17008290 != 6c008327; relocation sequence differs (1 expected/1 actual)
 0x8003A920,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
+0x8003A95C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
