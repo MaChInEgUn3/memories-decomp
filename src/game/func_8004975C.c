@@ -6,7 +6,7 @@ extern int func_80077150(int, int);
 
 int func_8004975C(int value, short expected)
 {
-    register int saved asm("$18");
+    register int saved;
     u8 *state = D_8009B458;
     short current = *(short *)(state + 0x4A4);
     if (current != expected)
