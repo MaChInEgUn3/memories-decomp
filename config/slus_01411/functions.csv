@@ -970,7 +970,7 @@ address,size,name,status,module,notes
 0x8005A2E0,0xF0,func_8005A2E0,unmatched_asm,game,
 0x8005A3D0,0x98,func_8005A3D0,unmatched_asm,game,
 0x8005A468,0x5C,func_8005A468,unmatched_asm,game,
-0x8005A4C4,0x78,func_8005A4C4,unmatched_asm,game,
+0x8005A4C4,0x78,func_8005A4C4,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8005A53C,0xDC,func_8005A53C,unmatched_asm,game,
 0x8005A618,0x90,func_8005A618,unmatched_asm,game,
 0x8005A6A8,0x1D0,func_8005A6A8,unmatched_asm,game,
