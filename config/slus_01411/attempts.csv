@@ -3169,3 +3169,13 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8006C120,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: a8!=90; word +0x0: a8ffbd27!=90ffbd27; relocations differ
 0x8006C120,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: a8!=a0; word +0x0: a8ffbd27!=a0ffbd27; relocations differ
 0x8006C120,6,gcc_2_8_1_g0,gcc_2_8_1_g0,deferred,byte +0x0: a8!=a0; word +0x0: a8ffbd27!=a0ffbd27; relocations differ
+0x800530C4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"tool error: /home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
+/home/superconta/data/share/yugioh/tmp/agents/wave8-high/variants/800530C4/v1.c:1: conflicting types for `D_8009B478'
+/home/superconta/data/share/yugioh/tmp/agents/wave8-high/variants/800530C4/v1.c:1: previous declaration of `D_8009B478'
+/home/superconta/data/share/yugioh/tmp/agents/wave8-high/variants/800530C4/v1.c: In function `func_800530C4':
+/home/superconta/data/share/yugioh/tmp/agents/wave8-high/variants/800530C4/v1.c:1: `D_8009B478' has an incomplete type"
+0x800530C4,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: d8!=e0; word +0x0: d8ffbd27!=e0ffbd27; relocations differ
+0x800530C4,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x4: 84!=18; word +0x4: 84008497!=1800b0af; relocations differ
+0x800530C4,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x8: 00!=0c; word +0x8: 000c0224!=0c000224; relocations differ
+0x800530C4,5,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x82: 10!=02; word +0x80: 0f80103c!=0f80023c; relocations differ
+0x800530C4,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
