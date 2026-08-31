@@ -1243,6 +1243,12 @@
       "source": "src/game/func_80030F80.c"
     },
     {
+      "address": "0x80030FD0",
+      "profile": "gcc_2_8_1_g0",
+      "size": "0x30",
+      "source": "src/game/func_80030FD0.c"
+    },
+    {
       "address": "0x80031078",
       "profile": "gcc_2_8_1_g8",
       "size": "0xC",
