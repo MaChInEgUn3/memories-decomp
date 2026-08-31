@@ -214,15 +214,15 @@ Psy-Q compiler binary is not present, so this remains a reproducible
 open-source stand-in rather than a claim that the local executable is Sony's
 original CCPSX.
 
-The decision is supported by 561 independent full-executable matches totaling
-41,112 bytes (`0xA098`). Their profile distribution is:
+The decision is supported by 579 independent full-executable matches totaling
+45,224 bytes (`0xB0A8`). Their profile distribution is:
 
 | Profile | Matching functions |
 |---|---:|
-| `gcc_2_8_1_g8` | 306 |
-| `gcc_2_8_1_g8_split` | 51 |
-| `gcc_2_8_1_g0` | 171 |
-| `gcc_2_8_1_g0_split` | 33 |
+| `gcc_2_8_1_g8` | 311 |
+| `gcc_2_8_1_g8_split` | 53 |
+| `gcc_2_8_1_g0` | 181 |
+| `gcc_2_8_1_g0_split` | 34 |
 
 GCC 2.7.2 remains installed solely as the required Psy-Q 4.6 DOS-cohort
 fallback. No committed matching function currently requires it.
