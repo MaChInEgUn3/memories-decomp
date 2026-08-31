@@ -381,3 +381,4 @@ address,attempt,compiler,flags,result,summary
 0x80042874,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
 0x80042918,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
 0x8004293C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
+0x800429D8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
