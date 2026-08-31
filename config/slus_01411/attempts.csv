@@ -2495,3 +2495,8 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80013998,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x78: 34!=24; word +0x78: 340053ae!=240053ae
 0x80013998,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0xa8: 02!=03; word +0xa8: 02141300!=03141300
 0x80013998,5,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x80019BD0,1,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x46: 43!=42; word +0x44: 08004324!=08004224; relocations differ
+0x80019BD0,2,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x27: 92!=82; word +0x24: 21000392!=21000382
+0x80019BD0,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x46: 43!=42; word +0x44: 08004324!=08004224; relocations differ
+0x80019BD0,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0xc0: 21!=00; word +0xc0: 21000292!=00160300
+0x80019BD0,5,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
