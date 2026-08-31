@@ -223,3 +223,4 @@ address,attempt,compiler,flags,result,summary
 0x80024E24,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":4,""expected"":3,""offset"":12}"
 0x80024E24,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
 0x80024E4C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
+0x80028220,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Linked bytes and relocations matched exactly.
