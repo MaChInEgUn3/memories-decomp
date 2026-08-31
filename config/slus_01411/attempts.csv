@@ -581,3 +581,8 @@ address,attempt,compiler,flags,result,summary
 0x80022618,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x32: 04!=02; word +0x30: 0180043c!=0180023c; relocations differ
 0x80022618,5,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x44: e1!=21; word +0x44: e1fb010c!=21280000; relocations differ
 0x80022618,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
+0x80022F98,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x22: a2!=84; word +0x20: 3200a294!=32008494; relocations differ
+0x80022F98,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: 13!=14; word +0x0: 1300a010!=1400a010
+0x80022F98,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: 13!=14; word +0x0: 1300a010!=1400a010; relocations differ
+0x80022F98,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: 13!=14; word +0x0: 1300a010!=1400a010
+0x80022F98,5,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations

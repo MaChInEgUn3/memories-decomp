@@ -171,7 +171,7 @@ address,size,name,status,module,notes
 0x800229F4,0x3A0,func_800229F4,unmatched_asm,game,
 0x80022D94,0x158,func_80022D94,unmatched_asm,game,
 0x80022EEC,0xAC,func_80022EEC,unmatched_asm,game,
-0x80022F98,0x58,func_80022F98,unmatched_asm,game,
+0x80022F98,0x58,func_80022F98,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80022FF0,0xA0,func_80022FF0,unmatched_asm,game,
 0x80023090,0xB4,func_80023090,unmatched_asm,game,
 0x80023144,0x348,func_80023144,unmatched_asm,game,
