@@ -588,7 +588,7 @@ address,size,name,status,module,notes
 0x8003E7D4,0x38,func_8003E7D4,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003E80C,0x48,func_8003E80C,unmatched_asm,game,
 0x8003E854,0x63C,func_8003E854,unmatched_asm,game,
-0x8003EE90,0x38,func_8003EE90,unmatched_asm,game,
+0x8003EE90,0x38,func_8003EE90,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003EEC8,0x8,func_8003EEC8,matching_c,game,Empty void function matched the return-and-nop sequence.
 0x8003EED0,0x3E0,func_8003EED0,unmatched_asm,game,
 0x8003F2B0,0xD8,func_8003F2B0,unmatched_asm,game,
