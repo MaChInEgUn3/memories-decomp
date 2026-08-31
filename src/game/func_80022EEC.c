@@ -1,0 +1,31 @@
+typedef unsigned char u8;
+typedef signed char s8;
+typedef unsigned short u16;
+typedef signed short s16;
+typedef unsigned int u32;
+typedef signed int s32;
+
+extern u8 D_800E9F10[];
+extern u8 D_8009B1D5;
+extern void func_8004036C();
+
+void func_80022EEC(u8 *arg0)
+{
+    u8 *base = D_800E9F10;
+    s32 offset = *(s16 *)(arg0 + 0x2C) * 28;
+    u8 *parent;
+    offset += D_8009B1D5 * 112;
+    parent = *(u8 **)(base + offset);
+    if (parent == 0) {
+        func_8004036C(arg0);
+    } else {
+        *(u16 *)(arg0 + 0x30) =
+            *(u16 *)(parent + 0x30) + *(u16 *)(arg0 + 0x28);
+        *(u16 *)(arg0 + 0x32) =
+            *(u16 *)(parent + 0x32) + *(u16 *)(arg0 + 0x2A);
+        if (parent[0x6C] == 0) {
+            arg0[0x6C] = 0;
+            *(s32 *)(arg0 + 0x24) = 0;
+        }
+    }
+}
