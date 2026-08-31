@@ -361,3 +361,4 @@ address,attempt,compiler,flags,result,summary
 0x8003D300,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,first byte +0x0; word 0f80023c != 01000224; relocation sequence differs (7 expected/7 actual)
 0x8003D300,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,first byte +0x0; word 0f80023c != 01000224; relocation sequence differs (7 expected/7 actual)
 0x8003D300,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked text and relocation sequence
+0x8003E7D4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
