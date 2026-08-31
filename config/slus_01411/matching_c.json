@@ -1987,6 +1987,12 @@
       "source": "src/game/func_8003CBE8.c"
     },
     {
+      "address": "0x8003CC38",
+      "profile": "gcc_2_8_1_g8_split",
+      "size": "0xA0",
+      "source": "src/game/func_8003CC38.c"
+    },
+    {
       "address": "0x8003CDF8",
       "profile": "gcc_2_8_1_g8",
       "size": "0x50",
