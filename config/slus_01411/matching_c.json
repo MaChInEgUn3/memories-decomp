@@ -3607,6 +3607,12 @@
       "source": "src/game/func_800598E4.c"
     },
     {
+      "address": "0x80059908",
+      "profile": "gcc_2_8_1_g8",
+      "size": "0xF4",
+      "source": "src/game/func_80059908.c"
+    },
+    {
       "address": "0x800599FC",
       "profile": "gcc_2_8_1_g0",
       "size": "0x54",
