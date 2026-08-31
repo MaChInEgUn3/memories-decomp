@@ -23,10 +23,11 @@ SHA-256: 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 | PsyQ CRT/SDK function bytes | 117,332 (`0x1CA54`) |
 | Game functions heuristically marked handwritten | 63 |
 | Game handwritten-function bytes | 46,236 (`0xB49C`) |
-| Remaining game assembly-function bytes | 347,516 (`0x54D7C`) |
+| Remaining game assembly functions | 849 |
+| Remaining game assembly-function bytes | 339,208 (`0x52D08`) |
 | Embedded/unassigned text bytes | 1,780 (`0x6F4`) |
-| Matching C functions | 115 |
-| Matching C bytes | 2,460 (`0x99C`) |
+| Matching C functions | 282 |
+| Matching C bytes | 10,768 (`0x2A10`) |
 
 SDK classification is based on verified ownership boundaries. Handwritten
 classifications inside the game region remain provisional Splat/spimdisasm
@@ -45,27 +46,22 @@ Only matching C contributes to C progress. Exact generated assembly and
 classified binary data are necessary for a matching baseline but do not count
 as decompiled C.
 
-The first matching function is `func_800736C4`, which prints the
-`check_point` diagnostic and its numbered separator.
+The first matching function was `func_800736C4`, which prints the
+`check_point` diagnostic and its numbered separator. The matching set now
+spans the full resident game address range and includes bytecode readers,
+checkpoint helpers, wrappers, getters/setters, field updates, little-endian
+decoders, address-return helpers, transfer helpers, and control-flow routines.
 
-`func_80073624` is also matching C. It reads three bytecode indices and stores
-the sum of two table entries into the third.
+All 282 matching functions currently use the GCC 2.8.1 PSX probe:
 
-`func_8007058C` reads one byte from the current bytecode stream and advances
-the stream pointer.
+| Compiler profile | Functions |
+|---|---:|
+| `gcc_2_8_1_g8` | 195 |
+| `gcc_2_8_1_g8_split` | 14 |
+| `gcc_2_8_1_g0` | 60 |
+| `gcc_2_8_1_g0_split` | 13 |
 
-`func_800705AC` reads a little-endian 16-bit value and advances the stream by
-two bytes.
-
-`func_800735DC` copies one checkpoint table entry to another using two bytecode
-indices.
-
-`func_800735A0` reads a 16-bit immediate and stores it into a checkpoint table
-entry selected by the next bytecode index.
-
-The current matching set covers bytecode readers, checkpoint helpers, wrappers,
-getters/setters, field updates, little-endian decoders, address-return helpers,
-and empty functions across the resident game region.
-
-The attempt ledger currently records 141 outcomes: 115 matches, 23 nonmatches,
-and three deferred functions whose search budgets are exhausted.
+The attempt ledger currently records 501 outcomes: 282 matches, 207
+nonmatches, and 12 deferred functions whose six-attempt search budgets are
+exhausted. Deferred functions remain exact assembly and are not retried without
+genuinely new evidence.

@@ -43,6 +43,7 @@ The project pins the public decompals/old-gcc PSX branch:
 | Target | `mips-sony-psx` |
 | GCC version | `2.8.1` |
 | Local prefix | `tools/toolchains/gcc-2.8.1-psx/` |
+| Compiler executable | `tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc` |
 
 This is stock GNU GCC 2.8.1 patched for the PSX target. It is not Sony CCPSX
 and does not replace the selected Psy-Q 4.6 SDK identity.
@@ -88,6 +89,7 @@ GCC 2.7.2 MIPS build:
 | Target | `mips-linux-gnu` |
 | GCC version | `2.7.2` |
 | Local prefix | `tools/toolchains/gcc-2.7.2-mips/` |
+| Compiler executable | `tools/toolchains/gcc-2.7.2-mips/bin/mips-linux-gnu-gcc` |
 
 This public recipe is not a genuine `mips-sony-psx` DOS compiler. It requires:
 
@@ -204,10 +206,29 @@ The latest RCS string requires library source no earlier than January 1998.
 These dates constrain library members; they are not PsyQ package-version
 banners and must not be used alone to select an SDK package.
 
-## Candidate decision gate
+## Compiler decision and continuing probes
 
-An original C compiler is not selected yet. Selection requires multiple
-independent exact matches, including relocation and section behavior.
+The project matching path is selected: use the local `mips-sony-psx` GCC 2.8.1
+probe first and MASPSX 2.81 for every new game function. The exact proprietary
+Psy-Q compiler binary is not present, so this remains a reproducible
+open-source stand-in rather than a claim that the local executable is Sony's
+original CCPSX.
+
+The decision is supported by 282 independent full-executable matches totaling
+10,768 bytes (`0x2A10`). Their profile distribution is:
+
+| Profile | Matching functions |
+|---|---:|
+| `gcc_2_8_1_g8` | 195 |
+| `gcc_2_8_1_g8_split` | 14 |
+| `gcc_2_8_1_g0` | 60 |
+| `gcc_2_8_1_g0_split` | 13 |
+
+GCC 2.7.2 remains installed solely as the required Psy-Q 4.6 DOS-cohort
+fallback. No committed matching function currently requires it.
+
+Continuing compiler probes should still cover multiple independent code shapes,
+including relocation and section behavior:
 
 Probe cases:
 
@@ -228,6 +249,5 @@ assembler differences remain separable. Record complete hashes for every
 supplied compiler, assembler, linker, and library artifact. Treat the patched
 `LIBDS.LIB` as supporting library evidence rather than a 4.7 package marker.
 
-The GCC 2.8.1 probe has passed 115 functions totaling 2,460 bytes. Exact assembly
-remains the fallback, and GCC 2.7.2 remains the secondary compiler for
-documented dead ends or DOS-cohort evidence.
+Exact assembly remains the fallback, and GCC 2.7.2 remains the secondary
+compiler for documented dead ends or DOS-cohort evidence.

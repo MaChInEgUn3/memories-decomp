@@ -29,9 +29,10 @@ with full-file comparison as the merge gate.
   to a full-disc rebuild.
 - Treat MRG files as script-concatenated data whose generated offsets are
   expected in compiled executable tables, not as self-describing archives.
-- Treat `WA_MRG.MRG` as the leading overlay-container hypothesis and verify it
-  by connecting compiled offset tables and read destinations to the known
-  overlay slots.
+- Treat the high-memory destinations as shared runtime slots. Resident loader
+  traces currently tie WA to `0x80146000`, `0x80168000`, and the data subrange
+  at `0x8017A1D8`; MODEL to executable content at `0x8013A000`; and SU to the
+  observed modules at `0x80180000`.
 - Put all project scripts, downloaded tools, compilers, runtimes, environments,
   and third-party sources under `tools/`.
 - Put all documentation, research, naming notes, and curated reports under
@@ -79,10 +80,12 @@ with full-file comparison as the merge gate.
   1,792-function inventory.
 - `make match` reproduces the target SHA-256 exactly, and `make audit` verifies
   repository policy and clean deterministic regeneration.
-- One hundred fifteen game functions totaling 2,460 bytes are matching C using the GCC
-  2.8.1 probe. Broader conversion uses 2.8.1 first, falls back to GCC 2.7.2 when the
-  six-attempt budget is exhausted or compiler evidence points to the DOS
-  cohort, and still compares against Psy-Q 4.6 artifacts when available.
+- Two hundred eighty-two game functions totaling 10,768 bytes (`0x2A10`) are
+  matching C using the GCC 2.8.1 probe. Eight hundred forty-nine
+  compiler-generated game functions totaling 339,208 bytes (`0x52D08`) remain
+  in exact assembly. Broader conversion uses 2.8.1 first and falls back to GCC
+  2.7.2 only when recorded evidence points to the DOS cohort; a function is
+  deferred after six unsuccessful variants.
 
 ### Target executable
 
