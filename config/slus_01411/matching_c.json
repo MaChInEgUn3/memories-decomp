@@ -2833,6 +2833,12 @@
       "source": "src/game/func_8006086C.c"
     },
     {
+      "address": "0x80060AEC",
+      "profile": "gcc_2_8_1_g0",
+      "size": "0x4C",
+      "source": "src/game/func_80060AEC.c"
+    },
+    {
       "address": "0x8006C2FC",
       "profile": "gcc_2_8_1_g0",
       "size": "0x10",
