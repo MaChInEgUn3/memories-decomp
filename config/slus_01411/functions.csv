@@ -792,7 +792,7 @@ address,size,name,status,module,notes
 0x800493F8,0x3C,func_800493F8,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80049434,0xC0,func_80049434,unmatched_asm,game,
 0x800494F4,0x50,func_800494F4,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80049544,0x50,func_80049544,unmatched_asm,game,
+0x80049544,0x50,func_80049544,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80049594,0x10,func_80049594,matching_c,game,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x800495A4,0x38,func_800495A4,unmatched_asm,game,
 0x800495DC,0x10,func_800495DC,matching_c,game,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
