@@ -86,8 +86,8 @@ linker organization.
 
 ## Runtime load slots
 
-The region beginning at `0x8013A000` contains fixed slot boundaries also
-referenced near the start of the executable, including:
+The region beginning at `0x8013A000` contains fixed high-memory destinations
+referenced through a shared table at `0x80010000`. Important boundaries include:
 
 - `0x8013A000`
 - `0x8013B000`
@@ -97,13 +97,24 @@ referenced near the start of the executable, including:
 - `0x8017B000`
 - `0x80180000`
 
-Each begins with a small identifier and is otherwise initially almost entirely
-zero. Resident code contains unresolved calls into several of these ranges.
-They are therefore treated as runtime-loaded overlay or module destinations,
-not resident executable functions. Recovering their source archives is outside
-the current executable-only matching scope.
+The original executable places only small identifier words at several slot
+bases and otherwise fills the region with zeros. Loaded chunks continue the
+identifier sequence, supporting a module-ID interpretation:
 
-The current leading hypothesis is that these payloads come from
-`DATA/WA_MRG.MRG`. Verification requires recovering the generated WA_MRG offset
-tables from executable data and matching their read destinations to these slot
-addresses.
+| Slot | Resident word | Observed loaded words | Confirmed source |
+|---:|---:|---|---|
+| `0x8013A000` | `0x07` | Not yet catalogued | `MODEL.MRG` |
+| `0x80146000` | `0x17` | `0x18` | `WA_MRG.MRG` |
+| `0x80168000` | `0x12` | `0x13`, `0x14`, `0x15`, `0x16` | `WA_MRG.MRG` |
+| `0x8017A000` | `0x0C` | Base code from MODEL; data at `+0x1D8` from WA | Shared |
+| `0x80180000` | `0x0E` | `0x0F`, `0x10` | `SU.MRG` |
+
+Resident code calls exact functions inside the loaded bytes, including
+`0x801462B0` in a WA module, several `0x80168xxx` functions in WA modules,
+`0x8017A004` in the MODEL-loaded slot, and multiple `0x80180xxx` functions in
+SU modules.
+
+These addresses are therefore runtime-loaded overlay/module destinations, not
+resident executable functions. They are shared across MRG files and game
+states; they must not be attributed wholesale to WA. See `notes/overlays.md`
+for the loader trace and recovered sector layouts.

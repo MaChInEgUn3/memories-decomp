@@ -1,62 +1,89 @@
 # MRG File Model
 
-## Current understanding
+## Confirmed container model
 
-The project does not treat `*.MRG` as self-describing archive formats.
-According to the user-supplied research, the original build scripts **merged**
-input files by concatenation and generated offsets that were compiled into a C
-header or equivalent source table.
-
-`WA_MRG.MRG` is the leading hypothesis for the runtime overlays loaded into the
-high-memory slots documented in `notes/memory-map.md`. This remains a hypothesis
-until compiled offset tables and load calls are tied to specific WA_MRG byte
-ranges.
+The project does not treat `*.MRG` as self-describing archives. The original
+build scripts merged input files by concatenation and generated offsets,
+counts, or resource-specific loader code that was compiled into the game.
 
 Consequences:
 
-- Do not infer an archive header merely because the first words resemble
-  offsets or counts.
-- The authoritative index is expected in executable data tables and the code
-  that issues file seeks/reads.
-- Inner file boundaries must be recovered from compiled offset/size arrays,
-  access functions, and validation against the concatenated bytes.
-- Different MRG files may use different generated tables even though the
-  container operation was the same.
-- Repacking requires reproducing both concatenation order and generated
-  compile-time offsets; editing only the MRG bytes is insufficient.
+- Do not infer a header from the first words of an MRG.
+- The authoritative index is executable code and data, not an archive
+  directory.
+- Inner boundaries must be recovered from seek/count arguments, callback phase
+  tables, affine index calculations, and exact checks against the merged bytes.
+- Different MRG files may use different generated layouts even though all were
+  produced by concatenation.
+- Repacking would require reproducing both the byte concatenation and the
+  generated source tables or macros.
 
-## Relevant files
+## Resident file indices
 
-- `game/DATA/SU.MRG`
-- `game/DATA/WA_MRG.MRG`
-- `game/DATA/MODEL.MRG`
+The filename table at `0x8009078C` and runtime LBA table at `0x800E9EA8`
+establish:
 
-The executable also preserves development paths such as:
+| Index | File | Disc LBA |
+|---:|---|---:|
+| 0 | `WA_MRG.MRG` | 10,102 |
+| 1 | `SU.MRG` | 954 |
+| 2 | `MODEL.MRG` | 28,534 |
+| 3 | `MOVIE.STR` | 202,734 |
+| 4 | `SD_SE.DAT` | 2,193 |
+| 5 | `SD_BGM.DAT` | 2,936 |
+| 6 | `MASTER.XA` | 199,930 |
+
+Loader offsets and counts for the three MRG files are expressed in
+`0x800`-byte logical sectors. `func_80013940` converts a file-relative sector
+to both a byte offset and an absolute disc LBA.
+
+## Shared high-memory slots
+
+The fixed addresses beginning at `0x8013A000` are a shared runtime layout, not
+a WA-only destination list. Resident loader traces currently establish:
+
+| Destination | Confirmed resident source | Role |
+|---:|---|---|
+| `0x8013A000` | `MODEL.MRG` | Executable/module slot; called at `+4` |
+| `0x80146000` | `WA_MRG.MRG` | Repeated executable module |
+| `0x80168000` | `WA_MRG.MRG` | Reused executable module slot |
+| `0x8017A1D8` | `WA_MRG.MRG` | Repeated data subrange |
+| `0x8017A000` | `MODEL.MRG` | Executable content at the slot base |
+| `0x80180000` | `SU.MRG` | Reused executable module slot |
+
+WA therefore supplies several overlays and data ranges, but not every
+high-memory slot. The table at `0x80010000` is a shared game layout table.
+
+## Recovered WA organization
+
+The resident executable contains no conventional 32-bit WA directory.
+Generated-looking WA boundaries are encoded as immediate sector numbers,
+stride arithmetic, transfer counts, and phase callbacks.
+
+A contiguous layout has been recovered from WA sectors `5776-8661`, or byte
+range `0xB48000-0x10EA800`. It includes seven 235-sector records, a likely
+40-entry family of three-sector records, and multiple fixed packages. The
+seven large records use a 13-phase callback whose counts total exactly 235
+sectors.
+
+The complete loader trace, descriptor layout, sector map, phase table, archive
+attribution, and called-address checks are recorded in `notes/overlays.md`.
+
+## Development-path evidence
+
+The executable preserves paths including:
 
 ```text
 M:/mrgSU/SU.mrg
 M:/mrgSU/model.mrg
 ```
 
-These strings support a merge-script workflow and may help identify the source
-module responsible for generated offset tables.
+These support the merge-script model and may identify the original source
+module that included generated offsets.
 
-## Investigation workflow
+## Scope
 
-1. Find all code and data references associated with each MRG filename.
-2. Prioritize `WA_MRG.MRG` references that target overlay slot addresses such
-   as `0x8013A000`, `0x80146000`, `0x80168000`, or `0x80180000`.
-3. Identify the seek/read routine arguments and the tables supplying offsets
-   and lengths.
-4. Classify table element widths, sentinels, alignment, and whether lengths are
-   explicit or derived from the next offset.
-5. Verify every proposed boundary against the MRG bytes.
-6. Record recovered entries and evidence under `notes/`; keep transient
-   extraction output under `tmp/`.
-7. Only create extraction/repacking tools when executable analysis requires
-   them, because asset-format reversal remains outside the primary executable
-   matching target.
-
-The tracked disc LBA manifest identifies each complete MRG file's ISO extent.
-Those LBAs are separate from the generated offsets of items inside each merged
-file.
+The original BIN/CUE remains an immutable LBA and sector-layout reference.
+Recovering MRG boundaries is performed only when needed to understand resident
+code or runtime overlays. General asset extraction and repacking remain outside
+the executable matching target.
