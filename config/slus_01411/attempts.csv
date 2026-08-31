@@ -3565,3 +3565,4 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8005B8A0,2,gcc-2.8.1-psx,profile=gcc_2_8_1_g8 label=v2 source=tmp/agents/first-pass-c3/attempt-sources/8005B8A0/v2.c,nonmatch,byte +0x0: c8!=e0; word +0x0: c8ffbd27!=e0ffbd27; relocations differ; size 0x124/0x2DC
 0x80027228,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=v1 source=tmp/agents/first-pass-c3/attempt-sources/80027228/v1.c,nonmatch,byte +0x0: a8!=e0; word +0x0: a8ffbd27!=e0ffbd27; relocations differ; size 0x90/0x2E0
 0x8005106C,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=v1 source=tmp/agents/first-pass-c3/attempt-sources/8005106C/v1.c,nonmatch,byte +0x0: 70!=d8; word +0x0: 70ffbd27!=d8ffbd27; relocations differ; size 0xCC/0x2E4
+0x800556E8,1,gcc-2.8.1-psx,profile=gcc_2_8_1_g0 label=v1 source=tmp/agents/first-pass-c3/attempt-sources/800556E8/v1.c,nonmatch,byte +0x0: d8!=d0; word +0x0: d8ffbd27!=d0ffbd27; relocations differ; size 0xF0/0x2EC
