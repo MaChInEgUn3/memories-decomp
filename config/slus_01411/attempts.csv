@@ -600,3 +600,13 @@ address,attempt,compiler,flags,result,summary
 0x8002A660,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x1: 00!=80; word +0x0: 0a008284!=0a80033c
 0x8002A660,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0xc: 0a!=00; word +0xc: 0a80013c!=00000000
 0x8002A660,6,gcc_2_8_1_g0,gcc_2_8_1_g0,deferred,byte +0x18: 40!=0a; word +0x18: 4000a228!=0a008394
+0x800358A0,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x4: 10!=14; word +0x4: 1000b0af!=1400b1af
+0x800358A0,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,"/home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
+mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
+"
+0x800358A0,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,"/home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
+mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
+"
+0x800358A0,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x4: 10!=14; word +0x4: 1000b0af!=1400b1af
+0x800358A0,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x10: 18!=21; word +0x10: 1800bfaf!=2188c000
+0x800358A0,6,gcc_2_8_1_g0,gcc_2_8_1_g0,deferred,byte +0x34: fa!=f9; word +0x34: faff4014!=f9ff4014
