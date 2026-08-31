@@ -8,9 +8,9 @@ extern Entry24 *D_8009B458;
 
 void func_8004B70C(unsigned char index, int unused, int value)
 {
-    register Entry24 *entries asm("$3") = D_8009B458;
+    register Entry24 *entries = D_8009B458;
 
     entries += index;
-    asm("" : "+r"(entries));
+    
     entries->value = value & 0x7F;
 }
