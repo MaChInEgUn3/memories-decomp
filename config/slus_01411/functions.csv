@@ -705,7 +705,7 @@ address,size,name,status,module,notes
 0x80044D0C,0x14,func_80044D0C,matching_c,game,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly
 0x80044D20,0x14,func_80044D20,matching_c,game,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly
 0x80044D34,0x14,func_80044D34,matching_c,game,26 pre-policy variants: exact (-G0/-G8); selected -G0 high-base $v1/$v0 form; simpler forms ordered/allocated address incorrectly
-0x80044D48,0x58,func_80044D48,unmatched_asm,game,
+0x80044D48,0x58,func_80044D48,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80044DA0,0x20,func_80044DA0,matching_c,game,6 pre-policy variants: exact -G0; -G8 used GP-relative global access and volatile-byte form added loads
 0x80044DC0,0xD0,func_80044DC0,unmatched_asm,game,
 0x80044E90,0xC8,func_80044E90,unmatched_asm,game,
