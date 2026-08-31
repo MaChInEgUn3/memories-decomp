@@ -336,3 +336,4 @@ address,attempt,compiler,flags,result,summary
 0x80039F1C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: +0xC byte 03!=04; word 03004010!=04004014; relocations matched.
 0x80039F1C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Inverting the flag branch retained the target early return layout.
 0x80039FD4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct signed-byte assignment and cleanup call matched.
+0x80039FF8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Straight conditional flag/mode update matched.
