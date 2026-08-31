@@ -76,7 +76,7 @@ address,size,name,status,module,notes
 0x80015C0C,0x3C,func_80015C0C,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80015C48,0x3C,func_80015C48,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80015C84,0x3C,func_80015C84,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x80015CC0,0x3C,func_80015CC0,unmatched_asm,game,
+0x80015CC0,0x3C,func_80015CC0,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80015CFC,0x10,func_80015CFC,matching_c,game,4 pre-policy variants: direct small-data byte assignment to one reproduced the exact four-instruction sequence.
 0x80015D0C,0xC,func_80015D0C,matching_c,game,4 pre-policy variants: direct small-data byte assignment to zero reproduced the exact three-instruction sequence.
 0x80015D18,0xA0,func_80015D18,unmatched_asm,game,
