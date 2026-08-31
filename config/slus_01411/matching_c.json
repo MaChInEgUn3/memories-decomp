@@ -3013,6 +3013,12 @@
       "source": "src/game/func_80049120.c"
     },
     {
+      "address": "0x80049138",
+      "profile": "gcc_2_8_1_g0_no_split",
+      "size": "0xC8",
+      "source": "src/game/func_80049138.c"
+    },
+    {
       "address": "0x80049200",
       "profile": "gcc_2_8_1_g0",
       "size": "0x30",
