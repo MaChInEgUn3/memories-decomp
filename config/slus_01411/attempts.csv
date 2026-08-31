@@ -586,3 +586,6 @@ address,attempt,compiler,flags,result,summary
 0x80022F98,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: 13!=14; word +0x0: 1300a010!=1400a010; relocations differ
 0x80022F98,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x0: 13!=14; word +0x0: 1300a010!=1400a010
 0x80022F98,5,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x8002348C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x4: 09!=10; word +0x4: 0980063c!=1000bfaf; relocations differ
+0x8002348C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x4: 09!=10; word +0x4: 0980063c!=1000bfaf; relocations differ
+0x8002348C,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
