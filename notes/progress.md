@@ -23,11 +23,11 @@ SHA-256: 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 | PsyQ CRT/SDK function bytes | 117,332 (`0x1CA54`) |
 | Game functions heuristically marked handwritten | 63 |
 | Game handwritten-function bytes | 46,236 (`0xB49C`) |
-| Remaining game assembly functions | 625 |
-| Remaining game assembly-function bytes | 317,816 (`0x4D978`) |
+| Remaining game assembly functions | 570 |
+| Remaining game assembly-function bytes | 308,864 (`0x4B680`) |
 | Embedded/unassigned text bytes | 1,780 (`0x6F4`) |
-| Matching C functions | 506 |
-| Matching C bytes | 32,160 (`0x7DA0`) |
+| Matching C functions | 561 |
+| Matching C bytes | 41,112 (`0xA098`) |
 
 SDK classification is based on verified ownership boundaries. Handwritten
 classifications inside the game region remain provisional Splat/spimdisasm
@@ -52,16 +52,21 @@ spans the full resident game address range and includes bytecode readers,
 checkpoint helpers, wrappers, getters/setters, field updates, little-endian
 decoders, address-return helpers, transfer helpers, and control-flow routines.
 
-All 506 matching functions currently use the GCC 2.8.1 PSX probe:
+All 561 matching functions currently use the GCC 2.8.1 PSX probe:
 
 | Compiler profile | Functions |
 |---|---:|
-| `gcc_2_8_1_g8` | 286 |
-| `gcc_2_8_1_g8_split` | 46 |
-| `gcc_2_8_1_g0` | 149 |
-| `gcc_2_8_1_g0_split` | 25 |
+| `gcc_2_8_1_g8` | 306 |
+| `gcc_2_8_1_g8_split` | 51 |
+| `gcc_2_8_1_g0` | 171 |
+| `gcc_2_8_1_g0_split` | 33 |
 
-The attempt ledger currently records 1,489 outcomes: 506 matches, 895
-nonmatches, and 88 deferred functions whose six-attempt search budgets are
+The attempt ledger currently records 2,194 outcomes: 561 matches, 1,450
+nonmatches, and 183 deferred functions whose six-attempt search budgets are
 exhausted. Deferred functions remain exact assembly and are not retried without
 genuinely new evidence.
+
+The Wave 4 audit found that `func_800137E4` already had one historical attempt
+before a six-variant batch was run. Its canonical ledger was corrected to the
+first six total attempts, and the terminal summary preserves the accidentally
+run extra scratch variant and its mismatch. The function remains deferred.
