@@ -638,7 +638,7 @@ address,size,name,status,module,notes
 0x80040D14,0xC4,func_80040D14,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80040DD8,0x290,func_80040DD8,unmatched_asm,game,
 0x80041068,0x2D8,func_80041068,unmatched_asm,game,
-0x80041340,0xDC,func_80041340,unmatched_asm,game,
+0x80041340,0xDC,func_80041340,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x8004141C,0xC,func_8004141C,matching_c,game,Halfword clear with -1 return matched exactly.
 0x80041428,0xC,func_80041428,matching_c,game,Halfword clear with 1 return matched exactly.
 0x80041434,0x8,func_80041434,matching_c,game,Constant 1 return matched exactly.
