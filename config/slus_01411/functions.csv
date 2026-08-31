@@ -317,7 +317,7 @@ address,size,name,status,module,notes
 0x8002E128,0x248,func_8002E128,unmatched_asm,game,
 0x8002E370,0x44,func_8002E370,unmatched_asm,game,
 0x8002E3B4,0x28,func_8002E3B4,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x8002E3DC,0x20,func_8002E3DC,unmatched_asm,game,
+0x8002E3DC,0x20,func_8002E3DC,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8002E3FC,0x74,func_8002E3FC,unmatched_asm,game,
 0x8002E470,0x13C,func_8002E470,unmatched_asm,game,
 0x8002E5AC,0x10C,func_8002E5AC,unmatched_asm,game,
