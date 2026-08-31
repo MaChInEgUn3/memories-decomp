@@ -1022,7 +1022,7 @@ address,size,name,status,module,notes
 0x8005F27C,0x13C,func_8005F27C,unmatched_asm,game,
 0x8005F3B8,0x1AC,func_8005F3B8,unmatched_asm,game,
 0x8005F564,0x24,func_8005F564,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x8005F588,0x40,func_8005F588,unmatched_asm,game,
+0x8005F588,0x40,func_8005F588,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8005F5C8,0x14C,func_8005F5C8,unmatched_asm,game,
 0x8005F714,0x9C,func_8005F714,unmatched_asm,game,
 0x8005F7B0,0x78,func_8005F7B0,unmatched_asm,game,

@@ -467,3 +467,4 @@ address,attempt,compiler,flags,result,summary
 0x8005C4F0,4,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x8005C530,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x8005F564,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x8005F588,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
