@@ -610,7 +610,7 @@ address,size,name,status,module,notes
 0x8003FF08,0x2C,func_8003FF08,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003FF34,0x24,func_8003FF34,matching_c,game,Constant -8 and zero-argument call wrapper matched exactly.
 0x8003FF58,0x30,func_8003FF58,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x8003FF88,0x2C,func_8003FF88,unmatched_asm,game,
+0x8003FF88,0x2C,func_8003FF88,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003FFB4,0x24,func_8003FFB4,matching_c,game,16-bit mask and 0x8000 call wrapper matched exactly.
 0x8003FFD8,0x24,func_8003FFD8,matching_c,game,16-bit mask and 0xA000 call wrapper matched exactly.
 0x8003FFFC,0x30,func_8003FFFC,unmatched_asm,game,
