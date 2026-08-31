@@ -533,7 +533,7 @@ address,size,name,status,module,notes
 0x8003AC48,0x124,func_8003AC48,unmatched_asm,game,
 0x8003AD6C,0x2E8,func_8003AD6C,unmatched_asm,game,
 0x8003B054,0x324,func_8003B054,unmatched_asm,game,
-0x8003B378,0x194,func_8003B378,unmatched_asm,game,
+0x8003B378,0x194,func_8003B378,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x8003B50C,0xBC,func_8003B50C,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x8003B5C8,0xE4,func_8003B5C8,unmatched_asm,game,
 0x8003B6AC,0x68,func_8003B6AC,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
