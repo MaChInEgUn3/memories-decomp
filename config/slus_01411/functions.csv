@@ -1127,7 +1127,7 @@ address,size,name,status,module,notes
 0x80070710,0x28,func_80070710,unmatched_asm,game,
 0x80070738,0x8C,func_80070738,unmatched_asm,game,
 0x800707C4,0xAC,func_800707C4,unmatched_asm,game,
-0x80070870,0x54,func_80070870,unmatched_asm,game,
+0x80070870,0x54,func_80070870,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800708C4,0x5C,func_800708C4,unmatched_asm,game,
 0x80070920,0x68,func_80070920,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070988,0x38,func_80070988,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.

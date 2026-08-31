@@ -3559,6 +3559,12 @@
       "source": "src/game/read_u16.c"
     },
     {
+      "address": "0x80070870",
+      "profile": "gcc_2_8_1_g0_split",
+      "size": "0x54",
+      "source": "src/game/func_80070870.c"
+    },
+    {
       "address": "0x80070920",
       "profile": "gcc_2_8_1_g0",
       "size": "0x68",
