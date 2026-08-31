@@ -1,0 +1,2 @@
+extern short D_801D07BC[];
+void func_80032370(void){register short*source __asm__("$6");register unsigned char*base __asm__("$4");register int i __asm__("$5");register short*current __asm__("$3");short*dest;__asm__ volatile("lui $2,%%hi(D_801D07BC)\n\taddiu $6,$2,%%lo(D_801D07BC)":"=r"(source)::"$2");base=(unsigned char*)source-0x56C;i=15;current=source+15;for(;i>=0;i--,current--)if(*current!=0&&base[*current-1]==0)*current=0;dest=source;for(i=0;i<16;i++,source++)if(*source){if(source!=dest){*dest=*source;*source=0;}dest++;}}
