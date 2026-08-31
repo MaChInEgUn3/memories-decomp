@@ -94,6 +94,12 @@ build: split
 match: build
 	@$(PYTHON) tools/project/match.py
 
+build-incremental: split
+	@$(PYTHON) tools/project/build_incremental.py
+
+match-incremental: build-incremental
+	@$(PYTHON) tools/project/match.py
+
 inventory: split
 	@$(PYTHON) tools/project/function_inventory.py
 

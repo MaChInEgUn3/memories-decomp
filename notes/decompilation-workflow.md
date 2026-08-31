@@ -12,6 +12,22 @@ The entire rebuilt `SLUS_014.11` must retain the target SHA-256. A function is
 not matching merely because it is functionally equivalent or has a similar
 instruction count.
 
+Long integration runs may seed the single-worker incremental object cache after
+a clean full match:
+
+```sh
+make match
+tools/environments/python/bin/python \
+  tools/project/build_incremental.py --seed-existing
+make match-incremental
+```
+
+`make match-incremental` still regenerates the split, relinks the entire
+executable, and checks its target SHA-256. It reuses an object only when the
+source, local includes, compiler profile, compiler, assembler, MASPSX, assembly
+filter, and generated Splat include fingerprints are unchanged. The ordinary
+`make match` remains the clean-build acceptance gate for final audits.
+
 ## Function conversion
 
 For each candidate:
