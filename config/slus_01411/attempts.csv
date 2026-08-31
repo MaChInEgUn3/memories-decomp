@@ -2983,3 +2983,9 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80058838,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: d8!=c0; word +0x0: d8ffbd27!=c0ffbd27; relocations differ
 0x80058838,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x5: 48!=50; word +0x4: 21488000!=21508000; relocations differ
 0x80058838,6,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,deferred,byte +0x5: 48!=50; word +0x4: 21488000!=21508000; relocations differ
+0x800592AC,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x4: 40!=21; word +0x4: 4000b0af!=21188000; relocations differ
+0x800592AC,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x4: 40!=48; word +0x4: 4000b0af!=4800b2af; relocations differ
+0x800592AC,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x4: 40!=48; word +0x4: 4000b0af!=4800b2af; relocations differ
+0x800592AC,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x4: 40!=48; word +0x4: 4000b0af!=4800b2af; relocations differ
+0x800592AC,5,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,nonmatch,byte +0x4: 40!=21; word +0x4: 4000b0af!=21188000; relocations differ
+0x800592AC,6,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,deferred,byte +0x4: 40!=48; word +0x4: 4000b0af!=4800b2af; relocations differ
