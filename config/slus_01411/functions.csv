@@ -230,7 +230,7 @@ address,size,name,status,module,notes
 0x8002778C,0x114,func_8002778C,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
 0x800278A0,0x11C,func_800278A0,unmatched_asm,game,
 0x800279BC,0x43C,func_800279BC,unmatched_asm,game,
-0x80027DF8,0x428,func_80027DF8,unmatched_asm,game,
+0x80027DF8,0x428,func_80027DF8,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80028220,0x40,func_80028220,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80028260,0x1C,func_80028260,matching_c,game,High-bit conditional adjustment matched first variant.
 0x8002827C,0x6C,func_8002827C,matching_c,game,4 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.

@@ -1,0 +1,181 @@
+typedef signed char s8;
+typedef unsigned char u8;
+typedef signed short s16;
+typedef unsigned short u16;
+typedef signed int s32;
+typedef unsigned int u32;
+typedef signed long long s64;
+typedef unsigned long long u64;
+typedef struct LocalObj {
+    u8 pad0[0x68];
+    u8 f68;
+} LocalObj;
+typedef struct LocalEnt {
+    u16 id;
+    s16 x;
+    s16 y;
+    u16 flags;
+    u8 b8;
+    s8 b9;
+    s8 bA;
+    u8 bB;
+} LocalEnt;
+typedef struct LocalRec {
+    LocalObj *obj;
+    u8 pad4[8];
+    u16 id;
+    u8 padE[8];
+    u16 flags;
+    u8 pad18[4];
+} LocalRec;
+typedef struct LocalE9 {
+    u8 pad0[0x18];
+    s8 count;
+    s8 pad19;
+    s8 slots[6];
+} LocalE9;
+typedef struct LocalR6 {
+    s16 id;
+    u8 b2;
+    u8 pad3[3];
+} LocalR6;
+typedef struct LocalBlob {
+    u8 pad0[0x4B9FC];
+    LocalR6 cards[1];
+} LocalBlob;
+extern LocalE9 D_800E9FF0[];
+extern LocalBlob D_8015C424;
+extern u8 D_801A7AD8[];
+extern LocalR6 D_801A7E20[];
+extern s32 D_801D4244[];
+extern int func_800170C8();
+
+void func_80027DF8(LocalEnt *out, s32 who) {
+    u8 *base;
+    s32 i;
+
+    base = &D_801A7AD8[who * 0x1A4];
+
+    {
+        LocalRec *rec;
+        s32 *tbl;
+
+        rec = (LocalRec *) (base + 0x8C);
+        i = 0;
+        tbl = D_801D4244;
+        do {
+            out->id = 0;
+            if (rec->flags & 0x8000) {
+                s32 r;
+                s32 t;
+
+                out->id = rec->id;
+                r = func_800170C8(rec);
+                out->x = r;
+                out->y = r >> 16;
+                out->flags = rec->flags;
+                out->b8 = rec->obj->f68;
+                if (rec->flags & 0x200) {
+                    t = *(s32 *) ((((s16) rec->id - 1) << 2) + (u32) tbl) >> 18;
+                } else {
+                    t = *(s32 *) ((((s16) rec->id - 1) << 2) + (u32) tbl) >> 22;
+                }
+                out->b9 = t & 0xF;
+            }
+            i += 1;
+            out += 1;
+            rec += 1;
+        } while (i < 5);
+    }
+
+    {
+        LocalRec *rec;
+        s32 *tbl;
+
+        rec = (LocalRec *) (base + 0x118);
+        i = 0;
+        tbl = D_801D4244;
+        do {
+            out->id = 0;
+            if (rec->flags & 0x8000) {
+                s32 r;
+                s32 t;
+
+                out->id = rec->id;
+                r = func_800170C8(rec);
+                out->x = r;
+                out->y = r >> 16;
+                out->flags = rec->flags;
+                out->b8 = rec->obj->f68;
+                if (rec->flags & 0x200) {
+                    t = *(s32 *) ((((s16) rec->id - 1) << 2) + (u32) tbl) >> 18;
+                } else {
+                    t = *(s32 *) ((((s16) rec->id - 1) << 2) + (u32) tbl) >> 22;
+                }
+                out->b9 = t & 0xF;
+            }
+            i += 1;
+            out += 1;
+            rec += 1;
+        } while (i < 5);
+    }
+
+    {
+        s32 *tbl;
+
+        i = 0;
+        do {
+            s32 n;
+
+            n = D_800E9FF0[who].slots[i];
+            if (n >= 0) {
+                s32 *p;
+                s32 id;
+
+                id = D_8015C424.cards[n].id;
+                out->id = id;
+                tbl = D_801D4244;
+                p = (s32 *) (((id - 1) << 2) + (u32) tbl);
+                out->x = (*p & 0x1FF) * 10;
+                out->y = ((*p >> 9) & 0x1FF) * 10;
+                out->flags = 0;
+                out->b8 = (*p >> 26) & 0x1F;
+                out->b9 = (*p >> 22) & 0xF;
+                out->bA = (*p >> 18) & 0xF;
+                out += 1;
+            }
+            i += 1;
+        } while (i < 5);
+    }
+
+    {
+        LocalR6 *rp;
+
+        i = D_800E9FF0[who].count;
+        rp = &D_801A7E20[i + who * 40];
+        if (i < 0x28) {
+            s32 *tbl;
+
+            tbl = D_801D4244;
+            do {
+                s32 *p;
+                s32 id;
+
+                id = rp->id;
+                out->id = id;
+                p = (s32 *) (((id - 1) << 2) + (u32) tbl);
+                out->x = (*p & 0x1FF) * 10;
+                out->y = ((*p >> 9) & 0x1FF) * 10;
+                out->flags = 0;
+                out->b8 = (*p >> 26) & 0x1F;
+                i += 1;
+                out->b9 = (*p >> 22) & 0xF;
+                out->bA = (*p >> 18) & 0xF;
+                out->bB = rp->b2;
+                rp += 1;
+                out += 1;
+            } while (i < 0x28);
+        }
+    }
+    out->id = 0;
+}
