@@ -466,7 +466,7 @@ address,size,name,status,module,notes
 0x80037DA4,0x280,func_80037DA4,unmatched_asm,game,
 0x80038024,0x4C,func_80038024,unmatched_asm,game,
 0x80038070,0x24,func_80038070,matching_c,game,First -O2 -G8 call-wrapper candidate matched.
-0x80038094,0x40,func_80038094,unmatched_asm,game,
+0x80038094,0x40,func_80038094,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x800380D4,0x3C,func_800380D4,unmatched_asm,game,
 0x80038110,0x38,func_80038110,unmatched_asm,game,
 0x80038148,0x160,func_80038148,unmatched_asm,game,

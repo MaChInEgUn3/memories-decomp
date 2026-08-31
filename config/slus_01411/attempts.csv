@@ -311,3 +311,5 @@ address,attempt,compiler,flags,result,summary
 0x80037D6C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: size 60/56; +0x2 byte 83!=82; word 58008380!=58008280; relocations differed.
 0x80037D6C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 2: +0x20 byte 00!=51; word 000062ac!=510085a0; relocations matched.
 0x80037D6C,3,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 3: linked bytes and relocations matched exactly; Loading the byte before updating the stream pointer fixed store order.
+0x80038094,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Variant 1: size 68/64; +0xA byte 83!=82; word 58008380!=58008280; relocations differed.
+0x80038094,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 2: linked bytes and relocations matched exactly; Post-increment in the call argument placed the pointer store in the call delay slot.
