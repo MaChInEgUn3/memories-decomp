@@ -3751,6 +3751,12 @@
       "source": "src/game/check_point_add.c"
     },
     {
+      "address": "0x8007368C",
+      "profile": "gcc_2_8_1_g0_split",
+      "size": "0x38",
+      "source": "src/game/func_8007368C.c"
+    },
+    {
       "address": "0x800736C4",
       "profile": "gcc_2_8_1_g8",
       "size": "0x40",

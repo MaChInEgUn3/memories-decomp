@@ -1196,7 +1196,7 @@ address,size,name,status,module,notes
 0x800735A0,0x3C,func_800735A0,matching_c,game,Immediate checkpoint table store using GCC 2.8.1 PSX -O2 -G0
 0x800735DC,0x48,func_800735DC,matching_c,game,Checkpoint table copy using GCC 2.8.1 PSX -O2 -G0 with ordered volatile pointers
 0x80073624,0x68,func_80073624,matching_c,game,Three-index addition helper using GCC 2.8.1 PSX -O2 -G0 and maspsx 2.81
-0x8007368C,0x38,func_8007368C,unmatched_asm,game,
+0x8007368C,0x38,func_8007368C,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800736C4,0x40,func_800736C4,matching_c,game,First matching C using GCC 2.8.1 PSX -O2 -G8 and maspsx 2.81
 0x80073704,0x20,func_80073704,sdk_asm,psyq/sdk,
 0x80073724,0x10,func_80073724,sdk_asm,psyq/sdk,
