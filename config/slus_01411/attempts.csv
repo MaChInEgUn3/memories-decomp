@@ -239,3 +239,7 @@ address,attempt,compiler,flags,result,summary
 0x8002C598,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":15,""expected"":255,""offset"":8}"
 0x8002C598,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":160,""expected"":136,""offset"":16}"
 0x8002C598,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,Linked bytes and relocations matched exactly.
+0x8002C5CC,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":3,""expected"":2,""offset"":2}"
+0x8002C5CC,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":3,""expected"":2,""offset"":2}"
+0x8002C5CC,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"{""actual"":3,""expected"":2,""offset"":2}"
+0x8002C5CC,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,Linked bytes and relocations matched exactly.
