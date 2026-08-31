@@ -1063,6 +1063,12 @@
       "source": "src/game/func_80031E04.c"
     },
     {
+      "address": "0x80031EE4",
+      "profile": "gcc_2_8_1_g0",
+      "size": "0x98",
+      "source": "src/game/func_80031EE4.c"
+    },
+    {
       "address": "0x80032328",
       "profile": "gcc_2_8_1_g0",
       "size": "0x48",
