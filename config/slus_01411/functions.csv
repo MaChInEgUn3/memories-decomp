@@ -631,7 +631,7 @@ address,size,name,status,module,notes
 0x800404CC,0x44,func_800404CC,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80040510,0x78,func_80040510,unmatched_asm,game,
 0x80040588,0x28C,func_80040588,unmatched_asm,game,
-0x80040814,0xBC,func_80040814,unmatched_asm,game,
+0x80040814,0xBC,func_80040814,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800408D0,0x328,func_800408D0,unmatched_asm,game,
 0x80040BF8,0xB4,func_80040BF8,unmatched_asm,game,
 0x80040CAC,0x68,func_80040CAC,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
