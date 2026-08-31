@@ -453,3 +453,8 @@ address,attempt,compiler,flags,result,summary
 0x8005949C,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x80059590,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
 0x800598E4,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x80059AA8,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: 0f!=c0; word +0x0: 0f80033c!=c0100400; relocations differ; size 0x3c/0x38
+0x80059AA8,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: 0f!=c0; word +0x0: 0f80033c!=c0100400; relocations differ
+0x80059AA8,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x1d: 10!=18; word +0x1c: 21104300!=21186200
+0x80059AA8,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x1e: 43!=62; word +0x1c: 21104300!=21106200
+0x80059AA8,5,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
