@@ -3222,3 +3222,9 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8002CEE8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x14: 13!=10; word +0x14: 13004014!=10004014
 0x8002CEE8,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x5c: 33!=32; word +0x5c: 33b40008!=32b40008
 0x8002CEE8,3,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x80031574,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x80: 1d!=ff; word +0x80: 1d80023c!=ffff1026
+0x80031574,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: c0!=b8; word +0x0: c0ffbd27!=b8ffbd27
+0x80031574,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x80: 1d!=ff; word +0x80: 1d80023c!=ffff1026
+0x80031574,4,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x0: c0!=c8; word +0x0: c0ffbd27!=c8ffbd27
+0x80031574,5,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x11c: ff!=50; word +0x11c: fff7053c!=5000a88f
+0x80031574,6,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
