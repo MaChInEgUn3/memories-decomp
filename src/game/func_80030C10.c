@@ -1,0 +1,2 @@
+extern unsigned char D_8009B2EB,D_8009B2E8;extern unsigned short D_8009B2C8;extern unsigned char D_80090D0C[],D_8009B363[],D_8009B26C[];extern void func_80030250(void*,int,int,int,int,int,int);extern int func_80030294(void);
+void func_80030C10(void){unsigned char f=D_8009B2EB;int r;if((f&0x80)==0){D_8009B2EB=f|0x80;D_8009B2C8=D_8009B2E8;func_80030250(D_80090D0C,0x14,0,0,0xC,2,1);}r=func_80030294();if(r!=0){if(r<0)D_8009B2EB=0;else{D_8009B363[0]=0;D_8009B26C[0]=5;D_8009B2E8=*(unsigned char*)&D_8009B2C8;}}}
