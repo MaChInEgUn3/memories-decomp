@@ -543,3 +543,4 @@ address,attempt,compiler,flags,result,summary
 0x80015870,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0xe: 03!=02; word +0xc: ff00033c!=ff00023c; relocations differ
 0x80015870,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0xe: 03!=02; word +0xc: ff00033c!=ff00023c; relocations differ
 0x80015870,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
+0x800158B8,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
