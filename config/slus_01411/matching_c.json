@@ -1513,6 +1513,12 @@
       "source": "src/game/func_8005F588.c"
     },
     {
+      "address": "0x8005FAE4",
+      "profile": "gcc_2_8_1_g8",
+      "size": "0x24",
+      "source": "src/game/func_8005FAE4.c"
+    },
+    {
       "address": "0x8005FB08",
       "profile": "gcc_2_8_1_g8",
       "size": "0xC",
