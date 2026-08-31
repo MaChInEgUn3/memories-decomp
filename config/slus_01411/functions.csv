@@ -677,7 +677,7 @@ address,size,name,status,module,notes
 0x80043178,0x14,func_80043178,matching_c,game,Two halfword field copies matched exact load/store scheduling.
 0x8004318C,0xA4,func_8004318C,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80043230,0xF8,func_80043230,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80043328,0x1CC,func_80043328,unmatched_asm,game,
+0x80043328,0x1CC,func_80043328,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800434F4,0x168,func_800434F4,unmatched_asm,game,
 0x8004365C,0x25C,func_8004365C,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x800438B8,0xA8,func_800438B8,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
