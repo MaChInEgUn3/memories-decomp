@@ -684,3 +684,4 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80038B4C,4,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x15: 18!=20; word +0x14: 21188300!=21208300
 0x80038B4C,5,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0xa: 83!=82; word +0x8: 58008380!=58008280
 0x80038B4C,6,gcc_2_8_1_g8,gcc_2_8_1_g8,deferred,cannot infer link address for undefined symbol __builtin_unreachable
+0x80038024,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
