@@ -333,7 +333,7 @@ address,size,name,status,module,notes
 0x8002EE20,0x3C,func_8002EE20,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8002EE5C,0x38,func_8002EE5C,matching_c,game,4 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
 0x8002EE94,0x59C,func_8002EE94,unmatched_asm,game,
-0x8002F430,0x8,func_8002F430,unmatched_asm,game,
+0x8002F430,0x8,func_8002F430,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8002F438,0x8,func_8002F438,unmatched_asm,game,
 0x8002F440,0x80,func_8002F440,unmatched_asm,game,
 0x8002F4C0,0x170,func_8002F4C0,unmatched_asm,game,
