@@ -2712,3 +2712,5 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x8005F828,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x2c: 05!=24; word +0x2c: 05006214!=2400bfaf; relocations differ
 0x8005F828,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x3c: 26!=25; word +0x3c: 26004310!=25004310; relocations differ
 0x8005F828,4,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
+0x800610E0,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,tool error: /home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
+0x800610E0,2,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
