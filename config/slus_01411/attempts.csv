@@ -355,3 +355,5 @@ address,attempt,compiler,flags,result,summary
 0x8003CE48,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,first byte +0x4; word 00000000 != 98048397; relocation sequence differs (6 expected/6 actual)
 0x8003CE48,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,first byte +0x4; word 00000000 != 9c0482a7; relocation sequence differs (6 expected/6 actual)
 0x8003CE48,3,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
+0x8003D288,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,first byte +0xC; word 06006214 != 03006210
+0x8003D288,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked text and relocation sequence
