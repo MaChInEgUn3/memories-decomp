@@ -601,7 +601,7 @@ address,size,name,status,module,notes
 0x8003F810,0x6C,func_8003F810,unmatched_asm,game,
 0x8003F87C,0x58,func_8003F87C,unmatched_asm,game,
 0x8003F8D4,0x404,func_8003F8D4,unmatched_asm,game,
-0x8003FCD8,0x3C,func_8003FCD8,unmatched_asm,game,
+0x8003FCD8,0x3C,func_8003FCD8,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003FD14,0x100,func_8003FD14,unmatched_asm,game,
 0x8003FE14,0x5C,func_8003FE14,unmatched_asm,game,
 0x8003FE70,0x10,func_8003FE70,matching_c,game,Ordered stores to the two small-data globals matched exactly.
