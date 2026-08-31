@@ -301,3 +301,4 @@ address,attempt,compiler,flags,result,summary
 0x80037914,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct conditional state update with mode six matched.
 0x80037950,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Direct conditional state update with mode four matched.
 0x8003798C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Array declarations forced the required absolute global loads.
+0x800379C4,1,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,Variant 1: linked bytes and relocations matched exactly; Call-result check and conditional byte clear matched.
