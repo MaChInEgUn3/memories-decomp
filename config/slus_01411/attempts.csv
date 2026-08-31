@@ -2092,3 +2092,9 @@ mips-sony-psx-gcc: Internal compiler error: program cc1 got fatal signal 11
 0x80059B90,4,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x60: 00!=84; word +0x60: 00000000!=8400a397
 0x80059B90,5,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,matched,exact linked bytes and relocations
 0x80059F18,1,gcc_2_8_1_g0,gcc_2_8_1_g0,matched,exact linked bytes and relocations
+0x8005A3D0,1,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x2: 83!=86; word +0x0: 170e8390!=170e8690
+0x8005A3D0,2,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,byte +0x2: 83!=82; word +0x0: 170e8390!=170e8290
+0x8005A3D0,3,gcc_2_8_1_g0,gcc_2_8_1_g0,nonmatch,tool error: /home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
+0x8005A3D0,4,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x2: 83!=82; word +0x0: 170e8390!=170e8290
+0x8005A3D0,5,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,nonmatch,byte +0x2: 83!=86; word +0x0: 170e8390!=170e8690
+0x8005A3D0,6,gcc_2_8_1_g0_split,gcc_2_8_1_g0_split,deferred,tool error: /home/superconta/data/share/yugioh/tools/toolchains/gcc-2.8.1-psx/bin/mips-sony-psx-gcc failed (1):
