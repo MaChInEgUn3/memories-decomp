@@ -528,3 +528,5 @@ address,attempt,compiler,flags,result,summary
 0x80014390,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x1c: 21!=03; word +0x1c: 21184000!=03004018
 0x80014390,3,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x1c: 21!=03; word +0x1c: 21184000!=03004018
 0x80014390,4,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,exact linked bytes and relocations
+0x800156DC,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,byte +0x1c: c8!=ce; word +0x1c: c89e4224!=ce9e4224
+0x800156DC,2,gcc_2_8_1_g8,gcc_2_8_1_g8,matched,exact linked bytes and relocations
