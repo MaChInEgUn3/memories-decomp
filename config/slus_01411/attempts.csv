@@ -197,3 +197,6 @@ address,attempt,compiler,flags,result,summary
 0x800176D0,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Direct indexed struct array emitted three repeated absolute address sequences and was 12 bytes too large.
 0x800176D0,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"Explicit entry/member cursors matched size, body, and relocations but allocated the HI16 directly to $a0."
 0x800176D0,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,GAS split-address profile selected target $v0-to-$a0 address formation and matched exactly.
+0x8001778C,1,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,Direct indexed struct array emitted three repeated absolute address sequences and was 12 bytes too large.
+0x8001778C,2,gcc_2_8_1_g8,gcc_2_8_1_g8,nonmatch,"Explicit entry/member cursors matched size, body, and relocations but allocated the HI16 directly to $a0."
+0x8001778C,3,gcc_2_8_1_g8_split,gcc_2_8_1_g8_split,matched,GAS split-address profile selected target $v0-to-$a0 address formation and matched exactly.

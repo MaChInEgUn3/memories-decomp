@@ -99,7 +99,7 @@ address,size,name,status,module,notes
 0x800175A0,0x130,func_800175A0,unmatched_asm,game,
 0x800176D0,0x38,func_800176D0,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
 0x80017708,0x84,func_80017708,unmatched_asm,game,
-0x8001778C,0x38,func_8001778C,unmatched_asm,game,
+0x8001778C,0x38,func_8001778C,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
 0x800177C4,0xF8,func_800177C4,unmatched_asm,game,
 0x800178BC,0xD0,func_800178BC,unmatched_asm,game,
 0x8001798C,0x68,func_8001798C,unmatched_asm,game,
