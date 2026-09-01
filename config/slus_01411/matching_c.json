@@ -4474,31 +4474,31 @@
       "address": "0x8007249C",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x128",
-      "source": "src/game/ai_script_find_equip_target.c"
+      "source": "src/game/ai_fusion.c"
     },
     {
       "address": "0x800725C4",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x7C",
-      "source": "src/game/ai_script_check_ritual.c"
+      "source": "src/game/ai_fusion.c"
     },
     {
       "address": "0x80072640",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0xB4",
-      "source": "src/game/ai_script_find_first_monster.c"
+      "source": "src/game/ai_fusion.c"
     },
     {
       "address": "0x800726F4",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0xCC",
-      "source": "src/game/ai_script_find_first_type.c"
+      "source": "src/game/ai_fusion.c"
     },
     {
       "address": "0x800727C0",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x288",
-      "source": "src/game/ai_complete_fusion.c"
+      "source": "src/game/ai_fusion.c"
     },
     {
       "address": "0x80072F1C",
