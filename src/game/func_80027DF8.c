@@ -47,7 +47,7 @@ extern LocalE9 D_800E9FF0[];
 extern LocalBlob D_8015C424;
 extern u8 D_801A7AD8[];
 extern LocalR6 gDuel_aPlayerHand[];
-extern s32 D_801D4244[];
+extern s32 gDuel_adwCardStats[];
 extern int Duel_CalcCardStats();
 
 void func_80027DF8(LocalEnt *out, s32 who) {
@@ -62,7 +62,7 @@ void func_80027DF8(LocalEnt *out, s32 who) {
 
         rec = (LocalRec *) (base + 0x8C);
         i = 0;
-        tbl = D_801D4244;
+        tbl = gDuel_adwCardStats;
         do {
             out->id = 0;
             if (rec->flags & 0x8000) {
@@ -94,7 +94,7 @@ void func_80027DF8(LocalEnt *out, s32 who) {
 
         rec = (LocalRec *) (base + 0x118);
         i = 0;
-        tbl = D_801D4244;
+        tbl = gDuel_adwCardStats;
         do {
             out->id = 0;
             if (rec->flags & 0x8000) {
@@ -134,7 +134,7 @@ void func_80027DF8(LocalEnt *out, s32 who) {
 
                 id = D_8015C424.cards[n].id;
                 out->id = id;
-                tbl = D_801D4244;
+                tbl = gDuel_adwCardStats;
                 p = (s32 *) (((id - 1) << 2) + (u32) tbl);
                 out->x = (*p & 0x1FF) * 10;
                 out->y = ((*p >> 9) & 0x1FF) * 10;
@@ -156,7 +156,7 @@ void func_80027DF8(LocalEnt *out, s32 who) {
         if (i < 0x28) {
             s32 *tbl;
 
-            tbl = D_801D4244;
+            tbl = gDuel_adwCardStats;
             do {
                 s32 *p;
                 s32 id;

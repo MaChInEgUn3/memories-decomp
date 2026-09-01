@@ -1,12 +1,12 @@
-extern int func_8007058C(void);
-extern int func_800705AC(void);
-extern int D_800F5B98[];
+extern int AiScript_ReadByte(void);
+extern int AiScript_ReadShort(void);
+extern int gAiScript_aMemory[];
 
-void func_800735A0(void)
+void AiScript_Store(void)
 {
-    int value = func_800705AC();
-    int index = func_8007058C();
-    volatile int *values = D_800F5B98;
+    int value = AiScript_ReadShort();
+    int index = AiScript_ReadByte();
+    volatile int *values = gAiScript_aMemory;
 
     values[index] = value;
 }

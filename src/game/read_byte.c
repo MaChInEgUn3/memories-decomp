@@ -5,7 +5,7 @@ typedef struct {
 
 extern ByteStream gAiScript_State;
 
-int func_8007058C(void)
+int AiScript_ReadByte(void)
 {
     // Preserve the original stream-base register allocation.
     register ByteStream *stream = &gAiScript_State;

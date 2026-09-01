@@ -5,7 +5,7 @@ typedef struct {
     u16 field40;
 } Object;
 
-extern int D_801D4244[];
+extern int gDuel_adwCardStats[];
 extern void *func_8004002C(void);
 extern Object *func_800400AC(void *, int);
 extern void func_80040510();
@@ -25,8 +25,8 @@ void func_80031574(int index, int arg1, int arg2, int arg3, int arg4)
     object = func_800400AC(func_8004002C(), 1);
     func_80040510(object, x, y, 0x10, 0x10, 0, 0xC8, 0xB, 0x260, 0xFC);
     __asm__ volatile(
-        "lui $2,%%hi(D_801D4244)\n\t"
-        "addiu $2,$2,%%lo(D_801D4244)\n\t"
+        "lui $2,%%hi(gDuel_adwCardStats)\n\t"
+        "addiu $2,$2,%%lo(gDuel_adwCardStats)\n\t"
         "addiu %1,%1,-1\n\t"
         "sll %1,%1,2\n\t"
         "addu %1,%1,$2\n\t"

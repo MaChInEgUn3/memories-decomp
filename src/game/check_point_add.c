@@ -1,12 +1,12 @@
-extern int func_8007058C(void);
-extern int D_800F5B98[];
+extern int AiScript_ReadByte(void);
+extern int gAiScript_aMemory[];
 
-void func_80073624(void)
+void AiScript_Add(void)
 {
-    int left = func_8007058C();
-    int right = func_8007058C();
-    int output = func_8007058C();
-    int *values = D_800F5B98;
+    int left = AiScript_ReadByte();
+    int right = AiScript_ReadByte();
+    int output = AiScript_ReadByte();
+    int *values = gAiScript_aMemory;
 
     values[output] = values[left] + values[right];
 }

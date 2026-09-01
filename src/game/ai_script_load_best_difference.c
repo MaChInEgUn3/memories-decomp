@@ -1,14 +1,14 @@
 extern int gAiScript_aMemory[];
-extern unsigned char D_800EAE90;
+extern unsigned short gAi_wBestDifference;
 extern int AiScript_ReadByte(void);
 
-void func_80071510(void)
+void AiScript_LoadBestDifference(void)
 {
     int index = AiScript_ReadByte();
     register int *values asm("$4") = gAiScript_aMemory;
     register unsigned int value asm("$3");
 
     asm("" : "+r"(values));
-    value = D_800EAE90;
+    value = gAi_wBestDifference;
     values[index] = value;
 }

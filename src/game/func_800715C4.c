@@ -1,1 +1,0 @@
-extern int D_800F5B98[],func_8007058C(void);extern unsigned char gAiScript_State[];void func_800715C4(void){int dest=func_8007058C(),i;for(i=0;i<5;i++){int v=gAiScript_State[0x38+i];if((unsigned)(v-1)<10){D_800F5B98[dest]=v;return;}}D_800F5B98[dest]=0;}

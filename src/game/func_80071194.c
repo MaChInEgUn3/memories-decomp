@@ -1,1 +1,0 @@
-extern int D_800F5B98[],D_801D4244[],func_8007058C(void),Duel_GetBaseCardStat(int,int);void func_80071194(void){register int*values=D_800F5B98;int value=values[func_8007058C()];int dest=func_8007058C(),result;if(((D_801D4244[value-1]>>26)&31)<20){int a=Duel_GetBaseCardStat(value,0),b=Duel_GetBaseCardStat(value,1);result=!(b<a);}else result=0;D_800F5B98[dest]=result;}

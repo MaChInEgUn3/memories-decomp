@@ -6,10 +6,14 @@ typedef signed int s32;
 typedef unsigned int u32;
 
 extern s32 gAiScript_aMemory[];
-extern u8 D_800EAE8F[];
+extern u8 D_800EAE8E[];
 extern s32 AiScript_ReadByte(void);
 
-void func_8007368C(void)
+void AiScript_SetPosition(void)
 {
-    D_800EAE8F[0] = *(u8 *)&gAiScript_aMemory[AiScript_ReadByte()];
+    s32 *p = gAiScript_aMemory;
+    s32 v;
+
+    v = p[AiScript_ReadByte()];
+    D_800EAE8E[0] = v;
 }

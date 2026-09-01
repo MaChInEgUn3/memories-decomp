@@ -5,7 +5,7 @@ typedef struct {
 
 extern ByteStream gAiScript_State;
 
-int func_800705AC(void)
+int AiScript_ReadShort(void)
 {
     // Preserve the original stream and increment register allocation.
     register ByteStream *stream asm("$2") = &gAiScript_State;
