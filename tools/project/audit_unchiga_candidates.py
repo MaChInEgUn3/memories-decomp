@@ -45,6 +45,7 @@ MASPSX_PATH = "tools/vendor/maspsx/maspsx.py"
 INTEGRATE_TOOL_PATH = "tools/project/integrate_verified_match.py"
 INCREMENTAL_TOOL_PATH = "tools/project/build_incremental.py"
 AUDIT_REPORT_PATH = "notes/unchiga-match-audit.md"
+SYMBOLS_CONFIG_PATH = "config/slus_01411/symbols.txt"
 BINUTILS_PATH = "tools/toolchains/binutils-2.42/bin"
 LOAD_ADDRESS = 0x80010000
 HEADER_SIZE = 0x800
@@ -270,6 +271,116 @@ def load_unit_flags(path: Path) -> dict[str, str]:
     return result
 
 
+def preferred_symbol_names(
+    root: Path,
+    functions: dict[int, dict[str, str]],
+) -> tuple[dict[str, str], dict[int, str]]:
+    current_symbols = load_symbol_file(
+        resolve_within(root, "config/slus_01411/symbols.txt", must_exist=True)
+    )
+    preferred: dict[int, str] = {}
+
+    def rank(name: str) -> tuple[int, int, str]:
+        if name.startswith("g") and not name.startswith("glabel"):
+            return (0, len(name), name)
+        if not re.fullmatch(r"(?:D|func)_[0-9A-Fa-f]{8}", name):
+            return (1, len(name), name)
+        return (2, len(name), name)
+
+    by_address: dict[int, list[str]] = defaultdict(list)
+    for name, address in current_symbols.items():
+        by_address[address].append(name)
+    for address, names in by_address.items():
+        preferred[address] = min(names, key=rank)
+    for address, function in functions.items():
+        preferred[address] = function["name"]
+
+    reference_symbols = load_symbol_file(
+        resolve_within(root, REFERENCE_SYMBOLS_PATH, must_exist=True)
+    )
+    replacements: dict[str, str] = {}
+    for name, address in reference_symbols.items():
+        replacement = preferred.get(address)
+        if replacement is None:
+            replacement = (
+                name
+                if re.fullmatch(r"(?:D|func)_[0-9A-Fa-f]{8}", name)
+                else f"D_{address:08X}"
+            )
+        if replacement != name:
+            replacements[name] = replacement
+    return replacements, preferred
+
+
+def rewrite_identifiers(text: str, replacements: dict[str, str]) -> str:
+    existing = set(
+        re.findall(
+            r"\b[A-Za-z_][A-Za-z0-9_]*\b",
+            COMMENT_PATTERN.sub("", text),
+        )
+    )
+    replacements = {
+        old: new
+        for old, new in replacements.items()
+        if new not in existing
+    }
+    output: list[str] = []
+    index = 0
+    state = "code"
+    quote = ""
+    while index < len(text):
+        char = text[index]
+        pair = text[index : index + 2]
+        if state == "block_comment":
+            output.append(char)
+            if pair == "*/":
+                output.append("/")
+                index += 2
+                state = "code"
+                continue
+        elif state == "line_comment":
+            output.append(char)
+            if char == "\n":
+                state = "code"
+        elif state == "string":
+            output.append(char)
+            if char == "\\" and index + 1 < len(text):
+                output.append(text[index + 1])
+                index += 2
+                continue
+            if char == quote:
+                state = "code"
+        else:
+            if pair == "/*":
+                output.extend(("/*"))
+                index += 2
+                state = "block_comment"
+                continue
+            if pair == "//":
+                output.extend(("//"))
+                index += 2
+                state = "line_comment"
+                continue
+            if char in {'"', "'"}:
+                output.append(char)
+                state = "string"
+                quote = char
+            elif char == "_" or char.isalpha():
+                end = index + 1
+                while end < len(text) and (
+                    text[end] == "_" or text[end].isalnum()
+                ):
+                    end += 1
+                identifier = text[index:end]
+                output.append(replacements.get(identifier, identifier))
+                index = end
+                continue
+            else:
+                output.append(char)
+        index += 1
+    return "".join(output)
+
+
 def profile_for_flags(flags: str) -> tuple[str, bool]:
     tokens = flags.split()
     keep_large_ori = "--keep-large-ori" in tokens
@@ -414,6 +525,7 @@ def prepare_manifest(root: Path) -> list[dict[str, str]]:
     profiles = load_json(
         resolve_within(root, PROFILES_PATH, must_exist=True)
     )["profiles"]
+    symbol_replacements, _preferred = preferred_symbol_names(root, functions)
     attempts = read_csv(
         resolve_within(root, EXTERNAL_ATTEMPTS_PATH, must_exist=True)
     )
@@ -467,6 +579,7 @@ def prepare_manifest(root: Path) -> list[dict[str, str]]:
             current["name"],
             source_text,
         )
+        source_text = rewrite_identifiers(source_text, symbol_replacements)
         source_text = TYPEDEFS + source_text.lstrip()
         if source_uses_asm(source_text):
             raise AuditError(f"{address:#010x}: prepared source contains asm")
@@ -1294,6 +1407,58 @@ def restore_paths(backups: dict[Path, bytes | None]) -> None:
             path.write_bytes(original)
 
 
+def add_required_linker_aliases(
+    root: Path,
+    work: Path,
+    address: int,
+) -> list[str]:
+    obj = resolve_within(
+        root,
+        f"{WORK_PATH}/build/{address:08X}/candidate.o",
+        must_exist=True,
+    )
+    target_symbols = load_nm_symbols(
+        root,
+        work,
+        resolve_within(root, TARGET_ELF_PATH, must_exist=True),
+    )
+    config_path = resolve_within(
+        root,
+        SYMBOLS_CONFIG_PATH,
+        must_exist=True,
+    )
+    configured = load_symbol_file(config_path)
+    reference = load_symbol_file(
+        resolve_within(root, REFERENCE_SYMBOLS_PATH, must_exist=True)
+    )
+    aliases: list[tuple[str, int]] = []
+    for symbol in sorted(set(undefined_symbols(root, work, obj))):
+        if symbol in target_symbols or symbol in configured:
+            continue
+        if not re.fullmatch(r"[A-Za-z_.$][A-Za-z0-9_.$]*", symbol):
+            raise AuditError(f"{address:#010x}: invalid alias symbol {symbol}")
+        alias_address = reference.get(symbol)
+        if alias_address is None:
+            match = SYMBOL_ADDRESS_PATTERN.search(symbol)
+            if match:
+                alias_address = int(match.group(1), 16)
+        if alias_address is None:
+            raise AuditError(
+                f"{address:#010x}: unresolved linker alias {symbol}"
+            )
+        aliases.append((symbol, alias_address))
+    if not aliases:
+        return []
+
+    text = config_path.read_text(encoding="utf-8").rstrip()
+    if "// Collaborator-verified source aliases" not in text:
+        text += "\n\n// Collaborator-verified source aliases"
+    for symbol, alias_address in aliases:
+        text += f"\n{symbol} = 0x{alias_address:08X};"
+    config_path.write_text(text + "\n", encoding="utf-8")
+    return [symbol for symbol, _address in aliases]
+
+
 def candidate_destination(
     root: Path,
     manifest_row: dict[str, str],
@@ -1343,6 +1508,7 @@ def commit_function(
             EXTERNAL_ATTEMPTS_PATH,
             FUNCTIONS_PATH,
             MATCHING_PATH,
+            SYMBOLS_CONFIG_PATH,
             str(destination.relative_to(root)),
         ],
     )
@@ -1384,7 +1550,18 @@ def integrate_exact(
 ) -> int:
     work = resolve_within(root, WORK_PATH)
     require_integration_repository(root, work)
-    ensure_baseline(root, work)
+    baseline_log = work / "integration-baseline.log"
+    completed = run(
+        root,
+        work,
+        ["make", "match"],
+        stdout_path=baseline_log,
+    )
+    require_success(completed, "clean integration baseline")
+    target = resolve_within(root, TARGET_PATH, must_exist=True)
+    built = resolve_within(root, BUILT_PATH, must_exist=True)
+    if sha256(target) != sha256(built):
+        raise AuditError("clean integration baseline does not match target")
     seed_log = work / "incremental-seed.log"
     completed = run(
         root,
@@ -1433,6 +1610,7 @@ def integrate_exact(
             resolve_within(root, EXTERNAL_ATTEMPTS_PATH, must_exist=True),
             resolve_within(root, FUNCTIONS_PATH, must_exist=True),
             resolve_within(root, MATCHING_PATH, must_exist=True),
+            resolve_within(root, SYMBOLS_CONFIG_PATH, must_exist=True),
             destination,
         ]
         backups = {
@@ -1440,6 +1618,7 @@ def integrate_exact(
             for path in tracked_paths
         }
         try:
+            add_required_linker_aliases(root, work, address)
             append_evidence(root, manifest_row, result, "matched")
             command = [
                 str(
