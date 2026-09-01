@@ -4352,7 +4352,7 @@
     },
     {
       "address": "0x80070D00",
-      "profile": "gcc_2_8_1_g0_split",
+      "profile": "gcc_2_8_1_g8_split",
       "size": "0xA8",
       "source": "src/game/ai_script_call.c"
     },
