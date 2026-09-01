@@ -1,0 +1,87 @@
+name: Matching build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: matching-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  clean-build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    env:
+      MAKEFLAGS: -j2
+      GAME_ARCHIVE_URL: ${{ secrets.YGOFM_GAME_ARCHIVE_URL }}
+      GAME_ARCHIVE_SHA256: ${{ secrets.YGOFM_GAME_ARCHIVE_SHA256 }}
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install host build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends \
+            build-essential \
+            ca-certificates \
+            curl \
+            git \
+            patch \
+            python3-pip \
+            python3-venv
+
+      - name: Require private retail input secrets
+        run: |
+          if [ -z "$GAME_ARCHIVE_URL" ] || [ -z "$GAME_ARCHIVE_SHA256" ]; then
+            echo "::error::Configure YGOFM_GAME_ARCHIVE_URL and YGOFM_GAME_ARCHIVE_SHA256."
+            exit 1
+          fi
+
+      - name: Download and verify retail inputs
+        run: |
+          mkdir -p tmp/ci
+          curl \
+            --fail \
+            --location \
+            --retry 3 \
+            --silent \
+            --show-error \
+            "$GAME_ARCHIVE_URL" \
+            --output tmp/ci/game-inputs.tar
+          printf '%s  %s\n' \
+            "$GAME_ARCHIVE_SHA256" \
+            tmp/ci/game-inputs.tar \
+            | sha256sum --check --strict
+          python3 tools/project/extract_game_archive.py \
+            tmp/ci/game-inputs.tar
+
+      - name: Restore pinned project tools
+        uses: actions/cache@v4
+        with:
+          path: |
+            tools/downloads
+            tools/environments
+            tools/toolchains
+            tools/vendor
+          key: ${{ runner.os }}-project-tools-${{ hashFiles('tools/bootstrap/*.json', 'tools/bootstrap/*.py') }}
+
+      - name: Install or verify pinned tools
+        run: make tools
+
+      - name: Perform clean matching build
+        run: |
+          make clean
+          make match
+          printf '%s  %s\n' \
+            84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88 \
+            tmp/project-build/SLUS_014.11 \
+            | sha256sum --check --strict

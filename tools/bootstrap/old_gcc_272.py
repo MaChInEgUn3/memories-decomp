@@ -186,7 +186,7 @@ def build_compiler(
     )
     apply_build_patches(root, lock, repository, build)
 
-    jobs = max(1, min(os.cpu_count() or 1, 4))
+    jobs = max(1, min(os.cpu_count() or 1, 2))
     run(
         root,
         [

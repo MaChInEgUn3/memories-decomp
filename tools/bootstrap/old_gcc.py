@@ -396,7 +396,7 @@ def build_compiler(root: Path, lock: dict[str, Any], source: Path) -> None:
     )
     (build / "insn-config.h").touch()
 
-    jobs = max(1, min(os.cpu_count() or 1, 4))
+    jobs = max(1, min(os.cpu_count() or 1, 2))
     run(
         root,
         [

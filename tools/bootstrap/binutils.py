@@ -259,7 +259,7 @@ def build_toolchain(root: Path, lock: dict[str, Any], source: Path) -> None:
     ]
     run(root, command, cwd=build)
 
-    jobs = max(1, min(os.cpu_count() or 1, 8))
+    jobs = max(1, min(os.cpu_count() or 1, 2))
     run(
         root,
         [
