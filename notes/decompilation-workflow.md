@@ -12,6 +12,9 @@ Any script that adds parallel execution must default to at most four workers
 and expose a lower worker count. Do not derive an unbounded default from the
 host CPU count.
 
+`make` may use `MAKEFLAGS=-j2`. Candidate selection, candidate compilation
+pipelines, ledger updates, and integration decisions remain sequential.
+
 The Copilot CLI itself has exhausted its JavaScript heap during long,
 tool-heavy sessions even when no compiler workers were active. To limit
 session-memory growth:

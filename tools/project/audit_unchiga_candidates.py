@@ -177,7 +177,7 @@ def run(
     work.mkdir(parents=True, exist_ok=True)
     environment = os.environ.copy()
     environment.update(local_environment(root))
-    environment["MAKEFLAGS"] = "-j1"
+    environment["MAKEFLAGS"] = "-j2"
     environment["GIT_AUTHOR_NAME"] = "Copilot"
     environment["GIT_AUTHOR_EMAIL"] = (
         "223556219+Copilot@users.noreply.github.com"
