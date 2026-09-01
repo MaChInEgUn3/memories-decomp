@@ -283,6 +283,18 @@ def main() -> int:
                     f"{address:#010x}: expected one matching manifest entry"
                 )
             entry = existing_entries[0]
+            source_value = entry.get("source")
+            source_owners = sum(
+                1
+                for candidate_entry in entries
+                if isinstance(candidate_entry, dict)
+                and candidate_entry.get("source") == source_value
+            )
+            if source_owners != 1:
+                raise IntegrationError(
+                    f"{address:#010x}: cannot replace one function inside "
+                    "a grouped translation unit"
+                )
             if entry.get("source") != destination_relative:
                 raise IntegrationError(
                     f"{address:#010x}: destination differs from matching manifest"

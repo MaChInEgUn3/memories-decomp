@@ -256,6 +256,13 @@ def plan(
         for row in matching["functions"]
         if isinstance(row, dict) and isinstance(row.get("address"), str)
     }
+    matching_source_counts: dict[str, int] = {}
+    for row in matching_rows.values():
+        source_value = row.get("source")
+        if isinstance(source_value, str):
+            matching_source_counts[source_value] = (
+                matching_source_counts.get(source_value, 0) + 1
+            )
     replacements: dict[str, str] = {}
     moves: list[Move] = []
 
@@ -282,7 +289,10 @@ def plan(
             if matching_row is not None:
                 source = root / str(matching_row["source"])
                 address_stem = f"func_{mapping.address:08X}"
-                if source.stem in {old_name, address_stem}:
+                if (
+                    matching_source_counts.get(str(matching_row["source"])) == 1
+                    and source.stem in {old_name, address_stem}
+                ):
                     destination = source.with_name(
                         f"{snake_case(mapping.name)}.c"
                     )

@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from pathlib import PurePosixPath
 
 from workspace import WorkspaceError, require_workspace_root
 
@@ -42,7 +43,16 @@ EXTERNAL_ATTEMPT_FIELDS = (
     "result",
     "summary",
 )
-EXTERNAL_MODES = {"reference_match", "inline_refinement"}
+EXTERNAL_MODES = {
+    "reference_match",
+    "inline_refinement",
+    "collaborator_match",
+}
+EXTERNAL_MODE_LIMITS = {
+    "reference_match": MAX_FUNCTION_ATTEMPTS,
+    "inline_refinement": MAX_FUNCTION_ATTEMPTS,
+    "collaborator_match": 1,
+}
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 ASM_PATTERN = re.compile(r"\b(?:asm|__asm|__asm__)\b")
 COMMENT_PATTERN = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
@@ -179,6 +189,10 @@ def audit_attempts(root: Path) -> None:
     function_addresses = {
         parse_integer(row["address"], "function address") for row in functions
     }
+    function_names = {
+        parse_integer(row["address"], "function address"): row["name"]
+        for row in functions
+    }
     matching_path = root / "config/slus_01411/matching_c.json"
     with matching_path.open("r", encoding="utf-8") as handle:
         matching_value = json.load(handle)
@@ -305,11 +319,26 @@ def audit_attempts(root: Path) -> None:
                 f"{address:#010x}: reference_match lacks reference source"
             )
         if has_reference:
-            expected = (
+            reference = PurePosixPath(row["reference_path"])
+            original = (
                 "tmp/references/ygofm-decomp/src/"
                 f"func_{address:08X}.c"
             )
-            if row["reference_path"] != expected:
+            collaborator = (
+                not reference.is_absolute()
+                and ".." not in reference.parts
+                and reference.parts[:4]
+                == ("tmp", "references", "ygofm-decomp-unchiga", "src")
+                and reference.suffix == ".c"
+            )
+            valid_reference = (
+                row["reference_path"] == original
+                if mode == "reference_match"
+                else collaborator
+                if mode == "collaborator_match"
+                else row["reference_path"] == original or collaborator
+            )
+            if not valid_reference:
                 raise AuditError(
                     f"{address:#010x}: unexpected reference path"
                 )
@@ -324,9 +353,10 @@ def audit_attempts(root: Path) -> None:
         external_by_key.setdefault((mode, address), []).append(row)
 
     for (mode, address), rows in external_by_key.items():
-        if len(rows) > MAX_FUNCTION_ATTEMPTS:
+        maximum = EXTERNAL_MODE_LIMITS[mode]
+        if len(rows) > maximum:
             raise AuditError(
-                f"{address:#010x}: exceeds six {mode} attempts"
+                f"{address:#010x}: exceeds {maximum} {mode} attempts"
             )
         ended = False
         for expected, row in enumerate(rows, start=1):
@@ -341,14 +371,13 @@ def audit_attempts(root: Path) -> None:
                     f"{address:#010x}: external row follows terminal result"
                 )
             if row["result"] == "matched":
-                if mode == "reference_match":
-                    external_matches.add(address)
+                external_matches.add(address)
                 ended = True
             elif row["result"] == "deferred":
                 ended = True
-            elif expected == MAX_FUNCTION_ATTEMPTS:
+            elif expected == maximum:
                 raise AuditError(
-                    f"{address:#010x}: sixth external attempt is not deferred"
+                    f"{address:#010x}: final external attempt is not deferred"
                 )
 
     latest_success_by_address: dict[int, dict[str, str]] = {}
@@ -384,11 +413,15 @@ def audit_attempts(root: Path) -> None:
             raise AuditError(
                 f"{address:#010x}: matching source does not exist"
             )
-        if sha256(source) != row["candidate_sha256"]:
-            raise AuditError(
-                f"{address:#010x}: matching source hash differs from external evidence"
-            )
         source_text = source.read_text(encoding="utf-8")
+        definition = re.compile(
+            rf"\b{re.escape(function_names[address])}\s*\("
+        )
+        if definition.search(source_text) is None:
+            raise AuditError(
+                f"{address:#010x}: current source does not define "
+                f"{function_names[address]}"
+            )
         if ASM_PATTERN.search(COMMENT_PATTERN.sub("", source_text)):
             raise AuditError(
                 f"{address:#010x}: successful external source still uses GCC asm"

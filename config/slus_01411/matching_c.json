@@ -496,13 +496,13 @@
       "address": "0x80019A08",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x58",
-      "source": "src/game/duel_check_equip.c"
+      "source": "src/game/duel_card_checks.c"
     },
     {
       "address": "0x80019A60",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0xCC",
-      "source": "src/game/duel_check_fusion.c"
+      "source": "src/game/duel_card_checks.c"
     },
     {
       "address": "0x80019B2C",
@@ -592,13 +592,13 @@
       "address": "0x8001EF1C",
       "profile": "gcc_2_8_1_g8",
       "size": "0x5C",
-      "source": "src/game/duel_calc_battle_attack.c"
+      "source": "src/game/duel_battle_stats.c"
     },
     {
       "address": "0x8001EF78",
       "profile": "gcc_2_8_1_g8",
       "size": "0x5C",
-      "source": "src/game/duel_calc_battle_defense.c"
+      "source": "src/game/duel_battle_stats.c"
     },
     {
       "address": "0x8001EFD4",

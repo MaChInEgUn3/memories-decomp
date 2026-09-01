@@ -4,8 +4,23 @@
 
 - Never use more than four concurrent processes.
 - Default to sequential matching and integration for memory-heavy work.
+- `make` may use two jobs; candidate decisions and integration remain
+  sequential.
 - Do not trade reliability for maximum throughput; steady progress without
   out-of-memory interruptions is the priority.
+
+## Current collaborator phase
+
+- Unchiga pure-C audit: 94 overlapping addresses reviewed, 15 rejected for
+  actual inline assembly, 79 independently compiled, 41 exact, and 38
+  nonmatching.
+- All 41 exact candidates are integrated; 25 replace matching inline assembly
+  and 16 add new matching-C functions.
+- The semantic registry now contains 175 accepted names after a 19-symbol
+  sound/gameplay-state pass.
+- Grouped translation units are supported for contiguous, same-profile
+  functions. The first two duel groups are documented in
+  `notes/grouped-translation-units.md`.
 
 ## Problem and proposed approach
 

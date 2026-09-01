@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -79,7 +80,6 @@ def load_matching_functions(root: Path) -> list[dict[str, Any]]:
     profiles = load_profiles(root)
     parsed: list[dict[str, Any]] = []
     seen_addresses: set[int] = set()
-    seen_sources: set[str] = set()
     source_root = resolve_within(root, "src", must_exist=True)
 
     for index, function in enumerate(functions):
@@ -97,9 +97,9 @@ def load_matching_functions(root: Path) -> list[dict[str, Any]]:
             raise GenerationError(
                 f"matching function {address:#010x} has invalid source/profile"
             )
-        if address in seen_addresses or source_value in seen_sources:
+        if address in seen_addresses:
             raise GenerationError(
-                f"duplicate matching function address or source at {address:#010x}"
+                f"duplicate matching function address at {address:#010x}"
             )
         if profile not in profiles:
             raise GenerationError(
@@ -138,7 +138,6 @@ def load_matching_functions(root: Path) -> list[dict[str, Any]]:
             }
         )
         seen_addresses.add(address)
-        seen_sources.add(source_value)
 
     parsed.sort(key=lambda function: function["address"])
     previous_end = 0
@@ -148,7 +147,62 @@ def load_matching_functions(root: Path) -> list[dict[str, Any]]:
                 f"overlapping matching function at {function['address']:#010x}"
             )
         previous_end = function["address"] + function["size"]
+
+    by_source: dict[str, list[dict[str, Any]]] = {}
+    for function in parsed:
+        by_source.setdefault(function["source"], []).append(function)
+    for source_value, members in by_source.items():
+        if len(members) == 1:
+            continue
+        profiles_used = {member["profile"] for member in members}
+        if len(profiles_used) != 1:
+            raise GenerationError(
+                f"{source_value}: grouped functions use multiple profiles"
+            )
+        source_text = resolve_within(
+            root, source_value, must_exist=True
+        ).read_text(encoding="utf-8")
+        expected = members[0]["address"]
+        for member in members:
+            if member["address"] != expected:
+                raise GenerationError(
+                    f"{source_value}: grouped functions are not contiguous"
+                )
+            name = inventory[member["address"]]["name"]
+            if re.search(rf"\b{re.escape(name)}\s*\(", source_text) is None:
+                raise GenerationError(
+                    f"{source_value}: does not define grouped symbol {name}"
+                )
+            expected += member["size"]
     return parsed
+
+
+def group_translation_units(
+    functions: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    units: list[dict[str, Any]] = []
+    index = 0
+    while index < len(functions):
+        first = functions[index]
+        members = [first]
+        index += 1
+        while (
+            index < len(functions)
+            and functions[index]["source"] == first["source"]
+        ):
+            members.append(functions[index])
+            index += 1
+        units.append(
+            {
+                "address": first["address"],
+                "size": sum(member["size"] for member in members),
+                "source": first["source"],
+                "segment": first["segment"],
+                "profile": first["profile"],
+                "members": [member["address"] for member in members],
+            }
+        )
+    return units
 
 
 def load_image_regions(root: Path) -> dict[str, dict[str, Any]]:
@@ -217,6 +271,7 @@ def generate(root: Path) -> tuple[Path, Path]:
         raise GenerationError(f"{template_path}: invalid Splat configuration")
 
     functions = load_matching_functions(root)
+    units = group_translation_units(functions)
     regions = load_image_regions(root)
     text_start = parse_integer(regions["text"]["file_start"], "text start")
     text_end = parse_integer(regions["text"]["file_end"], "text end")
@@ -224,12 +279,12 @@ def generate(root: Path) -> tuple[Path, Path]:
     subsegments: list[list[Any]] = [[0x800, "data", "initial_data"]]
     text_sources: list[dict[str, Any]] = []
 
-    for function in functions:
-        start = file_offset(function["address"])
-        end = start + function["size"]
+    for unit in units:
+        start = file_offset(unit["address"])
+        end = start + unit["size"]
         if start < cursor or end > text_end:
             raise GenerationError(
-                f"matching function {function['address']:#010x} is outside text"
+                f"matching unit {unit['address']:#010x} is outside text"
             )
         if start > cursor:
             name = f"generated/text_{cursor:06x}"
@@ -241,13 +296,16 @@ def generate(root: Path) -> tuple[Path, Path]:
                     "object": f"asm_{cursor:06x}.o",
                 }
             )
-        subsegments.append([start, "c", function["segment"]])
+        subsegments.append([start, "c", unit["segment"]])
         text_sources.append(
             {
                 "kind": "c",
-                "source": function["source"],
-                "object": f"c_{function['address']:08x}.o",
-                "profile": function["profile"],
+                "source": unit["source"],
+                "object": f"c_{unit['address']:08x}.o",
+                "profile": unit["profile"],
+                "members": [
+                    f"0x{address:08X}" for address in unit["members"]
+                ],
             }
         )
         cursor = end
