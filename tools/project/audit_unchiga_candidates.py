@@ -1417,23 +1417,24 @@ def add_required_linker_aliases(
         f"{WORK_PATH}/build/{address:08X}/candidate.o",
         must_exist=True,
     )
-    target_symbols = load_nm_symbols(
-        root,
-        work,
-        resolve_within(root, TARGET_ELF_PATH, must_exist=True),
-    )
     config_path = resolve_within(
         root,
         SYMBOLS_CONFIG_PATH,
         must_exist=True,
     )
     configured = load_symbol_file(config_path)
+    function_names = {
+        row["name"]
+        for row in read_csv(
+            resolve_within(root, FUNCTIONS_PATH, must_exist=True)
+        )
+    }
     reference = load_symbol_file(
         resolve_within(root, REFERENCE_SYMBOLS_PATH, must_exist=True)
     )
     aliases: list[tuple[str, int]] = []
     for symbol in sorted(set(undefined_symbols(root, work, obj))):
-        if symbol in target_symbols or symbol in configured:
+        if symbol in configured or symbol in function_names or symbol == "_gp":
             continue
         if not re.fullmatch(r"[A-Za-z_.$][A-Za-z0-9_.$]*", symbol):
             raise AuditError(f"{address:#010x}: invalid alias symbol {symbol}")
