@@ -1,5 +1,16 @@
 # Matching Decompilation Workflow
 
+## Resource limits
+
+Never run more than **four concurrent processes** for this project. Prefer one
+sequential worker for matching, integration, full-link verification, and other
+memory-heavy work. Steady progress is more valuable than process fan-out that
+risks an out-of-memory crash and loses the active session.
+
+Any script that adds parallel execution must default to at most four workers
+and expose a lower worker count. Do not derive an unbounded default from the
+host CPU count.
+
 ## Match invariant
 
 After the assembly baseline, every accepted source change must preserve:

@@ -1,5 +1,12 @@
 # Yu-Gi-Oh! Forbidden Memories Matching Decompilation Plan
 
+## Resource ceiling
+
+- Never use more than four concurrent processes.
+- Default to sequential matching and integration for memory-heavy work.
+- Do not trade reliability for maximum throughput; steady progress without
+  out-of-memory interruptions is the priority.
+
 ## Problem and proposed approach
 
 Create a matching decompilation project for the North American PSX executable
