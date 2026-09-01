@@ -4,6 +4,7 @@ ENTRY(entrypoint)
 
 INCLUDE tmp/splat/undefined_funcs_auto.txt
 INCLUDE tmp/splat/undefined_syms_auto.txt
+INCLUDE config/slus_01411/c_symbols.ld
 
 _gp = 0x8009AF08;
 loaded_image_end = 0x801E0000;

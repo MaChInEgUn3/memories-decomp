@@ -46,6 +46,7 @@ INTEGRATE_TOOL_PATH = "tools/project/integrate_verified_match.py"
 INCREMENTAL_TOOL_PATH = "tools/project/build_incremental.py"
 AUDIT_REPORT_PATH = "notes/unchiga-match-audit.md"
 SYMBOLS_CONFIG_PATH = "config/slus_01411/symbols.txt"
+C_LINKER_SYMBOLS_PATH = "config/slus_01411/c_symbols.ld"
 BINUTILS_PATH = "tools/toolchains/binutils-2.42/bin"
 LOAD_ADDRESS = 0x80010000
 HEADER_SIZE = 0x800
@@ -1419,10 +1420,15 @@ def add_required_linker_aliases(
     )
     config_path = resolve_within(
         root,
-        SYMBOLS_CONFIG_PATH,
+        C_LINKER_SYMBOLS_PATH,
         must_exist=True,
     )
     configured = load_symbol_file(config_path)
+    configured.update(
+        load_symbol_file(
+            resolve_within(root, SYMBOLS_CONFIG_PATH, must_exist=True)
+        )
+    )
     function_names = {
         row["name"]
         for row in read_csv(
@@ -1456,54 +1462,34 @@ def add_required_linker_aliases(
     if not aliases:
         return []
 
-    append_absolute_aliases(config_path, aliases)
+    append_linker_aliases(config_path, aliases)
     return [symbol for symbol, _address in aliases]
 
 
-def append_absolute_aliases(
+def append_linker_aliases(
     config_path: Path,
     aliases: list[tuple[str, int]],
 ) -> None:
     if not aliases:
         return
     text = config_path.read_text(encoding="utf-8").rstrip()
-    if "// Collaborator-verified source aliases" not in text:
-        text += "\n\n// Collaborator-verified source aliases"
     for symbol, alias_address in aliases:
-        text += (
-            f"\n{symbol} = 0x{alias_address:08X};"
-            " // absolute:True"
-        )
+        text += f"\n{symbol} = 0x{alias_address:08X};"
     config_path.write_text(text + "\n", encoding="utf-8")
-
-
-def normalize_collaborator_aliases(config_path: Path) -> None:
-    text = config_path.read_text(encoding="utf-8")
-    marker = "// Collaborator-verified source aliases"
-    if marker not in text:
-        return
-    prefix, suffix = text.split(marker, 1)
-    lines = [marker]
-    for line in suffix.splitlines():
-        stripped = line.strip()
-        if not stripped:
-            continue
-        main = stripped.split("//", 1)[0].rstrip()
-        lines.append(f"{main} // absolute:True")
-    config_path.write_text(
-        prefix.rstrip() + "\n\n" + "\n".join(lines) + "\n",
-        encoding="utf-8",
-    )
 
 
 def persist_current_c_symbols(root: Path, work: Path) -> list[str]:
     config_path = resolve_within(
         root,
-        SYMBOLS_CONFIG_PATH,
+        C_LINKER_SYMBOLS_PATH,
         must_exist=True,
     )
-    normalize_collaborator_aliases(config_path)
     configured = load_symbol_file(config_path)
+    configured.update(
+        load_symbol_file(
+            resolve_within(root, SYMBOLS_CONFIG_PATH, must_exist=True)
+        )
+    )
     functions = live_functions(root)
     function_names = {row["name"] for row in functions.values()}
     matching = live_matching(root)
@@ -1521,11 +1507,11 @@ def persist_current_c_symbols(root: Path, work: Path) -> list[str]:
         [str(tool(root, "nm")), "-u", *[str(path) for path in objects]],
     )
     require_success(completed, "scan matching-C undefined symbols")
-    undefined = {
-        fields[-1]
-        for line in completed.stdout.decode(errors="replace").splitlines()
-        if (fields := line.split())
-    }
+    undefined: set[str] = set()
+    for line in completed.stdout.decode(errors="replace").splitlines():
+        fields = line.split()
+        if len(fields) >= 2 and fields[-2] == "U":
+            undefined.add(fields[-1])
     target_symbols = load_nm_symbols(
         root,
         work,
@@ -1546,7 +1532,7 @@ def persist_current_c_symbols(root: Path, work: Path) -> list[str]:
         if address is None:
             raise AuditError(f"cannot persist C linker symbol {symbol}")
         aliases.append((symbol, address))
-    append_absolute_aliases(config_path, aliases)
+    append_linker_aliases(config_path, aliases)
     return [symbol for symbol, _address in aliases]
 
 
@@ -1599,7 +1585,7 @@ def commit_function(
             EXTERNAL_ATTEMPTS_PATH,
             FUNCTIONS_PATH,
             MATCHING_PATH,
-            SYMBOLS_CONFIG_PATH,
+            C_LINKER_SYMBOLS_PATH,
             str(destination.relative_to(root)),
         ],
     )
@@ -1659,7 +1645,7 @@ def integrate_exact(
         work,
         "diff",
         "--",
-        SYMBOLS_CONFIG_PATH,
+        C_LINKER_SYMBOLS_PATH,
     ):
         symbol_log = work / "durable-symbol-match.log"
         completed = run(
@@ -1672,7 +1658,7 @@ def integrate_exact(
         completed = run(
             root,
             work,
-            ["git", "add", "--", SYMBOLS_CONFIG_PATH],
+            ["git", "add", "--", C_LINKER_SYMBOLS_PATH],
         )
         require_success(completed, "stage durable C symbols")
         completed = run(root, work, ["git", "diff", "--cached", "--check"])
@@ -1744,7 +1730,7 @@ def integrate_exact(
             resolve_within(root, EXTERNAL_ATTEMPTS_PATH, must_exist=True),
             resolve_within(root, FUNCTIONS_PATH, must_exist=True),
             resolve_within(root, MATCHING_PATH, must_exist=True),
-            resolve_within(root, SYMBOLS_CONFIG_PATH, must_exist=True),
+            resolve_within(root, C_LINKER_SYMBOLS_PATH, must_exist=True),
             destination,
         ]
         backups = {
