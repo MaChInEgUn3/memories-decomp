@@ -92,20 +92,35 @@ def audit_identity(root: Path) -> None:
     ]
     if not commits:
         raise AuditError("repository has no commits")
+    first_parent = {
+        line
+        for line in git(root, "rev-list", "--first-parent", "HEAD").splitlines()
+        if line
+    }
 
     for commit in commits:
         output = git(
             root,
             "show",
             "-s",
-            "--format=%an%n%ae%n%cn%n%ce%n%B",
+            "--format=%P%n%an%n%ae%n%cn%n%ce%n%B",
             commit,
         )
         lines = output.splitlines()
-        if len(lines) < 4:
+        if len(lines) < 5:
             raise AuditError(f"{commit}: malformed commit metadata")
-        author_name, author_email, committer_name, committer_email = lines[:4]
-        message = "\n".join(lines[4:])
+        if commit not in first_parent:
+            continue
+        parents = lines[0].split()
+        author_name, author_email, committer_name, committer_email = lines[1:5]
+        message = "\n".join(lines[5:])
+        if (
+            len(parents) >= 2
+            and (committer_name, committer_email)
+            == ("GitHub", "noreply@github.com")
+            and re.match(r"^Merge pull request #\d+ from ", message)
+        ):
+            continue
         if (author_name, author_email) != (EXPECTED_NAME, EXPECTED_EMAIL):
             raise AuditError(
                 f"{commit}: unexpected author "
@@ -119,8 +134,20 @@ def audit_identity(root: Path) -> None:
                 f"{commit}: unexpected committer "
                 f"{committer_name} <{committer_email}>"
             )
-        if "co-authored-by:" in message.lower():
-            raise AuditError(f"{commit}: contains a Co-authored-by trailer")
+        trailers = re.findall(
+            r"^Co-authored-by:\s*(.+?)\s*$",
+            message,
+            flags=re.IGNORECASE | re.MULTILINE,
+        )
+        expected_trailer = f"{EXPECTED_NAME} <{EXPECTED_EMAIL}>"
+        unexpected = [
+            trailer for trailer in trailers if trailer != expected_trailer
+        ]
+        if unexpected:
+            raise AuditError(
+                f"{commit}: unexpected Co-authored-by trailer "
+                f"{unexpected[0]}"
+            )
 
 
 def audit_tracked_paths(root: Path) -> None:
