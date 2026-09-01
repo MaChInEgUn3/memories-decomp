@@ -4180,13 +4180,13 @@
       "address": "0x8007058C",
       "profile": "gcc_2_8_1_g0",
       "size": "0x20",
-      "source": "src/game/read_byte.c"
+      "source": "src/game/ai_script_read_byte.c"
     },
     {
       "address": "0x800705AC",
       "profile": "gcc_2_8_1_g0",
       "size": "0x2C",
-      "source": "src/game/read_u16.c"
+      "source": "src/game/ai_script_read_short.c"
     },
     {
       "address": "0x800705D8",
@@ -4492,19 +4492,19 @@
       "address": "0x800735A0",
       "profile": "gcc_2_8_1_g0",
       "size": "0x3C",
-      "source": "src/game/check_point_immediate.c"
+      "source": "src/game/ai_script_store.c"
     },
     {
       "address": "0x800735DC",
       "profile": "gcc_2_8_1_g0",
       "size": "0x48",
-      "source": "src/game/check_point_copy.c"
+      "source": "src/game/ai_script_set_register.c"
     },
     {
       "address": "0x80073624",
       "profile": "gcc_2_8_1_g0",
       "size": "0x68",
-      "source": "src/game/check_point_add.c"
+      "source": "src/game/ai_script_add.c"
     },
     {
       "address": "0x8007368C",
@@ -4516,7 +4516,7 @@
       "address": "0x800736C4",
       "profile": "gcc_2_8_1_g8",
       "size": "0x40",
-      "source": "src/game/check_point.c"
+      "source": "src/game/ai_script_print.c"
     }
   ],
   "schema": 1
