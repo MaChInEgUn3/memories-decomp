@@ -727,6 +727,12 @@
       "source": "src/game/duel_shuffle_both_decks.c"
     },
     {
+      "address": "0x800245EC",
+      "profile": "gcc_2_8_1_cc_g0_as_g8_no_split",
+      "size": "0x118",
+      "source": "src/game/func_800245EC.c"
+    },
+    {
       "address": "0x80024704",
       "profile": "gcc_2_8_1_g8",
       "size": "0x30",
