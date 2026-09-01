@@ -6,13 +6,13 @@ typedef signed int s32;
 typedef unsigned int u32;
 
 
-extern u8 D_800F5BE8[], D_800EAE88[], D_800F5B98[];
+extern u8 gAiScript_State[], D_800EAE88[], D_800F5B98[];
 extern void func_8008E360(void *, s32);
 void func_800705D8(void *arg0) {
-    func_8008E360(D_800F5BE8, 0xD4);
+    func_8008E360(gAiScript_State, 0xD4);
     func_8008E360(D_800EAE88, 0xC);
     func_8008E360(D_800F5B98, 0x50);
-    if (arg0 == 0) D_800F5BE8[0] = 1;
-    *(void **)(D_800F5BE8 + 4) = arg0;
-    *(void **)(D_800F5BE8 + 8) = arg0;
+    if (arg0 == 0) gAiScript_State[0] = 1;
+    *(void **)(gAiScript_State + 4) = arg0;
+    *(void **)(gAiScript_State + 8) = arg0;
 }

@@ -5,10 +5,10 @@ typedef signed char s8;
 typedef short s16;
 typedef int s32;
 
-extern u16 D_8017C2D8[];
+extern u16 gDuel_aFusionTable[];
 
 s32 func_80019A60(s32 arg0, s32 arg1) {
-    u8 *base = (u8 *)D_8017C2D8;
+    u8 *base = (u8 *)gDuel_aFusionTable;
     u8 *p;
     s32 off;
     s32 n;

@@ -5,12 +5,12 @@ typedef unsigned int u32;
 
 extern u8 D_8009B26C, D_8009B26E;
 extern u8 D_8009B369[9], D_8009B2F8[9], D_8009B0A3[9];
-extern s8 D_8009B361[9];
+extern s8 gDuel_bOpponentID[9];
 extern u8 D_8009B368[9], D_8009B362[9], D_8009B27A[9];
 extern u8 D_8009B370[9];
 extern u16 D_8009B16C[9];
 extern u32 D_80010000[];
-extern u8 D_801D0200[];
+extern u8 gDuel_awPlayerDeck[];
 extern void func_800323F8(u32, void *, int, int);
 extern void func_80015A00(void), func_8003FF34(void), func_80015B00(void);
 extern int func_80033BE8(void);
@@ -26,7 +26,7 @@ void func_8002CEE8(void)
     if (!(value & 0x40)) {
         D_8009B26C = value | 0x40;
         D_8009B26E = 1;
-        if (!D_8009B369[0] && D_8009B361[0] >= 0)
+        if (!D_8009B369[0] && gDuel_bOpponentID[0] >= 0)
             D_8009B26E = 0;
         D_8009B0A3[0] = 10;
         return;
@@ -39,7 +39,7 @@ void func_8002CEE8(void)
         if (!(value & 0x80)) {
             D_8009B26E = value | 0x80;
             D_8009B2F8[0] = 0x80;
-            func_800323F8(D_80010000[0], D_801D0200, 0, 0x80);
+            func_800323F8(D_80010000[0], gDuel_awPlayerDeck, 0, 0x80);
             func_80015A00();
         } else if (func_80033BE8() == 0) {
             func_8003FF34();

@@ -1,5 +1,5 @@
 extern int D_800F5B98[];
-extern unsigned char D_8009B364;
+extern unsigned char gDuel_bTerrain;
 extern int func_8007058C(void);
 
 void func_80071460(void)
@@ -9,6 +9,6 @@ void func_80071460(void)
     register unsigned int value asm("$4");
 
     asm("" : "+r"(values));
-    value = D_8009B364;
+    value = gDuel_bTerrain;
     values[index] = value;
 }

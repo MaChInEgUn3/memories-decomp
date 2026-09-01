@@ -46,7 +46,7 @@ typedef struct LocalBlob {
 extern LocalE9 D_800E9FF0[];
 extern LocalBlob D_8015C424;
 extern u8 D_801A7AD8[];
-extern LocalR6 D_801A7E20[];
+extern LocalR6 gDuel_aPlayerHand[];
 extern s32 D_801D4244[];
 extern int Duel_CalcCardStats();
 
@@ -152,7 +152,7 @@ void func_80027DF8(LocalEnt *out, s32 who) {
         LocalR6 *rp;
 
         i = D_800E9FF0[who].count;
-        rp = &D_801A7E20[i + who * 40];
+        rp = &gDuel_aPlayerHand[i + who * 40];
         if (i < 0x28) {
             s32 *tbl;
 

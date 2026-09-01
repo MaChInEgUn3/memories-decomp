@@ -11,7 +11,7 @@ extern u8 D_80177EA4[];
 extern u8 D_8018C2D8[];
 extern u8 D_8018C7D8[];
 extern u8 D_801A7AD8[];
-extern u8 D_801A7E20[];
+extern u8 gDuel_aPlayerHand[];
 extern s32 D_801D4244[];
 extern int func_8002497C();
 extern int func_8007F978();
@@ -47,7 +47,7 @@ u8 *func_800249E0(s32 a, s32 b) {
 
     n = b * 6;
     tb = D_8015C424;
-    *(s32 *)(p + 4) = (s32)(D_801A7E20 + n);
+    *(s32 *)(p + 4) = (s32)(gDuel_aPlayerHand + n);
     p[0x18] = idx;
 
     g = tb + n + 0x48000;

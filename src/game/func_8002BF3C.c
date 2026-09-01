@@ -5,13 +5,13 @@ typedef signed short s16;
 typedef unsigned int u32;
 typedef signed int s32;
 
-extern u8 D_801D0250[];
-extern u16 D_801D0200[];
+extern u8 gLibrary_abCardChest[];
+extern u16 gDuel_awPlayerDeck[];
 extern void func_8002CCE4();
 
 void func_8002BF3C(void)
 {
-    u8 *p = D_801D0250;
+    u8 *p = gLibrary_abCardChest;
     s32 i = 0;
     u16 *q;
     do {
@@ -20,7 +20,7 @@ void func_8002BF3C(void)
         i++;
         p++;
     } while (i < 0x2D2);
-    q = D_801D0200;
+    q = gDuel_awPlayerDeck;
     i = 0;
     do {
         if (*q != 0)

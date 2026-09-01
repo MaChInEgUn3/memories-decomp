@@ -1,4 +1,4 @@
-extern unsigned char D_800F5BE8[];
+extern unsigned char gAiScript_State[];
 
 void func_80073420(void)
 {
@@ -6,7 +6,7 @@ void func_80073420(void)
     register unsigned char *position asm("$2");
 
     asm("" : "+r"(index));
-    position = D_800F5BE8;
+    position = gAiScript_State;
     asm("" : "+r"(position));
     position += index;
     asm("" : "+r"(position));

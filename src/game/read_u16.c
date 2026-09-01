@@ -3,12 +3,12 @@ typedef struct {
     unsigned char *current;
 } ByteStream;
 
-extern ByteStream D_800F5BE8;
+extern ByteStream gAiScript_State;
 
 int func_800705AC(void)
 {
     // Preserve the original stream and increment register allocation.
-    register ByteStream *stream asm("$2") = &D_800F5BE8;
+    register ByteStream *stream asm("$2") = &gAiScript_State;
     unsigned char *current = stream->current;
     register unsigned char *next asm("$4") = current + 2;
 

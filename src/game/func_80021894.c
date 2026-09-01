@@ -1,12 +1,12 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern u8 D_801D0200[];
+extern u8 gDuel_awPlayerDeck[];
 
 void func_80021894(int arg0)
 {
     int i;
-    u8 *base = D_801D0200;
+    u8 *base = gDuel_awPlayerDeck;
     u8 *value = base + (arg0 + 0x4F);
     u16 *destination = (u16 *)(base + 0x5BC);
     u16 *entry;

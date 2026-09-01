@@ -10,11 +10,11 @@ typedef struct {
     s16 value;
 } Threshold;
 
-extern Threshold D_801798A8[][5];
+extern Threshold gDuel_awRankScoreChange[][5];
 
 s32 func_80021558(s32 arg0, s32 arg1)
 {
-    Threshold *p = &D_801798A8[arg0][0];
+    Threshold *p = &gDuel_awRankScoreChange[arg0][0];
 
     while (1) {
         if (arg1 < p->threshold) {

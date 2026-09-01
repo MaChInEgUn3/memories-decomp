@@ -1,8 +1,8 @@
-extern unsigned short D_801D0200[];
+extern unsigned short gDuel_awPlayerDeck[];
 
 int func_8002EE5C(void)
 {
-    unsigned short *entry = D_801D0200;
+    unsigned short *entry = gDuel_awPlayerDeck;
     int i = 0;
 
     while (i < 40) {

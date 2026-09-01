@@ -1,9 +1,9 @@
-extern short D_800F5BE8[];
+extern short gAiScript_State[];
 
 void func_80073380(void)
 {
     register int index asm("$3") = 31;
-    register short *position asm("$2") = D_800F5BE8;
+    register short *position asm("$2") = gAiScript_State;
 
     asm("" : "+r"(position));
     position += 31;

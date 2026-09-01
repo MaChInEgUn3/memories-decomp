@@ -10,7 +10,7 @@ typedef struct LocalRec12 {
     s16 unk0;
     u8 pad2[10];
 } LocalRec12;
-extern u8 D_800F5BE8[];
+extern u8 gAiScript_State[];
 extern LocalRec12 D_801AB000[];
 extern int func_80019A08();
 extern int func_80019A60();
@@ -26,7 +26,7 @@ void func_800727C0(s32 arg0) {
     s32 n;
     s32 m;
 
-    a = (u8 *)D_800F5BE8;
+    a = (u8 *)gAiScript_State;
     i = 0;
     if (a[0x9C] == 0) {
         return;

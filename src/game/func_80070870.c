@@ -13,7 +13,7 @@ typedef struct {
 } EntryC;
 
 extern EntryC D_801AB000[];
-extern u8 D_800F5BE8[];
+extern u8 gAiScript_State[];
 
 s32 func_80070870(s32 arg0)
 {
@@ -22,7 +22,7 @@ s32 func_80070870(s32 arg0)
     u16 *q;
 
     v = D_801AB000[arg0].unk0;
-    q = (u16 *)D_800F5BE8;
+    q = (u16 *)gAiScript_State;
     for (i = 0; i < 0x20; i++) {
         if (v == q[i + 0x1F]) {
             return 1;

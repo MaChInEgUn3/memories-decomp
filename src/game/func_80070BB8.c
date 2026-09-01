@@ -6,7 +6,7 @@ typedef unsigned int u32;
 typedef signed int s32;
 
 extern s32 D_800F5B98[];
-extern s32 D_800F5BE8[];
+extern s32 gAiScript_State[];
 extern s32 func_8007058C();
 extern s32 func_800705AC();
 
@@ -19,7 +19,7 @@ void func_80070BB8(void)
     s32 value = D_800F5B98[first];
     if (value <= D_800F5B98[second] &&
         D_800F5B98[third] <= value) {
-        offset += D_800F5BE8[1];
-        D_800F5BE8[2] = offset;
+        offset += gAiScript_State[1];
+        gAiScript_State[2] = offset;
     }
 }

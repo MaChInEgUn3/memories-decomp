@@ -3,12 +3,12 @@ typedef struct {
     unsigned char *current;
 } ByteStream;
 
-extern ByteStream D_800F5BE8;
+extern ByteStream gAiScript_State;
 
 int func_8007058C(void)
 {
     // Preserve the original stream-base register allocation.
-    register ByteStream *stream = &D_800F5BE8;
+    register ByteStream *stream = &gAiScript_State;
 
     return *stream->current++;
 }

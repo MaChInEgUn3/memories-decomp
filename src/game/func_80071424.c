@@ -1,5 +1,5 @@
 extern int D_800F5B98[];
-extern signed char D_8009B361;
+extern signed char gDuel_bOpponentID;
 extern int func_8007058C(void);
 
 void func_80071424(void)
@@ -9,6 +9,6 @@ void func_80071424(void)
     register int value asm("$4");
 
     asm("" : "+r"(values));
-    value = D_8009B361;
+    value = gDuel_bOpponentID;
     values[index] = value;
 }

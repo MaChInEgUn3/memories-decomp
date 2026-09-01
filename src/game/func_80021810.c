@@ -1,5 +1,5 @@
 typedef unsigned short u16;
-extern char D_8017878C[];
+extern char gDuel_awSaPowCardDrops[];
 extern int func_8008E590(void);
 
 int func_80021810(int arg0)
@@ -11,7 +11,7 @@ int func_80021810(int arg0)
     int i;
 
     offset = arg0 * 1460;
-    entry = (u16 *)(D_8017878C + offset);
+    entry = (u16 *)(gDuel_awSaPowCardDrops + offset);
     target = (func_8008E590() & 0x7FF) + 1;
     total = 0;
     i = 0;
