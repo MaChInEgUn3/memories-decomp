@@ -1,17 +1,23 @@
-extern int D_800E9DB0[4];
-extern int D_8009B0B8;
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef signed char s8;
+typedef short s16;
+typedef int s32;
 
-void func_800134B4(void)
-{
-    int i = 3;
-    register int *entry asm("$2") = D_800E9DB0;
+extern u32 D_800E9DB0[];
+extern u32 D_8009B0B8;
 
-    asm("" : "+r"(entry));
-    entry += 3;
+/* Zeroes D_800E9DB0[0..3] and D_8009B0B8. */
+void func_800134B4(void) {
+    u32 *v0;
+    int v1;
+    v1 = 3;
+    v0 = &D_800E9DB0[v1];
     do {
-        *entry = 0;
-        i--;
-        entry--;
-    } while (i >= 0);
+        *v0 = 0;
+        v1 -= 1;
+        v0 -= 1;
+    } while (v1 >= 0);
     D_8009B0B8 = 0;
 }
