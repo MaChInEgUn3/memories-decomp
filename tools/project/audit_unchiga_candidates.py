@@ -1454,12 +1454,28 @@ def add_required_linker_aliases(
     text = config_path.read_text(encoding="utf-8").rstrip()
     if "// Collaborator-verified source aliases" not in text:
         text += "\n\n// Collaborator-verified source aliases"
+    configured_addresses = Counter(configured.values())
+    added_addresses: Counter[int] = Counter()
     for symbol, alias_address in aliases:
-        attributes = ""
-        if LOAD_ADDRESS <= alias_address < 0x801E0000:
+        existing_count = configured_addresses[alias_address]
+        alias_index = added_addresses[alias_address]
+        if (
+            LOAD_ADDRESS <= alias_address < 0x801E0000
+            and existing_count == 0
+            and alias_index == 0
+        ):
             rom_address = HEADER_SIZE + alias_address - LOAD_ADDRESS
             attributes = f" // rom:0x{rom_address:X}"
+        elif (
+            LOAD_ADDRESS <= alias_address < 0x801E0000
+            and existing_count == 0
+            and alias_index == 1
+        ):
+            attributes = " // segment:main"
+        else:
+            attributes = " // absolute:True"
         text += f"\n{symbol} = 0x{alias_address:08X};{attributes}"
+        added_addresses[alias_address] += 1
     config_path.write_text(text + "\n", encoding="utf-8")
     return [symbol for symbol, _address in aliases]
 
