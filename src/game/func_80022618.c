@@ -1,24 +1,33 @@
 typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef signed char s8;
+typedef short s16;
+typedef int s32;
 
+/* "~c0702D EFFECT = %2d %2d\n" */
+extern u8 D_80010074[];
+/* "               **\n~c777\0" */
+extern u8 D_80010090[];
+/* "            **\n~c777\0" */
+extern u8 D_800100A8[];
 extern u8 D_8009AF2A;
 extern u8 D_8009AF2C;
 extern u8 D_8009AF2D;
-extern char D_80010074[];
-extern char D_80010090[];
-extern char D_800100A8[];
 extern void func_800222F4(void);
 extern void func_8007EF84();
 
-void func_80022618(void)
-{
-    register char *text asm("$4");
+/* Prints the "EFFECT = %2d %2d" debug line, then one of two divider strings
+   depending on D_8009AF2A. */
+void func_80022618(void) {
+    u8 v0;
 
     func_800222F4();
     func_8007EF84(D_80010074, D_8009AF2C, D_8009AF2D);
-    if (D_8009AF2A != 0) {
-        text = D_80010090;
+    v0 = D_8009AF2A;
+    if (v0 != 0) {
+        func_8007EF84(D_80010090);
     } else {
-        text = D_800100A8;
+        func_8007EF84(D_800100A8);
     }
-    func_8007EF84(text);
 }
