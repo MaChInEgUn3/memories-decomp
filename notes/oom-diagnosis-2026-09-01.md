@@ -54,6 +54,23 @@ minutes while:
 This rules out unrelated user processes as the immediate cause and shows that
 the session itself has a high memory baseline.
 
+That replacement process subsequently crashed and wrote
+`report.20260901.165334.280534.0.001.json`. Its heap was again exhausted at
+approximately 1.87 GiB used against the same 2.15 GiB limit. More importantly,
+the second report contained 30,033 libuv handles:
+
+| Handle type | Count |
+| --- | ---: |
+| `async` | 30,003 |
+| `signal` | 19 |
+| all other types | 11 |
+
+Of the async handles, 30,002 were referenced and 30,003 were active. No Node
+worker was active. This is direct evidence of an internal asynchronous-handle
+leak or unbounded handle retention in the CLI/session/tool path. It explains
+why limiting compiler and agent concurrency did not stop the crashes: the
+leaked objects belong to the long-lived Copilot process itself.
+
 The failing process accumulated about 621,000 filesystem reads and ran for
 roughly fourteen minutes. Immediately before the failure, the work repeatedly
 loaded source, configuration, generated assembly, and collaborator-reference
@@ -77,11 +94,13 @@ failure is resolved.
 ## Contributing causes
 
 1. A long-lived resumed session with extensive decompilation and tool history.
-2. Repeated large tool results retained in the CLI context.
-3. Reading several files in one parallel tool batch, which increases the
+2. At least one CLI/session/tool path retaining tens of thousands of active,
+   referenced `uv_async` handles.
+3. Repeated large tool results retained in the CLI context.
+4. Reading several files in one parallel tool batch, which increases the
    transient and retained payload even when the process count stays at four.
-4. An approximately 2 GiB V8 heap ceiling in the crashing process.
-5. No swap and only about 8 GiB of host RAM, leaving little safety margin once
+5. An approximately 2 GiB V8 heap ceiling in the crashing process.
+6. No swap and only about 8 GiB of host RAM, leaving little safety margin once
    native RSS grew beyond the V8 heap.
 
 ## Operational response
@@ -90,6 +109,9 @@ failure is resolved.
 - Treat four concurrent processes as an emergency maximum, never a default.
 - Avoid background agents and broad repository/reference scans.
 - Search before reading and cap every returned range or command output.
+- Consolidate a complete bounded phase into one standalone sequential script
+  that writes compact results to disk, instead of issuing one CLI tool call per
+  candidate.
 - Put verbose compiler, linker, and comparison logs under `tmp/`.
 - Process collaborator candidates through a sequential driver that writes a
   compact manifest and result ledger rather than returning per-candidate
