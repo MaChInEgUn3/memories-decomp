@@ -1,21 +1,30 @@
 typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef signed char s8;
+typedef short s16;
+typedef int s32;
 
-extern u8 *D_8009B458;
+/* Validates a byte value (1..20) and stores it into the s16 field 0x510
+   of *D_8009B458 (same field read by get_8009b45c_510.c... note: a
+   different global, D_8009B458 not D_8009B45C). Returns the stored value,
+   or 0xFF if out of range or zero. */
+struct S8009B458 {
+    char pad[0x510];
+    s16 f510;
+};
 
-int func_80049600(int value)
-{
-    register int original asm("$3") = value;
-    register int check asm("$4") = (u8)original;
-    register int result asm("$2");
-    if ((unsigned int)check >= 21) {
-        result = 255;
-        return result;
+extern struct S8009B458 *D_8009B458;
+
+s32 func_80049600(u32 a0) {
+    u8 x = a0 & 0xFF;
+
+    if (x >= 0x15) {
+        return 0xFF;
     }
-    result = check;
-    if (check == 0) {
-        result = 255;
-        return result;
+    if (x == 0) {
+        return 0xFF;
     }
-    *(short *)(D_8009B458 + 0x510) = (u8)original;
-    return result;
+    D_8009B458->f510 = x;
+    return x;
 }
