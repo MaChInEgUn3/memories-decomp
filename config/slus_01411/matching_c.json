@@ -638,7 +638,7 @@
     },
     {
       "address": "0x80021810",
-      "profile": "gcc_2_8_1_g8",
+      "profile": "gcc_2_8_1_g8_split",
       "size": "0x84",
       "source": "src/game/duel_select_card_drop.c"
     },
