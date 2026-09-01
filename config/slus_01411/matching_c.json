@@ -440,7 +440,7 @@
     },
     {
       "address": "0x80017DB4",
-      "profile": "gcc_2_8_1_g8",
+      "profile": "gcc_2_8_1_g8_split",
       "size": "0x88",
       "source": "src/game/func_80017DB4.c"
     },
