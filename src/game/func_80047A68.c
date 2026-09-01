@@ -12,7 +12,7 @@ typedef struct {
     u16 ids[4];
 } SelectionState;
 
-extern SelectionState *D_8009B45C;
+extern SelectionState *g_SDValue;
 extern void func_80076ED0(s32, u32);
 
 void func_80047A68(void)
@@ -20,10 +20,10 @@ void func_80047A68(void)
     s32 i;
     u32 mask = 0x100000;
     u32 result = 0;
-    u16 threshold = D_8009B45C->threshold;
+    u16 threshold = g_SDValue->threshold;
 
     for (i = 0; i < 4; i++) {
-        if (D_8009B45C->ids[i] >= threshold) {
+        if (g_SDValue->ids[i] >= threshold) {
             result |= mask;
         }
         mask <<= 1;

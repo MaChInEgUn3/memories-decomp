@@ -1,6 +1,6 @@
 typedef unsigned char u8;
 
-extern u8 *D_8009B45C;
+extern u8 *g_SDValue;
 extern void func_80076ED0(int, int);
 
 int func_80047F38(u8 value)
@@ -8,7 +8,7 @@ int func_80047F38(u8 value)
     int i;
     int result = 0;
     int mask = 1;
-    u8 *state = D_8009B45C;
+    u8 *state = g_SDValue;
     for (i = 0; i < 4; i++, mask <<= 1) {
         u8 *item = state;
         item += i;

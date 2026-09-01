@@ -1,6 +1,6 @@
-extern unsigned char *D_8009B45C;
+extern unsigned char *g_SDValue;
 void func_800490F0(short value, unsigned char flag)
 {
-    *(short *)(D_8009B45C + 0x1582) = value;
-    D_8009B45C[0x1584] = flag;
+    *(short *)(g_SDValue + 0x1582) = value;
+    g_SDValue[0x1584] = flag;
 }

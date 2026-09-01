@@ -5,7 +5,7 @@ typedef unsigned short u16;
 typedef signed int s32;
 typedef unsigned int u32;
 extern u8 D_801A7AD8[];
-extern s32 func_800170C8();
+extern s32 Duel_CalcCardStats();
 extern s32 func_8001EF78();
 extern s32 func_8001EF1C();
 
@@ -18,9 +18,9 @@ s32 func_8001EFD4(u8 *left, u8 *right)
     s32 actual;
 
     if (right == (u8 *)0)
-        return func_800170C8(a) & 65535;
+        return Duel_CalcCardStats(a) & 65535;
     b = D_801A7AD8 + right[106] * 28;
-    packed = func_800170C8(b);
+    packed = Duel_CalcCardStats(b);
     wanted = packed & 65535;
     if (*(u16 *)(b + 22) & 2048)
         wanted = (u32)packed >> 16;

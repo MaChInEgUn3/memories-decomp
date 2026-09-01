@@ -27,7 +27,7 @@ struct S8009B45C_pad {
     u8 f434;
 };
 
-extern struct S8009B45C_pad *D_8009B45C;
+extern struct S8009B45C_pad *g_SDValue;
 extern s32 func_80047864();
 extern s32 func_80076ED0();
 extern s32 func_80077090();
@@ -44,26 +44,26 @@ void func_800478EC(void) {
     bit2 = 1;
     accum = 0;
     for (i = 0; i < 4; i++) {
-        if (D_8009B45C->f428[i] != 0) {
-            if (D_8009B45C->f428[i] >= D_8009B45C->f424[i]) {
-                D_8009B45C->f424[i] = 0;
+        if (g_SDValue->f428[i] != 0) {
+            if (g_SDValue->f428[i] >= g_SDValue->f424[i]) {
+                g_SDValue->f424[i] = 0;
             } else {
-                D_8009B45C->f424[i] = D_8009B45C->f424[i] - D_8009B45C->f428[i];
+                g_SDValue->f424[i] = g_SDValue->f424[i] - g_SDValue->f428[i];
             }
-            if (D_8009B45C->f424[i] != 0) {
+            if (g_SDValue->f424[i] != 0) {
                 func_80047864(i);
                 goto tail;
             }
-            D_8009B45C->f434 &= ~bit2;
-            D_8009B45C->f428[i] = 0;
+            g_SDValue->f434 &= ~bit2;
+            g_SDValue->f428[i] = 0;
             func_80076ED0(0, mask);
             accum |= mask;
         }
     tail:
-        timer = D_8009B45C->f42C[i];
+        timer = g_SDValue->f42C[i];
         if (timer != 0) {
             timer -= 1;
-            D_8009B45C->f42C[i] = timer;
+            g_SDValue->f42C[i] = timer;
             if (timer == 0) {
                 v0 = func_80077090(mask);
                 if (v0 != 0) {

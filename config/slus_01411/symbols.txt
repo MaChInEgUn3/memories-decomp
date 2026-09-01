@@ -9,3 +9,7 @@ bss_end = 0x800FE728;
 overlay_slots_start = 0x8013A000;
 tail_data_start = 0x801AC000;
 loaded_image_end = 0x801E0000; // absolute:True
+
+// Semantic names
+g_SDValue = 0x8009B45C;
+Duel_CalcCardStats = 0x800170C8; // type:func

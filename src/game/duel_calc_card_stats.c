@@ -1,7 +1,7 @@
 typedef signed short s16;
 typedef struct { char p[0xE]; s16 a, b, c, d; } Object;
 
-int func_800170C8(Object *object)
+int Duel_CalcCardStats(Object *object)
 {
     int low = object->a + object->c + object->d;
     int high;

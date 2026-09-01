@@ -1,11 +1,11 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern u8 *D_8009B45C;
+extern u8 *g_SDValue;
 
 void func_8004763C(void)
 {
-    register u8 *state asm("$5") = D_8009B45C;
+    register u8 *state asm("$5") = g_SDValue;
     register int i asm("$4") = *(u16 *)(state + 4);
     register int count asm("$2") = *(u16 *)state;
     register int sentinel asm("$3") = 0xFFFF;
@@ -19,7 +19,7 @@ void func_8004763C(void)
         } while (i < count);
     }
     {
-        u8 *final = D_8009B45C;
+        u8 *final = g_SDValue;
         *(u16 *)(final + 0x440) = *(u16 *)(final + 4);
         *(int *)(final + 0x438) =
             *(int *)(*(u8 **)(final + 0x448) + 4) + 0x1010;

@@ -14,7 +14,7 @@ typedef struct {
     int field2C;
 } Entry;
 
-extern u8 *D_8009B45C;
+extern u8 *g_SDValue;
 extern void func_8004503C(int, int, int);
 extern void func_80045BE8(Entry *);
 
@@ -22,7 +22,7 @@ void func_800471D0(int a0, int a1, int a2, int a3, int a4, int a5)
 {
     Entry entry;
     func_8004503C(-32, 0, 1);
-    *(u16 *)(D_8009B45C + 0x40) |= 2;
+    *(u16 *)(g_SDValue + 0x40) |= 2;
     entry.type = 32;
     entry.field10 = a5;
     entry.field14 = a2;

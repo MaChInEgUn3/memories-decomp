@@ -394,7 +394,7 @@
       "address": "0x800170C8",
       "profile": "gcc_2_8_1_g8",
       "size": "0x68",
-      "source": "src/game/func_800170C8.c"
+      "source": "src/game/duel_calc_card_stats.c"
     },
     {
       "address": "0x80017130",

@@ -1,5 +1,5 @@
-extern unsigned char *D_8009B45C;
+extern unsigned char *g_SDValue;
 void func_8004544C(void)
 {
-    D_8009B45C[0x1618] = 0;
+    g_SDValue[0x1618] = 0;
 }

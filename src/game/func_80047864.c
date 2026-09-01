@@ -1,7 +1,7 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern u8 *D_8009B45C;
+extern u8 *g_SDValue;
 extern void func_80077450(void *);
 
 void func_80047864(int index)
@@ -16,7 +16,7 @@ void func_80047864(int index)
         unsigned int product;
         if (saved != 0)
             mask <<= saved;
-        state = D_8009B45C;
+        state = g_SDValue;
         *(unsigned int *)(state + 0x3C4) = mask;
         half = state + (saved << 1);
         byte = state + saved;

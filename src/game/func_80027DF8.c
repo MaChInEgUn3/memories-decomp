@@ -48,7 +48,7 @@ extern LocalBlob D_8015C424;
 extern u8 D_801A7AD8[];
 extern LocalR6 D_801A7E20[];
 extern s32 D_801D4244[];
-extern int func_800170C8();
+extern int Duel_CalcCardStats();
 
 void func_80027DF8(LocalEnt *out, s32 who) {
     u8 *base;
@@ -70,7 +70,7 @@ void func_80027DF8(LocalEnt *out, s32 who) {
                 s32 t;
 
                 out->id = rec->id;
-                r = func_800170C8(rec);
+                r = Duel_CalcCardStats(rec);
                 out->x = r;
                 out->y = r >> 16;
                 out->flags = rec->flags;
@@ -102,7 +102,7 @@ void func_80027DF8(LocalEnt *out, s32 who) {
                 s32 t;
 
                 out->id = rec->id;
-                r = func_800170C8(rec);
+                r = Duel_CalcCardStats(rec);
                 out->x = r;
                 out->y = r >> 16;
                 out->flags = rec->flags;

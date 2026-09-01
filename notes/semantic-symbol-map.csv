@@ -1,0 +1,3 @@
+kind,address,name,confidence,evidence,notes
+global,0x8009B45C,g_SDValue,confirmed,"FM debug string; gms.c xref; dotr.c symbol","Sound-driver root state pointer; exact successor-game symbol spelling."
+function,0x800170C8,Duel_CalcCardStats,high,"gms.c calcStats; local body and callers","Clamps and writes the card's effective attack and defense statistics."

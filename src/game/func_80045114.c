@@ -17,12 +17,12 @@ struct S8009B45C {
     u8 pad2[0x32];
     struct Entry arr[16];
 };
-extern struct S8009B45C *D_8009B45C;
+extern struct S8009B45C *g_SDValue;
 extern void func_8004503C(s16, s32, s32);
 extern void func_80045BE8(u8 *);
 
 void func_80045114(void) {
-    struct S8009B45C *p = D_8009B45C;
+    struct S8009B45C *p = g_SDValue;
     s32 count;
 
     if ((p->f4A & 0x80) == 0) {

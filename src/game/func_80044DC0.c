@@ -1,12 +1,12 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern u8 *D_8009B45C;
+extern u8 *g_SDValue;
 extern void func_8007CDC0(u8 *);
 
 void func_80044DC0(int value)
 {
-    register u8 *state asm("$5") = D_8009B45C;
+    register u8 *state asm("$5") = g_SDValue;
     register int base asm("$6");
     register int color asm("$3");
     register int narrowed asm("$2");
@@ -32,5 +32,5 @@ void func_80044DC0(int value)
         data[1] = product >> 7;
     }
     func_8007CDC0(data);
-    *(short *)(D_8009B45C + 0x510) = saved;
+    *(short *)(g_SDValue + 0x510) = saved;
 }

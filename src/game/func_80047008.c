@@ -1,5 +1,5 @@
-extern unsigned char *D_8009B45C;
+extern unsigned char *g_SDValue;
 int func_80047008(void)
 {
-    return D_8009B45C[0x48];
+    return g_SDValue[0x48];
 }
