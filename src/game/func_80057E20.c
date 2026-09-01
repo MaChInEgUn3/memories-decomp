@@ -1,0 +1,53 @@
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef signed char s8;
+typedef short s16;
+typedef int s32;
+
+extern u8 D_800F2C40[]; /* 0xE20-byte-stride record array, shared with other D_800F2C40 users */
+
+typedef struct {
+    u16 x, y, z, w;
+} Vec4s;
+
+/* Copies the 8-byte {x,y,z} vector (+trailing pad word) at record[idx]+0xDC8
+   into *out, then clamps each axis up to a per-record minimum threshold
+   (record+0xCFF/0xD00/0xD01, each a byte multiplied by 16; 0 means "no
+   clamp"). Finally sets out->w to the largest of {x (if positive), y, z}. */
+void func_80057E20(s32 idx, Vec4s *out) {
+    u8 *rec = D_800F2C40 + idx * 0xE20;
+    u8 *thresh = rec + 0xCF8;
+
+    *out = *(Vec4s *)(rec + 0xDC8);
+
+    if (thresh[7] != 0) {
+        s32 t = thresh[7] << 4;
+        if ((s16)out->x < t) {
+            out->x = t;
+        }
+    }
+    if (thresh[8] != 0) {
+        s32 t = thresh[8] << 4;
+        if ((s16)out->y < t) {
+            out->y = t;
+        }
+    }
+    if (thresh[9] != 0) {
+        s32 t = thresh[9] << 4;
+        if ((s16)out->z < t) {
+            out->z = t;
+        }
+    }
+
+    out->w = 0;
+    if ((s16)out->x > 0) {
+        out->w = out->x;
+    }
+    if ((s16)out->w < (s16)out->y) {
+        out->w = out->y;
+    }
+    if ((s16)out->w < (s16)out->z) {
+        out->w = out->z;
+    }
+}
