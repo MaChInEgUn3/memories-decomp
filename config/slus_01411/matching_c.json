@@ -2924,7 +2924,7 @@
     },
     {
       "address": "0x80044DC0",
-      "profile": "gcc_2_8_1_g0",
+      "profile": "gcc_2_8_1_cc_g0_as_g8_no_split",
       "size": "0xD0",
       "source": "src/game/func_80044DC0.c"
     },
