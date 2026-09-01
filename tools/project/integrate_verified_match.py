@@ -19,7 +19,6 @@ class IntegrationError(RuntimeError):
     pass
 
 
-SYMBOL_PATTERN = re.compile(r"\bfunc_[0-9A-Fa-f]{8}\b")
 ASM_PATTERN = re.compile(r"\b(?:asm|__asm|__asm__)\b")
 COMMENT_PATTERN = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
 EXTERNAL_FIELDS = (
@@ -254,8 +253,10 @@ def main() -> int:
                 raise IntegrationError(
                     f"{address:#010x}: reference match still contains GCC asm"
                 )
-        symbols = set(SYMBOL_PATTERN.findall(source_text))
-        if function.name not in symbols:
+        definition_pattern = re.compile(
+            rf"\b{re.escape(function.name)}\s*\("
+        )
+        if definition_pattern.search(source_text) is None:
             raise IntegrationError(
                 f"{source}: does not define expected symbol {function.name}"
             )

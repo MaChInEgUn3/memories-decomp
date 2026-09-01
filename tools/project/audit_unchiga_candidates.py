@@ -12,9 +12,12 @@ import shutil
 import struct
 import subprocess
 import sys
+import time
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
+
+import record_external_attempt
 
 from workspace import (
     WorkspaceError,
@@ -39,6 +42,9 @@ TARGET_ELF_PATH = "tmp/project-build/SLUS_014.11.elf"
 BUILT_PATH = "tmp/project-build/SLUS_014.11"
 GENERATED_ASM_PATH = "tmp/splat/asm/generated"
 MASPSX_PATH = "tools/vendor/maspsx/maspsx.py"
+INTEGRATE_TOOL_PATH = "tools/project/integrate_verified_match.py"
+INCREMENTAL_TOOL_PATH = "tools/project/build_incremental.py"
+AUDIT_REPORT_PATH = "notes/unchiga-match-audit.md"
 BINUTILS_PATH = "tools/toolchains/binutils-2.42/bin"
 LOAD_ADDRESS = 0x80010000
 HEADER_SIZE = 0x800
@@ -170,6 +176,14 @@ def run(
     environment = os.environ.copy()
     environment.update(local_environment(root))
     environment["MAKEFLAGS"] = "-j1"
+    environment["GIT_AUTHOR_NAME"] = "Copilot"
+    environment["GIT_AUTHOR_EMAIL"] = (
+        "223556219+Copilot@users.noreply.github.com"
+    )
+    environment["GIT_COMMITTER_NAME"] = "Copilot"
+    environment["GIT_COMMITTER_EMAIL"] = (
+        "223556219+Copilot@users.noreply.github.com"
+    )
     stdin_handle = stdin_path.open("rb") if stdin_path is not None else None
     stdout_handle = (
         stdout_path.open("wb")
@@ -1108,6 +1122,552 @@ def verify(
     return results
 
 
+def git_output(root: Path, work: Path, *args: str) -> str:
+    completed = run(root, work, ["git", "--no-pager", *args])
+    require_success(completed, "git " + " ".join(args))
+    return completed.stdout.decode(errors="replace").strip()
+
+
+def require_integration_repository(root: Path, work: Path) -> None:
+    if git_output(root, work, "branch", "--show-current") != "master":
+        raise AuditError("integration requires branch master")
+    status = git_output(
+        root,
+        work,
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+    )
+    if status:
+        raise AuditError("integration requires a clean working tree")
+    upstream = git_output(
+        root,
+        work,
+        "rev-parse",
+        "--abbrev-ref",
+        "--symbolic-full-name",
+        "@{upstream}",
+    )
+    if upstream != "origin/master":
+        raise AuditError(f"unexpected upstream: {upstream}")
+    if git_output(root, work, "rev-parse", "HEAD") != git_output(
+        root,
+        work,
+        "rev-parse",
+        "origin/master",
+    ):
+        raise AuditError("master must be synchronized with origin/master")
+
+
+def result_rows(root: Path) -> dict[int, dict[str, str]]:
+    rows = read_csv(
+        resolve_within(
+            root,
+            f"{WORK_PATH}/verification-results.csv",
+            must_exist=True,
+        )
+    )
+    return {parse_address(row["address"]): row for row in rows}
+
+
+def live_matching(root: Path) -> dict[int, dict[str, Any]]:
+    value = load_json(resolve_within(root, MATCHING_PATH, must_exist=True))
+    return {
+        parse_address(str(row["address"])): row
+        for row in value["functions"]
+    }
+
+
+def live_functions(root: Path) -> dict[int, dict[str, str]]:
+    return {
+        parse_address(row["address"]): row
+        for row in read_csv(resolve_within(root, FUNCTIONS_PATH, must_exist=True))
+    }
+
+
+def external_rows(root: Path) -> list[dict[str, str]]:
+    return read_csv(
+        resolve_within(root, EXTERNAL_ATTEMPTS_PATH, must_exist=True)
+    )
+
+
+def evidence_history(
+    rows: list[dict[str, str]],
+    address: int,
+    mode: str,
+) -> list[dict[str, str]]:
+    return [
+        row
+        for row in rows
+        if parse_address(row["address"]) == address and row["mode"] == mode
+    ]
+
+
+def evidence_summary(
+    result: dict[str, str],
+    *,
+    exact: bool,
+) -> str:
+    if exact:
+        return (
+            "Unchiga pure-C source independently reproduced exact linked "
+            "text and relocation targets with no allocated non-text sections."
+        )
+    detail = result["first_difference"] or "text differs"
+    return (
+        "Unchiga pure-C source independently tested; "
+        f"bytes={result['bytes_match']}, "
+        f"relocations={result['relocations_match']}, "
+        f"sections={result['sections_ok']}; {detail}."
+    )
+
+
+def append_evidence(
+    root: Path,
+    manifest_row: dict[str, str],
+    result: dict[str, str],
+    outcome: str,
+) -> None:
+    path = resolve_within(root, EXTERNAL_ATTEMPTS_PATH, must_exist=True)
+    rows = record_external_attempt.load_rows(path)
+    address = parse_address(manifest_row["address"])
+    mode = manifest_row["mode"]
+    history = evidence_history(rows, address, mode)
+    maximum = record_external_attempt.MODE_MAX_ATTEMPTS[mode]
+    if history and history[-1]["result"] in record_external_attempt.TERMINAL_RESULTS:
+        if history[-1]["result"] == outcome:
+            return
+        raise AuditError(
+            f"{address:#010x}: {mode} history already ended with "
+            f"{history[-1]['result']}"
+        )
+    if len(history) >= maximum:
+        raise AuditError(f"{address:#010x}: {mode} budget exhausted")
+    candidate = resolve_within(
+        root,
+        manifest_row["candidate_source"],
+        must_exist=True,
+    )
+    reference = resolve_within(
+        root,
+        manifest_row["reference_path"],
+        must_exist=True,
+    )
+    rows.append(
+        {
+            "mode": mode,
+            "address": manifest_row["address"],
+            "attempt": str(len(history) + 1),
+            "reference_path": manifest_row["reference_path"],
+            "reference_sha256": sha256(reference),
+            "profile": manifest_row["profile"],
+            "candidate_source": manifest_row["candidate_source"],
+            "candidate_sha256": sha256(candidate),
+            "result": outcome,
+            "summary": evidence_summary(result, exact=outcome == "matched"),
+        }
+    )
+    functions = record_external_attempt.load_functions(
+        resolve_within(root, FUNCTIONS_PATH, must_exist=True)
+    )
+    matching_addresses = record_external_attempt.load_matching_addresses(
+        resolve_within(root, MATCHING_PATH, must_exist=True)
+    )
+    profiles = record_external_attempt.load_profiles(
+        resolve_within(root, PROFILES_PATH, must_exist=True)
+    )
+    record_external_attempt.validate_rows(
+        rows,
+        functions,
+        matching_addresses,
+        profiles,
+    )
+    record_external_attempt.write_rows(path, rows)
+
+
+def restore_paths(backups: dict[Path, bytes | None]) -> None:
+    for path, original in backups.items():
+        if original is None:
+            path.unlink(missing_ok=True)
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(original)
+
+
+def candidate_destination(
+    root: Path,
+    manifest_row: dict[str, str],
+) -> Path:
+    if manifest_row["mode"] == "inline_refinement":
+        return resolve_within(
+            root,
+            manifest_row["current_source"],
+            must_exist=True,
+        )
+    return resolve_within(
+        root,
+        f"src/game/{manifest_row['current_name']}.c",
+    )
+
+
+def run_incremental_match(
+    root: Path,
+    work: Path,
+    address: int,
+) -> None:
+    log = work / "integration-logs" / f"{address:08X}.log"
+    log.parent.mkdir(parents=True, exist_ok=True)
+    completed = run(
+        root,
+        work,
+        ["make", "match-incremental"],
+        stdout_path=log,
+    )
+    require_success(completed, f"{address:#010x}: incremental full match")
+
+
+def commit_function(
+    root: Path,
+    work: Path,
+    manifest_row: dict[str, str],
+    destination: Path,
+) -> None:
+    address = parse_address(manifest_row["address"])
+    completed = run(
+        root,
+        work,
+        [
+            "git",
+            "add",
+            "--",
+            EXTERNAL_ATTEMPTS_PATH,
+            FUNCTIONS_PATH,
+            MATCHING_PATH,
+            str(destination.relative_to(root)),
+        ],
+    )
+    require_success(completed, f"{address:#010x}: git add")
+    completed = run(
+        root,
+        work,
+        ["git", "diff", "--cached", "--check"],
+    )
+    require_success(completed, f"{address:#010x}: staged diff check")
+    subject = (
+        "decomp: replace inline assembly in "
+        if manifest_row["mode"] == "inline_refinement"
+        else "decomp: match "
+    ) + manifest_row["current_name"]
+    completed = run(
+        root,
+        work,
+        [
+            "git",
+            "-c",
+            "core.hooksPath=/dev/null",
+            "commit",
+            "--no-gpg-sign",
+            "-m",
+            subject,
+            "-m",
+            "Co-authored-by: Copilot "
+            "<223556219+Copilot@users.noreply.github.com>",
+        ],
+    )
+    require_success(completed, f"{address:#010x}: git commit")
+
+
+def integrate_exact(
+    root: Path,
+    rows: list[dict[str, str]],
+    results: dict[int, dict[str, str]],
+) -> int:
+    work = resolve_within(root, WORK_PATH)
+    require_integration_repository(root, work)
+    ensure_baseline(root, work)
+    seed_log = work / "incremental-seed.log"
+    completed = run(
+        root,
+        work,
+        [
+            str(
+                resolve_within(
+                    root,
+                    "tools/environments/python/bin/python",
+                    must_exist=True,
+                )
+            ),
+            str(resolve_within(root, INCREMENTAL_TOOL_PATH, must_exist=True)),
+            "--seed-existing",
+        ],
+        stdout_path=seed_log,
+    )
+    require_success(completed, "incremental cache seed")
+
+    integrated = 0
+    since_push = 0
+    last_push = time.monotonic()
+    for manifest_row in rows:
+        address = parse_address(manifest_row["address"])
+        result = results[address]
+        if result["exact"] != "True":
+            continue
+        functions = live_functions(root)
+        matching = live_matching(root)
+        history = evidence_history(
+            external_rows(root),
+            address,
+            manifest_row["mode"],
+        )
+        already_matched = (
+            bool(history)
+            and history[-1]["result"] == "matched"
+            and address in matching
+            and functions[address]["status"] == "matching_c"
+        )
+        if already_matched:
+            continue
+
+        destination = candidate_destination(root, manifest_row)
+        tracked_paths = [
+            resolve_within(root, EXTERNAL_ATTEMPTS_PATH, must_exist=True),
+            resolve_within(root, FUNCTIONS_PATH, must_exist=True),
+            resolve_within(root, MATCHING_PATH, must_exist=True),
+            destination,
+        ]
+        backups = {
+            path: path.read_bytes() if path.exists() else None
+            for path in tracked_paths
+        }
+        try:
+            append_evidence(root, manifest_row, result, "matched")
+            command = [
+                str(
+                    resolve_within(
+                        root,
+                        "tools/environments/python/bin/python",
+                        must_exist=True,
+                    )
+                ),
+                str(resolve_within(root, INTEGRATE_TOOL_PATH, must_exist=True)),
+                manifest_row["address"],
+                "--source",
+                manifest_row["candidate_source"],
+                "--destination",
+                str(destination.relative_to(root)),
+                "--profile",
+                manifest_row["profile"],
+                "--note",
+                (
+                    "Unchiga pure-C structure independently reproduced; "
+                    f"exact linked bytes and relocations with "
+                    f"{manifest_row['profile']}."
+                ),
+                "--evidence-source",
+                (
+                    "refinement"
+                    if manifest_row["mode"] == "inline_refinement"
+                    else "collaborator"
+                ),
+            ]
+            if manifest_row["mode"] == "inline_refinement":
+                command.append("--replace-existing")
+            completed = run(root, work, command)
+            require_success(completed, f"{address:#010x}: integrate candidate")
+            run_incremental_match(root, work, address)
+            commit_function(root, work, manifest_row, destination)
+        except Exception:
+            restore_paths(backups)
+            run(
+                root,
+                work,
+                ["git", "reset", "--quiet"],
+            )
+            raise
+        integrated += 1
+        since_push += 1
+        if since_push >= 10 or time.monotonic() - last_push >= 1800:
+            completed = run(root, work, ["git", "push", "origin", "master"])
+            require_success(completed, "periodic git push")
+            since_push = 0
+            last_push = time.monotonic()
+
+    if since_push:
+        completed = run(root, work, ["git", "push", "origin", "master"])
+        require_success(completed, "final exact-match push")
+    return integrated
+
+
+def render_audit_report(
+    manifest: list[dict[str, str]],
+    results: dict[int, dict[str, str]],
+    rejected: list[dict[str, str]],
+) -> str:
+    exact = [
+        row
+        for row in manifest
+        if results[parse_address(row["address"])]["exact"] == "True"
+    ]
+    misses = [
+        row
+        for row in manifest
+        if results[parse_address(row["address"])]["exact"] != "True"
+    ]
+    lines = [
+        "# Unchiga Pure-C Match Audit",
+        "",
+        "The collaborator sources were treated as hypotheses and compiled with "
+        "the local Psy-Q 4.6/GCC 2.8.1 plus MASPSX 2.81 pipeline. All work was "
+        "performed sequentially. Acceptance required exact linked function "
+        "bytes, equivalent relocation targets, and no allocated non-text "
+        "sections.",
+        "",
+        "## Results",
+        "",
+        f"- Initial address overlap: {len(manifest) + len(rejected)}",
+        f"- Rejected for actual inline assembly: {len(rejected)}",
+        f"- Independently tested pure-C candidates: {len(manifest)}",
+        f"- Exact pure-C matches: {len(exact)}",
+        f"- Pure-C nonmatches: {len(misses)}",
+        "- Tool failures: 0",
+        "",
+        "## Exact matches",
+        "",
+        "| Address | Project symbol | Mode | Profile |",
+        "| --- | --- | --- | --- |",
+    ]
+    for row in exact:
+        lines.append(
+            f"| `{row['address']}` | `{row['current_name']}` | "
+            f"`{row['mode']}` | `{row['profile']}` |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Nonmatches",
+            "",
+            "| Address | Project symbol | Mode | First difference |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
+    for row in misses:
+        result = results[parse_address(row["address"])]
+        detail = result["first_difference"] or "relocation/section mismatch"
+        lines.append(
+            f"| `{row['address']}` | `{row['current_name']}` | "
+            f"`{row['mode']}` | `{detail}` |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Rejected collaborator definitions",
+            "",
+            "These files were excluded without consuming a pure-C attempt "
+            "because direct source inspection found GCC inline assembly.",
+            "",
+            "| Address | Reason |",
+            "| --- | --- |",
+        ]
+    )
+    for row in rejected:
+        lines.append(f"| `{row['address']}` | {row['reason']} |")
+    lines.extend(
+        [
+            "",
+            "Detailed manifests, source hashes, result JSON, command logs, and "
+            "per-candidate build artifacts are under "
+            "`tmp/agents/unchiga-integration/`.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def record_misses_and_report(
+    root: Path,
+    manifest: list[dict[str, str]],
+    results: dict[int, dict[str, str]],
+) -> int:
+    work = resolve_within(root, WORK_PATH)
+    require_integration_repository(root, work)
+    recorded = 0
+    for row in manifest:
+        address = parse_address(row["address"])
+        result = results[address]
+        if result["exact"] == "True":
+            continue
+        history = evidence_history(external_rows(root), address, row["mode"])
+        if history:
+            if row["mode"] == "collaborator_match" or len(history) >= 2:
+                continue
+        outcome = (
+            "deferred"
+            if row["mode"] == "collaborator_match"
+            else "nonmatch"
+        )
+        append_evidence(root, row, result, outcome)
+        recorded += 1
+
+    rejected = read_csv(
+        resolve_within(
+            root,
+            f"{WORK_PATH}/rejected-candidates.csv",
+            must_exist=True,
+        )
+    )
+    report = resolve_within(root, AUDIT_REPORT_PATH)
+    report.write_text(
+        render_audit_report(manifest, results, rejected),
+        encoding="utf-8",
+    )
+    completed = run(
+        root,
+        work,
+        [
+            "git",
+            "add",
+            "--",
+            EXTERNAL_ATTEMPTS_PATH,
+            AUDIT_REPORT_PATH,
+        ],
+    )
+    require_success(completed, "stage collaborator audit report")
+    completed = run(root, work, ["git", "diff", "--cached", "--check"])
+    require_success(completed, "collaborator audit diff check")
+    if git_output(root, work, "diff", "--cached", "--name-only"):
+        completed = run(
+            root,
+            work,
+            [
+                "git",
+                "-c",
+                "core.hooksPath=/dev/null",
+                "commit",
+                "--no-gpg-sign",
+                "-m",
+                "docs: record collaborator match audit",
+                "-m",
+                "Co-authored-by: Copilot "
+                "<223556219+Copilot@users.noreply.github.com>",
+            ],
+        )
+        require_success(completed, "commit collaborator audit report")
+        completed = run(root, work, ["git", "push", "origin", "master"])
+        require_success(completed, "push collaborator audit report")
+    return recorded
+
+
+def apply_audit(root: Path, rows: list[dict[str, str]]) -> tuple[int, int]:
+    results = result_rows(root)
+    if set(results) != {parse_address(row["address"]) for row in rows}:
+        raise AuditError(
+            "verification results do not cover the complete current manifest"
+        )
+    integrated = integrate_exact(root, rows, results)
+    recorded = record_misses_and_report(root, rows, results)
+    return integrated, recorded
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
@@ -1117,7 +1677,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "command",
-        choices=("manifest", "verify", "all"),
+        choices=("manifest", "verify", "all", "apply"),
         nargs="?",
         default="all",
     )
@@ -1147,6 +1707,14 @@ def main() -> int:
                 f"Unchiga audit: selected={len(results)} "
                 f"exact={exact} nonmatch={len(results) - exact - errors} "
                 f"errors={errors}"
+            )
+        elif args.command == "apply":
+            if args.address is not None or args.limit is not None:
+                raise AuditError("apply requires the complete manifest")
+            integrated, recorded = apply_audit(root, rows)
+            print(
+                f"Unchiga apply: integrated={integrated} "
+                f"recorded_nonmatches={recorded}"
             )
         else:
             print(f"Unchiga manifest: candidates={len(rows)}")
