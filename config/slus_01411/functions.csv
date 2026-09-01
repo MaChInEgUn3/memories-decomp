@@ -722,7 +722,7 @@ address,size,name,status,module,notes
 0x80045334,0x118,func_80045334,unmatched_asm,game,
 0x8004544C,0x10,func_8004544C,matching_c,game,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x8004545C,0x28,func_8004545C,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80045484,0x90,func_80045484,unmatched_asm,game,
+0x80045484,0x90,func_80045484,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_cc_g0_as_g8_no_split.
 0x80045514,0x6D4,func_80045514,unmatched_asm,game,
 0x80045BE8,0xB0,func_80045BE8,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80045C98,0x2A4,func_80045C98,unmatched_asm,game,
