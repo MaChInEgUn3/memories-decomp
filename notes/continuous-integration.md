@@ -46,8 +46,24 @@ code generation under the explicit PSX flags.
 
 The GCC 2.7.2 fallback is a matching-research tool and is not required for the
 current clean build, so CI does not install or validate it. Binutils 2.42 is
-still bootstrapped locally on a cold cache and restored from the Actions cache
-on later runs.
+not built in CI either.
+
+Ubuntu 22.04 installs the pinned
+`binutils-mips-linux-gnu=2.38-1ubuntu1cross2` package. The project creates
+small wrappers beneath `tools/toolchains/binutils-2.42/bin/` so existing build
+paths remain local and stable. The wrapper manifest records and validates the
+package version plus the SHA-256 of every packaged binary. The explicit `-EL`,
+MIPS I, ABI, and small-data flags remain controlled by the project.
+
+Ubuntu's MIPS assembler marks text sections with 16-byte alignment, while the
+original pinned assembler uses 4-byte alignment. After assembling a C or
+generated text object, the package-backed path uses the packaged `objcopy` to
+set `.text` alignment to 4. This changes section metadata only and prevents
+the linker from inserting gaps between function objects.
+
+Local development may continue using the source-built pinned binutils 2.42.
+CI sets `USE_SYSTEM_MIPS_BINUTILS=1`, causing `make check-build-tools` to
+validate the package-backed wrappers instead.
 
 GitHub does not expose repository secrets to pull requests from forks. Those
 runs therefore fail at the explicit private-input check rather than receiving

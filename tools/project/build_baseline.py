@@ -47,6 +47,34 @@ def tool(root: Path, name: str) -> Path:
     return path
 
 
+def linker_compatibility_flags() -> list[str]:
+    flags = ["--no-relax"]
+    if os.environ.get("USE_SYSTEM_MIPS_BINUTILS") != "1":
+        flags.append("--no-warn-rwx-segments")
+    return flags
+
+
+def assembler_compatibility_flags() -> list[str]:
+    if os.environ.get("USE_SYSTEM_MIPS_BINUTILS") == "1":
+        return ["-no-pad-sections", "-O1"]
+    return []
+
+
+def normalize_text_alignment(root: Path, output: Path) -> None:
+    if os.environ.get("USE_SYSTEM_MIPS_BINUTILS") != "1":
+        return
+    objcopy = tool(root, "objcopy")
+    run(
+        root,
+        [
+            str(objcopy),
+            "--set-section-alignment",
+            ".text=4",
+            str(output),
+        ],
+    )
+
+
 def require_generated_file(root: Path, relative_path: str) -> Path:
     path = resolve_within(root, relative_path, must_exist=True)
     if not path.is_file():
@@ -72,6 +100,7 @@ def assemble(
             "-march=r3000",
             "-mabi=32",
             "-G0",
+            *assembler_compatibility_flags(),
             "-I",
             str(include_directory),
             "-o",
@@ -79,6 +108,7 @@ def assemble(
             str(source),
         ],
     )
+    normalize_text_alignment(root, output)
     return output
 
 
@@ -97,11 +127,13 @@ def assemble_c_output(
             "-EL",
             "-mips1",
             f"-G{data_limit}",
+            *assembler_compatibility_flags(),
             "-o",
             str(output),
             str(source),
         ],
     )
+    normalize_text_alignment(root, output)
     return output
 
 
@@ -302,6 +334,11 @@ def binary_object(
     source = require_generated_file(root, source_path)
     output = resolve_within(root, output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
+    output_format = (
+        "elf32-tradlittlemips"
+        if os.environ.get("USE_SYSTEM_MIPS_BINUTILS") == "1"
+        else "elf32-littlemips"
+    )
     run(
         root,
         [
@@ -309,7 +346,7 @@ def binary_object(
             "-I",
             "binary",
             "-O",
-            "elf32-littlemips",
+            output_format,
             "-B",
             "mips",
             str(source),
@@ -383,8 +420,7 @@ def build(root: Path) -> Path:
             str(linker),
             "-EL",
             "-G0",
-            "--no-relax",
-            "--no-warn-rwx-segments",
+            *linker_compatibility_flags(),
             "-T",
             str(linker_script),
             "-Map",

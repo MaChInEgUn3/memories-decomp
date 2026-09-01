@@ -3,6 +3,13 @@ LOCAL_PYTHON := $(ROOT)/tools/environments/python/bin/python
 SPLAT := $(ROOT)/tools/environments/python/bin/splat
 PYTHON ?= $(if $(wildcard $(LOCAL_PYTHON)),$(LOCAL_PYTHON),python3)
 BOOTSTRAP_PYTHON ?= python3
+USE_SYSTEM_MIPS_BINUTILS ?= 0
+
+ifeq ($(USE_SYSTEM_MIPS_BINUTILS),1)
+BUILD_BINUTILS_CHECK := tools/bootstrap/binutils_system.py --check
+else
+BUILD_BINUTILS_CHECK := tools/bootstrap/binutils.py --check
+endif
 
 export HOME := $(ROOT)/tmp/home
 export TMPDIR := $(ROOT)/tmp
@@ -17,7 +24,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-target verify-inputs tools python-tools toolchain compiler compiler-281 compiler-281-prebuilt compiler-272 check-tools check-build-tools info extract map split build match inventory classify-functions candidates siblings external-attempts basic-types progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
+.PHONY: help workspace verify-target verify-inputs tools python-tools toolchain toolchain-system compiler compiler-281 compiler-281-prebuilt compiler-272 check-tools check-build-tools info extract map split build match inventory classify-functions candidates siblings external-attempts basic-types progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
 
 help:
 	@printf '%s\n' \
@@ -65,6 +72,9 @@ python-tools: verify-target
 toolchain: verify-target
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/binutils.py
 
+toolchain-system: verify-target
+	@$(BOOTSTRAP_PYTHON) tools/bootstrap/binutils_system.py
+
 compiler: compiler-281 compiler-272
 
 compiler-281: verify-target
@@ -84,7 +94,7 @@ check-tools: workspace
 
 check-build-tools: workspace
 	@$(PYTHON) tools/bootstrap/bootstrap.py --check
-	@$(PYTHON) tools/bootstrap/binutils.py --check
+	@$(PYTHON) $(BUILD_BINUTILS_CHECK)
 	@$(PYTHON) tools/bootstrap/old_gcc_prebuilt.py --check
 
 info: verify-target
