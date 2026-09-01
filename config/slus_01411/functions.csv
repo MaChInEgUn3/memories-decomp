@@ -176,7 +176,7 @@ address,size,name,status,module,notes
 0x80023090,0xB4,func_80023090,unmatched_asm,game,
 0x80023144,0x348,func_80023144,unmatched_asm,game,
 0x8002348C,0x58,func_8002348C,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
-0x800234E4,0xDC,func_800234E4,unmatched_asm,game,
+0x800234E4,0xDC,func_800234E4,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x800235C0,0x748,func_800235C0,unmatched_asm,game,
 0x80023D08,0x2B4,func_80023D08,unmatched_asm,game,
 0x80023FBC,0xA4,func_80023FBC,unmatched_asm,game,
