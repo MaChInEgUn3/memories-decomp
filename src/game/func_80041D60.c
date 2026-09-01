@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* If arg0's 0x10 state bit isn't set yet: marks it set, resets f58/f5A,
    then walks a 3-level little-endian-u16 offset chain through arg0->f54's

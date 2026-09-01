@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     int first;
     int second;

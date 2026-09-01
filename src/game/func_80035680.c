@@ -1,4 +1,4 @@
-typedef unsigned int u32;
+#include "../types.h"
 
 extern u32 D_8009B304;
 extern u32 D_8009B30C;

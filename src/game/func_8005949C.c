@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     unsigned char bytes[0xE20];
 } EntryE20;

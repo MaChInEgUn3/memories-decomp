@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Advances the duel-field "camera nudge" object (D_8009B1C8) by a per-turn
    step read from the D_8009AF30 lookup table, or spawns a placeholder object

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { unsigned char pad[0xE0D]; unsigned char type; unsigned char pad2[8]; unsigned char state; unsigned char tail[9]; } Entry;
 extern Entry D_800F2C40[]; extern void func_80059700(int,int);
 void func_8005969C(int index,int type)

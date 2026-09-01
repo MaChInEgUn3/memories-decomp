@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same D_801A7AD8[] stat table (0x1C-byte stride) as func_8001EFD4.c, and
    the same D_8009B1C8->f1F check as create_obj_set_flag_and_marker.c. If

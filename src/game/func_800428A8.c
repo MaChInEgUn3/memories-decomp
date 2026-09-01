@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern void func_800404CC(void *, int, int, int, int, int, int, int);
 
 void func_800428A8(void *object, int a1, int a2, int a3, int a4, int a5,

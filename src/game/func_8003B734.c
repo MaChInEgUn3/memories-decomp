@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned short D_8009B398[];
 
 unsigned int func_8003B734(void)

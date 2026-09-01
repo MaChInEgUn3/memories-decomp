@@ -1,9 +1,4 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
+#include "../types.h"
 
 /* Compares arg2 bytes; returns the difference at the first mismatch. */
 s32 func_8004BAA0(u8 *arg0, u8 *arg1, s32 arg2) {

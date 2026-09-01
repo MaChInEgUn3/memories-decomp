@@ -1,4 +1,5 @@
-typedef unsigned char u8;typedef unsigned short u16;
+#include "../types.h"
+
 extern u16 D_8009B23A,D_8009B162;extern u8 D_8009B1D5;extern void*D_8009B1C8,*D_8009B22C;extern char D_800E9FF0[],D_800907D8[];
 extern void func_80022D94();
 void func_800208D4(void){if(!(D_8009B23A&0x8000)){D_8009B23A|=0x8000;func_80022D94(0x30,0x258,0x100,D_8009B1D5?0x400:0xC00,0);D_8009B162=0x10;}

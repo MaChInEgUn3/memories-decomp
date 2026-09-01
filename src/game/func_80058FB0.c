@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char D_800F2C40[];
 void func_80058FB0(int index, unsigned short *out)
 {

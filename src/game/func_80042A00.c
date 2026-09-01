@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     unsigned char pad0[0x30];
     short field30;

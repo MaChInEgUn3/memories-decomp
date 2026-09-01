@@ -1,4 +1,5 @@
-typedef unsigned short u16;typedef signed short s16;
+#include "../types.h"
+
 typedef struct{char p[4];int flags;char p8[0x10];u16 a,b;char p1c[0x14];s16 x,y;char p34[0x14];u16 c,d;}Obj;
 extern void*func_8004002C(void);extern Obj*func_800400AC(void*,int);extern void func_80040510(),func_80042918(Obj*);
 Obj*func_80019564(Obj*src){Obj*o=func_800400AC(func_8004002C(),1);func_80040510(o,src->x,src->y,0x8C,0xC4,0,0,0x15,0,0);

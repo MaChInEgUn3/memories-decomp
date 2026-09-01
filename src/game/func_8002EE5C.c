@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned short gDuel_awPlayerDeck[];
 
 int func_8002EE5C(void)

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 int func_80042AD8(int value, int target, int step)
 {
     if (target < 0) {

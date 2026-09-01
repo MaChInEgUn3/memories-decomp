@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern short gAiScript_State[];
 
 void AiScript_ClearCards(void)

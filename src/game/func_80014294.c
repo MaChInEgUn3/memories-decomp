@@ -1,5 +1,5 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
+#include "../types.h"
+
 extern char D_8009B11C[1];
 extern int D_8009B130, D_8009B0F4;
 extern u16 D_8009B100;

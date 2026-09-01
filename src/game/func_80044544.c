@@ -1,3 +1,5 @@
+#include "../types.h"
+
 int func_80044544(char *entry, int count)
 {
     int i;

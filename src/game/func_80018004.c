@@ -1,6 +1,5 @@
-typedef unsigned char u8;
-typedef signed char s8;
-typedef unsigned short u16;
+#include "../types.h"
+
 typedef struct Child { char p[4]; u8 field_04; } Child;
 typedef struct Object {
     char p0[4]; Child *child; char p8[0xE]; u16 flags;

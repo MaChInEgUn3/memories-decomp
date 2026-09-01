@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int gAiScript_aMemory[];
 extern unsigned short gAi_wBestDifference;
 extern int AiScript_ReadByte(void);

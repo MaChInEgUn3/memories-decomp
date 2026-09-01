@@ -1,5 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned int u32;
+#include "../types.h"
 
 int func_80041534(u8 *object, u8 *data)
 {

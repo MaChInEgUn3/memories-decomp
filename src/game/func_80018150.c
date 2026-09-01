@@ -1,4 +1,5 @@
-typedef unsigned short u16;
+#include "../types.h"
+
 typedef struct { char p[8]; u16 flags; } Object;
 extern void *func_8004006C(void);
 extern Object *func_800400AC(void *, int);

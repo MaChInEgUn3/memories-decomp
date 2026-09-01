@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int func_8007D3F0(int, int);
 
 int File_Exists(int first, int second)

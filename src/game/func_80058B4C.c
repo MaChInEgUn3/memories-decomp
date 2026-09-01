@@ -1,11 +1,5 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
-typedef signed long long s64;
-typedef unsigned long long u64;
+#include "../types.h"
+
 typedef struct LocalWords7 { s32 w[7]; } LocalWords7;
 extern int func_80058A7C();
 extern int func_800598E4();

@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same 2-element history slot as reset_history_ring_and_flags.c's
    D_8009B3A4[2]; only index 0 is read here (declared scalar -- an array

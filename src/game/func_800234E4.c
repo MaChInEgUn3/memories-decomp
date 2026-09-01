@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* D_800EFE48 "Slot" object record; see get_or_init_D_800EFE48_slot.c for the
    full layout. Only the fields this function touches are named here. */

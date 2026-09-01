@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     unsigned char pad[0x6C];
     unsigned char flags;

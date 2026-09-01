@@ -1,4 +1,4 @@
-typedef unsigned short u16;
+#include "../types.h"
 
 int func_80042960(char *object)
 {

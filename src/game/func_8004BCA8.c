@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int func_8004BAE4(int);
 
 int func_8004BCA8(int value)

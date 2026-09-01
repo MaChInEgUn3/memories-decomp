@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { short x, y, z, w; } Result;
 void func_8005FBC4(int a, int b, int c, int d, Result *out, int scale)
 {

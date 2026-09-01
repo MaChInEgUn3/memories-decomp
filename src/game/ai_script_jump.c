@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     int first;
     int addend;
@@ -12,6 +14,5 @@ void AiScript_Jump(void)
     int result = AiScript_ReadShort();
     register State *state = &gAiScript_State;
 
-    
     state->result = result + state->addend;
 }

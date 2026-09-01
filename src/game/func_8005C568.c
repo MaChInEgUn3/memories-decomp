@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { int words[6]; } Local;
 extern void func_800803F4(Local *);
 extern int func_80082324(int);

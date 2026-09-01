@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char *g_SDValue;
 extern void func_8004733C(unsigned short, unsigned char);
 

@@ -1,7 +1,5 @@
-typedef unsigned char u8;
-typedef signed char s8;
-typedef signed short s16;
-typedef unsigned short u16;
+#include "../types.h"
+
 typedef struct { char p[0xC]; s16 result; char pE[8]; u16 flags; } Object;
 typedef struct { char p[0xF]; s8 x, y; } Position;
 extern Position *D_8009B1B4;

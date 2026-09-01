@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int AiScript_ReadByte(void);
 extern int AiScript_ReadShort(void);
 extern int gAiScript_aMemory[];

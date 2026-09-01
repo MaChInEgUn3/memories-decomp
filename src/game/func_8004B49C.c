@@ -1,11 +1,5 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
-typedef signed long long s64;
-typedef unsigned long long u64;
+#include "../types.h"
+
 extern u8 *D_8009B458;
 extern int func_8004A0FC();
 extern int func_8004A27C();
@@ -76,7 +70,7 @@ void func_8004B49C(s32 arg0, s32 arg1, u8 arg2) {
     case 0x63:
         e[0x12] = arg2;
         break;
-    
+
     case 0x7F:
         break;
     }

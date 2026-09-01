@@ -1,10 +1,4 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
-
+#include "../types.h"
 
 typedef struct { u8 *p; u8 pad4[5]; u8 flag; u8 pad10[2]; } Rec12;
 extern Rec12 D_800EA030[];

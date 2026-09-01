@@ -1,4 +1,5 @@
-typedef signed short s16;
+#include "../types.h"
+
 typedef struct{s16 x,y,z;char p6[0x1E];int value;}State;
 extern State D_800F2848;
 extern s16 D_8009B204,D_8009B1EE,D_8009B192,D_8009B190,D_8009B166;

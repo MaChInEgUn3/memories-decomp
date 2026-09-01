@@ -1,4 +1,4 @@
-typedef unsigned char u8;
+#include "../types.h"
 
 extern u8 *g_SDValue;
 extern void func_8007CDC0(u8 *);

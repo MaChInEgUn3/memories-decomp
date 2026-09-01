@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { unsigned char enabled; unsigned char busy; unsigned short value; } State;
 extern State D_800F2B20;
 int func_8005A878(int arg)

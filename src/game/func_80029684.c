@@ -1,4 +1,4 @@
-typedef signed short s16;
+#include "../types.h"
 
 extern void func_80087A50();
 extern void func_8005B260(int, int, int, int);

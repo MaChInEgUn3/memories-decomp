@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same D_8009B458_c stream-buffer struct family as clear_8009b458_4A4_if_set.c
    / reset_8009b458_idle_state.c. sub.f0 is the same discriminant as f4A4;

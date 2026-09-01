@@ -1,11 +1,5 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
-typedef signed long long s64;
-typedef unsigned long long u64;
+#include "../types.h"
+
 typedef float f32;
 typedef double f64;
 typedef char M2C_UNK;
@@ -18,8 +12,6 @@ typedef u8 Entry;
 typedef u8 Rec;
 typedef u8 Block;
 typedef struct { u32 words[2]; } Blk8;
-
-
 
 extern s32 (*func_800603DC())();
 extern s32 func_8007F6CC();
@@ -53,7 +45,6 @@ void func_80060220(s32 arg0, u8 *arg1, u8 *arg2) {
         f = arg0 < 2;
         sh = arg0 << 8;
         p = q;
-
 
         do {
             q = p + 0xC;

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned int D_8009B400;
 extern void func_80047314(unsigned int);
 

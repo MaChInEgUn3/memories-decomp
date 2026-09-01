@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     unsigned char pad0[0xDC0];
     unsigned char first;

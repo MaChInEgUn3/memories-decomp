@@ -1,11 +1,5 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
-typedef signed long long s64;
-typedef unsigned long long u64;
+#include "../types.h"
+
 typedef float f32;
 typedef double f64;
 typedef char M2C_UNK;
@@ -19,9 +13,7 @@ typedef u8 Rec;
 typedef u8 Block;
 typedef struct { u32 words[2]; } Blk8;
 
-
 extern void *D_8009B458;
-
 
 void func_8004C5C8(u8 *p) {
     switch (*(u16 *)(D_8009B458 + 0x7FC)) {

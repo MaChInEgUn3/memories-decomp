@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     void *value;
     unsigned char pad4[0x12];

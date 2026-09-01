@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     unsigned char padding[8];
     unsigned char *current;

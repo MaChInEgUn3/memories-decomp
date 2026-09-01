@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern signed char gDuel_bOpponentID[];
 extern unsigned short D_8009B398[];
 extern unsigned char D_8009B164;

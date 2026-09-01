@@ -1,5 +1,5 @@
-typedef unsigned char u8;
-typedef signed char s8;
+#include "../types.h"
+
 extern s8 gDuel_bOpponentID[9], D_8009B238;
 extern u8 D_8009B1D5;
 extern void func_8003CDF8(void);

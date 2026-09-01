@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Validates a byte value (1..20) and stores it into the s16 field 0x510
    of *D_8009B458 (same field read by get_8009b45c_510.c... note: a

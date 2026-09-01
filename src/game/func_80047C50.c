@@ -1,3 +1,5 @@
+#include "../types.h"
+
 int func_80047C50(int value)
 {
     register int result asm("$2") = value;

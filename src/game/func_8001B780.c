@@ -1,4 +1,4 @@
-typedef signed char s8;
+#include "../types.h"
 
 typedef struct {
     unsigned char pad0[0x30];

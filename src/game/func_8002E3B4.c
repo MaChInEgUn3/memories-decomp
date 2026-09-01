@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned short D_8009B27C;
 
 int func_8002E3B4(void)

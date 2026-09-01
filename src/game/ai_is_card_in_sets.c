@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int Ai_IsCardInSet(int); extern int Ai_IsTypeInSet(int);
 int Ai_IsCardInSets(int mode,int index)
 {

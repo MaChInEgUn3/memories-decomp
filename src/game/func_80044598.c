@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int func_8008E680(void *, int);
 
 int func_80044598(int value, char *entry, int count)

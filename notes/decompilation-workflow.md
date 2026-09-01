@@ -65,6 +65,22 @@ source, local includes, compiler profile, compiler, assembler, MASPSX, assembly
 filter, and generated Splat include fingerprints are unchanged. The ordinary
 `make match` remains the clean-build acceptance gate for final audits.
 
+## Shared primitive types
+
+Every C source includes `src/types.h`, which is the single definition point
+for `s8/u8`, `s16/u16`, `s32/u32`, and `s64/u64`. Do not redeclare those
+aliases in a translation unit.
+
+Complex structs, unions, enums, callback types, and uncertain placeholders
+remain local until their layouts and ownership are understood well enough for
+a separate deliberate header pass.
+
+Validate the convention with:
+
+```sh
+make basic-types
+```
+
 ## Function conversion
 
 For each candidate:

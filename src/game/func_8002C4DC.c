@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned short gDuel_awPlayerDeck[];
 
 int func_8002C4DC(int value)

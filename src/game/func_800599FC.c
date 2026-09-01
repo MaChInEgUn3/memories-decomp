@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { int words[8]; } Local;
 extern void func_80058B4C(Local *, int, int, int, int, int, int, int);
 void func_800599FC(int a, int b, int c, int d, int e, int f, int g)

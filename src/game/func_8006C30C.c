@@ -1,3 +1,5 @@
+#include "../types.h"
+
 void func_8006C30C(unsigned char *destination, const unsigned char *source)
 {
     destination[0] = source[0];

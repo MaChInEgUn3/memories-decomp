@@ -1,7 +1,4 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
+#include "../types.h"
 
 extern u8 D_8009B26C, D_8009B26E;
 extern u8 D_8009B369[9], D_8009B2F8[9], D_8009B0A3[9];

@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same *D_8009B458 struct as set_8009b458_510_validated.c (f510 = item
    count, 1..20). Walks the 0x28-byte item array starting at offset 0x180

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 int func_80042B08(int value, int step)
 {
     if (value < 0) {

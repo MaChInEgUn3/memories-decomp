@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { void *pointer; short value; unsigned char pad[14]; } Entry;
 extern void func_8004036C(void *);
 void func_8002E00C(Entry *entries) {

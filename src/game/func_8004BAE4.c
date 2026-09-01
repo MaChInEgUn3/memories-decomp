@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char *D_8009B458;
 int func_8004BAE4(unsigned char *reader)
 {

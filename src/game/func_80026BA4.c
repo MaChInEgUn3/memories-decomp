@@ -1,4 +1,5 @@
-typedef unsigned short u16;
+#include "../types.h"
+
 extern u16 D_8009B1A8, D_8009B1D2, D_8009B220;
 
 void func_80026BA4(int value, int flag)

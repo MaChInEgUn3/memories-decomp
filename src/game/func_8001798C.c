@@ -1,4 +1,5 @@
-typedef unsigned char u8;
+#include "../types.h"
+
 extern u8 gDuel_bTerrain[9];
 extern void func_800171A8(void);
 extern void func_80014E1C();

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 int func_80037C74(unsigned char *object) {
     if (*(short *)(object + 0x38) >= *(short *)(object + 0x3E)) {
         *(short *)(object + 0x38) = 0;

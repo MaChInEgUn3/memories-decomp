@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     int value_0;
     int value_4;

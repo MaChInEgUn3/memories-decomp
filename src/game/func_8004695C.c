@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char *volatile D_8009B458;
 
 void func_8004695C(int value)

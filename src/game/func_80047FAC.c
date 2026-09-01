@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 // Scans 4 entries in g_SDValue's array at +0x404 (stride 2, u16) for ones
 // matching the low 16 bits of a0, counting how many also have a nonzero

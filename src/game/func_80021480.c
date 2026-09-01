@@ -1,4 +1,6 @@
-typedef signed char s8;typedef unsigned char u8;typedef unsigned short u16;typedef struct{char p[8];u16 flags;}Child;typedef struct{Child*first;Child*children[10];char p2C[8];u8 field34;}Container;
+#include "../types.h"
+
+typedef struct{char p[8];u16 flags;}Child;typedef struct{Child*first;Child*children[10];char p2C[8];u8 field34;}Container;
 extern Container*D_8009B1E8;extern void func_80040410(Child*,int);extern void*func_80035BE4();extern void func_80039A14(void*);
 void func_80021480(int mode)
 {

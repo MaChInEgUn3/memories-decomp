@@ -1,4 +1,6 @@
-typedef unsigned char u8;typedef unsigned short u16;typedef struct{u16 x,y;}Pair;typedef struct{char p[0x16];u16 flags;char tail[4];}Entry;typedef struct{char p[4];u16 y;}NewObject;
+#include "../types.h"
+
+typedef struct{u16 x,y;}Pair;typedef struct{char p[0x16];u16 flags;char tail[4];}Entry;typedef struct{char p[4];u16 y;}NewObject;
 extern u8 D_8009B1D5;extern u16 D_8009B220;extern Pair D_80090800[2][20];extern u8 D_800907D8[];extern Entry D_801A7AD8[];extern char D_8009AF40[];
 extern int func_80024E24(void);extern NewObject*func_8002C68C(int);extern void func_8008E870(char*,int),func_80024954(Entry*);
 void func_80026A3C(void)

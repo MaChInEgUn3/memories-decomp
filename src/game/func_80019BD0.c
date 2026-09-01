@@ -1,4 +1,6 @@
-typedef unsigned char u8;typedef unsigned short u16;typedef signed short s16;typedef struct{char p[0x16];u16 flags;char tail[4];}BoardEntry;
+#include "../types.h"
+
+typedef struct{char p[0x16];u16 flags;char tail[4];}BoardEntry;
 typedef struct Object{char p0[8];u16 flags;char pA[0x16];u8 alt,current,mode;char p23;void*callback;char p28[6];s16 limit;char p30[0x37];u8 field67;char p68[2];u8 index;char p6B;u8 active;}Object;
 extern BoardEntry D_801A7AD8[];extern int func_80042B98(Object*);
 void func_80019BD0(Object*o)

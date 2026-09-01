@@ -1,4 +1,4 @@
-typedef unsigned char u8;
+#include "../types.h"
 
 int func_8004A3BC(u8 *entry, int value)
 {

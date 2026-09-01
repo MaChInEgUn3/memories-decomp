@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char gAiScript_State[];
 
 void AiScript_ClearTypes(void)

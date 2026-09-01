@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int func_80073880(void *);
 
 int func_80043DA0(void **items, int stop)

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int D_8009AF64;
 extern int D_8009AF68;
 

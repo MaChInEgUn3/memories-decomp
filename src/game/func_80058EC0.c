@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same D_800F2C40 record table as get_D_800F2C40_slot_field_bf5.c. Reads the
    byte field at 0xBF5 and uses it as a sub-index into a 118-byte-stride

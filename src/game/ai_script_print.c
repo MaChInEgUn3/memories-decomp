@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int AiScript_ReadByte(void);
 extern int func_8008E870(const char *, ...);
 extern const char D_80011908[];

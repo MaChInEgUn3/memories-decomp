@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct Entry { void *object; char p4[8]; } Entry;
 typedef struct { char p0[4]; void *base; Entry *entries; } Parent;
 extern void func_80022F98(Parent *, void *);

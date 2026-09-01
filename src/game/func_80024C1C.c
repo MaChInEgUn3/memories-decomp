@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Allocates a display object (get_or_init_D_800EFE48_slot, type 0),
    positions it at (x, y), wires up its per-frame callback, and — only for

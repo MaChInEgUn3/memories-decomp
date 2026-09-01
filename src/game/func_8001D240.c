@@ -1,4 +1,5 @@
-typedef unsigned char u8;typedef unsigned short u16;typedef signed short s16;
+#include "../types.h"
+
 typedef struct{char p0[8];u16 flags;char pA[0x17];u8 current,mode;char p23;void*callback;s16 dx,dy;char p2C[0x3E];u8 index;char p6B;u8 active;}Object;
 typedef struct{char p[0x16];u16 flags;char tail[4];}Entry;extern Entry D_801A7AD8[];extern int func_80042B98(Object*);
 void func_8001D240(Object*o)

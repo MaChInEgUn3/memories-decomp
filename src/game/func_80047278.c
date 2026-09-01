@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern void func_800472A8(unsigned int);
 extern void func_80047AD0(unsigned int);
 

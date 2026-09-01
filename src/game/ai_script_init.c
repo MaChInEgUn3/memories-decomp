@@ -1,10 +1,4 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
-
+#include "../types.h"
 
 extern u8 gAiScript_State[], D_800EAE88[], gAiScript_aMemory[];
 extern void func_8008E360(void *, s32);

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     unsigned char data[24];
 } DiscFile;

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { int v[8]; } Block;
 typedef struct { unsigned char b[8]; } __attribute__((packed)) Packed8;
 typedef struct {

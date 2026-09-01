@@ -1,4 +1,6 @@
-typedef signed char s8;typedef struct{void*p[6];s8 value;}Entry;typedef struct{s8 result,field1;char p2[4];s8 value,zero,random;}State;
+#include "../types.h"
+
+typedef struct{void*p[6];s8 value;}Entry;typedef struct{s8 result,field1;char p2[4];s8 value,zero,random;}State;
 extern State D_800EAE88;extern int func_80026D18(Entry**,int,int),func_80026C0C(int),func_8008E590(void);
 int func_8002712C(void)
 {

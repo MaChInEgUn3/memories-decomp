@@ -1,4 +1,5 @@
-typedef unsigned short u16;
+#include "../types.h"
+
 typedef struct {
     u16 a, b, c, d, e, f, g, h;
     char rest[0x20];

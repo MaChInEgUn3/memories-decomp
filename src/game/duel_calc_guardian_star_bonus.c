@@ -1,4 +1,5 @@
-typedef unsigned short u16; typedef signed short s16;
+#include "../types.h"
+
 typedef struct { char pad_00[0xC]; s16 id; char pad_0E[8]; u16 flags; } Entry;
 extern int gDuel_adwCardStats[];
 extern int Duel_CalcGuardianStarMatchup(int, int);

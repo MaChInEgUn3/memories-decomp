@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern signed short D_8009B322;
 extern int func_80036D3C(unsigned char *);
 void func_800379F8(unsigned char *object) {

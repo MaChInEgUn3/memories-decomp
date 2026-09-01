@@ -1,4 +1,4 @@
-typedef unsigned char u8;
+#include "../types.h"
 
 void func_800136D4(void)
 {

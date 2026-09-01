@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { int key; void **handler; } Object;
 extern void *func_8006041C(int); extern void func_80060170(int, int);
 void func_8006086C(Object *object)

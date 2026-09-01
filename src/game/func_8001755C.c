@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int D_80010000[3];
 extern void func_800530C4(void);
 extern void func_800533D8(void);

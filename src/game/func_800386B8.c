@@ -1,9 +1,5 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
+#include "../types.h"
+
 extern s32 D_8009B404[];
 extern s32 D_8009B400[];
 extern s32 D_8009B350;

@@ -1,4 +1,4 @@
-typedef unsigned short u16;
+#include "../types.h"
 
 extern volatile u16 D_8009B112;
 

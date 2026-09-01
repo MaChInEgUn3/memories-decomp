@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char D_8009B26C;
 extern void func_8003BEB8(void), func_8016A080(void), func_8016A37C(void);
 void Main_RunPasswordMenu(void) {

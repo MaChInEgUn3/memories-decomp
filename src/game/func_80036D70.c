@@ -1,4 +1,5 @@
-typedef signed char s8;
+#include "../types.h"
+
 unsigned int func_80036D70(unsigned char *object) {
     unsigned char **stream = &((unsigned char **)object)[*(s8 *)(object + 0x58)];
     unsigned char *current = *stream;

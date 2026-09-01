@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int D_800E9EF0[];
 
 void func_8002CB50(int *destination)

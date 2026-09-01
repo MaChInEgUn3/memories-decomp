@@ -1,3 +1,5 @@
+#include "../types.h"
+
 void func_8003EEC8(void)
 {
 }

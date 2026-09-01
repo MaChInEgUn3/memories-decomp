@@ -1,4 +1,5 @@
-typedef unsigned char u8;
+#include "../types.h"
+
 typedef struct { int x; u8 a, b, flags, mode, pad[4]; } State;
 extern State D_800E9EC8;
 extern void func_80015780(void);

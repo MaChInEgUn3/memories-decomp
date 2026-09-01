@@ -1,3 +1,5 @@
+#include "../types.h"
+
 __asm__(
     ".set noreorder\n"
     ".globl func_8002A788\n"

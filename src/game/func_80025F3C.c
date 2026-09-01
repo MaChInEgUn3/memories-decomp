@@ -1,6 +1,5 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
+#include "../types.h"
+
 typedef struct Object {
     u16 x, y;
     u8 pad_04[0x16];

@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* CRC-16/XMODEM (poly 0x1021, zero-initialized) over data[0..len). */
 u32 func_8003CEB8(u8 *data, s32 len) {

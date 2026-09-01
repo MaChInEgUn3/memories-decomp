@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern void func_800473CC(unsigned int);
 extern void func_80047EC4(void);
 

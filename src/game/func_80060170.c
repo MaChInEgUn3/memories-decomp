@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { int first; int second; } Pair;
 extern Pair D_800F5918[80];
 void func_80060170(int key,int value)

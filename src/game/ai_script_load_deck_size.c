@@ -1,10 +1,4 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
-
+#include "../types.h"
 
 typedef struct { s16 value; u8 pad[10]; } Rec12;
 extern Rec12 gDuel_aActiveCards[];

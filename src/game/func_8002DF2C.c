@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern void func_8002DDFC(void);
 extern unsigned char *func_80014EEC(int, int, int, int, void *, int, int);
 extern unsigned int D_8009B0F4;
@@ -13,7 +15,7 @@ void func_8002DF2C(volatile unsigned char *owner, int value)
     if (owner) {
         *(short *)(owner + 0x3C) = value;
     }
-    
+
     index = ((value >> 4) & 15) * 10 + (value & 15);
     mode = value >> 8;
     switch (mode) {

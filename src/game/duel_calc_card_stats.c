@@ -1,4 +1,5 @@
-typedef signed short s16;
+#include "../types.h"
+
 typedef struct { char p[0xE]; s16 a, b, c, d; } Object;
 
 int Duel_CalcCardStats(Object *object)

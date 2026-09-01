@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int gFile_anLba[];
 extern signed char gSD_bOutputType;
 extern void func_80046990(int, int, int);

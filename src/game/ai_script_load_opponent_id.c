@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int gAiScript_aMemory[];
 extern signed char gDuel_bOpponentID;
 extern int AiScript_ReadByte(void);

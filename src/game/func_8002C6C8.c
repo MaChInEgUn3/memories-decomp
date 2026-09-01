@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Clears D_8009B260's bit 0x1, then walks all 8 D_800EAD88[] records. For
    each record whose f1C flags byte has 0x80 set: raises D_8009B260's bit 0

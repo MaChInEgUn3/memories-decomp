@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same *g_SDValue struct as set_8009b45c_1582_1584.c/clear_8009b45c_busy.c.
    If the 0x157E slot is active, notifies func_80049C40() (and clears the

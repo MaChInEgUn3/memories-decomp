@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int gAiScript_aMemory[];
 extern unsigned char gAi_bBestTarget;
 extern int AiScript_ReadByte(void);

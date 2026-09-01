@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     unsigned char *streams[22];
     signed char stream_index;

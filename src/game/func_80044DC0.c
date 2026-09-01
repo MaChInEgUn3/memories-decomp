@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Sibling of init_local_flags_and_notify (func_80044F58): builds the same
    4-byte CdMix volume/id packet, but here f0/f1-or-f2 are scaled DSP-style

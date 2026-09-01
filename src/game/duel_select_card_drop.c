@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Picks a weighted-random index (1-based, 0 = none) out of a 722-entry
    u16 weight table selected by a0 from the gDuel_awSaPowCardDrops record array

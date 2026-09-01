@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct Object {
     char pad_00[0x1C];
     int reset;

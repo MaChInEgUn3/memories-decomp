@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern void func_80012D4C(void);
 
 void func_80012D84(int count)

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 __asm__(
     ".set noreorder\n"
     ".globl Main_RunCredits\n"

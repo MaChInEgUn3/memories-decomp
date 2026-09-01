@@ -1,4 +1,5 @@
-typedef unsigned char u8;typedef unsigned short u16;
+#include "../types.h"
+
 typedef struct{char p0[4];u16 width,height;int field8,fieldC,field10,field14,field18,field1C,field20,field24;char p28[4];unsigned int flags;u16 x,y;int field34;char p38[8];int field40;u16 field44;u8 state,substate;}Object;
 extern int D_8009B118;extern void func_80013940(Object*,int,int,int);
 Object*func_80013998(Object*object,int flags,int field18,int sector,int vertical,int field20,int field40,int length)

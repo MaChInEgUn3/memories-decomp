@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct { short x, y, z, w; } Vec;
 extern unsigned short *func_800591FC(void), *func_80059208(void);
 extern unsigned char D_8009B07B, D_8009B07C;

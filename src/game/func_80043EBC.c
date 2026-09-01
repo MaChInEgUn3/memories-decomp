@@ -1,4 +1,4 @@
-typedef unsigned char u8;
+#include "../types.h"
 
 extern signed char D_8009B43E;
 extern u8 D_8009B44E;

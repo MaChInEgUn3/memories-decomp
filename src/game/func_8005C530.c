@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int func_8005BE3C(void);
 extern void func_8005BB7C(int);
 

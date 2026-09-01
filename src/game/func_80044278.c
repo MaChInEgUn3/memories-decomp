@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern void *D_800F2AE0[];
 extern short D_8009B44C;
 extern int D_8009B430;

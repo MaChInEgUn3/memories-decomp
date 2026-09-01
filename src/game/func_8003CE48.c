@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern volatile unsigned short D_8009B394;
 extern volatile unsigned short D_8009B398;
 extern volatile unsigned short D_8009B39E;

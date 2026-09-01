@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char D_8009B26C, D_8009B269;
 extern void func_80030198(void);
 extern void func_80031084(void);

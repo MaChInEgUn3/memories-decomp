@@ -1,5 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned int u32;
+#include "../types.h"
 
 typedef struct {
     u8 pad_00[0x69];

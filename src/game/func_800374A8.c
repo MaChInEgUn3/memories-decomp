@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern void func_800373C8(unsigned char *, int, int);
 void func_800374A8(unsigned char *object) {
     unsigned char flags = object[0x51];

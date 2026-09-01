@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     unsigned char padding[0x10];
     volatile int field_10;

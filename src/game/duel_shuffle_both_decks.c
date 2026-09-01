@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern char gDuel_awPlayerShuffledDeck[];
 extern void Duel_ShuffleDeck(void *, void *, void *);
 

@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     unsigned char padding_00[0x2C];
     unsigned int flags;

@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Called from func_8001EE44 (menu/list scroll helper). Given a current and a
    target grid index (col/row-style), works out whether the pair straddles a

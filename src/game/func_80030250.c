@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char D_8009B2EA, D_8009B2B4, D_8009B2B5, D_8009B2B6;
 extern unsigned char D_8009B2E9, D_8009B2DC, D_8009B2B8, D_8009B2C2;
 extern unsigned char D_8009B2C1, D_8009B2C0, D_8009B2E0;

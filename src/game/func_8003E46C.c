@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char D_8009B3C6;
 extern volatile unsigned short D_8009B3FA;
 

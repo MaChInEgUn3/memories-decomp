@@ -1,3 +1,5 @@
+#include "../types.h"
+
 typedef struct {
     int field0;
     int field4;

@@ -1,5 +1,5 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
+#include "../types.h"
+
 typedef struct { char p[8]; u16 flags; char pA[0x60]; u8 index; } Object;
 typedef struct { char p[0xA]; u8 index; } Source;
 extern Object *D_8009B1F8;

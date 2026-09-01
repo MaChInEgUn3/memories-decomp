@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int Duel_CalcCardStats(void *);
 extern int Duel_CalcGuardianStarBonus(void *, int);
 

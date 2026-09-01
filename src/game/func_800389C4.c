@@ -1,5 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
+#include "../types.h"
 
 void func_800389C4(u8 *value)
 {

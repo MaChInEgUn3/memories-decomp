@@ -1,10 +1,4 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
-
+#include "../types.h"
 
 typedef struct { u32 key; s16 index; } Item;
 extern s16 gCard_asNameSortKey[];

@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same stride-28 table as scan_flag80_entries_800eb288/func_80035DB8/
    clear_two_fields_800eb288 (see clear_matching_byte_800eb288.c): field17

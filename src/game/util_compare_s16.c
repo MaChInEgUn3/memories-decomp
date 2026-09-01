@@ -1,3 +1,5 @@
+#include "../types.h"
+
 int Util_CompareS16(const short *left, const short *right)
 {
     if (*left == *right) {

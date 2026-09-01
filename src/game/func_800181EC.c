@@ -1,4 +1,5 @@
-typedef unsigned char u8;
+#include "../types.h"
+
 typedef struct { char p[0x22]; u8 flag; char p23[0x45]; u8 type; } Object;
 
 int func_800181EC(Object *object)

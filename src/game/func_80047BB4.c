@@ -1,5 +1,4 @@
-typedef unsigned short u16;
-typedef unsigned char u8;
+#include "../types.h"
 
 extern u8 *g_SDValue;
 extern void func_80076ED0(int, int);

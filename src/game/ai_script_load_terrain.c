@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern int gAiScript_aMemory[];
 extern unsigned char gDuel_bTerrain;
 extern int AiScript_ReadByte(void);

@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same *g_SDValue struct/entry layout as func_80045114.c (arr[16], stride
    0x30, f0 at offset 0). */

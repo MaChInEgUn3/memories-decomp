@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same D_800907D8/D_801A7AD8 scan as func_8002778C.c, but skips the
    func_8001EFD4 comparison (while still counting the row as "found") when

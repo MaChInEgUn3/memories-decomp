@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern char D_800F2B00[];
 extern char D_80010538[];
 extern void *D_800F2AE0[];

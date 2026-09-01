@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 extern void (*D_800E9DB0[4])(void); /* per-frame callback slots */
 extern s32 runtime_gp;

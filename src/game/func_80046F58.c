@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern void func_80047EC4(void);
 extern void func_8004763C(void);
 extern void SD_Init(void);

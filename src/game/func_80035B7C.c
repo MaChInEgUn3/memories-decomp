@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern void func_80035CA8(int), func_80035DB8(int), func_8004036C(void *);
 void func_80035B7C(unsigned char *object) {
     func_80035CA8(object[0x57]);

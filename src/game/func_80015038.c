@@ -1,4 +1,4 @@
-typedef unsigned int u32;
+#include "../types.h"
 
 extern volatile u32 D_8009B0F4;
 extern void func_80015010(void);

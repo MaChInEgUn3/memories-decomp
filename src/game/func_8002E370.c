@@ -1,3 +1,5 @@
+#include "../types.h"
+
 extern unsigned char D_800EB010[];
 void func_8002E370(unsigned char *object) {
     register int i __asm__("$5") = 2;

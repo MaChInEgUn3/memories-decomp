@@ -1,9 +1,5 @@
-typedef signed char s8;
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
-typedef signed int s32;
-typedef unsigned int u32;
+#include "../types.h"
+
 typedef struct { u8 b0, b1, b2, b3; } Word4;
 extern void func_80058938(s32, s32, Word4, Word4, s32, s32);
 

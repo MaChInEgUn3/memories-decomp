@@ -1,9 +1,4 @@
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef signed char s8;
-typedef short s16;
-typedef int s32;
+#include "../types.h"
 
 /* Same *g_SDValue struct as other siblings. Fills the u16 array at f43C
    from index f4 up to (but not including) f0 with 0xFFFF, always sets

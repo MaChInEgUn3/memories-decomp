@@ -1,10 +1,5 @@
-typedef signed char s8;
-typedef signed int s32;
-typedef unsigned int u32;
+#include "../types.h"
 
-typedef unsigned char u8;
-typedef signed short s16;
-typedef unsigned short u16;
 typedef struct {
     char p0[8]; u16 flags; char pA[0x17]; u8 current;
     char p22[2]; void *callback; u8 target; char p29; s16 step;

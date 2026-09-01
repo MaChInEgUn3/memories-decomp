@@ -1,3 +1,5 @@
+#include "../types.h"
+
 int func_80044D0C(void)
 {
     register char *base asm("$3") = (char *)0x800A0000;
