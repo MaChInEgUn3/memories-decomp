@@ -1455,7 +1455,11 @@ def add_required_linker_aliases(
     if "// Collaborator-verified source aliases" not in text:
         text += "\n\n// Collaborator-verified source aliases"
     for symbol, alias_address in aliases:
-        text += f"\n{symbol} = 0x{alias_address:08X};"
+        attributes = ""
+        if LOAD_ADDRESS <= alias_address < 0x801E0000:
+            rom_address = HEADER_SIZE + alias_address - LOAD_ADDRESS
+            attributes = f" // rom:0x{rom_address:X}"
+        text += f"\n{symbol} = 0x{alias_address:08X};{attributes}"
     config_path.write_text(text + "\n", encoding="utf-8")
     return [symbol for symbol, _address in aliases]
 
