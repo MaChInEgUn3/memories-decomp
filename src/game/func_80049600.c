@@ -7,7 +7,7 @@ typedef int s32;
 
 /* Validates a byte value (1..20) and stores it into the s16 field 0x510
    of *D_8009B458 (same field read by get_8009b45c_510.c... note: a
-   different global, D_8009B458 not D_8009B45C). Returns the stored value,
+   different global, D_8009B458 not g_SDValue). Returns the stored value,
    or 0xFF if out of range or zero. */
 struct S8009B458 {
     char pad[0x510];

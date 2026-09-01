@@ -8,7 +8,7 @@ typedef int s32;
 extern int AiScript_ReadShort(void);
 extern void func_8008E870();
 
-/* Same struct as init_duel_buffers.c's D_800F5BE8 (f0/f4/f8 match), plus a
+/* Same struct as init_duel_buffers.c's gAiScript_State (f0/f4/f8 match), plus a
    byte count at 0x14 and an item stack starting at 0x18 (see
    pop_item_or_assert.c, the matching pop operation). */
 struct Big {
@@ -26,7 +26,7 @@ extern char D_800118AC[]; /* "ERROR:Sub Routine Nest Over !!\n" */
 extern char D_8009B084[]; /* "%s:%d\n" */
 extern char D_800118CC[]; /* "src/hirata/H_mctrl1.c" */
 
-/* Pushes D_800F5BE8.f8 onto its item stack; if the stack is already full
+/* Pushes gAiScript_State.f8 onto its item stack; if the stack is already full
    (8 entries), prints an error and hangs (original panic-on-overflow
    handler, the push-side sibling of pop_item_or_assert.c). Either way,
    ends by folding a freshly-read value into f8. */

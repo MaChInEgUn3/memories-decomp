@@ -11,7 +11,7 @@ typedef struct {
 extern u16 D_8009B220;
 extern int func_80024E24(void);
 extern Object *func_8002C68C(int);
-extern void func_8003FEE0(int);
+extern void SD_SEPlayFull(int);
 
 void func_80025EE0(void)
 {
@@ -22,7 +22,7 @@ void func_80025EE0(void)
         object->x = 0xA0;
         object->y = 0x78;
         object->field_1A = 1;
-        func_8003FEE0(2);
+        SD_SEPlayFull(2);
     } else {
         D_8009B220 = 0;
     }

@@ -26,7 +26,7 @@ typedef struct {
     RenderRecord *render;
 } MovingRecord;
 extern MovingRecord D_800EA1E8;
-extern void func_8003FEE0();
+extern void SD_SEPlayFull();
 extern void func_8002A2F4();
 
 s32 func_8002A3CC(void)
@@ -50,7 +50,7 @@ s32 func_8002A3CC(void)
         object->active = 0;
         object->x = object->rest_x;
         object->y = object->rest_y;
-        func_8003FEE0(53);
+        SD_SEPlayFull(53);
         func_8002A2F4(object);
     }
     object->render->x = object->x;

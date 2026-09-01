@@ -5,7 +5,7 @@ extern void func_800495DC(void);
 extern void func_800495EC(void);
 extern void func_80044DC0(int);
 
-void func_80046FA0(short value)
+void SD_SetOutputType(short value)
 {
     u8 *state = g_SDValue;
     if (state[0x48] != value) {

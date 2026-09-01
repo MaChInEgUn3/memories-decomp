@@ -21,7 +21,7 @@ extern Entry D_801A7AD8[];
 extern SideState D_800E9FF0[2];
 extern int func_80024E24(void);
 extern Object *func_8002C604(int);
-extern void func_8003FEE0(int), func_80025B28(Object *);
+extern void SD_SEPlayFull(int), func_80025B28(Object *);
 extern void *func_80042B40(int);
 
 void func_80025F3C(void)
@@ -40,7 +40,7 @@ void func_80025F3C(void)
         object->y = 0x78;
         side = D_8009B1D5 ^ 1;
         object->field_1A = side;
-        func_8003FEE0(0x23);
+        SD_SEPlayFull(0x23);
     } else if (!(D_8009B220 & 0x40)) {
         if (D_8009B17C->count != 0) {
             D_8009B220 |= 0x40;

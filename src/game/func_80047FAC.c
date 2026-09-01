@@ -5,7 +5,7 @@ typedef signed char s8;
 typedef short s16;
 typedef int s32;
 
-// Scans 4 entries in D_8009B45C's array at +0x404 (stride 2, u16) for ones
+// Scans 4 entries in g_SDValue's array at +0x404 (stride 2, u16) for ones
 // matching the low 16 bits of a0, counting how many also have a nonzero
 // SpuGetVoiceEnvelope result written to the stack-local it queries per entry.
 extern u8 *g_SDValue;

@@ -7,7 +7,7 @@ typedef int s32;
 
 /* Allocates a display object (get_or_init_D_800EFE48_slot, type 0),
    positions it at (x, y), wires up its per-frame callback, and — only for
-   cards whose type field (bits 26-30 of the packed D_801D4244[cardId-1]
+   cards whose type field (bits 26-30 of the packed gDuel_adwCardStats[cardId-1]
    record, same field decoded by idx_table_bitfield_copy.c and
    bitfield_compare_calls_store.c) is 0x14-0x17 (Spell/Trap subtypes, as
    opposed to Monster types which are < 0x14) — tags it with a small icon

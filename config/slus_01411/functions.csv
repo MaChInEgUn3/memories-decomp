@@ -608,7 +608,7 @@ address,size,name,status,module,notes
 0x8003FE14,0x5C,func_8003FE14,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
 0x8003FE70,0x10,func_8003FE70,matching_c,game,Ordered stores to the two small-data globals matched exactly.
 0x8003FE80,0x60,func_8003FE80,matching_c,game,Pure-C inline refinement matched the full executable.
-0x8003FEE0,0x28,func_8003FEE0,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
+0x8003FEE0,0x28,SD_SEPlayFull,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003FF08,0x2C,func_8003FF08,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003FF34,0x24,func_8003FF34,matching_c,game,Constant -8 and zero-argument call wrapper matched exactly.
 0x8003FF58,0x30,func_8003FF58,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
@@ -732,13 +732,13 @@ address,size,name,status,module,notes
 0x8004666C,0x5C,func_8004666C,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x800466C8,0x54,func_800466C8,matching_c,game,4 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8004671C,0x4C,func_8004671C,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x80046768,0x1F4,func_80046768,unmatched_asm,game,
+0x80046768,0x1F4,SD_InitState,unmatched_asm,game,
 0x8004695C,0x34,func_8004695C,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80046990,0x78,func_80046990,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80046A08,0x3E0,func_80046A08,unmatched_asm,game,
 0x80046DE8,0x170,func_80046DE8,unmatched_asm,game,
 0x80046F58,0x48,func_80046F58,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x80046FA0,0x68,func_80046FA0,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
+0x80046FA0,0x68,SD_SetOutputType,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80047008,0x14,func_80047008,matching_c,game,2 pre-policy variants: exact -G8; -G0 used absolute global access
 0x8004701C,0x20,func_8004701C,matching_c,game,4 pre-policy variants: exact -G8; -G0 used absolute global access
 0x8004703C,0x14,func_8004703C,matching_c,game,2 pre-policy variants: exact -G8; -G0 used absolute global access
@@ -773,7 +773,7 @@ address,size,name,status,module,notes
 0x80047FAC,0x90,func_80047FAC,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_cc_g0_as_g8_no_split.
 0x8004803C,0x274,func_8004803C,unmatched_asm,game,
 0x800482B0,0x3A8,func_800482B0,unmatched_asm,game,
-0x80048658,0x110,func_80048658,unmatched_asm,game,
+0x80048658,0x110,SD_SEPlay,unmatched_asm,game,
 0x80048768,0x1B8,func_80048768,unmatched_asm,game,
 0x80048920,0x108,func_80048920,unmatched_asm,game,
 0x80048A28,0x1E4,func_80048A28,unmatched_asm,game,
@@ -788,7 +788,7 @@ address,size,name,status,module,notes
 0x80049138,0xC8,func_80049138,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80049200,0x30,func_80049200,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80049230,0xA8,func_80049230,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x800492D8,0x30,func_800492D8,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
+0x800492D8,0x30,SD_Init,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80049308,0x8C,func_80049308,matching_c,game,Pure-C inline refinement matched the full executable.
 0x80049394,0x64,func_80049394,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x800493F8,0x3C,func_800493F8,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
@@ -801,7 +801,7 @@ address,size,name,status,module,notes
 0x800495EC,0x14,func_800495EC,matching_c,game,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
 0x80049600,0x40,func_80049600,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_cc_g0_as_g8_no_split.
 0x80049640,0x54,func_80049640,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80049694,0x30,func_80049694,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
+0x80049694,0x30,SD_Term,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x800496C4,0x98,func_800496C4,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8004975C,0x84,func_8004975C,matching_c,game,Pure-C inline refinement matched the full executable.
 0x800497E0,0xDC,func_800497E0,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_cc_g0_as_g8_no_split.

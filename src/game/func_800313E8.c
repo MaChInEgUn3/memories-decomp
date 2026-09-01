@@ -21,7 +21,7 @@ typedef struct { u32 words[2]; } Blk8;
 
 
 
-extern s32 func_8003FEE0();
+extern s32 SD_SEPlayFull();
 extern s32 func_8004036C();
 extern s32 func_800429D8();
 extern s32 func_80042A78();
@@ -36,7 +36,7 @@ void func_800313E8(u8 *p) {
         *(s16 *)(p + 0x60) = 0;
         *(s32 *)(p + 4) = *(s32 *)(p + 4) & 0xF7FFFFFF;
         p[0x6C] = p[0x6C] | 0x40;
-        func_8003FEE0(0xA);
+        SD_SEPlayFull(0xA);
     }
 
     v = p[0x6C];

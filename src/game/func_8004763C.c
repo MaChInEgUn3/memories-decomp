@@ -5,11 +5,11 @@ typedef signed char s8;
 typedef short s16;
 typedef int s32;
 
-/* Same *D_8009B45C struct as other siblings. Fills the u16 array at f43C
+/* Same *g_SDValue struct as other siblings. Fills the u16 array at f43C
    from index f4 up to (but not including) f0 with 0xFFFF, always sets
    f442=0xFFFF regardless of whether the fill ran, then propagates f4 into
    f440 and recomputes f438 from f448's own f4 field plus 0x1010. The
-   final field group is read via a fresh D_8009B45C dereference rather
+   final field group is read via a fresh g_SDValue dereference rather
    than the cached local (see project_d8009b45c_reload_pointer_trick). */
 struct Sub {
     char pad[4];

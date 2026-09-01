@@ -4,13 +4,13 @@ Date: 2026-09-01
 
 ## Result
 
-The first evidence-backed naming pass applies:
+The evidence-backed naming passes apply:
 
 | Kind | Applied names |
 |---|---:|
-| Functions | 116 |
-| Globals | 40 |
-| **Total** | **156** |
+| Functions | 122 |
+| Globals | 53 |
+| **Total** | **175** |
 
 The machine-readable registry is
 `notes/semantic-symbol-map.csv`. Each row records the address, accepted name,
@@ -41,6 +41,7 @@ Applied function families:
 | `Duel_` | 15 | card statistics, fusion, ritual, guardian stars, rank, drops, and deck work |
 | `Ai_` | 7 | AI range/set helpers and fusion completion |
 | `File_` | 3 | disc position and existence helpers |
+| `SD_` | 6 | sound state, output mode, effect playback, initialization, and termination |
 | `Library_` | 2 | card-used/owned library state |
 | `Util_` | 2 | behavior-established generic helpers |
 | Other | 4 | `BuildDeck_`, `Text_`, `Rand_`, and `Model_` |
@@ -57,6 +58,30 @@ state:
 
 The model loader at `0x80056504` is named `Model_LoadMonsterMerge`, using the
 local `MODEL.MRG`/`SU.MRG` behavior and DOTR's `LoadMerge` terminology.
+
+## Unchiga corroboration pass
+
+Unchiga's live traces, static recompilation, symbol catalogue, and matching
+sources were checked against local code before accepting another 19 names:
+
+- `SD_SEPlay`, `SD_SEPlayFull`, and `SD_SetOutputType` are directly supported
+  by reversible menu traces and local call/body behavior.
+- `SD_Init` and `SD_Term` are the locally matched initialization and mirrored
+  cleanup chains.
+- `0x80046768` is named `SD_InitState`, not the proposed `SD_LoadData`.
+  Its local body initializes `g_SDValue`, work buffers, callbacks, and default
+  fields but does not itself read `SD_BGM.DAT`, `SD_SE.DAT`, or `MASTER.XA`.
+- `gSD_bOutputType` records the signed-byte `-1` initialization sentinel and
+  the live-confirmed stereo/mono values `0` and `1`.
+- File-name/LBA tables, card-grid and Free Duel cursor pairs, password digits,
+  terrain, ritual, rank-score, equip, and card-name sort-key data received
+  subsystem names only where local data shape or live behavior corroborated
+  the imported label.
+
+The Unchiga SDK catalogue was not bulk-imported: it relies partly on a Psy-Q
+4.7 identification that conflicts with this project's independently
+established Psy-Q 4.6 toolchain, and Psy-Q functions remain outside the game
+decompilation scope.
 
 ## Deliberately deferred labels
 

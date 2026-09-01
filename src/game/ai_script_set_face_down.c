@@ -20,9 +20,9 @@ typedef struct {
 
 extern RecA gDuel_aActiveCards[];
 
-/* Looks up D_801AB000[D_800F5B98[idx1]] and classifies it: 0 if field0 is
+/* Looks up gDuel_aActiveCards[gAiScript_aMemory[idx1]] and classifies it: 0 if field0 is
    zero, 2 if flags bit 0x1000 is set, else 1. Stores the result at
-   D_800F5B98[idx2]. */
+   gAiScript_aMemory[idx2]. */
 void AiScript_SetFaceDown(void) {
     s32 *table = gAiScript_aMemory;
     s32 idx1 = AiScript_ReadByte();

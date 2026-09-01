@@ -5,11 +5,11 @@ typedef unsigned short u16;
 typedef signed int s32;
 typedef unsigned int u32;
 
-extern u16 D_8017A1D8[];
+extern u16 gDuel_awEquipTable[];
 
 s32 Duel_CheckEquip(s32 arg0, s32 arg1)
 {
-    u16 *p = D_8017A1D8;
+    u16 *p = gDuel_awEquipTable;
 
     while (1) {
         s32 key = p[0];

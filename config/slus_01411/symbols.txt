@@ -174,12 +174,23 @@ AiScript_SetRegister = 0x800735DC; // type:func
 AiScript_Add = 0x80073624; // type:func
 AiScript_Print = 0x800736C4; // type:func
 
-// Collaborator-verified source aliases
-D_8009B140 = 0x8009B140; // rom:0x8B940
-D_8009B141 = 0x8009B141; // rom:0x8B941
-D_800E9D94 = 0x800E9D94; // rom:0xDA594
-D_800E9EC8 = 0x800E9EC8; // rom:0xDA6C8
-D_800E9EC8_arr = 0x800E9EC8; // segment:main
-D_800E9ECE = 0x800E9ECE; // rom:0xDA6CE
-D_8009B1C8 = 0x8009B1C8; // rom:0x8B9C8
-D_801A7AD8 = 0x801A7AD8; // rom:0x1982D8
+// Semantic names
+SD_SEPlayFull = 0x8003FEE0; // type:func
+SD_InitState = 0x80046768; // type:func
+SD_SetOutputType = 0x80046FA0; // type:func
+SD_SEPlay = 0x80048658; // type:func
+SD_Init = 0x800492D8; // type:func
+SD_Term = 0x80049694; // type:func
+gFile_apszName = 0x8009078C;
+gDuel_aTerrainBoost = 0x800909D4;
+gCardGrid_bCursorColumn = 0x8009B258;
+gCardGrid_bCursorRow = 0x8009B259;
+gFreeDuel_bCursorColumn = 0x8009B366;
+gFreeDuel_bCursorRow = 0x8009B367;
+gSD_bOutputType = 0x8009B408;
+gFile_anLba = 0x800E9EA8;
+gPassword_abDigits = 0x8016D410;
+gDuel_awRitualData = 0x801799D8;
+gDuel_anRankScore = 0x80179A04;
+gDuel_awEquipTable = 0x8017A1D8;
+gCard_asNameSortKey = 0x801D4D8E;

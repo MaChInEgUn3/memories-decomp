@@ -36,7 +36,7 @@ s32 func_80024E24(void);
 s32 func_8001F364(s32);
 s32 func_80025028(s32);
 struct Obj *func_8002C68C(s32);
-void func_8003FEE0(u32);
+void SD_SEPlayFull(u32);
 
 void func_800250C8(void) {
     s32 s0;
@@ -55,7 +55,7 @@ void func_800250C8(void) {
         obj->field0 = 0xA0;
         obj->field2 = 0x78;
         obj->field1A = s1;
-        func_8003FEE0(0x14);
+        SD_SEPlayFull(0x14);
         return;
     }
     flag = D_8009B220;

@@ -2428,7 +2428,7 @@
       "address": "0x8003FEE0",
       "profile": "gcc_2_8_1_g8",
       "size": "0x28",
-      "source": "src/game/func_8003FEE0.c"
+      "source": "src/game/sd_se_play_full.c"
     },
     {
       "address": "0x8003FF08",
@@ -3040,7 +3040,7 @@
       "address": "0x80046FA0",
       "profile": "gcc_2_8_1_g8",
       "size": "0x68",
-      "source": "src/game/func_80046FA0.c"
+      "source": "src/game/sd_set_output_type.c"
     },
     {
       "address": "0x80047008",
@@ -3256,7 +3256,7 @@
       "address": "0x800492D8",
       "profile": "gcc_2_8_1_g0",
       "size": "0x30",
-      "source": "src/game/func_800492D8.c"
+      "source": "src/game/sd_init.c"
     },
     {
       "address": "0x80049308",
@@ -3334,7 +3334,7 @@
       "address": "0x80049694",
       "profile": "gcc_2_8_1_g0",
       "size": "0x30",
-      "source": "src/game/func_80049694.c"
+      "source": "src/game/sd_term.c"
     },
     {
       "address": "0x800496C4",
@@ -4408,7 +4408,7 @@
       "address": "0x80071320",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x98",
-      "source": "src/game/AiScript_SetFaceDown.c"
+      "source": "src/game/ai_script_set_face_down.c"
     },
     {
       "address": "0x800713B8",

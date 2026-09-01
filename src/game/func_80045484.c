@@ -5,7 +5,7 @@ typedef signed char s8;
 typedef short s16;
 typedef int s32;
 
-/* Same *D_8009B45C struct/entry layout as func_80045114.c (arr[16], stride
+/* Same *g_SDValue struct/entry layout as func_80045114.c (arr[16], stride
    0x30, f0 at offset 0). */
 struct Entry {
     u8 f0;

@@ -6,7 +6,7 @@ typedef short s16;
 typedef int s32;
 
 /* Picks a weighted-random index (1-based, 0 = none) out of a 722-entry
-   u16 weight table selected by a0 from the D_8017878C record array
+   u16 weight table selected by a0 from the gDuel_awSaPowCardDrops record array
    (1460-byte stride: 722 weights + 16 bytes trailing padding). Rolls a
    threshold in [1, 2048] and walks the weights accumulating a running sum
    until it reaches or passes the threshold. */

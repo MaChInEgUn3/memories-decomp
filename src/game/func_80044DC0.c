@@ -7,13 +7,13 @@ typedef int s32;
 
 /* Sibling of init_local_flags_and_notify (func_80044F58): builds the same
    4-byte CdMix volume/id packet, but here f0/f1-or-f2 are scaled DSP-style
-   from a0 instead of copied verbatim. D_8009B45C's fields 0x514/0x515 are
+   from a0 instead of copied verbatim. g_SDValue's fields 0x514/0x515 are
    per-channel volume scalars; f42 and f533 combine with (a0+1) to derive a
    shared 0-8191 "shift" factor, which each channel's scalar is then
    multiplied against and rescaled (>>7) into its packet byte. f48 picks
    which of f1/f2 carries the scaled value (the other gets 0), matching
    init_local_flags_and_notify's f48-based slot selection. Reloads
-   D_8009B45C through a fresh alias for the trailing f510 write, same
+   g_SDValue through a fresh alias for the trailing f510 write, same
    pattern as project_d8009b45c_reload_pointer_trick. */
 struct S8009B45C {
     char pad0[0x42];

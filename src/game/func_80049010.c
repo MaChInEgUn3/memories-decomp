@@ -5,7 +5,7 @@ typedef signed char s8;
 typedef short s16;
 typedef int s32;
 
-/* Same *D_8009B45C struct as set_8009b45c_1582_1584.c/clear_8009b45c_busy.c.
+/* Same *g_SDValue struct as set_8009b45c_1582_1584.c/clear_8009b45c_busy.c.
    If the 0x157E slot is active, notifies func_80049C40() (and clears the
    0x80 flag bit) if that flag was set, resets the slot via
    reset_slot_7E0_if_active(), and marks it inactive. Separately, if the

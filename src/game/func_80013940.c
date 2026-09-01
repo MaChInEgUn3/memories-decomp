@@ -6,7 +6,7 @@ typedef struct {
     int field_24;
 } Object;
 
-extern int D_800E9EA8[];
+extern int gFile_anLba[];
 
 void func_80013940(
     Object *object,
@@ -25,7 +25,7 @@ void func_80013940(
         object->field_14 = 0;
         object->field_24 = -sector_offset;
     } else {
-        register volatile int *lbas = D_800E9EA8;
+        register volatile int *lbas = gFile_anLba;
 
         object->field_14 = sector_offset << 11;
         object->field_24 = lbas[file_index] + sector_offset;

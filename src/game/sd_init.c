@@ -2,7 +2,7 @@ extern void func_80046294(void);
 extern void func_80049010(void);
 extern void func_80077FF0(int);
 
-void func_800492D8(void)
+void SD_Init(void)
 {
     func_80046294();
     func_80049010();
