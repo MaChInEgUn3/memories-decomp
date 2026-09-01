@@ -1,13 +1,25 @@
-extern unsigned char D_800F2C40[];
-int func_80058EC0(int index)
-{
-    register unsigned char *base asm("$5") = D_800F2C40;
-    register int offset asm("$3") = index * 0xE20;
-    register unsigned char *entry asm("$2") = base + offset;
-    register int selector asm("$4");
-    register int result asm("$2");
-    asm("" : "+r"(base), "+r"(offset), "+r"(entry));
-    selector = entry[0xBF5];
-    asm("nop\n\tsll %0,%1,4\n\tsubu %0,%0,%1\n\tsll %0,%0,2\n\tsubu %0,%0,%1\n\tsll %0,%0,1\n\taddu %0,%0,%2\n\taddu %0,%0,%3\n\tlhu %0,1988(%0)" : "=r"(result) : "r"(selector), "r"(offset), "r"(base));
-    return result;
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef signed char s8;
+typedef short s16;
+typedef int s32;
+
+/* Same D_800F2C40 record table as get_D_800F2C40_slot_field_bf5.c. Reads the
+   byte field at 0xBF5 and uses it as a sub-index into a 118-byte-stride
+   array of u16 entries starting at 0x7C4 within the same record. */
+struct RecD800F2C40 {
+    char pad[0xBF5];
+    u8 field_bf5; /* 0xBF5 */
+    char pad2[0xE20 - 0xBF5 - 1];
+};
+
+extern struct RecD800F2C40 D_800F2C40[];
+
+u16 func_80058EC0(s32 idx) {
+    u8 sub = D_800F2C40[idx].field_bf5;
+    {
+        u8 *base = (u8 *)D_800F2C40;
+        return *(u16 *)(idx * 0xE20 + sub * 118 + base + 0x7C4);
+    }
 }
