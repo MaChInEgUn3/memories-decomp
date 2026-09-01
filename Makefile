@@ -17,7 +17,7 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions candidates siblings external-attempts basic-types progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
+.PHONY: help workspace verify-target verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions candidates siblings external-attempts basic-types progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
 
 help:
 	@printf '%s\n' \
@@ -43,29 +43,33 @@ help:
 		'  verify-runtime-files  Verify runtime file order against disc LBAs' \
 		'  audit          Verify exact output, metadata, and repository policy' \
 		'  clean          Remove known generated project output under tmp/' \
+		'  verify-target  Validate only the SLUS executable needed to build' \
 		'  verify-inputs  Validate the SLUS-01411 executable and DATA files' \
 		'  workspace      Validate that commands are running from the project root'
 
 workspace:
 	@$(PYTHON) tools/project/workspace.py
 
+verify-target: workspace
+	@$(PYTHON) tools/project/verify_inputs.py --executable-only
+
 verify-inputs: workspace
 	@$(PYTHON) tools/project/verify_inputs.py
 
 tools: python-tools toolchain compiler
 
-python-tools: verify-inputs
+python-tools: verify-target
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/bootstrap.py
 
-toolchain: verify-inputs
+toolchain: verify-target
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/binutils.py
 
 compiler: compiler-281 compiler-272
 
-compiler-281: verify-inputs
+compiler-281: verify-target
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/old_gcc.py
 
-compiler-272: verify-inputs
+compiler-272: verify-target
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/old_gcc_272.py
 
 check-tools: workspace
@@ -74,13 +78,13 @@ check-tools: workspace
 	@$(PYTHON) tools/bootstrap/old_gcc.py --check
 	@$(PYTHON) tools/bootstrap/old_gcc_272.py --check
 
-info: verify-inputs
+info: verify-target
 	@$(PYTHON) tools/project/psx_exe.py info
 
-extract: verify-inputs
+extract: verify-target
 	@$(PYTHON) tools/project/psx_exe.py extract
 
-map: verify-inputs
+map: verify-target
 	@$(PYTHON) tools/project/validate_image_map.py
 
 split: map check-tools

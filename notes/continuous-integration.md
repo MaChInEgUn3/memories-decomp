@@ -9,27 +9,28 @@ PS-X EXE, and explicitly verifies:
 84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
 ```
 
-## Private retail inputs
+## Private retail executable
 
-Retail files remain ignored and must never be committed. Configure these
-GitHub Actions repository secrets:
+Retail files remain ignored and must never be committed. Upload only your
+verified `game/SLUS_014.11` to a private location that provides a direct HTTPS
+download, then configure this GitHub Actions repository secret:
 
 | Secret | Value |
 |---|---|
-| `YGOFM_GAME_ARCHIVE_URL` | Private or expiring HTTPS URL for the input tar archive |
-| `YGOFM_GAME_ARCHIVE_SHA256` | Lowercase SHA-256 of that exact archive |
+| `YGOFM_SLUS_01411_URL` | Private or expiring direct-download URL for `SLUS_014.11` |
 
-The archive may be an uncompressed tar or use gzip, bzip2, or xz compression.
-Every entry must be a regular file or directory beneath a top-level `game/`
-directory. Links, devices, absolute paths, and parent-directory traversal are
-rejected by `tools/project/extract_game_archive.py`.
+The workflow writes that response to `game/SLUS_014.11` and checks it against
+the known retail SHA-256 before installing tools or building. No DATA files,
+MRG files, STR/XA files, or BIN/CUE are uploaded to CI.
 
-The extracted `game/` tree must contain the same user-supplied files validated
-by `make verify-inputs`, including `SLUS_014.11`, the `DATA/` files, and the
-original BIN/CUE. A missing secret, download failure, archive hash mismatch,
-input hash mismatch, tool failure, build failure, or rebuilt executable hash
-mismatch makes the workflow fail.
+Normal matching-build targets use `make verify-target`, which validates only
+the executable. Disc-analysis and full repository-audit targets continue to
+use `make verify-inputs`, so local LBA and extracted-data verification remains
+unchanged.
+
+A missing secret, download failure, input hash mismatch, tool failure, build
+failure, or rebuilt executable hash mismatch makes the workflow fail.
 
 GitHub does not expose repository secrets to pull requests from forks. Those
 runs therefore fail at the explicit private-input check rather than receiving
-retail data.
+the retail executable.

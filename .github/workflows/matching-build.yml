@@ -20,8 +20,7 @@ jobs:
     timeout-minutes: 90
     env:
       MAKEFLAGS: -j2
-      GAME_ARCHIVE_URL: ${{ secrets.YGOFM_GAME_ARCHIVE_URL }}
-      GAME_ARCHIVE_SHA256: ${{ secrets.YGOFM_GAME_ARCHIVE_SHA256 }}
+      SLUS_URL: ${{ secrets.YGOFM_SLUS_01411_URL }}
 
     steps:
       - name: Check out source
@@ -41,28 +40,26 @@ jobs:
 
       - name: Require private retail input secrets
         run: |
-          if [ -z "$GAME_ARCHIVE_URL" ] || [ -z "$GAME_ARCHIVE_SHA256" ]; then
-            echo "::error::Configure YGOFM_GAME_ARCHIVE_URL and YGOFM_GAME_ARCHIVE_SHA256."
+          if [ -z "$SLUS_URL" ]; then
+            echo "::error::Configure the YGOFM_SLUS_01411_URL repository secret."
             exit 1
           fi
 
-      - name: Download and verify retail inputs
+      - name: Download and verify retail executable
         run: |
-          mkdir -p tmp/ci
+          mkdir -p game
           curl \
             --fail \
             --location \
             --retry 3 \
             --silent \
             --show-error \
-            "$GAME_ARCHIVE_URL" \
-            --output tmp/ci/game-inputs.tar
+            "$SLUS_URL" \
+            --output game/SLUS_014.11
           printf '%s  %s\n' \
-            "$GAME_ARCHIVE_SHA256" \
-            tmp/ci/game-inputs.tar \
+            84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88 \
+            game/SLUS_014.11 \
             | sha256sum --check --strict
-          python3 tools/project/extract_game_archive.py \
-            tmp/ci/game-inputs.tar
 
       - name: Restore pinned project tools
         uses: actions/cache@v4

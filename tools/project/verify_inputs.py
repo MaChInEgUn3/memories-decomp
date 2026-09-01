@@ -262,13 +262,17 @@ def verify(
     root: Path,
     target_manifest_path: Path,
     checksum_manifest_path: Path,
+    *,
+    executable_only: bool,
 ) -> None:
     target = load_target_manifest(target_manifest_path)
     checksums = load_checksum_manifest(checksum_manifest_path)
     files = expected_files(target)
-    expected_paths = {str(item["path"]) for item in files}
+    if executable_only:
+        files = [item for item in files if item["executable"]]
+    expected_paths = {str(item["path"]) for item in expected_files(target)}
 
-    if set(checksums) != expected_paths:
+    if not executable_only and set(checksums) != expected_paths:
         missing = sorted(expected_paths - set(checksums))
         unexpected = sorted(set(checksums) - expected_paths)
         details: list[str] = []
@@ -327,6 +331,11 @@ def parse_args() -> argparse.Namespace:
         default="config/slus_01411/files.sha256",
         help="SHA-256 manifest path relative to the repository root",
     )
+    parser.add_argument(
+        "--executable-only",
+        action="store_true",
+        help="validate only the PS-X executable needed for a matching build",
+    )
     return parser.parse_args()
 
 
@@ -336,7 +345,12 @@ def main() -> int:
         root = require_workspace_root()
         target_manifest = resolve_within(root, args.target, must_exist=True)
         checksum_manifest = resolve_within(root, args.checksums, must_exist=True)
-        verify(root, target_manifest, checksum_manifest)
+        verify(
+            root,
+            target_manifest,
+            checksum_manifest,
+            executable_only=args.executable_only,
+        )
     except (VerificationError, WorkspaceError, OSError, UnicodeError) as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
