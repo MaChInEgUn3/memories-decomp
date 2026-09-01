@@ -137,6 +137,24 @@ Only the latest successful external candidate for an address is bound to the
 current tracked source. Earlier successful reference evidence remains in the
 ledger as history if a later pure-C refinement supersedes it.
 
+One-shot imports from the merged Unchiga decomp use a distinct mode so they do
+not reset or obscure the six-attempt hypothesis histories:
+
+```sh
+tools/environments/python/bin/python \
+  tools/project/record_external_attempt.py 0x80012345 \
+  --mode collaborator_match \
+  --reference tmp/references/ygofm-decomp-unchiga/src/example_unit.c \
+  --profile gcc_2_8_1_g8 \
+  --candidate tmp/agents/unchiga-integration/candidates/0x80012345.c \
+  --result matched \
+  --summary "Independently reproduced the collaborator's pure-C match"
+```
+
+`collaborator_match` permits exactly one audited row per nonmatching function.
+It is not a new search budget: the row records whether the already-matched
+collaborator source reproduces under this project's toolchain and declarations.
+
 After a candidate has a terminal `matched` row in
 `config/slus_01411/attempts.csv`, promote it with:
 

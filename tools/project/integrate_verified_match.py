@@ -124,7 +124,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--evidence-source",
-        choices=("canonical", "reference", "refinement"),
+        choices=("canonical", "reference", "refinement", "collaborator"),
         default="canonical",
         help="ledger containing the terminal matched result",
     )
@@ -198,7 +198,11 @@ def main() -> int:
                 mode=(
                     "reference_match"
                     if args.evidence_source == "reference"
-                    else "inline_refinement"
+                    else (
+                        "inline_refinement"
+                        if args.evidence_source == "refinement"
+                        else "collaborator_match"
+                    )
                 ),
             )
         profiles = load_json(profiles_path).get("profiles")

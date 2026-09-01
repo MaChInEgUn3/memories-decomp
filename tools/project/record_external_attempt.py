@@ -32,10 +32,15 @@ FIELDS = (
     "result",
     "summary",
 )
-MODES = {"reference_match", "inline_refinement"}
+MODES = {"reference_match", "inline_refinement", "collaborator_match"}
 RESULTS = {"matched", "nonmatch", "deferred"}
 TERMINAL_RESULTS = {"matched", "deferred"}
 MAX_ATTEMPTS = 6
+MODE_MAX_ATTEMPTS = {
+    "reference_match": MAX_ATTEMPTS,
+    "inline_refinement": MAX_ATTEMPTS,
+    "collaborator_match": 1,
+}
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 ASM_PATTERN = re.compile(r"\b(?:asm|__asm|__asm__)\b")
 COMMENT_PATTERN = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
@@ -108,6 +113,28 @@ def require_tmp_path(value: str, context: str) -> None:
         or ".." in path.parts
     ):
         raise ExternalAttemptError(f"{context}: path must normalize beneath tmp/")
+
+
+def expected_reference_path(
+    mode: str,
+    address: int,
+    value: str,
+) -> bool:
+    if mode == "reference_match":
+        return value == (
+            "tmp/references/ygofm-decomp/src/"
+            f"func_{address:08X}.c"
+        )
+    if mode == "collaborator_match":
+        path = PurePosixPath(value)
+        return (
+            not path.is_absolute()
+            and ".." not in path.parts
+            and path.parts[:4]
+            == ("tmp", "references", "ygofm-decomp-unchiga", "src")
+            and path.suffix == ".c"
+        )
+    return True
 
 
 def preprocess_candidate(
@@ -194,18 +221,18 @@ def validate_rows(
             raise ExternalAttemptError(
                 f"{address:#010x}: incomplete reference path/hash pair"
             )
-        if mode == "reference_match" and not has_reference:
+        if mode in {"reference_match", "collaborator_match"} and not has_reference:
             raise ExternalAttemptError(
-                f"{address:#010x}: reference_match requires a reference source"
+                f"{address:#010x}: {mode} requires a reference source"
             )
         if has_reference:
-            expected = (
-                "tmp/references/ygofm-decomp/src/"
-                f"func_{address:08X}.c"
-            )
-            if row["reference_path"] != expected:
+            if not expected_reference_path(
+                mode,
+                address,
+                row["reference_path"],
+            ):
                 raise ExternalAttemptError(
-                    f"{address:#010x}: reference path must be {expected}"
+                    f"{address:#010x}: invalid {mode} reference path"
                 )
             if not SHA256_PATTERN.fullmatch(row["reference_sha256"]):
                 raise ExternalAttemptError(
@@ -218,9 +245,10 @@ def validate_rows(
         grouped.setdefault((mode, address), []).append(row)
 
     for (mode, address), history in grouped.items():
-        if len(history) > MAX_ATTEMPTS:
+        maximum = MODE_MAX_ATTEMPTS[mode]
+        if len(history) > maximum:
             raise ExternalAttemptError(
-                f"{address:#010x}: exceeds six {mode} attempts"
+                f"{address:#010x}: exceeds {maximum} {mode} attempt(s)"
             )
         ended = False
         for expected, row in enumerate(history, start=1):
@@ -241,7 +269,11 @@ def validate_rows(
                 )
             if row["result"] in TERMINAL_RESULTS:
                 ended = True
-            if expected == MAX_ATTEMPTS and row["result"] == "nonmatch":
+            if (
+                maximum == MAX_ATTEMPTS
+                and expected == MAX_ATTEMPTS
+                and row["result"] == "nonmatch"
+            ):
                 raise ExternalAttemptError(
                     f"{address:#010x}: sixth external attempt must be deferred"
                 )
@@ -331,7 +363,7 @@ def main() -> int:
             raise ExternalAttemptError(
                 f"{address:#010x}: external attempts are game-only"
             )
-        if args.mode == "reference_match":
+        if args.mode in {"reference_match", "collaborator_match"}:
             if function["status"] == "matching_c":
                 raise ExternalAttemptError(
                     f"{address:#010x}: use inline_refinement for matching C"
@@ -373,19 +405,16 @@ def main() -> int:
         reference_hash = ""
         if args.reference:
             reference = resolve_within(root, args.reference, must_exist=True)
-            expected_reference = resolve_within(
-                root,
-                (
-                    "tmp/references/ygofm-decomp/src/"
-                    f"func_{address:08X}.c"
-                ),
-                must_exist=True,
-            )
-            if reference != expected_reference:
+            reference_value = str(reference.relative_to(root))
+            if not expected_reference_path(
+                args.mode,
+                address,
+                reference_value,
+            ):
                 raise ExternalAttemptError(
-                    f"reference must be {expected_reference.relative_to(root)}"
+                    f"invalid {args.mode} reference path"
                 )
-            reference_path = str(reference.relative_to(root))
+            reference_path = reference_value
             reference_hash = sha256(reference)
 
         history = [
@@ -399,12 +428,17 @@ def main() -> int:
                 f"{address:#010x}: external history already ended with "
                 f"{history[-1]['result']}"
             )
-        if len(history) >= MAX_ATTEMPTS:
+        maximum = MODE_MAX_ATTEMPTS[args.mode]
+        if len(history) >= maximum:
             raise ExternalAttemptError(
-                f"{address:#010x}: six external attempts are exhausted"
+                f"{address:#010x}: {args.mode} attempt budget is exhausted"
             )
         attempt = len(history) + 1
-        if attempt == MAX_ATTEMPTS and args.result == "nonmatch":
+        if (
+            maximum == MAX_ATTEMPTS
+            and attempt == MAX_ATTEMPTS
+            and args.result == "nonmatch"
+        ):
             raise ExternalAttemptError(
                 "record the sixth unsuccessful attempt as deferred"
             )
