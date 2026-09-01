@@ -3212,7 +3212,7 @@
     },
     {
       "address": "0x80049010",
-      "profile": "gcc_2_8_1_g0",
+      "profile": "gcc_2_8_1_cc_g0_as_g8_no_split",
       "size": "0xE0",
       "source": "src/game/func_80049010.c"
     },
