@@ -64,7 +64,7 @@
       "address": "0x800138F4",
       "profile": "gcc_2_8_1_g8",
       "size": "0x4C",
-      "source": "src/game/func_800138F4.c"
+      "source": "src/game/file_get_position.c"
     },
     {
       "address": "0x80013940",
@@ -490,13 +490,13 @@
       "address": "0x80019A08",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x58",
-      "source": "src/game/func_80019A08.c"
+      "source": "src/game/duel_check_equip.c"
     },
     {
       "address": "0x80019A60",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0xCC",
-      "source": "src/game/func_80019A60.c"
+      "source": "src/game/duel_check_fusion.c"
     },
     {
       "address": "0x80019B2C",
@@ -580,19 +580,19 @@
       "address": "0x8001EE44",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0xD8",
-      "source": "src/game/func_8001EE44.c"
+      "source": "src/game/duel_calc_guardian_star_bonus.c"
     },
     {
       "address": "0x8001EF1C",
       "profile": "gcc_2_8_1_g8",
       "size": "0x5C",
-      "source": "src/game/func_8001EF1C.c"
+      "source": "src/game/duel_calc_battle_attack.c"
     },
     {
       "address": "0x8001EF78",
       "profile": "gcc_2_8_1_g8",
       "size": "0x5C",
-      "source": "src/game/func_8001EF78.c"
+      "source": "src/game/duel_calc_battle_defense.c"
     },
     {
       "address": "0x8001EFD4",
@@ -628,13 +628,13 @@
       "address": "0x80021558",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x40",
-      "source": "src/game/func_80021558.c"
+      "source": "src/game/duel_calc_rank_score_change.c"
     },
     {
       "address": "0x80021810",
       "profile": "gcc_2_8_1_g8",
       "size": "0x84",
-      "source": "src/game/func_80021810.c"
+      "source": "src/game/duel_select_card_drop.c"
     },
     {
       "address": "0x80021894",
@@ -706,13 +706,13 @@
       "address": "0x800245A0",
       "profile": "gcc_2_8_1_g8",
       "size": "0x4C",
-      "source": "src/game/func_800245A0.c"
+      "source": "src/game/duel_shuffle_both_decks.c"
     },
     {
       "address": "0x80024704",
       "profile": "gcc_2_8_1_g8",
       "size": "0x30",
-      "source": "src/game/func_80024704.c"
+      "source": "src/game/util_compare_s16.c"
     },
     {
       "address": "0x80024914",
@@ -964,7 +964,7 @@
       "address": "0x8002BF3C",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x90",
-      "source": "src/game/func_8002BF3C.c"
+      "source": "src/game/library_mark_owned_cards.c"
     },
     {
       "address": "0x8002C400",
@@ -1048,7 +1048,7 @@
       "address": "0x8002CB80",
       "profile": "gcc_2_8_1_g0",
       "size": "0x74",
-      "source": "src/game/func_8002CB80.c"
+      "source": "src/game/duel_calc_guardian_star_matchup.c"
     },
     {
       "address": "0x8002CCA8",
@@ -1078,67 +1078,67 @@
       "address": "0x8002CE08",
       "profile": "gcc_2_8_1_g8",
       "size": "0x5C",
-      "source": "src/game/func_8002CE08.c"
+      "source": "src/game/main_run_debug_menu.c"
     },
     {
       "address": "0x8002CEE8",
       "profile": "gcc_2_8_1_g8",
       "size": "0x1F8",
-      "source": "src/game/func_8002CEE8.c"
+      "source": "src/game/main_run_duel.c"
     },
     {
       "address": "0x8002D0E0",
       "profile": "gcc_2_8_1_g8",
       "size": "0xA0",
-      "source": "src/game/func_8002D0E0.c"
+      "source": "src/game/main_run_library_menu.c"
     },
     {
       "address": "0x8002D2D8",
       "profile": "gcc_2_8_1_g8",
       "size": "0x98",
-      "source": "src/game/func_8002D2D8.c"
+      "source": "src/game/main_run_campaign_map.c"
     },
     {
       "address": "0x8002D370",
       "profile": "gcc_2_8_1_g8",
       "size": "0x88",
-      "source": "src/game/func_8002D370.c"
+      "source": "src/game/main_run_build_deck_menu.c"
     },
     {
       "address": "0x8002D3F8",
       "profile": "gcc_2_8_1_g8",
       "size": "0x60",
-      "source": "src/game/func_8002D3F8.c"
+      "source": "src/game/main_run_free_duel_menu.c"
     },
     {
       "address": "0x8002D588",
       "profile": "gcc_2_8_1_g8",
       "size": "0xA4",
-      "source": "src/game/func_8002D588.c"
+      "source": "src/game/main_run_menu.c"
     },
     {
       "address": "0x8002D62C",
       "profile": "gcc_2_8_1_g8",
       "size": "0x58",
-      "source": "src/game/func_8002D62C.c"
+      "source": "src/game/main_run_name_entry.c"
     },
     {
       "address": "0x8002D684",
       "profile": "gcc_2_8_1_g8",
       "size": "0x44",
-      "source": "src/game/func_8002D684.c"
+      "source": "src/game/main_run_password_menu.c"
     },
     {
       "address": "0x8002D6C8",
       "profile": "gcc_2_8_1_g8",
       "size": "0x68",
-      "source": "src/game/func_8002D6C8.c"
+      "source": "src/game/main_run_options_menu.c"
     },
     {
       "address": "0x8002D730",
       "profile": "gcc_2_8_1_g8",
       "size": "0x94",
-      "source": "src/game/func_8002D730.c"
+      "source": "src/game/main_run_game_over.c"
     },
     {
       "address": "0x8002D7C4",
@@ -1150,13 +1150,13 @@
       "address": "0x8002DA1C",
       "profile": "gcc_2_8_1_g8",
       "size": "0x21C",
-      "source": "src/game/func_8002DA1C.c"
+      "source": "src/game/main_run_credits.c"
     },
     {
       "address": "0x8002DD74",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x88",
-      "source": "src/game/func_8002DD74.c"
+      "source": "src/game/main_loop.c"
     },
     {
       "address": "0x8002DF2C",
@@ -1486,7 +1486,7 @@
       "address": "0x80032B60",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x74",
-      "source": "src/game/func_80032B60.c"
+      "source": "src/game/build_deck_compare_card.c"
     },
     {
       "address": "0x80032BD4",
@@ -1552,13 +1552,13 @@
       "address": "0x800357E8",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0xB8",
-      "source": "src/game/func_800357E8.c"
+      "source": "src/game/text_encode_decimal_digits.c"
     },
     {
       "address": "0x800358FC",
       "profile": "gcc_2_8_1_g0",
       "size": "0x50",
-      "source": "src/game/func_800358FC.c"
+      "source": "src/game/rand_get_interval.c"
     },
     {
       "address": "0x8003594C",
@@ -3952,7 +3952,7 @@
       "address": "0x8005C4F0",
       "profile": "gcc_2_8_1_g0",
       "size": "0x40",
-      "source": "src/game/func_8005C4F0.c"
+      "source": "src/game/file_exists.c"
     },
     {
       "address": "0x8005C530",

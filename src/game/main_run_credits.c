@@ -1,8 +1,8 @@
 __asm__(
     ".set noreorder\n"
-    ".globl func_8002DA1C\n"
-    ".ent func_8002DA1C\n"
-    "func_8002DA1C:\n"
+    ".globl Main_RunCredits\n"
+    ".ent Main_RunCredits\n"
+    "Main_RunCredits:\n"
     ".word 0x27BDFFD0\n"
     ".word 0x240400A0\n"
     ".word 0x24050078\n"
@@ -33,7 +33,7 @@ __asm__(
     ".word 0xA62205DC\n"
     ".word 0x24100020\n"
     ".word 0x0C000000\n"
-    ".reloc .-4, R_MIPS_26, func_8002CCE4\n"
+    ".reloc .-4, R_MIPS_26, Library_UpdateCardUsedFlag\n"
     ".word 0x36048000\n"
     ".word 0x26100001\n"
     ".word 0x2A020120\n"
@@ -180,5 +180,5 @@ __asm__(
     ".word 0x8FB00020\n"
     ".word 0x03E00008\n"
     ".word 0x27BD0030\n"
-    ".end func_8002DA1C\n"
+    ".end Main_RunCredits\n"
 );

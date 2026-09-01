@@ -5,7 +5,7 @@ typedef struct {
 extern int func_8007D3F0(DiscFile *, const char *);
 extern int func_8007E710(DiscFile *);
 
-void func_800138F4(int *output, const char *path)
+void File_GetPosition(int *output, const char *path)
 {
     DiscFile file;
 

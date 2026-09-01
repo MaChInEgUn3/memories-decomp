@@ -1,9 +1,9 @@
 typedef unsigned short u16; typedef signed short s16;
 typedef struct { char pad_00[0xC]; s16 id; char pad_0E[8]; u16 flags; } Entry;
 extern int D_801D4244[];
-extern int func_8002CB80(int, int);
+extern int Duel_CalcGuardianStarMatchup(int, int);
 
-int func_8001EE44(Entry *left, Entry *right)
+int Duel_CalcGuardianStarBonus(Entry *left, Entry *right)
 {
     int left_value, right_value;
     if (right == 0) return 0;
@@ -15,5 +15,5 @@ int func_8001EE44(Entry *left, Entry *right)
         right_value = (D_801D4244[right->id - 1] >> 18) & 0xF;
     else
         right_value = (D_801D4244[right->id - 1] >> 22) & 0xF;
-    return func_8002CB80(left_value, right_value);
+    return Duel_CalcGuardianStarMatchup(left_value, right_value);
 }

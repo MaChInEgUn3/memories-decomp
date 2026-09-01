@@ -1,7 +1,7 @@
 extern int func_8002CCA8(int);
-extern void func_8002CCE4(int);
+extern void Library_UpdateCardUsedFlag(int);
 int func_8002CD48(int value) {
     int result = func_8002CCA8(value);
-    if (result == 0) func_8002CCE4(value);
+    if (result == 0) Library_UpdateCardUsedFlag(value);
     return result;
 }

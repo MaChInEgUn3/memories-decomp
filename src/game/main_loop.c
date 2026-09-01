@@ -10,7 +10,7 @@ extern u8 D_8009B26C;
 extern void (*D_80090B64[])(void);
 extern void func_8002CDE8(void), func_80012D4C(void);
 extern void func_8002CD8C(void), func_80015B00(void);
-void func_8002DD74(void) {
+void Main_Loop(void) {
     func_8002CDE8();
     for (;;) {
         u8 v;

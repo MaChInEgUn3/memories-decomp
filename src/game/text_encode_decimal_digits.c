@@ -7,7 +7,7 @@ typedef int s32;
 
 extern s32 D_80090E0C[];
 
-void func_800357E8(s32 arg0, s32 arg1, u8 *arg2) {
+void Text_EncodeDecimalDigits(s32 arg0, s32 arg1, u8 *arg2) {
     s32 d = D_80090E0C[arg1];
     s32 i;
 

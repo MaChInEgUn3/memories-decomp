@@ -12,7 +12,7 @@ typedef struct {
 
 extern Threshold gDuel_awRankScoreChange[][5];
 
-s32 func_80021558(s32 arg0, s32 arg1)
+s32 Duel_CalcRankScoreChange(s32 arg0, s32 arg1)
 {
     Threshold *p = &gDuel_awRankScoreChange[arg0][0];
 

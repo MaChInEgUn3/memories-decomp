@@ -7,16 +7,16 @@ typedef signed int s32;
 
 extern u8 gLibrary_abCardChest[];
 extern u16 gDuel_awPlayerDeck[];
-extern void func_8002CCE4();
+extern void Library_UpdateCardUsedFlag();
 
-void func_8002BF3C(void)
+void Library_MarkOwnedCards(void)
 {
     u8 *p = gLibrary_abCardChest;
     s32 i = 0;
     u16 *q;
     do {
         if (*p != 0)
-            func_8002CCE4(i + 0x121);
+            Library_UpdateCardUsedFlag(i + 0x121);
         i++;
         p++;
     } while (i < 0x2D2);
@@ -24,7 +24,7 @@ void func_8002BF3C(void)
     i = 0;
     do {
         if (*q != 0)
-            func_8002CCE4(*q + 0x120);
+            Library_UpdateCardUsedFlag(*q + 0x120);
         i++;
         q++;
     } while (i < 0x28);

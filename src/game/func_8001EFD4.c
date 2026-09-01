@@ -6,8 +6,8 @@ typedef signed int s32;
 typedef unsigned int u32;
 extern u8 D_801A7AD8[];
 extern s32 Duel_CalcCardStats();
-extern s32 func_8001EF78();
-extern s32 func_8001EF1C();
+extern s32 Duel_CalcBattleDefense();
+extern s32 Duel_CalcBattleAttack();
 
 s32 func_8001EFD4(u8 *left, u8 *right)
 {
@@ -25,9 +25,9 @@ s32 func_8001EFD4(u8 *left, u8 *right)
     if (*(u16 *)(b + 22) & 2048)
         wanted = (u32)packed >> 16;
     if (*(u16 *)(a + 22) & 2048)
-        actual = func_8001EF78(a, b);
+        actual = Duel_CalcBattleDefense(a, b);
     else
-        actual = func_8001EF1C(a, b);
+        actual = Duel_CalcBattleAttack(a, b);
     if (actual != wanted)
         return actual - wanted;
     if ((*(u16 *)(a + 22) & 2048) || (*(u16 *)(b + 22) & 2048))

@@ -7,7 +7,7 @@ typedef int s32;
 
 extern u16 gDuel_aFusionTable[];
 
-s32 func_80019A60(s32 arg0, s32 arg1) {
+s32 Duel_CheckFusion(s32 arg0, s32 arg1) {
     u8 *base = (u8 *)gDuel_aFusionTable;
     u8 *p;
     s32 off;

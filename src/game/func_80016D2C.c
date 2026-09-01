@@ -1,7 +1,7 @@
 typedef unsigned char u8;typedef unsigned short u16;
 typedef struct{char p[4];u16 x;char p6[8];u8 value;char pF[8];u8 index;char p18[0x52];}Obj;
-extern int D_800E9D90[];extern void func_800357E8(int,int,u8*),func_800849F0(Obj*,int,u16);
+extern int D_800E9D90[];extern void Text_EncodeDecimalDigits(int,int,u8*),func_800849F0(Obj*,int,u16);
 void func_80016D2C(Obj*a,Obj*b,int source,int count){
- u8 temp[8];int i;func_800357E8(source,count,temp);
+ u8 temp[8];int i;Text_EncodeDecimalDigits(source,count,temp);
  for(i=count-1;i>=0;i--){b->value=temp[i]<<3;func_800849F0(b,D_800E9D90[a->index],*(u16*)((char*)a+0x14));b->x+=8;}
 }

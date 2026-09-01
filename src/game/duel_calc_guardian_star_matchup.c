@@ -1,0 +1,1 @@
+int Duel_CalcGuardianStarMatchup(int a,int b){register int limit __asm__("$3")=6;a-=7;if(a>=0){b-=7;limit=4;if(b<0)return 0;}else{b--;if(b>=limit)return 0;a+=limit;}a++;if(a>=limit)a=0;if(a==b)return 500;a-=2;if(a<0)a+=limit;if(a==b)return-500;return 0;}

@@ -18,7 +18,7 @@ extern void func_8002CD8C(void), func_800179F4(void), func_80024388(void);
 extern void func_80047AD0(int), func_800134B4(void), func_80012D84(int);
 extern void func_800137E4(void);
 
-void func_8002CEE8(void)
+void Main_RunDuel(void)
 {
     u8 value = D_8009B26C;
     int state;

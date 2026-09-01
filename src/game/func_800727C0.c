@@ -12,9 +12,9 @@ typedef struct LocalRec12 {
 } LocalRec12;
 extern u8 gAiScript_State[];
 extern LocalRec12 D_801AB000[];
-extern int func_80019A08();
-extern int func_80019A60();
-extern int func_8002CBF4();
+extern int Duel_CheckEquip();
+extern int Duel_CheckFusion();
+extern int Duel_GetBaseCardStat();
 extern int func_80070920();
 
 void func_800727C0(s32 arg0) {
@@ -38,26 +38,26 @@ void func_800727C0(s32 arg0) {
             k = i + 0xB;
             if (v != 0) {
                 if (func_80070920(p[0x9E], k) == 0) {
-                    n = func_80019A60(arg0, v);
+                    n = Duel_CheckFusion(arg0, v);
                     if (n == 0) {
-                        n = func_80019A08(arg0, v);
+                        n = Duel_CheckEquip(arg0, v);
                     }
                     if (n != 0) {
                         p[p[0xA2] + 0xA4] = k;
-                        if (func_8002CBF4(n, 0) > *(u16 *)(p + 0xA0) ||
-                            (func_8002CBF4(n, 0) == *(u16 *)(p + 0xA0) &&
+                        if (Duel_GetBaseCardStat(n, 0) > *(u16 *)(p + 0xA0) ||
+                            (Duel_GetBaseCardStat(n, 0) == *(u16 *)(p + 0xA0) &&
                              p[0xA2] < p[0xA3])) {
-                            *(u16 *)(p + 0xA0) = func_8002CBF4(n, 0);
+                            *(u16 *)(p + 0xA0) = Duel_GetBaseCardStat(n, 0);
                             p[0xA3] = p[0xA2];
                             for (m = 0; m <= (s32)p[0xA3]; m++) {
                                 p[m + 0x38] = p[m + 0xA4];
                             }
                             p[m + 0x38] = 0;
                         }
-                        if (func_8002CBF4(n, 1) > *(u16 *)(p + 0xA0) ||
-                            (func_8002CBF4(n, 1) == *(u16 *)(p + 0xA0) &&
+                        if (Duel_GetBaseCardStat(n, 1) > *(u16 *)(p + 0xA0) ||
+                            (Duel_GetBaseCardStat(n, 1) == *(u16 *)(p + 0xA0) &&
                              p[0xA2] < p[0xA3])) {
-                            *(u16 *)(p + 0xA0) = func_8002CBF4(n, 1);
+                            *(u16 *)(p + 0xA0) = Duel_GetBaseCardStat(n, 1);
                             p[0xA3] = p[0xA2];
                             for (m = 0; m <= (s32)p[0xA3]; m++) {
                                 p[m + 0x38] = p[m + 0xA4];

@@ -13,7 +13,7 @@ extern u8 D_8018C7D8[];
 extern u8 D_801A7AD8[];
 extern u8 gDuel_aPlayerHand[];
 extern s32 D_801D4244[];
-extern int func_8002497C();
+extern int Duel_GetTerrainBoost();
 extern int func_8007F978();
 
 u8 *func_800249E0(s32 a, s32 b) {
@@ -59,7 +59,7 @@ u8 *func_800249E0(s32 a, s32 b) {
         ((D_801D4244[*(s16 *)(p + 0xC) - 1] >> 9) & 0x1FF) * 0xA;
     *(s16 *)(p + 0x12) = 0;
     *(s16 *)(p + 0x14) =
-        func_8002497C((D_801D4244[*(s16 *)(p + 0xC) - 1] >> 26) & 0x1F);
+        Duel_GetTerrainBoost((D_801D4244[*(s16 *)(p + 0xC) - 1] >> 26) & 0x1F);
 
     base = D_80177EA4;
     q = base + idx * 0x10;

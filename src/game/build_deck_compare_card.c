@@ -8,7 +8,7 @@ typedef unsigned int u32;
 
 typedef struct { u32 key; s16 index; } Item;
 extern s16 D_801D4D8E[];
-s32 func_80032B60(Item *arg0, Item *arg1) {
+s32 BuildDeck_CompareCard(Item *arg0, Item *arg1) {
     u32 a = arg0->key;
     u32 b = arg1->key;
     if (a == b) {

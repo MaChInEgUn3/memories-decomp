@@ -7,7 +7,7 @@ typedef unsigned int u32;
 
 extern u16 D_8017A1D8[];
 
-s32 func_80019A08(s32 arg0, s32 arg1)
+s32 Duel_CheckEquip(s32 arg0, s32 arg1)
 {
     u16 *p = D_8017A1D8;
 

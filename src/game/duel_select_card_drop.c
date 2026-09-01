@@ -2,7 +2,7 @@ typedef unsigned short u16;
 extern char gDuel_awSaPowCardDrops[];
 extern int func_8008E590(void);
 
-int func_80021810(int arg0)
+int Duel_SelectCardDrop(int arg0)
 {
     register int offset asm("$16");
     register u16 *entry asm("$16");

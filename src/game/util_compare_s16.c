@@ -1,4 +1,4 @@
-int func_80024704(const short *left, const short *right)
+int Util_CompareS16(const short *left, const short *right)
 {
     if (*left == *right) {
         return 0;
