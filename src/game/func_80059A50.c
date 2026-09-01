@@ -1,15 +1,19 @@
-typedef struct { int words[7]; } Params;
-extern void func_80058A7C(int, int, Params *);
-void func_80059A50(int a, int b, Params *params)
-{
-    Params copy;
-    register int w0 asm("$3") = params->words[0];
-    register int w1 asm("$7") = params->words[1];
-    register int w2 asm("$8") = params->words[2];
-    register int w3 asm("$9") = params->words[3];
-    copy.words[0]=w0; copy.words[1]=w1; copy.words[2]=w2; copy.words[3]=w3;
-    w0=params->words[4]; w1=params->words[5]; w2=params->words[6];
-    copy.words[4]=w0; copy.words[5]=w1; copy.words[6]=w2;
-    asm("" : : "m"(copy));
-    func_80058A7C(a,b,&copy);
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef signed char s8;
+typedef short s16;
+typedef int s32;
+
+struct Rec7 {
+    s32 f[7];
+};
+
+extern s32 func_80058A7C(s32 a0, s32 a1, struct Rec7 *a2);
+
+/* Copies the 7-word struct onto the stack before forwarding it, so the
+   callee can't alias the caller's copy. */
+s32 func_80059A50(s32 a0, s32 a1, struct Rec7 *src) {
+    struct Rec7 buf = *src;
+    return func_80058A7C(a0, a1, &buf);
 }
