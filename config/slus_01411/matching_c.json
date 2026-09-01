@@ -4405,6 +4405,12 @@
       "source": "src/game/ai_script_load_card_id.c"
     },
     {
+      "address": "0x80071320",
+      "profile": "gcc_2_8_1_g8_split",
+      "size": "0x98",
+      "source": "src/game/AiScript_SetFaceDown.c"
+    },
+    {
       "address": "0x800713B8",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x6C",
