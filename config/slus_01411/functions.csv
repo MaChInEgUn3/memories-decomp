@@ -49,7 +49,7 @@ address,size,name,status,module,notes
 0x800151B0,0x28,func_800151B0,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x800151D8,0x138,func_800151D8,unmatched_asm,game,
 0x80015310,0x1D4,func_80015310,unmatched_asm,game,
-0x800154E4,0x1D4,func_800154E4,unmatched_asm,game,
+0x800154E4,0x1D4,func_800154E4,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x800156B8,0x24,func_800156B8,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800156DC,0x50,func_800156DC,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8001572C,0x54,func_8001572C,matching_c,game,4 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.

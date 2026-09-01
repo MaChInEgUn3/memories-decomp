@@ -173,3 +173,11 @@ AiScript_Store = 0x800735A0; // type:func
 AiScript_SetRegister = 0x800735DC; // type:func
 AiScript_Add = 0x80073624; // type:func
 AiScript_Print = 0x800736C4; // type:func
+
+// Collaborator-verified source aliases
+D_8009B140 = 0x8009B140; // rom:0x8B940
+D_8009B141 = 0x8009B141; // rom:0x8B941
+D_800E9D94 = 0x800E9D94; // rom:0xDA594
+D_800E9EC8 = 0x800E9EC8; // rom:0xDA6C8
+D_800E9EC8_arr = 0x800E9EC8; // segment:main
+D_800E9ECE = 0x800E9ECE; // rom:0xDA6CE
