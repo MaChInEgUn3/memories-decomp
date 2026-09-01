@@ -1,0 +1,101 @@
+# Copilot CLI OOM Diagnosis - 2026-09-01
+
+## Outcome
+
+The crash recorded in
+`tmp/report.20260901.161950.280136.0.001.json` was an internal Copilot CLI
+JavaScript heap exhaustion. It was not a compiler failure and was not caused
+by the kernel terminating a large parallel build.
+
+The hard four-process ceiling remains useful, but process count alone cannot
+prevent this failure. Long-session context and tool-output retention are the
+primary risk, with parallel or verbose operations acting as amplifiers.
+
+## Crash evidence
+
+The Node diagnostic report records:
+
+| Measurement | Value |
+| --- | ---: |
+| Failure | `Allocation failed - JavaScript heap out of memory` |
+| Copilot CLI version in report | `1.0.71` |
+| Node version | `24.16.0` |
+| V8 heap limit | 2,150,629,376 bytes |
+| V8 used heap | 1,867,489,752 bytes |
+| Old-space used | 1,843,310,472 bytes |
+| Old-space available | 168,160 bytes |
+| Process RSS | 7,047,389,184 bytes |
+| Host physical memory | 8,277,184,512 bytes |
+| Host available memory | 223,756,288 bytes |
+| Active Node workers at capture | 0 |
+| Active libuv handles at capture | 0 |
+| Swap | none |
+
+Old-space was effectively full and garbage collection could not free enough
+strongly referenced data for another allocation. The command line included
+Node's `--optimize-for-size`, and this process had a roughly 2 GiB V8 heap
+limit.
+
+The process RSS was much larger than the reported V8 heap. The diagnostic
+cannot assign every native allocation to a component, but this pattern is
+consistent with retained JavaScript data plus native allocator fragmentation
+or other private anonymous allocations accumulated during the session.
+
+## Reproduction indicators
+
+The replacement CLI process reached approximately 2.1 GiB RSS within ten
+minutes while:
+
+- no compiler or build child was running;
+- only the Copilot CLI process was large;
+- about 1.95 GiB was private anonymous memory;
+- the host otherwise had several GiB available.
+
+This rules out unrelated user processes as the immediate cause and shows that
+the session itself has a high memory baseline.
+
+The failing process accumulated about 621,000 filesystem reads and ran for
+roughly fourteen minutes. Immediately before the failure, the work repeatedly
+loaded source, configuration, generated assembly, and collaborator-reference
+content while restoring a long-running decompilation session. Four-way tool
+batches reduced compiler fan-out but still returned multiple large payloads
+to the same CLI context.
+
+## External corroboration
+
+Open issue `github/copilot-cli#4664`, labeled `area:sessions` and
+`area:context-memory`, reports the same failure when resuming a long-standing
+session with substantial conversation and tool history. It remained open
+during this diagnosis.
+
+Copilot CLI 1.0.81 added recent-history-first loading for large sessions, but
+the 1.0.82 changelog does not state that large-session heap exhaustion was
+fixed. The local crash report predates the current 1.0.82 runtime and identifies
+1.0.71, but upgrading alone is therefore not sufficient evidence that the
+failure is resolved.
+
+## Contributing causes
+
+1. A long-lived resumed session with extensive decompilation and tool history.
+2. Repeated large tool results retained in the CLI context.
+3. Reading several files in one parallel tool batch, which increases the
+   transient and retained payload even when the process count stays at four.
+4. An approximately 2 GiB V8 heap ceiling in the crashing process.
+5. No swap and only about 8 GiB of host RAM, leaving little safety margin once
+   native RSS grew beyond the V8 heap.
+
+## Operational response
+
+- Use one process and one tool call at a time for normal work.
+- Treat four concurrent processes as an emergency maximum, never a default.
+- Avoid background agents and broad repository/reference scans.
+- Search before reading and cap every returned range or command output.
+- Put verbose compiler, linker, and comparison logs under `tmp/`.
+- Process collaborator candidates through a sequential driver that writes a
+  compact manifest and result ledger rather than returning per-candidate
+  disassembly in the conversation.
+- Commit and push bounded batches so a fresh session can resume entirely from
+  tracked notes and ledgers.
+- Do not use `NODE_OPTIONS=--max-old-space-size=8192` on this host. An 8 GiB
+  heap allowance on an 8 GiB, no-swap machine can destabilize the entire host
+  and only postpones unbounded retention.

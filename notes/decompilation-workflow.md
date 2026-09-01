@@ -2,14 +2,37 @@
 
 ## Resource limits
 
-Never run more than **four concurrent processes** for this project. Prefer one
-sequential worker for matching, integration, full-link verification, and other
-memory-heavy work. Steady progress is more valuable than process fan-out that
-risks an out-of-memory crash and loses the active session.
+Never run more than **four concurrent processes** for this project. That is a
+hard ceiling, not a target. Prefer one sequential worker for matching,
+integration, full-link verification, and other memory-heavy work. Steady
+progress is more valuable than process fan-out that risks an out-of-memory
+crash and loses the active session.
 
 Any script that adds parallel execution must default to at most four workers
 and expose a lower worker count. Do not derive an unbounded default from the
 host CPU count.
+
+The Copilot CLI itself has exhausted its JavaScript heap during long,
+tool-heavy sessions even when no compiler workers were active. To limit
+session-memory growth:
+
+- Do not launch background agents for routine matching or source analysis.
+- Use one tool call at a time by default. Do not batch large file reads.
+- Search first, then read only narrow ranges. Never load `gms.c`, `dotr.c`, or
+  another large reference/export in full.
+- Bound command output with focused filters or line limits. Write unavoidable
+  verbose logs beneath `tmp/` and inspect only their summary or relevant tail.
+- Run candidate verification sequentially and emit one compact result record
+  per candidate instead of returning compiler or disassembly dumps.
+- Work in small recoverable batches, update durable ledgers immediately, and
+  commit plus push each completed batch before loading more reference context.
+- Start a fresh CLI session from the durable notes after a bounded batch if
+  memory usage is rising. Do not rely on a single indefinitely resumed
+  session as the project state store.
+
+Do not raise the Node heap to 8 GiB on the current host. It has approximately
+8 GiB of physical memory and no swap, so doing so would trade a controlled V8
+failure for whole-host memory exhaustion.
 
 ## Match invariant
 
