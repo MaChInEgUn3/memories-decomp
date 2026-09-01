@@ -17,13 +17,14 @@ export GOMODCACHE := $(ROOT)/tools/environments/go/pkg/mod
 
 .DEFAULT_GOAL := help
 
-.PHONY: help workspace verify-target verify-inputs tools python-tools toolchain compiler compiler-281 compiler-272 check-tools info extract map split build match inventory classify-functions candidates siblings external-attempts basic-types progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
+.PHONY: help workspace verify-target verify-inputs tools python-tools toolchain compiler compiler-281 compiler-281-prebuilt compiler-272 check-tools check-build-tools info extract map split build match inventory classify-functions candidates siblings external-attempts basic-types progress disc-layout verify-disc runtime-files verify-runtime-files audit clean
 
 help:
 	@printf '%s\n' \
 		'Available targets:' \
 		'  tools          Install pinned project tools beneath tools/' \
 		'  check-tools    Verify pinned local project tools' \
+		'  check-build-tools  Verify only tools required for a clean build' \
 		'  info           Show the verified PS-X executable header' \
 		'  extract        Extract the verified header and loaded payload' \
 		'  map            Validate the top-level executable region map' \
@@ -69,6 +70,9 @@ compiler: compiler-281 compiler-272
 compiler-281: verify-target
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/old_gcc.py
 
+compiler-281-prebuilt: verify-target
+	@$(BOOTSTRAP_PYTHON) tools/bootstrap/old_gcc_prebuilt.py
+
 compiler-272: verify-target
 	@$(BOOTSTRAP_PYTHON) tools/bootstrap/old_gcc_272.py
 
@@ -77,6 +81,11 @@ check-tools: workspace
 	@$(PYTHON) tools/bootstrap/binutils.py --check
 	@$(PYTHON) tools/bootstrap/old_gcc.py --check
 	@$(PYTHON) tools/bootstrap/old_gcc_272.py --check
+
+check-build-tools: workspace
+	@$(PYTHON) tools/bootstrap/bootstrap.py --check
+	@$(PYTHON) tools/bootstrap/binutils.py --check
+	@$(PYTHON) tools/bootstrap/old_gcc_prebuilt.py --check
 
 info: verify-target
 	@$(PYTHON) tools/project/psx_exe.py info
@@ -87,7 +96,7 @@ extract: verify-target
 map: verify-target
 	@$(PYTHON) tools/project/validate_image_map.py
 
-split: map check-tools
+split: map check-build-tools
 	@$(PYTHON) tools/project/clean.py generated splat
 	@$(PYTHON) tools/project/generate_build_config.py
 	@$(SPLAT) split tmp/generated/slus_01411.split.yaml

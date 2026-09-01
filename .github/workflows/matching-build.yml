@@ -72,7 +72,11 @@ jobs:
           key: ${{ runner.os }}-project-tools-${{ hashFiles('tools/bootstrap/*.json', 'tools/bootstrap/*.py') }}
 
       - name: Install or verify pinned tools
-        run: make tools
+        run: |
+          make python-tools
+          make toolchain
+          make compiler-281-prebuilt
+          make check-build-tools
 
       - name: Perform clean matching build
         run: |

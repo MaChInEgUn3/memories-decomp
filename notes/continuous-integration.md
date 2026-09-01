@@ -31,6 +31,24 @@ unchanged.
 A missing secret, download failure, input hash mismatch, tool failure, build
 failure, or rebuilt executable hash mismatch makes the workflow fail.
 
+## Compiler installation
+
+CI does not build GCC. It downloads the official
+`gcc-2.8.1.tar.gz` asset from the `decompals/old-gcc` 0.17 release,
+verifies the archive and individual `gcc`, `cc1`, and `cpp` SHA-256 hashes,
+and installs a local wrapper that points the fixed-prefix release driver at
+the repository-local compiler components.
+
+The similarly named `gcc-2.8.1-psx.tar.gz` asset is not used: a complete local
+comparison found 95 differing C objects and 45 text-size changes. The selected
+`mips-linux-gnu` release asset reproduces the project's required GCC 2.8.1
+code generation under the explicit PSX flags.
+
+The GCC 2.7.2 fallback is a matching-research tool and is not required for the
+current clean build, so CI does not install or validate it. Binutils 2.42 is
+still bootstrapped locally on a cold cache and restored from the Actions cache
+on later runs.
+
 GitHub does not expose repository secrets to pull requests from forks. Those
 runs therefore fail at the explicit private-input check rather than receiving
 the retail executable.
