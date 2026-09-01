@@ -1432,13 +1432,18 @@ def add_required_linker_aliases(
     reference = load_symbol_file(
         resolve_within(root, REFERENCE_SYMBOLS_PATH, must_exist=True)
     )
+    target_symbols = load_nm_symbols(
+        root,
+        work,
+        resolve_within(root, TARGET_ELF_PATH, must_exist=True),
+    )
     aliases: list[tuple[str, int]] = []
     for symbol in sorted(set(undefined_symbols(root, work, obj))):
         if symbol in configured or symbol in function_names or symbol == "_gp":
             continue
         if not re.fullmatch(r"[A-Za-z_.$][A-Za-z0-9_.$]*", symbol):
             raise AuditError(f"{address:#010x}: invalid alias symbol {symbol}")
-        alias_address = reference.get(symbol)
+        alias_address = target_symbols.get(symbol) or reference.get(symbol)
         if alias_address is None:
             match = SYMBOL_ADDRESS_PATTERN.search(symbol)
             if match:
@@ -1451,32 +1456,97 @@ def add_required_linker_aliases(
     if not aliases:
         return []
 
+    append_absolute_aliases(config_path, aliases)
+    return [symbol for symbol, _address in aliases]
+
+
+def append_absolute_aliases(
+    config_path: Path,
+    aliases: list[tuple[str, int]],
+) -> None:
+    if not aliases:
+        return
     text = config_path.read_text(encoding="utf-8").rstrip()
     if "// Collaborator-verified source aliases" not in text:
         text += "\n\n// Collaborator-verified source aliases"
-    configured_addresses = Counter(configured.values())
-    added_addresses: Counter[int] = Counter()
     for symbol, alias_address in aliases:
-        existing_count = configured_addresses[alias_address]
-        alias_index = added_addresses[alias_address]
-        if (
-            LOAD_ADDRESS <= alias_address < 0x801E0000
-            and existing_count == 0
-            and alias_index == 0
-        ):
-            rom_address = HEADER_SIZE + alias_address - LOAD_ADDRESS
-            attributes = f" // rom:0x{rom_address:X}"
-        elif (
-            LOAD_ADDRESS <= alias_address < 0x801E0000
-            and existing_count == 0
-            and alias_index == 1
-        ):
-            attributes = " // segment:main"
-        else:
-            attributes = " // absolute:True"
-        text += f"\n{symbol} = 0x{alias_address:08X};{attributes}"
-        added_addresses[alias_address] += 1
+        text += (
+            f"\n{symbol} = 0x{alias_address:08X};"
+            " // absolute:True"
+        )
     config_path.write_text(text + "\n", encoding="utf-8")
+
+
+def normalize_collaborator_aliases(config_path: Path) -> None:
+    text = config_path.read_text(encoding="utf-8")
+    marker = "// Collaborator-verified source aliases"
+    if marker not in text:
+        return
+    prefix, suffix = text.split(marker, 1)
+    lines = [marker]
+    for line in suffix.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        main = stripped.split("//", 1)[0].rstrip()
+        lines.append(f"{main} // absolute:True")
+    config_path.write_text(
+        prefix.rstrip() + "\n\n" + "\n".join(lines) + "\n",
+        encoding="utf-8",
+    )
+
+
+def persist_current_c_symbols(root: Path, work: Path) -> list[str]:
+    config_path = resolve_within(
+        root,
+        SYMBOLS_CONFIG_PATH,
+        must_exist=True,
+    )
+    normalize_collaborator_aliases(config_path)
+    configured = load_symbol_file(config_path)
+    functions = live_functions(root)
+    function_names = {row["name"] for row in functions.values()}
+    matching = live_matching(root)
+    objects = [
+        resolve_within(
+            root,
+            f"tmp/project-build/obj/c_{address:08x}.o",
+            must_exist=True,
+        )
+        for address in sorted(matching)
+    ]
+    completed = run(
+        root,
+        work,
+        [str(tool(root, "nm")), "-u", *[str(path) for path in objects]],
+    )
+    require_success(completed, "scan matching-C undefined symbols")
+    undefined = {
+        fields[-1]
+        for line in completed.stdout.decode(errors="replace").splitlines()
+        if (fields := line.split())
+    }
+    target_symbols = load_nm_symbols(
+        root,
+        work,
+        resolve_within(root, TARGET_ELF_PATH, must_exist=True),
+    )
+    reference = load_symbol_file(
+        resolve_within(root, REFERENCE_SYMBOLS_PATH, must_exist=True)
+    )
+    aliases: list[tuple[str, int]] = []
+    for symbol in sorted(undefined):
+        if symbol in configured or symbol in function_names or symbol == "_gp":
+            continue
+        address = target_symbols.get(symbol) or reference.get(symbol)
+        if address is None:
+            match = SYMBOL_ADDRESS_PATTERN.search(symbol)
+            if match:
+                address = int(match.group(1), 16)
+        if address is None:
+            raise AuditError(f"cannot persist C linker symbol {symbol}")
+        aliases.append((symbol, address))
+    append_absolute_aliases(config_path, aliases)
     return [symbol for symbol, _address in aliases]
 
 
@@ -1583,6 +1653,49 @@ def integrate_exact(
     built = resolve_within(root, BUILT_PATH, must_exist=True)
     if sha256(target) != sha256(built):
         raise AuditError("clean integration baseline does not match target")
+    durable_symbols = persist_current_c_symbols(root, work)
+    if durable_symbols or git_output(
+        root,
+        work,
+        "diff",
+        "--",
+        SYMBOLS_CONFIG_PATH,
+    ):
+        symbol_log = work / "durable-symbol-match.log"
+        completed = run(
+            root,
+            work,
+            ["make", "match"],
+            stdout_path=symbol_log,
+        )
+        require_success(completed, "durable C-symbol full match")
+        completed = run(
+            root,
+            work,
+            ["git", "add", "--", SYMBOLS_CONFIG_PATH],
+        )
+        require_success(completed, "stage durable C symbols")
+        completed = run(root, work, ["git", "diff", "--cached", "--check"])
+        require_success(completed, "durable C-symbol diff check")
+        completed = run(
+            root,
+            work,
+            [
+                "git",
+                "-c",
+                "core.hooksPath=/dev/null",
+                "commit",
+                "--no-gpg-sign",
+                "-m",
+                "build: persist matching C symbols",
+                "-m",
+                "Co-authored-by: Copilot "
+                "<223556219+Copilot@users.noreply.github.com>",
+            ],
+        )
+        require_success(completed, "commit durable C symbols")
+        completed = run(root, work, ["git", "push", "origin", "master"])
+        require_success(completed, "push durable C symbols")
     seed_log = work / "incremental-seed.log"
     completed = run(
         root,
