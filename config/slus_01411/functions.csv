@@ -804,7 +804,7 @@ address,size,name,status,module,notes
 0x80049694,0x30,func_80049694,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x800496C4,0x98,func_800496C4,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8004975C,0x84,func_8004975C,matching_c,game,Pure-C inline refinement matched the full executable.
-0x800497E0,0xDC,func_800497E0,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
+0x800497E0,0xDC,func_800497E0,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_cc_g0_as_g8_no_split.
 0x800498BC,0x3C,func_800498BC,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800498F8,0x28,func_800498F8,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80049920,0x144,func_80049920,unmatched_asm,game,

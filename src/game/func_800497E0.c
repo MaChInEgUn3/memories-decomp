@@ -1,40 +1,69 @@
 typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef signed char s8;
+typedef short s16;
+typedef int s32;
 
-extern u8 *D_8009B458;
-extern void func_800771B0(void *);
-extern int func_80077150(int, int);
+/* Same D_8009B458_c stream-buffer struct family as clear_8009b458_4A4_if_set.c
+   / reset_8009b458_idle_state.c. sub.f0 is the same discriminant as f4A4;
+   sub.f10/f14 (absolute offsets 0x4B4/0x4B8) are a threshold and a base
+   offset for the pending-transfer window, and f818 is the running byte
+   count consumed from it. */
+struct SubRec {
+    s16 f0;
+    char pad[0x10 - 2];
+    s32 f10;
+    s32 f14;
+};
 
-int func_800497E0(int value, unsigned int amount, short expected)
-{
-    register u8 *state asm("$3") = D_8009B458;
-    short current = *(short *)(state + 0x4A4);
-    register int result asm("$2");
-    u8 *entry;
-    unsigned int remaining;
-    if (current != expected)
-        goto failure;
-    entry = state + 0x4A4;
-    func_800771B0((u8 *)*(void **)(entry + 0x14) +
-                  *(unsigned int *)(state + 0x818));
-    remaining = *(unsigned int *)(entry + 0x10) -
-                *(unsigned int *)(D_8009B458 + 0x818);
-    if (remaining < amount)
-        amount = remaining;
-    if (func_80077150(value, amount) == amount)
-        goto success;
-failure:
-    result = -1;
-    goto done;
-success:
-    {
-        register u8 *final asm("$2") = D_8009B458;
-        *(unsigned int *)(final + 0x818) += amount;
-        if (*(unsigned int *)(final + 0x818) <
-            *(unsigned int *)(entry + 0x10))
-            result = -2;
-        else
-            result = current;
+struct S8009B458 {
+    char pad0[0x4A4];
+    struct SubRec sub;
+    char pad1[0x818 - 0x4A4 - 0x18];
+    u32 f818;
+};
+
+extern struct S8009B458 *D_8009B458;
+extern void func_800771B0(void *a0);
+extern s32 func_80077150(void *a0, s32 a1);
+
+/* Validates the caller's state token against the pending transfer's
+   discriminant, clamps the requested byte count to what remains in the
+   window, forwards it to SpuRead, and advances the consumed-byte
+   counter. Returns the state token once the window fills, -2 while more
+   remains, or -1 on a state mismatch or short transfer. */
+s32 func_800497E0(void *rec, s32 count, s32 state) {
+    struct S8009B458 *v1 = D_8009B458;
+    struct SubRec *s1;
+    s32 result;
+
+    if (v1->sub.f0 != (s16)state) {
+        return -1;
     }
-done:
-    return result;
+
+    s1 = &v1->sub;
+    func_800771B0((void *)(s1->f14 + v1->f818));
+
+    {
+        s32 remaining = s1->f10 - D_8009B458->f818;
+        if ((u32)remaining < (u32)count) {
+            count = remaining;
+        }
+    }
+
+    result = func_80077150(rec, count);
+    if (result != count) {
+        return -1;
+    }
+
+    {
+        u32 total = D_8009B458->f818 + count;
+        D_8009B458->f818 = total;
+        if (total >= (u32)s1->f10) {
+            return (s16)state;
+        }
+    }
+
+    return -2;
 }
