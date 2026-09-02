@@ -8,9 +8,9 @@ The evidence-backed naming passes apply:
 
 | Kind | Applied names |
 |---|---:|
-| Functions | 122 |
+| Functions | 123 |
 | Globals | 53 |
-| **Total** | **175** |
+| **Total** | **176** |
 
 The machine-readable registry is
 `notes/semantic-symbol-map.csv`. Each row records the address, accepted name,
@@ -82,6 +82,10 @@ The Unchiga SDK catalogue was not bulk-imported: it relies partly on a Psy-Q
 4.7 identification that conflicts with this project's independently
 established Psy-Q 4.6 toolchain, and Psy-Q functions remain outside the game
 decompilation scope.
+
+The recomp's independently instrumented reward path confirms
+`Duel_AwardCard` at `0x80021894`: it saturates the awarded card's chest count
+and updates the fifteen-entry recent-award history.
 
 ## Deliberately deferred labels
 

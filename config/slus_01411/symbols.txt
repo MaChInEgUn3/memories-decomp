@@ -194,3 +194,6 @@ gDuel_awRitualData = 0x801799D8;
 gDuel_anRankScore = 0x80179A04;
 gDuel_awEquipTable = 0x8017A1D8;
 gCard_asNameSortKey = 0x801D4D8E;
+
+// Semantic names
+Duel_AwardCard = 0x80021894; // type:func
