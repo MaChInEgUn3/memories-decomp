@@ -1,5 +1,10 @@
 # Yu-Gi-Oh! Forbidden Memories Matching Decompilation Plan
 
+The active remaining-function campaign is specified in
+`notes/remaining-decompilation-plan.md`. Its phase order is mandatory:
+decompilation/refinement, then semantic naming and source grouping, then
+cross-function global-use and structure recovery.
+
 ## Resource ceiling
 
 - Never use more than four concurrent processes.
