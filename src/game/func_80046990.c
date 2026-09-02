@@ -1,15 +1,14 @@
 #include "../types.h"
-
-extern u8 *g_SDValue;
+#include "sound.h"
 
 void func_80046990(int first, int second, int third)
 {
-    *(int *)(g_SDValue + 0x3C) = 0;
+    g_SDValue->field_003C = 0;
     if (first == 0)
-        g_SDValue[0x4A] &= 0xFE;
+        g_SDValue->flags_004A &= 0xFE;
     if (second == 0)
-        g_SDValue[0x4A] &= 0xFD;
+        g_SDValue->flags_004A &= 0xFD;
     if (third == 0)
-        g_SDValue[0x4A] &= 0xBF;
-    *(u16 *)(g_SDValue + 0x40) |= 0xA;
+        g_SDValue->flags_004A &= 0xBF;
+    g_SDValue->flags_0040 |= 0xA;
 }

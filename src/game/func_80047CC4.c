@@ -1,26 +1,24 @@
 #include "../types.h"
+#include "sound.h"
 
-extern u8 *g_SDValue;
 extern int func_80047C50(int);
 extern void func_80047C70(int);
 
 void func_80047CC4(int value)
 {
     int normalized = func_80047C50((u16)value);
-    u8 *state = g_SDValue;
+    SDValue *state = g_SDValue;
     int tries = 0;
-    int slot = state[0x435];
+    int slot = state->field_0435;
     int bit = 1 << (u8)slot;
     int command = 1 << ((u8)slot + 20);
     do {
         state = g_SDValue;
-        if (state[0x434] & bit) {
-            u8 *item = state;
-            item += (u8)slot * 2;
-            if (*(u16 *)(item + 0x404) == (u16)normalized) {
+        if (state->voice_active_mask & bit) {
+            if (state->voice_ids[(u8)slot] == (u16)normalized) {
                 func_80047C70(command);
-                g_SDValue[0x435] = slot;
-                g_SDValue[0x434] &= ~bit;
+                g_SDValue->field_0435 = slot;
+                g_SDValue->voice_active_mask &= ~bit;
                 break;
             }
         }

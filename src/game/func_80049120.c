@@ -1,7 +1,7 @@
 #include "../types.h"
+#include "sound.h"
 
-extern unsigned char *g_SDValue;
 int func_80049120(void)
 {
-    return *(short *)(g_SDValue + 0x1582) != 0;
+    return g_SDValue->field_1582 != 0;
 }

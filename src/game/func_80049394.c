@@ -1,14 +1,14 @@
 #include "../types.h"
+#include "sound.h"
 
-extern u8 *g_SDValue;
 extern void func_80049010(void);
 
 void func_80049394(void *entry)
 {
     func_80049010();
     if (entry != 0)
-        *(void **)(g_SDValue + 0x1564) = entry;
+        g_SDValue->music_track = entry;
     else
-        *(void **)(g_SDValue + 0x1564) = (void *)0x801EA800;
-    **(u16 **)(g_SDValue + 0x1564) = 0xFFFF;
+        g_SDValue->music_track = (u16 *)0x801EA800;
+    *g_SDValue->music_track = 0xFFFF;
 }

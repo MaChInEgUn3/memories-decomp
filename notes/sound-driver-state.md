@@ -51,3 +51,19 @@ The contiguous output/control block at `0x80046F58-0x80047278` now builds as
 `src/game/sound_output.c`. Its ten functions use `SDValue` and `SDCommand`
 directly, including output-type reads/writes, driver flags, CD-volume reuse,
 and construction of three command variants.
+
+An additional scalar/pointer pass converts 17 pure-C functions to named
+`SDValue` fields covering channel volume, CD volume, driver flags, the
+four-voice tables, late control fields, and the music-track pointer.
+
+Two accesses deliberately retain an explicit byte-pointer expression:
+
+- `func_80047FAC` indexes the four voice IDs as
+  `((u8 *)g_SDValue + index * 2 + 0x404)` because direct structure-array
+  indexing changes GCC's address calculation and adds three instructions.
+- `func_800493F8` writes the music-track pointer through
+  `((u8 *)g_SDValue + 0x1564)` because the direct member assignment changes
+  register allocation.
+
+Both files include `sound.h`; the raw expressions are exact-code-generation
+views of fields whose offsets and types are defined by `SDValue`.

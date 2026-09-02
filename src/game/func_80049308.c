@@ -1,24 +1,24 @@
 #include "../types.h"
+#include "sound.h"
 
-extern u8 *g_SDValue;
 extern int func_800496C4(void *, int, int);
 
 void func_80049308(void)
 {
-    u8 *state = g_SDValue;
-    if (*(short *)(state + 0x157A) != 0) {
-        u8 *entry = *(u8 **)(state + 0x1564);
+    SDValue *state = g_SDValue;
+    if (state->field_157A != 0) {
+        u8 *entry = (u8 *)state->music_track;
         int result = func_800496C4(entry + 0x50, 0, *(int *)(entry + 0x0C));
-        *(short *)(g_SDValue + 0x157A) = result;
+        g_SDValue->field_157A = result;
         if ((result << 16) != 0) {
-            *(short *)(g_SDValue + 0x1578) = -1;
-            *(short *)(g_SDValue + 0x157A) = -1;
+            g_SDValue->field_1578 = -1;
+            g_SDValue->field_157A = -1;
             return;
         }
     }
     {
-        register u8 *final = g_SDValue;
-        register u16 *entry = *(u16 **)(final + 0x1564);
-        *(u16 *)(final + 0x1578) = *entry;
+        register SDValue *final = g_SDValue;
+        register u16 *entry = final->music_track;
+        final->field_1578 = *entry;
     }
 }

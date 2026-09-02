@@ -1,6 +1,6 @@
 #include "../types.h"
+#include "sound.h"
 
-extern u8 *g_SDValue;
 extern void func_80049010(void);
 
 void func_800493F8(void)
@@ -8,6 +8,6 @@ void func_800493F8(void)
     u16 *entry;
     func_80049010();
     entry = (u16 *)0x801EA800;
-    *(u16 **)(g_SDValue + 0x1564) = entry;
+    *(u16 **)((u8 *)g_SDValue + 0x1564) = entry;
     entry[0] = 0xFFFF;
 }

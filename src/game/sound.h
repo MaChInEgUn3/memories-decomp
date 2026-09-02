@@ -78,7 +78,8 @@ typedef struct {
     u8 pad1585;
     s16 field_1586;
     s16 field_1588;
-    u8 pad158A[0x63];
+    u8 pad158A[0x4E];
+    u8 field_15D8[0x15];
     u8 field_15ED;
     u8 field_15EE;
     u8 field_15EF;
