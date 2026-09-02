@@ -1,24 +1,24 @@
 #include "../types.h"
+#include "sound.h"
 
-extern u8 *D_8009B458;
 extern void func_800771B0(void *);
 extern int func_80077150(int, int);
 
 int func_8004975C(int value, short expected)
 {
     register int saved;
-    u8 *state = D_8009B458;
-    short current = *(short *)(state + 0x4A4);
+    SDSecondaryState *state = D_8009B458;
+    short current = state->transfer.field_0000;
     if (current != expected)
         return -1;
     saved = value;
     {
-        u8 *entry = state + 0x4A4;
-        func_800771B0(*(void **)(entry + 0x14));
-        if (func_80077150(saved, *(int *)(entry + 0x10)) !=
-            *(int *)(entry + 0x10))
+        SDSecondaryTransfer *entry = &state->transfer;
+        func_800771B0(entry->field_0014);
+        if (func_80077150(saved, entry->field_0010) !=
+            entry->field_0010)
             return -1;
-        *(int *)(entry + 0x0C) = saved;
+        entry->field_000C = saved;
     }
     return current;
 }

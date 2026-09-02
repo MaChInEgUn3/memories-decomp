@@ -1,6 +1,6 @@
 #include "../types.h"
+#include "sound.h"
 
-extern u8 *D_8009B458;
 extern s16 func_80077240(s32);
 
 s16 func_800498BC(s16 arg0)
@@ -12,7 +12,7 @@ s16 func_800498BC(s16 arg0)
 
 void func_800498F8(void)
 {
-    s16 *value = (s16 *)(D_8009B458 + 0x4A4);
+    s16 *value = &D_8009B458->transfer.field_0000;
 
     if (*value != -1)
         *value = -1;
