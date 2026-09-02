@@ -1,20 +1,16 @@
 #include "../types.h"
 
-extern unsigned char gAiScript_State[];
+/* Same 25-entry lookahead window as scan_table3_800708c4.c (offsets
+   126..150 from D_800F5BE8), cleared here. */
+extern u8 gAiScript_State[];
 
-void AiScript_ClearTypes(void)
-{
-    register int index asm("$3") = 24;
-    register unsigned char *position asm("$2");
-
-    asm("" : "+r"(index));
-    position = gAiScript_State;
-    asm("" : "+r"(position));
-    position += index;
-    asm("" : "+r"(position));
+void AiScript_ClearTypes(void) {
+    s32 i = 24;
+    u8 *p = gAiScript_State;
+    p += i;
     do {
-        position[126] = 0;
-        index--;
-        position--;
-    } while (index >= 0);
+        p[126] = 0;
+        i--;
+        p--;
+    } while (i >= 0);
 }
