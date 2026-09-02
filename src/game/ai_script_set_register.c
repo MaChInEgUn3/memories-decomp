@@ -1,16 +1,13 @@
 #include "../types.h"
 
 extern int AiScript_ReadByte(void);
-extern int gAiScript_aMemory[];
 
-void AiScript_SetRegister(void)
-{
-    int source = AiScript_ReadByte();
-    int destination = AiScript_ReadByte();
-    register volatile int *values asm("$3") = gAiScript_aMemory;
-    register int value asm("$4");
-    volatile int *destination_value = &values[destination];
+/* Same 4-byte-stride table as idx_table_copy_lowbyte.c. */
+extern s32 gAiScript_aMemory[];
 
-    value = values[source];
-    *destination_value = value;
+/* Copies one table entry to another: two indices read from the stream. */
+void AiScript_SetRegister(void) {
+    s32 src = AiScript_ReadByte();
+    s32 dst = AiScript_ReadByte();
+    gAiScript_aMemory[dst] = gAiScript_aMemory[src];
 }
