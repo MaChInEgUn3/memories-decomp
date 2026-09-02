@@ -123,7 +123,13 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--evidence-source",
-        choices=("canonical", "reference", "refinement", "collaborator"),
+        choices=(
+            "canonical",
+            "reference",
+            "refinement",
+            "collaborator",
+            "post-terminal",
+        ),
         default="canonical",
         help="ledger containing the terminal matched result",
     )
@@ -200,7 +206,11 @@ def main() -> int:
                     else (
                         "inline_refinement"
                         if args.evidence_source == "refinement"
-                        else "collaborator_match"
+                        else (
+                            "collaborator_match"
+                            if args.evidence_source == "collaborator"
+                            else "post_terminal_resolution"
+                        )
                     )
                 ),
             )

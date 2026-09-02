@@ -37,6 +37,10 @@ Konami type or field naming.
 The remaining named `field_XXXX` members have verified offsets and widths but
 insufficient semantic evidence for stronger names.
 
+`SD_ArmBusyCallback` now expresses the registration path in pure C: it sets
+`busy` and installs `SD_ClearBusyFlag` in the main callback slot. This replaces
+the former register-pinned source while preserving exact code generation.
+
 ## Structure safeguards
 
 The header contains compile-time size assertions for:

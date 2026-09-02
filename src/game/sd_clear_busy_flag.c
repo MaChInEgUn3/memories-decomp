@@ -1,7 +1,7 @@
 #include "../types.h"
 #include "sound.h"
 
-void func_8004544C(void)
+void SD_ClearBusyFlag(void)
 {
     g_SDValue->busy = 0;
 }

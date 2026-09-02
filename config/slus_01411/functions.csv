@@ -572,14 +572,14 @@ address,size,name,status,module,notes
 0x8003CF14,0xB4,func_8003CF14,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x8003CFC8,0x74,func_8003CFC8,matching_c,game,Pure-C inline refinement matched the full executable.
 0x8003D03C,0xB8,func_8003D03C,unmatched_asm,game,
-0x8003D0F4,0x80,func_8003D0F4,unmatched_asm,game,
+0x8003D0F4,0x80,SaveData_ApplyRuntimeState,matching_c,game,Post-terminal pure-C match from collaborator source; three verified absolute store literals preserve retail $at materialization.
 0x8003D174,0x114,func_8003D174,unmatched_asm,game,
 0x8003D288,0x30,func_8003D288,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003D2B8,0x48,func_8003D2B8,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003D300,0x2C,func_8003D300,matching_c,game,4 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
 0x8003D32C,0x8,func_8003D32C,matching_c,game,Empty void function matched the return-and-nop sequence.
 0x8003D334,0x138,func_8003D334,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8.
-0x8003D46C,0xAC,func_8003D46C,unmatched_asm,game,
+0x8003D46C,0xAC,DuelEffect_CreateChannel,matching_c,game,Post-terminal pure-C match from collaborator source; one verified absolute byte store preserves retail $at materialization.
 0x8003D518,0xFC,func_8003D518,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x8003D614,0x138,func_8003D614,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8003D74C,0x2F4,func_8003D74C,unmatched_asm,game,
@@ -720,8 +720,8 @@ address,size,name,status,module,notes
 0x800451E0,0x28,func_800451E0,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80045208,0x12C,func_80045208,unmatched_asm,game,
 0x80045334,0x118,func_80045334,unmatched_asm,game,
-0x8004544C,0x10,func_8004544C,matching_c,game,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
-0x8004545C,0x28,func_8004545C,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
+0x8004544C,0x10,SD_ClearBusyFlag,matching_c,game,2 pre-policy variants: exact -G0; -G8 used GP-relative global access
+0x8004545C,0x28,SD_ArmBusyCallback,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80045484,0x90,func_80045484,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_cc_g0_as_g8_no_split.
 0x80045514,0x6D4,func_80045514,unmatched_asm,game,
 0x80045BE8,0xB0,func_80045BE8,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.

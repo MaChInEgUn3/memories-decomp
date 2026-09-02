@@ -212,3 +212,13 @@ Model_InitLightTriplet = 0x80059134; // type:func
 Model_RegisterHandlerKey = 0x80060170; // type:func
 Model_FindHandlerKey = 0x800601D0; // type:func
 Model_GetPrimitiveHandler = 0x8006041C; // type:func
+
+// Semantic names
+SaveData_ApplyRuntimeState = 0x8003D0F4; // type:func
+
+// Semantic names
+DuelEffect_CreateChannel = 0x8003D46C; // type:func
+
+// Semantic names
+SD_ClearBusyFlag = 0x8004544C; // type:func
+SD_ArmBusyCallback = 0x8004545C; // type:func

@@ -32,9 +32,10 @@ Verified channel fields used by matching C include:
 | `0x5C`, `0x5E` | `range_start_5C`, `range_count_5E` | adjacent `D_80090E58` bounds |
 | `0x61` | `field_61` | byte clear in `DuelEffect_InitEntry` |
 
-All six pure-C users now include the shared header and use
+Seven pure-C users now include the shared header and use
 `DuelEffectChannel`: `func_80028310`, `func_80035A64`, `func_80035AB8`,
-`DuelEffect_InitEntry`, `func_8003D614`, and `func_8003F388`.
+`DuelEffect_InitEntry`, `DuelEffect_CreateChannel`, `func_8003D614`, and
+`func_8003F388`.
 
 ## `D_800EB288`: 620 `0x1C`-byte entries
 

@@ -32,7 +32,12 @@ FIELDS = (
     "result",
     "summary",
 )
-MODES = {"reference_match", "inline_refinement", "collaborator_match"}
+MODES = {
+    "reference_match",
+    "inline_refinement",
+    "collaborator_match",
+    "post_terminal_resolution",
+}
 RESULTS = {"matched", "nonmatch", "deferred"}
 TERMINAL_RESULTS = {"matched", "deferred"}
 MAX_ATTEMPTS = 6
@@ -40,6 +45,7 @@ MODE_MAX_ATTEMPTS = {
     "reference_match": MAX_ATTEMPTS,
     "inline_refinement": MAX_ATTEMPTS,
     "collaborator_match": 1,
+    "post_terminal_resolution": 1,
 }
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 ASM_PATTERN = re.compile(r"\b(?:asm|__asm|__asm__)\b")
@@ -88,6 +94,32 @@ def load_matching_addresses(path: Path) -> set[int]:
         parse_address(str(entry["address"]))
         for entry in functions
         if isinstance(entry, dict)
+    }
+
+
+def load_terminal_deferred_addresses(path: Path) -> set[int]:
+    latest: dict[int, str] = {}
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            latest[parse_address(row["address"])] = row["result"]
+    return {
+        address for address, result in latest.items() if result == "deferred"
+    }
+
+
+def terminal_resolution_addresses(
+    rows: list[dict[str, str]],
+    canonical_deferred_addresses: set[int],
+) -> set[int]:
+    inline_latest: dict[int, str] = {}
+    for row in rows:
+        if row["mode"] == "inline_refinement":
+            inline_latest[parse_address(row["address"])] = row["result"]
+    return canonical_deferred_addresses | {
+        address
+        for address, result in inline_latest.items()
+        if result == "deferred"
     }
 
 
@@ -180,7 +212,12 @@ def validate_rows(
     functions: dict[int, dict[str, str]],
     matching_addresses: set[int],
     profiles: dict[str, dict[str, Any]],
+    terminal_deferred_addresses: set[int],
 ) -> None:
+    resolution_addresses = terminal_resolution_addresses(
+        rows,
+        terminal_deferred_addresses,
+    )
     grouped: dict[tuple[str, int], list[dict[str, str]]] = {}
     for row in rows:
         mode = row["mode"]
@@ -242,6 +279,16 @@ def validate_rows(
             raise ExternalAttemptError(
                 f"{address:#010x}: inline refinement requires matching C"
             )
+        if mode == "post_terminal_resolution":
+            if address not in resolution_addresses:
+                raise ExternalAttemptError(
+                    f"{address:#010x}: post-terminal resolution lacks a "
+                    "deferred canonical or inline-refinement history"
+                )
+            if row["result"] != "matched":
+                raise ExternalAttemptError(
+                    f"{address:#010x}: post-terminal resolution must be matched"
+                )
         grouped.setdefault((mode, address), []).append(row)
 
     for (mode, address), history in grouped.items():
@@ -329,12 +376,24 @@ def main() -> int:
         profiles_path = resolve_within(
             root, "config/slus_01411/compiler_profiles.json", must_exist=True
         )
+        attempts_path = resolve_within(
+            root, "config/slus_01411/attempts.csv", must_exist=True
+        )
         ledger_path = resolve_within(root, args.ledger, must_exist=True)
         functions = load_functions(functions_path)
         matching_addresses = load_matching_addresses(matching_path)
+        terminal_deferred_addresses = load_terminal_deferred_addresses(
+            attempts_path
+        )
         profiles = load_profiles(profiles_path)
         rows = load_rows(ledger_path)
-        validate_rows(rows, functions, matching_addresses, profiles)
+        validate_rows(
+            rows,
+            functions,
+            matching_addresses,
+            profiles,
+            terminal_deferred_addresses,
+        )
         if args.check:
             print(f"external attempts: OK ({len(rows)} rows)")
             return 0
@@ -370,10 +429,20 @@ def main() -> int:
                 )
             if not args.reference:
                 raise ExternalAttemptError("--reference is required")
-        else:
+        elif args.mode == "inline_refinement":
             if address not in matching_addresses:
                 raise ExternalAttemptError(
                     f"{address:#010x}: inline refinement requires matching C"
+                )
+        else:
+            resolution_addresses = terminal_resolution_addresses(
+                rows,
+                terminal_deferred_addresses,
+            )
+            if address not in resolution_addresses:
+                raise ExternalAttemptError(
+                    f"{address:#010x}: post-terminal resolution requires a "
+                    "deferred canonical or inline-refinement history"
                 )
 
         candidate = resolve_within(root, args.candidate, must_exist=True)
@@ -457,7 +526,13 @@ def main() -> int:
                 "summary": args.summary,
             }
         )
-        validate_rows(rows, functions, matching_addresses, profiles)
+        validate_rows(
+            rows,
+            functions,
+            matching_addresses,
+            profiles,
+            terminal_deferred_addresses,
+        )
         write_rows(ledger_path, rows)
     except (
         ExternalAttemptError,
@@ -474,7 +549,7 @@ def main() -> int:
         return 1
 
     print(
-        f"external attempt {attempt}/{MAX_ATTEMPTS}: "
+        f"external attempt {attempt}/{maximum}: "
         f"{address:#010x} {args.mode} {args.result}"
     )
     return 0

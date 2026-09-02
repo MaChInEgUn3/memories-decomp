@@ -57,6 +57,21 @@ The collaborator sources were treated as hypotheses and compiled with the local 
 | `0x80070E20` | `AiScript_SetRandom` | `inline_refinement` | `gcc_2_8_1_g8_split` |
 | `0x80071320` | `AiScript_SetFaceDown` | `collaborator_match` | `gcc_2_8_1_g8_split` |
 
+## Post-terminal resolutions
+
+Three results originally failed this audit's strict symbolic-relocation gate
+but were later resolved through full executable matching:
+
+| Address | Semantic name | Resolution |
+|---|---|---|
+| `0x8003D0F4` | `SaveData_ApplyRuntimeState` | Three isolated write-only addresses use verified C integer literals to preserve retail `$at` materialization. |
+| `0x8003D46C` | `DuelEffect_CreateChannel` | One isolated write-only address uses the same verified literal exception. |
+| `0x8004545C` | `SD_ArmBusyCallback` | Two C absolute-address expressions replace the prior register-pinned matching source. |
+
+All three complete linked executables match the retail SHA-256. Their original
+audit rows remain historical evidence; the accepted resolutions are recorded
+as `post_terminal_resolution`.
+
 ## Nonmatches
 
 | Address | Project symbol | Mode | First difference |
@@ -73,8 +88,6 @@ The collaborator sources were treated as hypotheses and compiled with the local 
 | `0x80035DB8` | `func_80035DB8` | `inline_refinement` | `+0xA: 0f80023c != 0f80033c` |
 | `0x80035DF4` | `func_80035DF4` | `inline_refinement` | `+0x8: 88b24224 != a0b24224` |
 | `0x8003735C` | `func_8003735C` | `inline_refinement` | `+0x2: 5c008294 != 5c008394` |
-| `0x8003D0F4` | `func_8003D0F4` | `collaborator_match` | `relocation/section mismatch` |
-| `0x8003D46C` | `func_8003D46C` | `collaborator_match` | `relocation/section mismatch` |
 | `0x800400AC` | `func_800400AC` | `collaborator_match` | `+0x9: 2148a000 != 2140a000` |
 | `0x8004020C` | `func_8004020C` | `collaborator_match` | `+0x6: 00008384 != 00008584` |
 | `0x800428EC` | `func_800428EC` | `collaborator_match` | `+0x4: 6c008327 != 160085a0` |
@@ -82,7 +95,6 @@ The collaborator sources were treated as hypotheses and compiled with the local 
 | `0x80044D0C` | `func_80044D0C` | `inline_refinement` | `+0x0: 0a80033c != 01000224` |
 | `0x80044D20` | `func_80044D20` | `inline_refinement` | `+0x0: 0a80033c != 02000224` |
 | `0x80044D34` | `func_80044D34` | `inline_refinement` | `+0x0: 0a80033c != 03000224` |
-| `0x8004545C` | `func_8004545C` | `inline_refinement` | `+0x2: 0a80033c != 0a80023c` |
 | `0x80058FB0` | `func_80058FB0` | `inline_refinement` | `+0x1: c0180400 != c0100400` |
 | `0x80059134` | `func_80059134` | `inline_refinement` | `+0x1: c0180400 != c0100400` |
 | `0x80060170` | `func_80060170` | `inline_refinement` | `+0x2: 0f80023c != 0f80063c` |

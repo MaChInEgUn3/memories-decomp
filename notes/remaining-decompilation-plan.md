@@ -1,6 +1,6 @@
-# Remaining Game Decompilation Plan
+# Continuous Game Decompilation Plan
 
-## Starting state
+## Current state
 
 The resident inventory contains 1,794 functions:
 
@@ -8,15 +8,31 @@ The resident inventory contains 1,794 functions:
 |---|---:|
 | Game functions | 1,196 |
 | Psy-Q CRT/SDK functions | 598 |
-| Matching-C game functions | 769 |
-| Matching sources still containing GCC inline assembly | 80 |
-| Game functions still represented by assembly | 427 |
-| Assembly functions already deferred after six attempts | 217 |
-| Assembly functions with remaining canonical budget | 209 |
-| Newly exposed zero-attempt game functions | 1 |
+| Matching-C game functions | 775 |
+| Matching sources still containing GCC inline assembly | 58 |
+| Terminal compiler-generated game assembly | 358 |
+| Intentional handwritten game assembly | 63 |
 
-The zero-attempt function is `func_8002DDFC`, a game callback recovered after
-the original first-pass campaign.
+The previous bounded campaign produced terminal histories for every remaining
+compiler-generated assembly function. Those histories are research indexes,
+not a declaration that the project is complete.
+
+## Completion target
+
+Continue the decompile, name, group, and progress loop until:
+
+- every game-owned compiler-generated function is exact matching pure C;
+- every matching source is free of inline assembly;
+- every game function has an evidence-backed semantic name and concise purpose;
+- every function is grouped with its subsystem when address order, compiler
+  profile, and declarations permit it;
+- any game assembly that remains is independently justified as intentional
+  handwritten or hardware-facing code and is semantically documented;
+- the complete executable remains byte-identical after every accepted change.
+
+Terminal mismatch histories do not satisfy this completion target. They prevent
+blind repetition and identify the concrete compiler/source blocker that future
+evidence must resolve.
 
 ## Non-negotiable rules
 
@@ -24,128 +40,109 @@ the original first-pass campaign.
 - Try GCC 2.8.1 with MASPSX 2.81 first.
 - Use GCC 2.7.2 with MASPSX 2.72 only when code evidence supports the DOS
   cohort or the 2.8.1 budget is exhausted.
-- Never exceed six distinct source variants for one function.
-- Record every variant and mismatch reason immediately.
-- Keep exact assembly for any function that reaches attempt six without a
-  match.
-- Treat GMS, Unchiga's decomp, and Unchiga's recomp as evidence, not ground
-  truth. Do not copy their guessed types.
+- Never repeat a terminal source/profile experiment without genuinely new
+  compiler, source, structure, or runtime evidence.
+- Preserve the original six-attempt ledgers as immutable history. Any
+  post-terminal investigation must begin from one concrete new discriminator,
+  remain bounded, and record its result before another variant is considered.
+- Record an exact post-terminal pure-C resolution as
+  `post_terminal_resolution` evidence; this one-shot success record does not
+  rewrite or append speculative variants to the original six-attempt
+  canonical or inline-refinement history.
+- Keep exact assembly until a replacement passes the complete executable match.
+- Treat GenericMadScientist's IDA decompilation (`gms.c`), Unchiga's decomp,
+  and Unchiga's recomp as evidence, not ground truth. Do not copy their guessed
+  types.
 - Run matching work sequentially; `make` may use two jobs.
 - Keep all work inside this repository and all generated candidates/logs under
   `tmp/`.
 - Keep commits atomic and push accumulated commits only when about 15 minutes
   have elapsed; never wait idly for the push interval.
 
-## Phase 1: recover recorded collaborator matches
+## Continuous loop
 
-Re-audit Unchiga's `match/attempts/*.json` and `match/matched/*.c` against the
-current project.
+### 1. Rank unresolved functions
 
-Priority order:
+Rebuild the queue from the current inventory and terminal evidence:
 
-1. Recorded zero-difference results.
-2. Results with fewer than 10 differing words.
-3. Results with fewer than 25% differing words.
-4. Larger structural sketches only when their comments identify a concrete
-   residual and a remaining source variant.
+1. A recovered exact source or compiler fingerprint not previously tested.
+2. One- or two-word residuals with a specific control-flow, declaration, or
+   scheduler discriminator.
+3. Same-address GenericMadScientist or Unchiga bodies corroborated by local
+   callers and data layout.
+4. Contiguous subsystem chains where a shared type or declaration can resolve
+   several functions.
+5. Larger functions with exact-size and exact-relocation candidates.
 
 Do not rerun Unchiga's exhaustive `msearch.py` cross-products. They can contain
 hundreds or thousands of variants and would violate this project's six-variant
-limit. Extract only the recorded winner or closest source shape, then verify it
-once with the local toolchain.
+policy. Extract only a concrete recorded source or residual discriminator.
+
+### 2. Recover and verify source
+
+For one ranked target:
+
+1. Read the target assembly, all preserved candidates, callers/callees, globals,
+   GenericMadScientist pseudocode, and Unchiga evidence.
+2. State the new discriminator before compiling another candidate.
+3. Verify field widths, signedness, prototypes, and aliasing locally.
+4. Compile sequentially under the evidence-backed profile.
+5. Integrate only exact code and relocation matches.
+6. Run the complete executable match immediately.
 
 An exact linked-byte candidate may use a C integer address for an isolated
-absolute store when symbolic C changes register allocation. Such a candidate
-is acceptable only when:
+absolute store only under the documented literal-address exception. Inline
+assembly transcription is not a decompilation result.
 
-- it is pure C;
-- the literal equals the locally verified target symbol address;
-- complete function bytes match;
-- all remaining symbolic relocations match;
-- the exception is recorded in the attempt summary and source note;
-- the complete executable matches after integration.
+### 3. Assign semantic meaning
 
-## Phase 2: collaborator near-match pass
+For every accepted match:
 
-There are currently 49 relevant Unchiga sketch addresses:
+1. Derive the role from the matched body, call graph, strings, and data layout.
+2. Use project naming conventions and subsystem prefixes.
+3. Record confidence, evidence, caveats, and a concise description.
+4. Apply the name across inventory, source, symbols, and references with the
+   semantic-name tooling.
+5. Leave the address-based name when the role is not yet supported; do not
+   guess merely to increase the naming count.
 
-- 23 unmatched functions with canonical budget remaining;
-- 26 matching inline-assembly functions with refinement budget remaining.
+### 4. Consolidate the subsystem
 
-For each address:
+After a coherent set matches:
 
-1. Read the recorded best flags, knob count, and residual word count.
-2. Recover the exact recorded best source without executing a broad search.
-3. Replace reference declarations with independently checked local widths,
-   signedness, and prototypes.
-4. Compile one candidate under the recorded profile.
-5. If it fails, use at most one additional variant justified by the recorded
-   residual notes.
-6. Record and stop when the per-function budget is exhausted.
+1. Merge contiguous same-profile functions into a subsystem translation unit
+   when the grouped-unit invariants hold.
+2. Reuse shared headers and structures only where multiple exact functions
+   establish compatible layouts.
+3. Regenerate the global-use map when declarations or structures change.
+4. Preserve raw accesses wherever typed expressions alter exact codegen.
 
-## Phase 3: zero-attempt callback
+### 5. Publish progress
 
-Attempt `func_8002DDFC` from:
+After each accepted wave:
 
-- its local target assembly;
-- GMS pseudocode at the same address;
-- the call contract in `func_8002DF2C`;
-- neighboring matching object-callback structures.
+1. Run `make progress` to refresh the generated README metrics.
+2. Update the campaign notes with accepted matches and newly established
+   blockers.
+3. Run the smallest targeted checks followed by the complete audit.
+4. Commit one logical change at a time.
+5. Continue working between pushes and synchronize only when the push cadence
+   permits it.
 
-This function must receive an ordinary first attempt before the campaign can
-be considered complete.
+Then rebuild the unresolved queue and repeat from step 1.
 
-## Phase 4: inline-assembly replacement
+## Current research priorities
 
-For the 80 matching sources that still use GCC assembly:
+- Resolve compiler-origin questions shared by the register-allocation and
+  scheduler residual families before retrying their members.
+- Recover external jump-table placement so semantically solved switch functions
+  can reference the retail tables exactly.
+- Convert the 59 matching inline-assembly sources to pure C when a new compiler
+  or source discriminator is available.
+- Use the model, sound, AI, duel, file, and main-loop structures already
+  recovered to revisit terminal candidates with corrected declaration shapes.
+- Expand semantic descriptions alongside matches instead of postponing all
+  naming to a final bulk pass.
 
-1. Prefer a recorded Unchiga pure-C or sketch result.
-2. Use GMS pseudocode only for control-flow and role clues.
-3. Preserve current matching sources until a pure-C candidate independently
-   matches.
-4. Continue `inline_refinement` histories within their remaining budget.
-5. Leave irreducible low-level routines in their current exact form after
-   attempt six, with the residual documented.
-
-## Phase 5: remaining canonical functions
-
-Process the 209 nonterminal assembly functions in evidence order:
-
-1. Same-address Unchiga sketch or source.
-2. Same-address GMS pseudocode.
-3. Recomp live behavior or QoL instrumentation.
-4. Existing `ygofm-decomp` structural reference.
-5. Local matching siblings and callers.
-6. Fresh m2c-assisted reconstruction when no external body exists.
-
-Favor smaller functions and complete subsystem chains, but do not skip a large
-function with unusually strong same-address evidence.
-
-## Decompilation completion gate
-
-The matching phase is complete only when every game function is in one of
-these states:
-
-- exact matching C;
-- exact current matching source with a terminal inline-refinement history;
-- assembly fallback with a terminal six-attempt history;
-- documented intentional handwritten assembly.
-
-At that point, regenerate progress and publish a report containing accepted
-matches, pure-C replacements, new deferrals, and remaining intentional
-assembly.
-
-## Post-decompilation phases
-
-Only after the completion gate:
-
-1. Apply evidence-backed semantic names using local behavior, GMS, DOTR style,
-   and Unchiga's live research.
-2. Regroup newly understood contiguous same-profile functions into subsystem
-   translation units.
-3. Build a cross-function global-use map from matching C and target assembly.
-4. Define shared structures only where multiple independently matched
-   functions establish compatible offsets, widths, and roles.
-
-Do not begin the global-use/structure phase while active matching candidates
-remain.
+The queue is exhausted only at the completion target above, not when every
+function merely has a terminal attempt history.

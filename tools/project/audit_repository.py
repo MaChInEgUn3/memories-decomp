@@ -48,11 +48,13 @@ EXTERNAL_MODES = {
     "reference_match",
     "inline_refinement",
     "collaborator_match",
+    "post_terminal_resolution",
 }
 EXTERNAL_MODE_LIMITS = {
     "reference_match": MAX_FUNCTION_ATTEMPTS,
     "inline_refinement": MAX_FUNCTION_ATTEMPTS,
     "collaborator_match": 1,
+    "post_terminal_resolution": 1,
 }
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 ASM_PATTERN = re.compile(r"\b(?:asm|__asm|__asm__)\b")
@@ -310,6 +312,21 @@ def audit_attempts(root: Path) -> None:
 
     external_by_key: dict[tuple[str, int], list[dict[str, str]]] = {}
     external_matches: set[int] = set()
+    inline_latest: dict[int, str] = {}
+    for row in external_attempts:
+        if row["mode"] == "inline_refinement":
+            inline_latest[
+                parse_integer(row["address"], "external attempt address")
+            ] = row["result"]
+    resolution_addresses = {
+        address
+        for address, rows in by_address.items()
+        if rows[-1]["result"] == "deferred"
+    } | {
+        address
+        for address, result in inline_latest.items()
+        if result == "deferred"
+    }
     for row in external_attempts:
         mode = row["mode"]
         address = parse_integer(row["address"], "external attempt address")
@@ -384,6 +401,16 @@ def audit_attempts(root: Path) -> None:
             raise AuditError(
                 f"{address:#010x}: inline refinement is not matching C"
             )
+        if mode == "post_terminal_resolution":
+            if address not in resolution_addresses:
+                raise AuditError(
+                    f"{address:#010x}: post-terminal resolution lacks a "
+                    "deferred canonical or inline-refinement history"
+                )
+            if row["result"] != "matched":
+                raise AuditError(
+                    f"{address:#010x}: post-terminal resolution must be matched"
+                )
         external_by_key.setdefault((mode, address), []).append(row)
 
     for (mode, address), rows in external_by_key.items():

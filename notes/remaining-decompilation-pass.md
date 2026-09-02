@@ -183,3 +183,34 @@ Post-campaign work then followed the required gate order:
 
 Each structure note records exact-safe migrations, remaining assembly users,
 and raw code-generation exceptions.
+
+## Continuous campaign restart
+
+The completion target was reopened after terminal histories were explicitly
+reclassified as research indexes rather than project completion. The first
+continuous wave recovered exact C from previously rejected relocation-only
+results:
+
+| Address | Semantic name | Resolution |
+|---|---|---|
+| `0x8003D0F4` | `SaveData_ApplyRuntimeState` | Collaborator C already emitted the retail instructions. Three verified absolute store literals preserve `$at` address materialization; the full executable matches. |
+| `0x8003D46C` | `DuelEffect_CreateChannel` | Shared `DuelEffectChannel` C already emitted the retail instructions. One verified absolute byte store preserves `$at` materialization; the full executable matches. |
+| `0x8004545C` | `SD_ArmBusyCallback` | Replaced register-pinned matching C with two ordinary C absolute-address stores, eliminating one GCC asm-bearing source while retaining the exact executable. |
+
+The immutable six-attempt histories remain unchanged. Each accepted result is
+recorded once as `post_terminal_resolution` evidence, which is allowed only
+after a deferred canonical or inline-refinement history and only for an exact
+pure-C result.
+
+State after this wave:
+
+| State | Count |
+|---|---:|
+| Matching C | 775 |
+| Terminal unmatched assembly | 358 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 193 |
+
+`GMS` in historical notes refers to **GenericMadScientist**, whose `gms.c` IDA
+decompilation is used as supporting evidence rather than ground truth.

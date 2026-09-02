@@ -13,7 +13,8 @@ Naming decisions in this project use three different kinds of evidence:
    and gameplay context.
 
 The games are not assumed to share implementation code. DOTR is used for style
-and terminology; GMS and the RAM map are used for Forbidden Memories semantics.
+and terminology; GenericMadScientist's IDA decompilation (`gms.c`) and the RAM
+map are used for Forbidden Memories semantics.
 
 ## Function names
 
