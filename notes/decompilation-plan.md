@@ -5,6 +5,9 @@ The active remaining-function campaign is specified in
 decompilation/refinement, then semantic naming and source grouping, then
 cross-function global-use and structure recovery.
 
+Current campaign results and bounded profile-sweep evidence are recorded in
+`notes/remaining-decompilation-pass.md`.
+
 ## Resource ceiling
 
 - Never use more than four concurrent processes.
