@@ -142,3 +142,44 @@ Current canonical state:
 The decompilation completion gate is therefore satisfied. Post-campaign naming
 adds thirteen conservative mechanical names; ambiguous matches remain
 address-based.
+
+## Final campaign outcome
+
+The remaining campaign accepted:
+
+- four new canonical matching functions:
+  - `Duel_UpdateCardPickCursor` (`0x800240B0`);
+  - `0x8002A9C0`;
+  - `0x800336F0`;
+  - `Model_GetPrimitiveHandler` (`0x8006041C`);
+- 21 exact pure-C replacements for matching inline-assembly sources.
+
+Final game-function state:
+
+| State | Count |
+|---|---:|
+| Matching C | 773 |
+| Terminal unmatched assembly | 360 |
+| Intentional handwritten assembly | 63 |
+
+The 59 matching sources that retain GCC assembly are terminally documented
+after six pure-C refinement attempts. No canonical unmatched function or
+inline-refinement history remains active.
+
+Post-campaign work then followed the required gate order:
+
+1. Semantic registry expanded to 189 accepted names.
+2. Source grouping expanded to 681 translation units, with 135 functions in
+   43 grouped units.
+3. `notes/global-usage.csv` recorded 3,356 function/global relationships for
+   784 globals across 923 game functions.
+4. Shared layouts were added for:
+   - AI active cards, interpreter state, and duelists;
+   - primary and secondary sound-driver state;
+   - DuelEffect channels and entries;
+   - model slots and handler registry;
+   - duel-card records;
+   - fade/transition state.
+
+Each structure note records exact-safe migrations, remaining assembly users,
+and raw code-generation exceptions.

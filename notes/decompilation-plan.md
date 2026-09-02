@@ -42,8 +42,8 @@ have complete six-attempt refinement histories.
   `g_SDValue` sound-driver work area. Conversion proceeds in exact-matching
   batches, retaining raw local views only where GCC addressing shape requires
   them.
-- Current source organization: 769 matching functions in 687 translation
-  units; 37 grouped subsystem units contain 119 functions.
+- Current source organization: 773 matching functions in 681 translation
+  units; 43 grouped subsystem units contain 135 functions.
 - The AI, File, sound-frontend, and sound-driver ranges have no remaining
   contiguous same-profile pure-C runs. Further consolidation requires first
   removing inline assembly, matching intervening functions, or deliberately
@@ -51,6 +51,14 @@ have complete six-attempt refinement histories.
 - Every pure-C user of `g_SDValue` includes `sound.h`. Three raw expressions
   remain solely because typed member syntax changes GCC code generation;
   inline-assembly users remain deferred.
+- The remaining-function campaign is terminal: all unmatched game functions
+  have six-attempt histories, and all retained matching inline sources have
+  six-attempt refinement histories.
+- Post-campaign global-use analysis covers 3,356 function/global rows and 784
+  globals across 923 game functions.
+- Shared post-campaign layouts now cover the secondary sound state,
+  DuelEffect channels/entries, model slots/handler registry, duel-card records,
+  and fade transitions in addition to the earlier AI and primary sound state.
 
 ## Problem and proposed approach
 
