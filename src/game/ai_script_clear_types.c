@@ -1,7 +1,7 @@
 #include "../types.h"
 
 /* Same 25-entry lookahead window as scan_table3_800708c4.c (offsets
-   126..150 from D_800F5BE8), cleared here. */
+   126..150 from gAiScript_State), cleared here. */
 extern u8 gAiScript_State[];
 
 void AiScript_ClearTypes(void) {

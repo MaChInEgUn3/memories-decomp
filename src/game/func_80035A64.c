@@ -7,7 +7,7 @@ typedef struct {
     unsigned char rest[0x2E];
 } Entry;
 extern Entry D_800EB0F8[];
-extern void func_80035CE4(void), func_80035DF4(void);
+extern void DuelEffect_ResetOccupancy(void), DuelEffect_ResetEntryMarkers(void);
 void func_80035A64(void) {
     int i = 4;
     Entry *entry = D_800EB0F8;
@@ -21,6 +21,6 @@ void func_80035A64(void) {
         i--;
         entry++;
     } while (i != 0);
-    func_80035CE4();
-    func_80035DF4();
+    DuelEffect_ResetOccupancy();
+    DuelEffect_ResetEntryMarkers();
 }

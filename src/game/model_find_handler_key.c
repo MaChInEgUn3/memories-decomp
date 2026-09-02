@@ -16,7 +16,7 @@ extern s32 func_80089E20[];
 
 /* Reverse lookup: finds the entry whose val matches, returns its key (or -1
    if val is the sentinel, or if no entry matches after scanning all 80). */
-s32 func_800601D0(s32 val) {
+s32 Model_FindHandlerKey(s32 val) {
     struct Entry *e = D_800F5918;
     s32 i;
     if (val == (s32) func_80089E20) {

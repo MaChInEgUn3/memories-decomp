@@ -8,9 +8,9 @@ The evidence-backed naming passes apply:
 
 | Kind | Applied names |
 |---|---:|
-| Functions | 123 |
+| Functions | 136 |
 | Globals | 53 |
-| **Total** | **176** |
+| **Total** | **189** |
 
 The machine-readable registry is
 `notes/semantic-symbol-map.csv`. Each row records the address, accepted name,
@@ -86,6 +86,23 @@ decompilation scope.
 The recomp's independently instrumented reward path confirms
 `Duel_AwardCard` at `0x80021894`: it saturates the awarded card's chest count
 and updates the fifteen-entry recent-award history.
+
+## Remaining-campaign naming
+
+After all canonical and inline-refinement histories became terminal, thirteen
+newly matched functions received mechanical, evidence-backed names:
+
+- `Duel_UpdateCardPickCursor`;
+- `Duel_ApplyCardObjectFlags`;
+- six `DuelEffect_` table/entry maintenance helpers;
+- `Model_CopySlotU16Values`;
+- `Model_InitLightTriplet`;
+- `Model_RegisterHandlerKey`;
+- `Model_FindHandlerKey`;
+- `Model_GetPrimitiveHandler`.
+
+Larger render/state functions whose purpose remains ambiguous were deliberately
+left address-based.
 
 ## Deliberately deferred labels
 

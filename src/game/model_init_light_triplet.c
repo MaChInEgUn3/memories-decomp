@@ -11,7 +11,7 @@ struct Entry {
 
 extern struct Entry D_800F2C40[];
 
-void func_80059134(s32 a0) {
+void Model_InitLightTriplet(s32 a0) {
     u8 *base = (u8 *)&D_800F2C40[a0];
 
     *(s32 *)(base + 0xD70) = 3000;

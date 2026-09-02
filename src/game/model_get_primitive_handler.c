@@ -35,7 +35,7 @@ extern void func_80066B54(void);
 extern void func_80066E60(void);
 extern void func_80089E20(void);
 
-void *func_8006041C(u32 arg0) {
+void *Model_GetPrimitiveHandler(u32 arg0) {
     s32 temp_a0_2;
     u32 temp_a0;
     u32 temp_a0_3;

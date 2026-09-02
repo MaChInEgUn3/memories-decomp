@@ -1,6 +1,6 @@
 #include "../types.h"
 
-/* Same stride-28 table as scan_flag80_entries_800eb288/func_80035DB8/
+/* Same stride-28 table as scan_flag80_entries_800eb288/DuelEffect_ClearMatchingMarker/
    clear_two_fields_800eb288 (see clear_matching_byte_800eb288.c): field17
    gates the scan, field19/field21 are the two bytes written here. */
 struct Obj {

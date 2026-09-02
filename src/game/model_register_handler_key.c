@@ -10,7 +10,7 @@ extern struct Entry D_800F5918[80];
 
 /* Finds `key` in the table; if absent and there is a free slot, claims it
    with (key, val). No-op once all 80 slots are taken and no match exists. */
-void func_80060170(s32 key, s32 val) {
+void Model_RegisterHandlerKey(s32 key, s32 val) {
     s32 i;
     struct Entry *e = D_800F5918;
     for (i = 0; i < 80; i++, e++) {

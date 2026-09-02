@@ -6,7 +6,7 @@ extern u8 D_800EAF08[];
 extern u8 D_8009B324;
 extern u8 D_8009B325;
 
-void func_80035CE4(void) {
+void DuelEffect_ResetOccupancy(void) {
     u8 *v0;
     int v1;
     v0 = D_800EAF08;

@@ -17,7 +17,7 @@ extern struct Entry D_800EB010[3];
 /* Walks D_800EB010 backward from index 2 to 0; on the first entry whose
    flag30 is non-negative, sets bit 0x2 in a0->flags and returns. Does
    nothing if all three entries have flag30 < 0. */
-void func_8002E370(struct Obj *a0) {
+void DuelEffect_MarkObjectIfActive(struct Obj *a0) {
     int count;
     struct Entry *p;
     int v0;

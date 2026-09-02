@@ -108,7 +108,7 @@ address,size,name,status,module,notes
 0x80017E3C,0xC8,func_80017E3C,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80017F04,0x100,func_80017F04,unmatched_asm,game,
 0x80018004,0x7C,func_80018004,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x80018080,0xD0,func_80018080,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x80018080,0xD0,Duel_ApplyCardObjectFlags,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80018150,0x9C,func_80018150,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x800181EC,0x70,func_800181EC,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8001825C,0x3AC,func_8001825C,unmatched_asm,game,
@@ -182,7 +182,7 @@ address,size,name,status,module,notes
 0x80023FBC,0xA4,func_80023FBC,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_cc_g0_as_g8_no_split.
 0x80024060,0x28,func_80024060,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80024088,0x28,func_80024088,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x800240B0,0x150,func_800240B0,matching_c,game,Unchiga pure-C structure independently verified with split addresses; exact linked bytes. Three isolated absolute-address stores preserve target register allocation.
+0x800240B0,0x150,Duel_UpdateCardPickCursor,matching_c,game,Unchiga pure-C structure independently verified with split addresses; exact linked bytes. Three isolated absolute-address stores preserve target register allocation.
 0x80024200,0x188,func_80024200,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80024388,0x6C,func_80024388,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x800243F4,0x1AC,Duel_ShuffleDeck,unmatched_asm,game,
@@ -316,7 +316,7 @@ address,size,name,status,module,notes
 0x8002E00C,0x54,func_8002E00C,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8002E060,0xC8,func_8002E060,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8002E128,0x248,func_8002E128,unmatched_asm,game,
-0x8002E370,0x44,func_8002E370,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x8002E370,0x44,DuelEffect_MarkObjectIfActive,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x8002E3B4,0x28,func_8002E3B4,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8002E3DC,0x20,func_8002E3DC,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8002E3FC,0x74,func_8002E3FC,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
@@ -423,15 +423,15 @@ address,size,name,status,module,notes
 0x80035A58,0xC,func_80035A58,matching_c,game,First -O2 -G8 global-byte assignment candidate matched.
 0x80035A64,0x54,func_80035A64,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80035AB8,0x38,func_80035AB8,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x80035AF0,0x8C,func_80035AF0,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_o1_g0.
+0x80035AF0,0x8C,DuelEffect_InitEntry,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_o1_g0.
 0x80035B7C,0x68,func_80035B7C,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80035BE4,0x54,func_80035BE4,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80035C38,0x70,func_80035C38,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80035CA8,0x3C,func_80035CA8,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
-0x80035CE4,0x2C,func_80035CE4,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x80035CE4,0x2C,DuelEffect_ResetOccupancy,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80035D10,0xA8,func_80035D10,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
-0x80035DB8,0x3C,func_80035DB8,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
-0x80035DF4,0x2C,func_80035DF4,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x80035DB8,0x3C,DuelEffect_ClearMatchingMarker,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x80035DF4,0x2C,DuelEffect_ResetEntryMarkers,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80035E20,0xDAC,func_80035E20,unmatched_asm,game,
 0x80036BCC,0x48,func_80036BCC,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80036C14,0x128,func_80036C14,unmatched_asm,game,
@@ -442,7 +442,7 @@ address,size,name,status,module,notes
 0x8003700C,0x104,func_8003700C,unmatched_asm,game,
 0x80037110,0x98,func_80037110,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800371A8,0x1B4,func_800371A8,unmatched_asm,game,
-0x8003735C,0x6C,func_8003735C,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x8003735C,0x6C,DuelEffect_HasActiveEntry,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x800373C8,0x54,func_800373C8,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x8003741C,0x8C,func_8003741C,unmatched_asm,game,
 0x800374A8,0x4C,func_800374A8,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
@@ -922,10 +922,10 @@ address,size,name,status,module,notes
 0x80058F10,0x10,func_80058F10,matching_c,game,1 pre-policy variants: Straight G0 integer getter matched linked bytes and HI16/LO16 relocations.
 0x80058F20,0x54,func_80058F20,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80058F74,0x3C,func_80058F74,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80058FB0,0x50,func_80058FB0,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x80058FB0,0x50,Model_CopySlotU16Values,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80059000,0xDC,func_80059000,matching_c,game,Pure-C inline refinement matched the full executable.
 0x800590DC,0x58,func_800590DC,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80059134,0x8C,func_80059134,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x80059134,0x8C,Model_InitLightTriplet,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x800591C0,0x3C,func_800591C0,matching_c,game,Pure-C inline refinement matched the full executable.
 0x800591FC,0xC,func_800591FC,matching_c,game,3 pre-policy variants: Plain address return and split-only failed; -mgas -msplit-addresses placed LO16 in the return delay slot.
 0x80059208,0xC,func_80059208,matching_c,game,1 pre-policy variants: Straight address-of-byte G8 return matched linked bytes and GPREL16 relocation.
@@ -1037,11 +1037,11 @@ address,size,name,status,module,notes
 0x8005FBC4,0x58,func_8005FBC4,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8005FC1C,0x228,func_8005FC1C,unmatched_asm,game,
 0x8005FE44,0x32C,func_8005FE44,unmatched_asm,game,
-0x80060170,0x60,func_80060170,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
-0x800601D0,0x50,func_800601D0,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x80060170,0x60,Model_RegisterHandlerKey,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
+0x800601D0,0x50,Model_FindHandlerKey,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80060220,0x1BC,func_80060220,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800603DC,0x40,func_800603DC,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.
-0x8006041C,0x450,func_8006041C,matching_c,game,Full GMS/target callback selector matched after using function designators and verified void declarations
+0x8006041C,0x450,Model_GetPrimitiveHandler,matching_c,game,Full GMS/target callback selector matched after using function designators and verified void declarations
 0x8006086C,0x4C,func_8006086C,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x800608B8,0x234,func_800608B8,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80060AEC,0x4C,func_80060AEC,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.

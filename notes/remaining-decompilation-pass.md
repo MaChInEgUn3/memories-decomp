@@ -133,7 +133,12 @@ record layout and compiler blocker documented.
 
 Current canonical state:
 
-- 301 unmatched game functions are terminally deferred;
-- 62 unmatched game functions remain nonterminal;
-- the remaining functions require manual source/declaration repair, GMS
-  reconstruction, or new collaborator evidence rather than compiler flags.
+- all unmatched game functions have terminal canonical histories;
+- 59 retained matching inline-assembly sources have terminal refinement
+  histories;
+- the manual batches recovered exact C for `0x8002A9C0`, `0x800336F0`, and
+  `0x8006041C`, while terminally documenting the remaining large functions.
+
+The decompilation completion gate is therefore satisfied. Post-campaign naming
+adds thirteen conservative mechanical names; ambiguous matches remain
+address-based.

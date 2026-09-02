@@ -1,11 +1,11 @@
 #include "../types.h"
 
-/* Same stride-28 table as func_80035DB8/reset_free_slot pairing (see
+/* Same stride-28 table as DuelEffect_ClearMatchingMarker/reset_free_slot pairing (see
    clear_matching_byte_800eb288.c): clears field17 and the byte at
    struct-relative offset 7 on all 620 entries. */
 extern u8 D_800EB288[];
 
-void func_80035DF4(void) {
+void DuelEffect_ResetEntryMarkers(void) {
     u8 *v0;
     int v1;
     int off;

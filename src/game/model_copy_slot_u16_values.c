@@ -10,7 +10,7 @@ struct RecD800F2C40 {
 
 extern struct RecD800F2C40 D_800F2C40[];
 
-void func_80058FB0(s32 idx, u16 *out) {
+void Model_CopySlotU16Values(s32 idx, u16 *out) {
     struct RecD800F2C40 *rec = &D_800F2C40[idx];
     out[0] = rec->arr[0];
     out[1] = rec->arr[1];

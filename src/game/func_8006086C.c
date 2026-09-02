@@ -1,9 +1,9 @@
 #include "../types.h"
 
 typedef struct { int key; void **handler; } Object;
-extern void *func_8006041C(int); extern void func_80060170(int, int);
+extern void *Model_GetPrimitiveHandler(int); extern void Model_RegisterHandlerKey(int, int);
 void func_8006086C(Object *object)
 {
-    *object->handler = func_8006041C(object->key);
-    func_80060170(object->key, (int)*object->handler);
+    *object->handler = Model_GetPrimitiveHandler(object->key);
+    Model_RegisterHandlerKey(object->key, (int)*object->handler);
 }

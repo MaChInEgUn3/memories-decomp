@@ -4,7 +4,7 @@ extern u8 D_800F5768[];
 extern u8 *D_8009B074;
 extern u8 *func_800591FC(void);
 extern u8 *func_80059208(void);
-extern void func_80058FB0();
+extern void Model_CopySlotU16Values();
 
 void func_8005F070(s32 enabled)
 {
@@ -30,7 +30,7 @@ void func_8005F070(s32 enabled)
                 s32 kind = *(s16 *)(entry + 6);
                 if (kind < 4) {
                     if (kind >= 2)
-                        func_80058FB0(*(s16 *)entry, table + offset);
+                        Model_CopySlotU16Values(*(s16 *)entry, table + offset);
                 }
             }
         }

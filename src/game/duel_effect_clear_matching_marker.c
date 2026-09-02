@@ -12,7 +12,7 @@ extern u8 D_800EB288[];
 
 /* Clears field17 on the first (only) entry whose field18 equals a0+1,
    scanning 620 entries. */
-void func_80035DB8(int a0) {
+void DuelEffect_ClearMatchingMarker(int a0) {
     struct Entry *v1;
     int a1;
     u8 v0;

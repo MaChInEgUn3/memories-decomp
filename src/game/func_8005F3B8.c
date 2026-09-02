@@ -3,7 +3,7 @@
 typedef struct { short x, y, z, w; } Vec;
 extern unsigned short *func_800591FC(void), *func_80059208(void);
 extern unsigned char D_8009B07B, D_8009B07C;
-extern void func_80058FB0(int, short *);
+extern void Model_CopySlotU16Values(int, short *);
 extern void func_80058434(int, int, int, int, int);
 extern void func_8005F070(int), func_80059EBC(int);
 
@@ -15,7 +15,7 @@ void func_8005F3B8(int mode, int y, int a, int b, Vec *offset)
         return;
     if (mode >= 0) {
         short v[4];
-        func_80058FB0(mode, v);
+        Model_CopySlotU16Values(mode, v);
         ((int *)p)[3] = v[0];
         ((int *)p)[4] = v[1];
         ((int *)p)[5] = v[2];

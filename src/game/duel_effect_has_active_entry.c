@@ -1,6 +1,6 @@
 #include "../types.h"
 
-/* Same stride-28 table as func_80035DB8/clear_two_fields_800eb288 (see
+/* Same stride-28 table as DuelEffect_ClearMatchingMarker/clear_two_fields_800eb288 (see
    clear_matching_byte_800eb288.c): field17 gates the scan, field19 is the
    match test. */
 struct Obj {
@@ -14,7 +14,7 @@ extern u8 D_800EB288[];
 /* Starting from record a0->field92, scans up to a0->field94 stride-28
    entries; returns 1 on the first entry with field17&0x80 set and field19
    nonzero, 0 if field17's bit clears, the count runs out, or field94==0. */
-int func_8003735C(struct Obj *a0) {
+int DuelEffect_HasActiveEntry(struct Obj *a0) {
     int v0;
     int count;
     u8 *v1;

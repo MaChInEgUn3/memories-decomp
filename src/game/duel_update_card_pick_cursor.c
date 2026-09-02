@@ -63,7 +63,7 @@ extern u16 D_8009B3A4[];
 extern s32 func_80024060(struct Cursor *);
 extern s32 func_80017034(struct FieldSlot *);
 
-void func_800240B0(struct Cursor *o) {
+void Duel_UpdateCardPickCursor(struct Cursor *o) {
     u8 f;
     s32 picked;
 

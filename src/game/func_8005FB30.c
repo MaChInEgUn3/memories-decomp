@@ -1,3 +1,3 @@
 #include "../types.h"
 
-typedef struct{short id;unsigned char pad[4];short state;}Item;extern unsigned char*D_8009B074;extern void func_80058FB0(int,void*);void func_8005FB30(unsigned char*p){int i;if(!p)p=D_8009B074;if(!p)return;for(i=0;i<2;i++){Item*x=(Item*)(p+i*8);if(x->state<4){if(x->state>=2)func_80058FB0(x->id,p+0x10+i*8);}}}
+typedef struct{short id;unsigned char pad[4];short state;}Item;extern unsigned char*D_8009B074;extern void Model_CopySlotU16Values(int,void*);void func_8005FB30(unsigned char*p){int i;if(!p)p=D_8009B074;if(!p)return;for(i=0;i<2;i++){Item*x=(Item*)(p+i*8);if(x->state<4){if(x->state>=2)Model_CopySlotU16Values(x->id,p+0x10+i*8);}}}
