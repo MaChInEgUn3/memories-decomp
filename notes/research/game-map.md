@@ -75,6 +75,13 @@ matched. Three left.
   reads and writes; `0x8009B390` is also the guard in the take-control cheat,
   so it is a live duel-state flag rather than save data.
 
+One more caution, from the disc side: the per-duelist drop blocks are in
+opponent-id order, 1-based, and that order puts **DarkNite at 37 and
+Nitemare at 38** (matched against an independent per-duelist drop list at
+92–100 % for all 39; `the-game.md` §6.4). If the records follow the same id,
+the two published labels for those rows are swapped. The block order is
+measured; the record order is still the archives' claim.
+
 **A warning that belongs with the data.** Unchiga found incorrect Free Duel
 record codes while building the rematch mod for the recomp, and the published
 cheat list does contain two errors that the stride exposes: Simon Muran's
@@ -127,7 +134,7 @@ per-chunk callback, and the callback's thirteen chunk sizes sum to exactly
 235 sectors, which fixes every chunk's offset. `func_800179F4` does the same
 for the per-duelist block (3 sectors at `0x1D33 + 3 × opponent` →
 `0x801781D8`: deck weights, three drop pools, rank table). All four tables
-are decoded and every id in them is a valid card; `tools_src/decode_tables.py` (in `MaChInEgUn3/ygofm-decomp`)
+are decoded and every id in them is a valid card; `tools_src/decode_tables.py`
 holds the decoders (read off `checkFusion`, `checkEquip`, `checkRitual` and
 `rankScoreChange`) and `tools_src/extract_mrg_tables.py` the sector
 arithmetic. `the-game.md` has the full blob layout and what was retracted.
