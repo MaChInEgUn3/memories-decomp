@@ -1,4 +1,5 @@
 #include "../types.h"
+#include "sound.h"
 
 typedef float f32;
 typedef double f64;
@@ -13,10 +14,8 @@ typedef u8 Rec;
 typedef u8 Block;
 typedef struct { u32 words[2]; } Blk8;
 
-extern void *D_8009B458;
-
 void func_8004C5C8(u8 *p) {
-    switch (*(u16 *)(D_8009B458 + 0x7FC)) {
+    switch (D_8009B458->timebase) {
     case 0x30:
         *(s32 *)(p + 0x1C) = *(s32 *)(p + 0x1C) * 10;
         *(s32 *)(p + 0x1C) = *(s32 *)(p + 0x1C) + *(u16 *)(p + 0x18);

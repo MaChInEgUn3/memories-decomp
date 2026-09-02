@@ -1,6 +1,6 @@
 #include "../types.h"
+#include "sound.h"
 
-extern u8 *D_8009B458;
 extern void func_800738B0(void);
 extern void func_80073A54(unsigned int);
 extern void func_800738A0(void *);
@@ -9,11 +9,11 @@ extern void func_800738C0(void);
 
 void func_8004B910(void)
 {
-    D_8009B458[0x503] = 1;
+    D_8009B458->flag_0503 = 1;
     func_800738B0();
     func_80073A54(0xF2000002);
-    func_800738A0(*(void **)(D_8009B458 + 0x504));
-    func_80073870(*(void **)(D_8009B458 + 0x504));
+    func_800738A0(D_8009B458->field_0504);
+    func_80073870(D_8009B458->field_0504);
     func_800738C0();
-    D_8009B458[0x500] = 0;
+    D_8009B458->flag_0500 = 0;
 }

@@ -1,14 +1,14 @@
 #include "../types.h"
+#include "sound.h"
 
-extern unsigned char *D_8009B458;
 int func_8004BAE4(unsigned char *reader)
 {
-    unsigned char *state = D_8009B458;
+    SDSecondaryState *state = D_8009B458;
     int offset = *(int *)reader;
-    int value = *(unsigned char *)(*(int *)(state + 0x7DC) + offset);
+    int value = state->field_07DC[offset];
     offset++;
     *(int *)reader = offset;
-    if ((unsigned int)*(int *)(state + 0x7EC) < (unsigned int)offset) {
+    if ((unsigned int)state->field_07EC < (unsigned int)offset) {
         reader[0x24] = 1;
         return -1;
     }

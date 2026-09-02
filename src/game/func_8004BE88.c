@@ -1,6 +1,6 @@
 #include "../types.h"
+#include "sound.h"
 
-extern u8 *D_8009B458;
 extern int func_8004BAE4();
 extern int func_8004BB34();
 extern int func_8004BC2C();
@@ -28,14 +28,14 @@ void func_8004BE88(u8 *p, s32 arg1) {
         v = func_8004BAE4(p) << 16;
         v = v | (func_8004BAE4(p) << 8);
         v = v | func_8004BAE4(p);
-        e = D_8009B458;
-        *(s32 *)(e + 0x808) = v;
+        e = (u8 *)D_8009B458;
+        ((SDSecondaryState *)e)->field_0808 = v;
         v = 0x3938700 / v;
         v = v * 100 / 115;
         if (v >= 0x100) {
             v = 0xFF;
         }
-        t = *(u16 *)(e + 0x7FC);
+        t = ((SDSecondaryState *)e)->timebase;
         switch (t) {
         case 0x3C:
         case 0x18:
@@ -45,8 +45,8 @@ void func_8004BE88(u8 *p, s32 arg1) {
             v = v >> 2;
             break;
         }
-        f = D_8009B458;
-        if (*(u16 *)(f + 0x7FA) != 0) {
+        f = (u8 *)D_8009B458;
+        if (((SDSecondaryState *)f)->field_07FA != 0) {
             off = z;
             i = z;
             do {
@@ -54,7 +54,7 @@ void func_8004BE88(u8 *p, s32 arg1) {
                 *(s16 *)(f + off + 0x52C) = v;
                 off += 0x2C;
                 i++;
-            } while (i < *(u16 *)(f + 0x7FA));
+            } while (i < ((SDSecondaryState *)f)->field_07FA);
         }
         break;
 

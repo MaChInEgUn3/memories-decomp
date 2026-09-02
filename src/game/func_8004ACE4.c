@@ -1,4 +1,5 @@
 #include "../types.h"
+#include "sound.h"
 
 typedef struct {
     int first;
@@ -8,7 +9,6 @@ typedef struct {
     u8 padC[12];
 } Packet;
 
-extern u8 *D_8009B458;
 extern int func_80075DC0(void);
 extern void func_80075BE0(int);
 extern int func_800767E0(int);
@@ -30,7 +30,7 @@ void func_8004ACE4(u8 *entry, int unused)
         if (func_800767E0(-2) != 0)
             func_80076790(1);
         func_80075BE0(1);
-        D_8009B458[0x844] = entry[0x13];
+        D_8009B458->field_0844 = entry[0x13];
         break;
     case 0x10:
         packet.first = 6;
@@ -38,7 +38,7 @@ void func_8004ACE4(u8 *entry, int unused)
         packet.fourth = entry[0x13] << 8;
         func_80075DE0(&packet);
         func_80075BE0(1);
-        D_8009B458[0x845] = entry[0x13];
+        D_8009B458->field_0845 = entry[0x13];
         break;
     }
 }
