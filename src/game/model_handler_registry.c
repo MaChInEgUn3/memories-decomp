@@ -13,6 +13,7 @@ typedef u8 Entry;
 typedef u8 Rec;
 typedef u8 Block;
 typedef struct { u32 words[2]; } Blk8;
+typedef u8 *(*ModelHandler)(u8 **);
 
 extern s32 func_80089E20[];
 extern s32 (*func_800603DC())();
@@ -133,5 +134,6 @@ void func_80060220(s32 arg0, u8 *arg1, u8 *arg2) {
 
     func_800603DC(*(s32 *)arg1)(arg2);
     func_8007F6CC(0);
-    *(u8 *(**)(u8 **))(*(s32 *)(arg1 + 4)) = func_80089E20;
+    *(ModelHandler *)(*(s32 *)(arg1 + 4)) =
+        (ModelHandler)func_80089E20;
 }
