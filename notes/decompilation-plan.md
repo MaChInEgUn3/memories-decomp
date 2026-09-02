@@ -26,6 +26,10 @@
 - `src/game/ai.h` centralizes the verified active-card, interpreter-state, and
   per-duelist AI layouts; remaining inline-assembly views are deliberately
   deferred.
+- `src/game/sound.h` now defines the verified portion of the global
+  `g_SDValue` sound-driver work area. Conversion proceeds in exact-matching
+  batches, retaining raw local views only where GCC addressing shape requires
+  them.
 
 ## Problem and proposed approach
 
