@@ -97,9 +97,28 @@ typedef struct {
 } SDValue;
 
 typedef struct {
+    u8 field_0000;
+    u8 field_0001;
+    u8 pad0002;
+    u8 field_0003;
+    u8 pad0004;
+    u8 field_0005;
+    u8 field_0006;
+    u8 field_0007;
+    u8 pad0008[8];
+    u8 field_0010;
+    u8 field_0011;
+    u8 field_0012;
+    u8 field_0013;
+    u8 pad0014[4];
+} SDSecondaryRecord;
+
+typedef struct {
     u8 pad0000[3];
     u8 field_0003;
-    u8 pad0004[0x1A];
+    u8 pad0004[0x0B];
+    u8 field_000F;
+    u8 pad0010[0x0E];
     u16 field_001E;
     u8 pad0020[8];
 } SDSecondaryObject;
@@ -178,6 +197,9 @@ typedef char SDValue_size_must_be_0x164C[
 typedef char SDSecondaryObject_size_must_be_0x28[
     sizeof(SDSecondaryObject) == 0x28 ? 1 : -1
 ];
+typedef char SDSecondaryRecord_size_must_be_0x18[
+    sizeof(SDSecondaryRecord) == 0x18 ? 1 : -1
+];
 typedef char SDSecondaryTransfer_size_must_be_0x1C[
     sizeof(SDSecondaryTransfer) == 0x1C ? 1 : -1
 ];
@@ -211,6 +233,8 @@ typedef char SDSecondaryState_bytes_consumed_offset_must_be_0x818[
 typedef char SDSecondaryState_field_0844_offset_must_be_0x844[
     SD_STATE_OFFSET(SDSecondaryState, field_0844) == 0x844 ? 1 : -1
 ];
+
+#undef SD_STATE_OFFSET
 
 #ifndef SDVALUE_CUSTOM_EXTERN
 extern SDValue *g_SDValue;
