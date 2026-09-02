@@ -1,16 +1,30 @@
 #include "../types.h"
 
-typedef struct { int first; int second; } Pair;
-extern Pair D_800F5918[80];
-void func_80060170(int key,int value)
-{
-    register Pair *entry asm("$6"); register int i asm("$7");
-    register int *second asm("$3"); register int high asm("$2");
-    asm("lui %0,%%hi(D_800F5918)\n\taddiu %1,%0,%%lo(D_800F5918)\n\taddu %2,$0,$0" : "=r"(high),"=r"(entry),"=r"(i));
-    second=&entry->second;
-    do { register int current asm("$2")=*second;
-        if(current==key)return;
-        if(current!=0)i++; else { if(entry->first==0){*second=key;entry->first=value;return;} i++; }
-        second+=2; entry++;
-    } while(i<80);
+struct Entry {
+    s32 val;    /* 0x0 */
+    s32 key;    /* 0x4 */
+};
+
+/* Fixed 80-entry linear-probed table. Callers never use the return value. */
+extern struct Entry D_800F5918[80];
+
+/* Finds `key` in the table; if absent and there is a free slot, claims it
+   with (key, val). No-op once all 80 slots are taken and no match exists. */
+void func_80060170(s32 key, s32 val) {
+    s32 i;
+    struct Entry *e = D_800F5918;
+    for (i = 0; i < 80; i++, e++) {
+        if (e->key == key) {
+            return;
+        }
+        if (e->key != 0) {
+            continue;
+        }
+        if (e->val != 0) {
+            continue;
+        }
+        e->key = key;
+        e->val = val;
+        return;
+    }
 }

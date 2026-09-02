@@ -4202,7 +4202,7 @@
     },
     {
       "address": "0x80060170",
-      "profile": "gcc_2_8_1_g0",
+      "profile": "gcc_2_8_1_g8_split",
       "size": "0x60",
       "source": "src/game/func_80060170.c"
     },
