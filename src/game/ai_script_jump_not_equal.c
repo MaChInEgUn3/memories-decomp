@@ -1,3 +1,3 @@
 #include "../types.h"
 
-extern int gAiScript_aMemory[];typedef struct{int first,addend,result;}State;extern State gAiScript_State;extern int AiScript_ReadByte(void),AiScript_ReadShort(void);void AiScript_JumpNotEqual(void){int a=AiScript_ReadByte(),b=AiScript_ReadByte(),result=AiScript_ReadShort();register int*values asm("$3")=gAiScript_aMemory;asm("":"+r"(values));if(values[a]!=values[b]){register State*s asm("$2")=&gAiScript_State;result+=s->addend;s->result=result;}}
+extern int D_800F5B98[];typedef struct{int first,addend,result;}State;extern State D_800F5BE8;extern int func_8007058C(void),func_800705AC(void);void AiScript_JumpNotEqual(void){int a=func_8007058C(),b=func_8007058C(),result=func_800705AC();register int*values=D_800F5B98;if(values[a]!=values[b]){register State*s=&D_800F5BE8;result+=s->addend;s->result=result;}}

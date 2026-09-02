@@ -1134,7 +1134,7 @@ address,size,name,status,module,notes
 0x800709C0,0x80,AiScript_JumpGreaterEqual,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070A40,0x80,AiScript_JumpGreater,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x80070AC0,0x7C,AiScript_JumpEqual,matching_c,game,Pure-C refinement from Unchiga near-match evidence; local state pointer and in-place offset update reproduce exact bytes and relocations.
-0x80070B3C,0x7C,AiScript_JumpNotEqual,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
+0x80070B3C,0x7C,AiScript_JumpNotEqual,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g0_split.
 0x80070BB8,0xA8,AiScript_JumpBetween,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80070C60,0xA0,AiScript_JumpRandom,matching_c,game,Pure-C inline refinement matched the full executable.
 0x80070D00,0xA8,AiScript_Call,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.
