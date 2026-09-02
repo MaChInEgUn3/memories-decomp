@@ -4306,13 +4306,13 @@
       "address": "0x80070920",
       "profile": "gcc_2_8_1_g0",
       "size": "0x68",
-      "source": "src/game/ai_is_card_in_sets.c"
+      "source": "src/game/ai_script_support.c"
     },
     {
       "address": "0x80070988",
       "profile": "gcc_2_8_1_g0",
       "size": "0x38",
-      "source": "src/game/ai_script_jump.c"
+      "source": "src/game/ai_script_support.c"
     },
     {
       "address": "0x800709C0",
