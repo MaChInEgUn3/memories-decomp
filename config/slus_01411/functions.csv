@@ -1121,7 +1121,7 @@ address,size,name,status,module,notes
 0x8006CD78,0x243C,func_8006CD78,unmatched_asm,game,
 0x8006F1B4,0x13D8,func_8006F1B4,unmatched_asm,game,
 0x8007058C,0x20,AiScript_ReadByte,matching_c,game,Pure-C inline refinement matched the full executable.
-0x800705AC,0x2C,AiScript_ReadShort,matching_c,game,Little-endian bytecode word reader using GCC 2.8.1 PSX -O2 -G0 with register hints
+0x800705AC,0x2C,AiScript_ReadShort,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x800705D8,0x78,AiScript_Init,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80070650,0xC0,AiScript_Run,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80070710,0x28,Ai_GetHandSize,unmatched_asm,game,

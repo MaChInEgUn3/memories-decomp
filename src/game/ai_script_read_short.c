@@ -1,15 +1,17 @@
 #include "../types.h"
-#include "ai.h"
 
-extern AiScriptState gAiScript_State;
+/* Same byte-stream cursor as stream_read_advance.c. */
+struct Stream {
+    u8 pad[8];
+    u8 *cursor;
+};
 
-int AiScript_ReadShort(void)
-{
-    // Preserve the original stream and increment register allocation.
-    register AiScriptState *stream asm("$2") = &gAiScript_State;
-    unsigned char *current = stream->script_cursor;
-    register unsigned char *next asm("$4") = current + 2;
+extern struct Stream gAiScript_State;
 
-    stream->script_cursor = next;
-    return current[0] | (current[1] << 8);
+/* Reads a little-endian 16-bit value from the stream and advances the
+   cursor by 2. */
+int AiScript_ReadShort(void) {
+    u8 *p = gAiScript_State.cursor;
+    gAiScript_State.cursor += 2;
+    return p[0] | (p[1] << 8);
 }
