@@ -4334,7 +4334,7 @@
     },
     {
       "address": "0x80070AC0",
-      "profile": "gcc_2_8_1_g0",
+      "profile": "gcc_2_8_1_g8_split",
       "size": "0x7C",
       "source": "src/game/ai_script_jump_equal.c"
     },

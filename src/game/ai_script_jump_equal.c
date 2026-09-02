@@ -1,3 +1,25 @@
 #include "../types.h"
 
-extern int gAiScript_aMemory[];typedef struct{int first,addend,result;}State;extern State gAiScript_State;extern int AiScript_ReadByte(void),AiScript_ReadShort(void);void AiScript_JumpEqual(void){int a=AiScript_ReadByte(),b=AiScript_ReadByte(),result=AiScript_ReadShort();register int*values asm("$3")=gAiScript_aMemory;asm("":"+r"(values));if(values[a]==values[b]){register State*s asm("$2")=&gAiScript_State;result+=s->addend;s->result=result;}}
+typedef struct {
+    s32 first;
+    s32 jump_base;
+    s32 cursor;
+} AiScriptStatePrefix;
+
+extern s32 gAiScript_aMemory[];
+extern AiScriptStatePrefix gAiScript_State;
+extern s32 AiScript_ReadByte(void);
+extern s32 AiScript_ReadShort(void);
+
+void AiScript_JumpEqual(void)
+{
+    s32 first = AiScript_ReadByte();
+    s32 second = AiScript_ReadByte();
+    s32 offset = AiScript_ReadShort();
+
+    if (gAiScript_aMemory[first] == gAiScript_aMemory[second]) {
+        AiScriptStatePrefix *state = &gAiScript_State;
+        offset += state->jump_base;
+        state->cursor = offset;
+    }
+}
