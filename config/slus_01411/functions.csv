@@ -442,7 +442,7 @@ address,size,name,status,module,notes
 0x8003700C,0x104,func_8003700C,unmatched_asm,game,
 0x80037110,0x98,func_80037110,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800371A8,0x1B4,func_800371A8,unmatched_asm,game,
-0x8003735C,0x6C,func_8003735C,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
+0x8003735C,0x6C,func_8003735C,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x800373C8,0x54,func_800373C8,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x8003741C,0x8C,func_8003741C,unmatched_asm,game,
 0x800374A8,0x4C,func_800374A8,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
