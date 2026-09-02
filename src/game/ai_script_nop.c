@@ -3,3 +3,7 @@
 void AiScript_HandNop(void)
 {
 }
+
+void AiScript_FieldNop(void)
+{
+}
