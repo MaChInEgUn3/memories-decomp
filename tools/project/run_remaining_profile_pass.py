@@ -140,6 +140,7 @@ def candidates(
     scope: str,
     variant: str,
     limit: int,
+    repair_gprel: bool,
 ) -> list[dict[str, Any]]:
     functions = read_csv(resolve_within(root, FUNCTIONS_PATH, must_exist=True))
     functions_by_address = {
@@ -207,20 +208,30 @@ def candidates(
     for function in functions:
         address = int(function["address"], 0)
         history = by_address.get(address, [])
+        summary = history[-1]["summary"].lower() if history else ""
+        tool_error = (
+            "tool error" in summary
+            or "compile/build failed" in summary
+            or "profile-pass tool error" in summary
+        )
+        gprel_error = (
+            "gprel16" in summary
+            or "small-data" in summary
+            or "out-of-range gprel" in summary
+        )
         if (
             function["module"] != "game"
             or function["status"] != "unmatched_asm"
             or not history
             or len(history) >= 6
             or history[-1]["result"] in {"matched", "deferred"}
-            or "tool error" in history[-1]["summary"].lower()
-            or "compile/build failed" in history[-1]["summary"].lower()
+            or tool_error and not (repair_gprel and gprel_error)
         ):
             continue
         source = source_from_attempt(root, history[-1])
         if source is None or not source.is_file() or not source_is_pure(source):
             continue
-        group = profile_group(history)
+        group = "g0" if repair_gprel else profile_group(history)
         if group is None:
             continue
         profile = selected_profile(group, variant)
@@ -312,6 +323,14 @@ def parse_args() -> argparse.Namespace:
         required=True,
     )
     parser.add_argument("--limit", type=int, default=100)
+    parser.add_argument(
+        "--repair-gprel",
+        action="store_true",
+        help=(
+            "include unmatched pure candidates whose latest tool error is "
+            "a G8 small-data relocation failure, and test them as G0"
+        ),
+    )
     return parser.parse_args()
 
 
@@ -326,10 +345,14 @@ def main() -> int:
             scope=args.scope,
             variant=args.variant,
             limit=args.limit,
+            repair_gprel=args.repair_gprel,
         )
         rows = run_pass(root, selected)
         work = resolve_within(root, WORK_PATH)
-        output_name = f"{args.scope}-{args.variant}-results"
+        repair_suffix = "-gprel" if args.repair_gprel else ""
+        output_name = (
+            f"{args.scope}-{args.variant}{repair_suffix}-results"
+        )
         write_csv(work / f"{output_name}.csv", rows)
         write_json(
             work / f"{output_name}.json",

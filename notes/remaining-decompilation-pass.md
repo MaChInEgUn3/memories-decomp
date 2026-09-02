@@ -96,3 +96,44 @@ The profile pass also showed why declaration repair must be separated from
 profile variation: recurrent errors include invalid G8 small-data placement,
 incomplete m2c pointer types, unresolved `.rodata`/pseudo-register symbols, and
 missing global declarations.
+
+## Canonical profile completion
+
+Preserved pure-C unmatched candidates received the same bounded fallback
+profiles:
+
+| Pass | Tested | Exact |
+|---|---:|---:|
+| GCC 2.7.2 fallback | 72 | 0 |
+| GCC 2.8.1 no second scheduler pass | 71 | 0 |
+| GCC 2.8.1 O1 terminal variant | 66 | 0 |
+
+Sixty-six preserved-source histories reached attempt six and were deferred.
+
+Ten additional candidates whose prior G8 attempts failed only through
+out-of-range small-data relocations were repaired by forcing G0:
+
+| G0 repair pass | Tested | Exact |
+|---|---:|---:|
+| Default | 10 | 0 |
+| Split | 10 | 0 |
+| No-split | 10 | 0 |
+| GCC 2.7.2 | 10 | 0 |
+| No second scheduler pass | 5 | 0 |
+
+All ten GPREL-repair histories are now terminal. The source repair was
+successful—the candidates compile and link—but their C structure still does
+not reproduce retail code.
+
+`func_80058938` was manually reconstructed from GMS after m2c failed on two
+unaligned 32-bit copies. Pure-C `memcpy`, packed-pointer assignment, and
+packed-parameter forms all trigger a GCC `cc1` signal-11 internal compiler
+error under both 2.8.1 and 2.7.2. Its six-attempt history is terminal with the
+record layout and compiler blocker documented.
+
+Current canonical state:
+
+- 301 unmatched game functions are terminally deferred;
+- 62 unmatched game functions remain nonterminal;
+- the remaining functions require manual source/declaration repair, GMS
+  reconstruction, or new collaborator evidence rather than compiler flags.
