@@ -15,10 +15,13 @@ typedef u8 Block;
 typedef struct { u32 words[2]; } Blk8;
 
 extern s32 func_80047864();
+extern void func_80047788(u16);
+extern void func_8004763C(void);
 extern s32 func_80076ED0();
 extern s32 func_80077090();
 
-void func_800478EC(void) {
+void func_800478EC(void)
+{
     s32 mask;
     s32 bit2;
     s32 accum;
@@ -67,7 +70,67 @@ void func_800478EC(void) {
         bit2 <<= 1;
         mask <<= 1;
     }
-    if (accum != 0) {
+    if (accum != 0)
         func_80076ED0(0, accum);
+}
+
+void func_80047A68(void)
+{
+    s32 i;
+    u32 mask = 0x100000;
+    u32 result = 0;
+    u16 threshold = g_SDValue->field_0004;
+
+    for (i = 0; i < 4; i++) {
+        if (g_SDValue->voice_ids[i] >= threshold)
+            result |= mask;
+        mask <<= 1;
+    }
+    func_80076ED0(0, result);
+}
+
+s32 func_80047AD0(s32 value)
+{
+    u16 index = value;
+    SDValue *state = g_SDValue;
+
+    if (state->field_0448[index].field_0004 == 0)
+        return 1;
+    if (state->field_0442 == index)
+        return 1;
+    func_80047A68();
+    func_8004763C();
+    {
+        register SDValue *final = g_SDValue;
+        register s32 call_value = index;
+        final->field_0442 = value;
+        final->flags_0040 |= 2;
+        func_80047788(call_value);
+    }
+    return 1;
+}
+
+s32 func_80047B68(u16 value)
+{
+    SDValue *state = g_SDValue;
+
+    if (state->field_0442 == value)
+        return 1;
+    state->field_0442 = value;
+    state->flags_0040 |= 2;
+    func_80047788(value);
+    return 1;
+}
+
+void func_80047BB4(u16 *items, s32 count)
+{
+    s32 i;
+
+    func_80076ED0(0, 0x00F00000);
+    func_8004763C();
+    g_SDValue->flags_0040 |= 2;
+    for (i = 0; i < count; i++) {
+        if (items[i] != 0xFFFF)
+            func_80047788(items[i]);
     }
 }
