@@ -227,8 +227,14 @@ typedef char SDSecondaryState_field_07E0_offset_must_be_0x7E0[
 typedef char SDSecondaryState_field_07FA_offset_must_be_0x7FA[
     SD_STATE_OFFSET(SDSecondaryState, field_07FA) == 0x7FA ? 1 : -1
 ];
+typedef char SDSecondaryState_timebase_offset_must_be_0x7FC[
+    SD_STATE_OFFSET(SDSecondaryState, timebase) == 0x7FC ? 1 : -1
+];
 typedef char SDSecondaryState_bytes_consumed_offset_must_be_0x818[
     SD_STATE_OFFSET(SDSecondaryState, bytes_consumed) == 0x818 ? 1 : -1
+];
+typedef char SDSecondaryState_field_081C_offset_must_be_0x81C[
+    SD_STATE_OFFSET(SDSecondaryState, field_081C) == 0x81C ? 1 : -1
 ];
 typedef char SDSecondaryState_field_0844_offset_must_be_0x844[
     SD_STATE_OFFSET(SDSecondaryState, field_0844) == 0x844 ? 1 : -1
@@ -240,8 +246,6 @@ typedef char SDSecondaryState_field_0844_offset_must_be_0x844[
 extern SDValue *g_SDValue;
 #endif
 
-#ifndef SDSECONDARYSTATE_CUSTOM_EXTERN
 extern SDSecondaryState *D_8009B458;
-#endif
 
 #endif

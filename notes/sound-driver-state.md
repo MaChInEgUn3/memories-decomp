@@ -89,3 +89,75 @@ The contiguous initialization block at `0x80049200-0x800495EC` now builds as
 `src/game/sound_init.c`. It preserves the explicit raw music-pointer write in
 `func_800493F8` while sharing `SDValue` declarations across the other
 music/sequence helpers.
+
+## Secondary state (`D_8009B458`)
+
+`D_8009B458` is a second global pointer used by the sequence/stream side of the
+sound driver. `func_800494F4` installs the pointer and clears exactly 530
+32-bit words, establishing a total allocation size of `0x848` bytes.
+
+`src/game/sound.h` defines the partial `SDSecondaryState`,
+`SDSecondaryTransfer`, `SDSecondaryRecord`, and `SDSecondaryObject` views.
+Offset-based names are retained except where several matched functions
+establish a stable role. Unmodeled and overlapping regions remain padding or
+explicit typed/raw views rather than speculative fields.
+
+### Confirmed secondary-state fields
+
+| Offset | Width | Field | Local matching-C evidence |
+|---|---:|---|---|
+| `0x0000` | `0x18` stride | `SDSecondaryRecord` view | `func_8004B49C`, `func_8004B6E8`, and `func_8004B70C` index the same records and establish byte fields at `+0x00`, `+0x01`, `+0x03`, `+0x05`-`+0x07`, and `+0x10`-`+0x13`. |
+| `0x0180` | `0x28` stride | `objects[20]` | `func_8004A7C0`, `func_8004B49C`, and `func_8004C84C` establish the object base/stride; additional matched inline-assembly functions use the same view. Verified members are bytes at `+0x03` and `+0x0F`, and a `u16` at `+0x1E`. |
+| `0x04A4` | `0x1C` | `transfer` | `func_80049434`, `func_800496C4`, `func_8004975C`, `func_800497E0`, and `func_800498F8`. Members are `s16 +0x00`, pointer `+0x04`, `s32 +0x08/+0x0C/+0x10`, pointer `+0x14`, and bytes `+0x18`-`+0x1B`. |
+| `0x0500`-`0x0503` | `u8` | `flag_0500`-`flag_0503` | Initialization, playback, update, and shutdown routines independently read/write these flags. |
+| `0x0504` | pointer | `field_0504` | `func_8004B910` passes it to both stop/cleanup calls. |
+| `0x0508` | `u8` | `field_0508` | `func_8004B734` increments and wraps it at 11. |
+| `0x0509` | `u8` | `field_0509` | `func_8004695C`, `func_80047050`, and `func_8004B734` set/test it. |
+| `0x050C` | callback pointer | `field_050C` | `func_8004B734` conditionally invokes it. |
+| `0x0510` | `s16` | `object_count` | Initialized/set by `func_80049434` and `func_80049600`; bounds the `0x28`-byte object scans in several matched functions. |
+| `0x0512`, `0x0514`, `0x0516` | `s16` | `field_0512`, `field_0514`, `field_0516` | Initialization and parameter-update functions establish signed halfword accesses. |
+| `0x07DC` | pointer | `field_07DC` | Playback copies `field_07E8` here; `func_8004BAE4` reads indexed stream bytes through it. |
+| `0x07E0`-`0x07E6` | four `s16` | `field_07E0`-`field_07E6` | Playback setup/reset and parameter functions consistently use halfword accesses. |
+| `0x07E8` | pointer | `field_07E8` | `func_80049A64` stores the sequence/stream input pointer. |
+| `0x07EC` | `s32` | `field_07EC` | Playback initializes the bound to `0x10000`; `func_8004BAE4` compares its reader offset against it. |
+| `0x07FA` | `u16` | `field_07FA` | `func_8004BE88` and `func_8004C77C` bound `0x2C`-byte work-record loops. |
+| `0x07FC` | `u16` | `timebase` | `func_8004BE88` and `func_8004C5C8` select timing conversions from it. |
+| `0x0800` | `u8` | `field_0800` | Cleared by `func_8004C77C`. |
+| `0x0804`, `0x0808`, `0x080C`, `0x0810` | `s32` | offset-based fields | Timing/playback routines establish word accesses; their broader roles remain uncertain. |
+| `0x0814`, `0x0815` | `u8` | offset-based fields | Initialization and update/output controls set/test these bytes. |
+| `0x0818` | `u32` | `bytes_consumed` | `func_800496C4` clears it and `func_800497E0` advances it across a transfer window. |
+| `0x081C` | `s32` | `field_081C` | Initialized to `0x1000`, read by update/termination paths, and set by `func_80049594`. |
+| `0x0844`, `0x0845` | `u8` | offset-based fields | `func_8004ACE4` stores two control-event byte values. |
+
+The header uses GCC-2.8.1-compatible negative-array assertions for the
+`0x18`, `0x28`, and `0x1C` subview sizes, the complete `0x848` state size, and
+the major top-level offsets.
+
+### Migration status and exact-code exceptions
+
+All 33 pure-C users now include `sound.h` and use the shared typed global.
+Every accepted migration batch retained the exact full executable hash.
+
+Seven matching-C functions containing GCC inline assembly remain unchanged and
+keep their local raw declarations: `func_800496C4`, `func_80049CF8`,
+`func_80049DD8`, `func_8004A2F8`, `func_8004A854`, `func_8004B734`, and
+`func_8004C77C`.
+
+Two migrated functions retain explicit raw indexing where the shared type
+cannot replace the exact source shape:
+
+- `func_8004A7C0` calculates the `0x28`-byte object address explicitly.
+  Replacing it with `&D_8009B458->objects[index]` changes the linked
+  executable at `0x8004A7C8`.
+- `func_8004B49C` retains byte-pointer iteration for the overlapping
+  `0x18`-byte record and `0x28`-byte object views, while stable fields use the
+  shared types.
+
+`func_8004BE88` likewise keeps a byte pointer for the still-unmodeled
+`0x2C`-stride work-record region, but uses `SDSecondaryState` members for its
+verified scalar fields. These raw expressions are layout/code-generation
+views, not competing global declarations.
+
+Unchiga's generated `m2c_types.h` and focused decompilation sources corroborate
+the `0x848` clear size and several offsets, but the declarations above were
+derived and exact-tested from this repository's matched C.

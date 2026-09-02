@@ -9,6 +9,7 @@ void func_8004A7C0(int index)
 {
     int table_offset = index << 2;
     int object_offset = (table_offset + index) << 3;
+    /* Direct objects[index] syntax changes GCC's index calculation. */
     SDSecondaryObject *entry =
         (SDSecondaryObject *)((u8 *)D_8009B458 + 0x180 + object_offset);
     int *item;

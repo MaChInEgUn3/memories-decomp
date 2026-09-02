@@ -85,6 +85,7 @@ void func_8004B49C(s32 arg0, s32 arg1, u8 arg2) {
             m = 0x180;
             k = i;
             do {
+                /* The 0x18-byte record and 0x28-byte object views overlap. */
                 q = (u8 *)c + k;
                 if (id2 == q[0x183]) {
                     if (q[0x18D] != 0) {
