@@ -4550,7 +4550,7 @@
     },
     {
       "address": "0x80073380",
-      "profile": "gcc_2_8_1_g0",
+      "profile": "gcc_2_8_1_g8_split",
       "size": "0x28",
       "source": "src/game/ai_script_clear_cards.c"
     },
