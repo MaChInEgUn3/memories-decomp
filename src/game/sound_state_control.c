@@ -1,7 +1,21 @@
 #include "../types.h"
 #include "sound.h"
 
-void func_80046990(int first, int second, int third)
+extern u8 *volatile D_8009B458;
+
+void func_8004695C(s32 value)
+{
+    u8 *state;
+
+    D_8009B458[0x509] = value;
+    state = D_8009B458;
+    if (state[0x509] != 0)
+        state[0x500] = 1;
+    else
+        state[0x500] = 0;
+}
+
+void func_80046990(s32 first, s32 second, s32 third)
 {
     g_SDValue->field_003C = 0;
     if (first == 0)

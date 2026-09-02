@@ -1,8 +1,9 @@
 #include "../types.h"
 #include "sound.h"
 
-extern void func_80044DA0(void);
-extern void func_80044DC0(int);
+extern void func_80044DC0(s32);
+
+void func_80044DA0(void);
 
 void func_80044D48(void)
 {
@@ -16,4 +17,10 @@ void func_80044D48(void)
     base->buffer_ptrs_153C[2] = base->buffer_053C[2];
     base->field_0512 = 0;
     base->buffer_ptrs_153C[3] = base->buffer_053C[3];
+}
+
+void func_80044DA0(void)
+{
+    g_SDValue->channel_volume[0] = 0x80;
+    g_SDValue->channel_volume[1] = 0x80;
 }

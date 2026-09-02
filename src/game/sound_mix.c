@@ -3,11 +3,12 @@
 
 extern void func_8007CDC0(u8 *);
 
-void func_80044F58(int value)
+void func_80044F58(s32 value)
 {
     u8 data[4];
     SDValue *first;
     SDValue *second;
+
     g_SDValue->mix_multiplier = 7;
     data[0] = value;
     data[3] = 0;
@@ -24,4 +25,9 @@ void func_80044F58(int value)
     second = g_SDValue;
     first->cd_volume = value;
     second->field_0512 = 0;
+}
+
+s32 func_80044FE4(void)
+{
+    return g_SDValue->cd_volume;
 }
