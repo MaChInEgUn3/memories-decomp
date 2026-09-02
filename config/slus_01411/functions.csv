@@ -1138,7 +1138,7 @@ address,size,name,status,module,notes
 0x80070BB8,0xA8,AiScript_JumpBetween,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x80070C60,0xA0,AiScript_JumpRandom,matching_c,game,Pure-C inline refinement matched the full executable.
 0x80070D00,0xA8,AiScript_Call,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.
-0x80070DA8,0x78,AiScript_Return,matching_c,game,5 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0_split.
+0x80070DA8,0x78,AiScript_Return,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80070E20,0x94,AiScript_SetRandom,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80070EB4,0x68,AiScript_Subtract,matching_c,game,Pure-C inline refinement matched the full executable.
 0x80070F1C,0xDC,AiScript_PlayFieldCard,unmatched_asm,game,
