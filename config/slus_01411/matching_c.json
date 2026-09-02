@@ -1120,13 +1120,13 @@
       "address": "0x8002CDE8",
       "profile": "gcc_2_8_1_g8",
       "size": "0x20",
-      "source": "src/game/func_8002CDE8.c"
+      "source": "src/game/main_debug.c"
     },
     {
       "address": "0x8002CE08",
       "profile": "gcc_2_8_1_g8",
       "size": "0x5C",
-      "source": "src/game/main_run_debug_menu.c"
+      "source": "src/game/main_debug.c"
     },
     {
       "address": "0x8002CEE8",
