@@ -69,13 +69,26 @@ source grouping.
 | `src/game/sound_secondary_playback.c` | `gcc_2_8_1_g0` | Three secondary playback lifecycle helpers at `0x80049BAC-0x80049CB0` |
 | `src/game/sound_secondary_params.c` | `gcc_2_8_1_g0` | Secondary playback parameter setters/status query at `0x80049EC8-0x80049F50` |
 
-These pilots reduce four one-function source files to two coherent
-translation units and reduce generated C objects from 769 to 767. Function
-emission order and the complete retail executable SHA-256 remain unchanged.
+The original pilots reduced four one-function source files to two coherent
+translation units. The later subsystem pass applies the same invariants across
+AI, File, Duel, Main, Build Deck, and sound code. Function emission order and
+the complete retail executable SHA-256 remain unchanged.
 
-After the subsystem pass, all 769 matching functions build from 733
-translation units. Eighteen grouped units contain 54 functions; the largest is
-the ten-function `sound_output.c` block.
+After the expanded subsystem pass, all 769 matching functions build from 687
+translation units. Thirty-seven grouped units contain 119 functions; the
+largest is the thirteen-function `sound_init.c` block.
+
+An executable-order audit of the established AI, File, sound-frontend, and
+sound-driver ranges reports no remaining pair of single-source pure-C
+functions that is both contiguous and profile-compatible. Remaining source
+splits are caused by at least one of:
+
+- a nonmatching assembly function between matching functions;
+- different compiler profiles;
+- an existing GCC inline-assembly source retained for later pure-C
+  refinement;
+- noncontiguous executable addresses, which cannot share one object without
+  changing layout.
 
 ## Expansion policy
 

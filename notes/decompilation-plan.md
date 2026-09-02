@@ -30,8 +30,12 @@
   `g_SDValue` sound-driver work area. Conversion proceeds in exact-matching
   batches, retaining raw local views only where GCC addressing shape requires
   them.
-- Current source organization: 769 matching functions in 733 translation
-  units; 18 grouped subsystem units contain 54 functions.
+- Current source organization: 769 matching functions in 687 translation
+  units; 37 grouped subsystem units contain 119 functions.
+- The AI, File, sound-frontend, and sound-driver ranges have no remaining
+  contiguous same-profile pure-C runs. Further consolidation requires first
+  removing inline assembly, matching intervening functions, or deliberately
+  redesigning the object layout.
 - Every pure-C user of `g_SDValue` includes `sound.h`. Three raw expressions
   remain solely because typed member syntax changes GCC code generation;
   inline-assembly users remain deferred.
