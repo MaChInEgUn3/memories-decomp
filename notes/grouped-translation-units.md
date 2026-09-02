@@ -63,6 +63,10 @@ source grouping.
 | `src/game/sound_command_queue.c` | `gcc_2_8_1_g0` | Command marker insertion (`0x80045114`) and command wrapper (`0x800451E0`) |
 | `src/game/sound_state_control.c` | `gcc_2_8_1_g8` | Secondary-state activation (`0x8004695C`) and main sound-state flag setup (`0x80046990`) |
 | `src/game/sound_command_wrappers.c` | `gcc_2_8_1_g8` | Four command/sequence wrappers at `0x800473CC-0x80047458` |
+| `src/game/sound_voice_data.c` | `gcc_2_8_1_g0` | Voice-step assignment (`0x80048C0C`) and a 512-word transfer helper (`0x80048C70`) |
+| `src/game/sound_secondary_reset.c` | `gcc_2_8_1_g0` | Low-level state query (`0x800498BC`) and secondary-state reset (`0x800498F8`) |
+| `src/game/sound_secondary_playback.c` | `gcc_2_8_1_g0` | Three secondary playback lifecycle helpers at `0x80049BAC-0x80049CB0` |
+| `src/game/sound_secondary_params.c` | `gcc_2_8_1_g0` | Secondary playback parameter setters/status query at `0x80049EC8-0x80049F50` |
 
 These pilots reduce four one-function source files to two coherent
 translation units and reduce generated C objects from 769 to 767. Function

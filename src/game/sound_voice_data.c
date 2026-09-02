@@ -3,8 +3,9 @@
 
 void func_80048C0C(u16 value, u8 enabled)
 {
-    int i;
-    int mask;
+    s32 i;
+    s32 mask;
+
     if (enabled == 0)
         return;
     mask = 1;
@@ -14,5 +15,21 @@ void func_80048C0C(u16 value, u8 enabled)
             (state->voice_active_mask & mask)) {
             state->voice_step[i] = enabled;
         }
+    }
+}
+
+void func_80048C70(u32 *dst, u32 *src)
+{
+    u32 i;
+
+    for (i = 0; i < 64; i++) {
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
     }
 }
