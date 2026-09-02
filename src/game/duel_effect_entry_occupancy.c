@@ -4,14 +4,6 @@
 extern u8 D_800EAF08[];
 extern u8 D_8009B324;
 extern u8 D_8009B325;
-/* Raw tail view retained to preserve the original base-plus-17 address
-   calculation in DuelEffect_ClearMatchingMarker. */
-struct DuelEffectEntryTail {
-    u8 field17;
-    u8 field18;
-    u8 pad[28 - 2];
-};
-
 void func_80035CA8(int value)
 {
     int index;
@@ -73,18 +65,16 @@ s32 func_80035D10(void)
 /* Clears field17 on the first (only) entry whose field18 equals a0+1,
    scanning 620 entries. */
 void DuelEffect_ClearMatchingMarker(int a0) {
-    struct DuelEffectEntryTail *v1;
+    DuelEffectEntry *v1;
     int a1;
     u8 v0;
-    int off;
     a1 = 620;
     a0 = a0 + 1;
-    off = 17;
-    v1 = (struct DuelEffectEntryTail *)((u8 *)D_800EB288 + off);
+    v1 = D_800EB288;
     do {
-        v0 = v1->field18;
+        v0 = v1->field_12;
         if (v0 == a0) {
-            v1->field17 = 0;
+            v1->flags_11 = 0;
         }
         a1 -= 1;
         v1 += 1;
@@ -94,16 +84,13 @@ void DuelEffect_ClearMatchingMarker(int a0) {
 /* Clears field17 and the byte at struct-relative offset 7 on all 620
    stride-28 entries. */
 void DuelEffect_ResetEntryMarkers(void) {
-    u8 *v0;
+    DuelEffectEntry *v0;
     int v1;
-    int off;
     v1 = 620;
-    off = 24;
-    v0 = (u8 *)D_800EB288;
-    v0 = v0 + off;
+    v0 = D_800EB288;
     for (; v1 != 0; v1 = v1 - 1) {
-        v0[-7] = 0;
-        v0[0] = 0;
-        v0 = v0 + 28;
+        v0->flags_11 = 0;
+        v0->field_18 = 0;
+        v0 = v0 + 1;
     }
 }
