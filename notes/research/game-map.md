@@ -109,18 +109,32 @@ publish only 250 codes give the wrong constant.
 `0x800EA004` and the opponent's at `0x800EA024`. Each side also carries the
 ticking on-screen figure two bytes below the true value.
 
-**The game's fixed tables.**
+**The game's rule tables — and where they really live.**
 
-| table | address | touched by |
-|---|---|---|
-| fusion | `0x8017C2D8` | 2 functions (1 matched) |
-| equip | `0x8017A1D8` | 2 (1) |
-| ritual | `0x801799D8` | 4 (1) |
-| terrain bonuses | `0x800909D4` | — |
+| table | runtime address | touched by | on disc (`WA_MRG.MRG`) |
+|---|---|---|---|
+| fusion | `0x8017C2D8` | 2 functions (1 matched) | duel blob `+0x24800` (`0xB87800`), 64 KB, 25,131 recipes |
+| equip | `0x8017A1D8` | 2 (1) | duel blob `+0x22000` (`0xB85000`), 10 KB, 4,041 pairs |
+| ritual | `0x801799D8` | 4 (1) | duel blob `+0x34800` (`0xB97800`), 2 KB, 24 records |
+| rank scoring | `0x801798A8` | `rankScoreChange`, `calcRankScore` | duelist block `+0x16D0`, 200 B, same for all 39 |
+| terrain bonuses | `0x800909D4` | `getTerrainBoost` — an `s8[20][6]`, in the executable | — |
 
-Those small counts are the useful part: the fusion rules are reached from
-essentially one place, so "how does fusion work" is a two-function question,
-not a subsystem.
+Only the terrain table is in the executable; the other four are zero in
+`SLUS_014.11` because the duel loader reads them from the disc. That loader
+is already decompiled — `func_8001798C` issues a 235-sector read at sector
+`0x16C6 + 235 × terrain` of `WA_MRG.MRG` with `func_800171A8` as the
+per-chunk callback, and the callback's thirteen chunk sizes sum to exactly
+235 sectors, which fixes every chunk's offset. `func_800179F4` does the same
+for the per-duelist block (3 sectors at `0x1D33 + 3 × opponent` →
+`0x801781D8`: deck weights, three drop pools, rank table). All four tables
+are decoded and every id in them is a valid card; `tools_src/decode_tables.py` (in `MaChInEgUn3/ygofm-decomp`)
+holds the decoders (read off `checkFusion`, `checkEquip`, `checkRitual` and
+`rankScoreChange`) and `tools_src/extract_mrg_tables.py` the sector
+arithmetic. `the-game.md` has the full blob layout and what was retracted.
+
+Those small reader counts are the useful part: the fusion rules are reached
+from essentially one place, so "how does fusion work" is a two-function
+question, not a subsystem.
 
 ## The AI is a virtual machine
 
