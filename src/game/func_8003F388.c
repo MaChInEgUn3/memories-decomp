@@ -1,6 +1,6 @@
 #include "../types.h"
+#include "duel_effect.h"
 
-extern u8 D_800EB0F8[];
 extern u8 D_8009B3EE;
 extern u8 *D_8009B3D8;
 extern u8 *func_8004002C(void);
@@ -11,18 +11,18 @@ extern void func_800428EC(u8 *, s32);
 
 void func_8003F388(void) {
     s32 i = 0;
-    u8 *p = (u8 *)D_800EB0F8;
+    DuelEffectChannel *p = D_800EB0F8;
     u8 *o;
 
     D_8009B3EE = 0;
 
     for (; i < 4; i++) {
-        if (!(*(u16 *)(p + 0x34) & 0x8000)) {
+        if (!(p->flags_34 & 0x8000)) {
             D_8009B3EE = i;
 
             break;
         }
-        p += 0x64;
+        p++;
     }
 
     o = func_800400AC(func_8004002C(), 2);

@@ -1,4 +1,5 @@
 #include "../types.h"
+#include "duel_effect.h"
 
-typedef struct{unsigned char pad[0x34];unsigned short flags,value36,zero38,zero3A;unsigned char pad2[0x17];unsigned char field53,zero54,pad55[2],index,pad58,zero59,field5A,field5B;unsigned short first,count;unsigned char pad60,zero61,rest[2];}Entry;extern Entry D_800EB0F8[];extern unsigned short D_80090E58[];
-Entry*DuelEffect_InitEntry(int index,int value,int flags){register int offset=index<<1;int scaled=offset+index;Entry*e;unsigned short*range;scaled<<=3;scaled+=index;scaled<<=2;e=(Entry*)((unsigned char*)D_800EB0F8+scaled);flags|=0x8000;e->field5A=8;e->field5B=12;e->field53=2;range=(unsigned short*)((unsigned char*)D_80090E58+offset);e->index=index;e->value36=value;e->zero54=0;e->flags=flags;e->zero38=0;e->zero3A=0;e->zero59=0;e->zero61=0;e->first=range[0];e->count=range[1]-range[0];return e;}
+extern unsigned short D_80090E58[];
+DuelEffectChannel*DuelEffect_InitEntry(int index,int value,int flags){register int offset=index<<1;int scaled=offset+index;DuelEffectChannel*e;unsigned short*range;scaled<<=3;scaled+=index;scaled<<=2;e=(DuelEffectChannel*)((unsigned char*)D_800EB0F8+scaled);flags|=0x8000;e->field_5A=8;e->field_5B=12;e->field_53=2;range=(unsigned short*)((unsigned char*)D_80090E58+offset);e->index_57=index;e->field_36=value;e->field_54=0;e->flags_34=flags;e->field_38=0;e->field_3A=0;e->field_59=0;e->field_61=0;e->range_start_5C=range[0];e->range_count_5E=range[1]-range[0];return e;}
