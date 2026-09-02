@@ -1,23 +1,21 @@
 #include "../types.h"
 
-typedef struct {
-    u8 pad_00[0x11];
-    u8 field_11;
-    u8 pad_12[6];
-    u8 field_18;
-    u8 pad_19[3];
-} Entry28;
-extern Entry28 D_800EB288[];
-void func_80035DF4(void)
-{
-    int remaining = 0x26C;
-    register Entry28 *base asm("$2") = D_800EB288;
-    u8 *entry;
-    asm("" : "+r"(base));
-    entry = &base->field_18;
-    do {
-        entry[-7] = 0;
-        entry[0] = 0;
-        entry += sizeof(Entry28);
-    } while (--remaining != 0);
+/* Same stride-28 table as func_80035DB8/reset_free_slot pairing (see
+   clear_matching_byte_800eb288.c): clears field17 and the byte at
+   struct-relative offset 7 on all 620 entries. */
+extern u8 D_800EB288[];
+
+void func_80035DF4(void) {
+    u8 *v0;
+    int v1;
+    int off;
+    v1 = 620;
+    off = 24;
+    v0 = D_800EB288;
+    v0 = v0 + off;
+    for (; v1 != 0; v1 = v1 - 1) {
+        v0[-7] = 0;
+        v0[0] = 0;
+        v0 = v0 + 28;
+    }
 }
