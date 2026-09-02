@@ -3722,7 +3722,7 @@
     },
     {
       "address": "0x80059134",
-      "profile": "gcc_2_8_1_g0",
+      "profile": "gcc_2_8_1_g8_split",
       "size": "0x8C",
       "source": "src/game/func_80059134.c"
     },

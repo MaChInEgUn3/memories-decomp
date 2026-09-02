@@ -925,7 +925,7 @@ address,size,name,status,module,notes
 0x80058FB0,0x50,func_80058FB0,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80059000,0xDC,func_80059000,matching_c,game,Pure-C inline refinement matched the full executable.
 0x800590DC,0x58,func_800590DC,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
-0x80059134,0x8C,func_80059134,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
+0x80059134,0x8C,func_80059134,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x800591C0,0x3C,func_800591C0,matching_c,game,Pure-C inline refinement matched the full executable.
 0x800591FC,0xC,func_800591FC,matching_c,game,3 pre-policy variants: Plain address return and split-only failed; -mgas -msplit-addresses placed LO16 in the return delay slot.
 0x80059208,0xC,func_80059208,matching_c,game,1 pre-policy variants: Straight address-of-byte G8 return matched linked bytes and GPREL16 relocation.
