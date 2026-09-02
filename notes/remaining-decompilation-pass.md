@@ -69,3 +69,30 @@ After the sweep:
 The sweep demonstrates that compiler split/no-split selection alone is not the
 remaining blocker. Further progress must use better source structure,
 declaration repair, GMS semantics, or collaborator residual notes.
+
+## Inline-assembly completion pass
+
+The preserved pure-C refinement candidates were tested sequentially under
+untried compiler profiles:
+
+| Pass | Tested | Exact | Nonexact/error |
+|---|---:|---:|---:|
+| GCC 2.8.1 split | 71 | 19 | 52 |
+| GCC 2.8.1 no-split | 57 | 0 | 57 |
+| GCC 2.8.1 default | 14 | 0 | 14 |
+| GCC 2.7.2 fallback | 58 | 0 | 58 |
+| GCC 2.8.1 no second scheduler pass | 49 | 0 | 49 |
+| GCC 2.8.1 O1 final variant | 47 | 1 | 46 |
+
+Together with the earlier `AiScript_JumpEqual` source-shape fix, this campaign
+replaced 21 matching inline-assembly sources with exact pure C.
+
+The 59 matching sources that still contain GCC assembly now each have a
+terminal six-attempt `inline_refinement` history. They remain exact current
+sources; no further pure-C retry is allowed without genuinely new compiler or
+source evidence.
+
+The profile pass also showed why declaration repair must be separated from
+profile variation: recurrent errors include invalid G8 small-data placement,
+incomplete m2c pointer types, unresolved `.rodata`/pseudo-register symbols, and
+missing global declarations.

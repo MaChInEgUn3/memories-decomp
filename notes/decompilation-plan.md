@@ -8,6 +8,10 @@ cross-function global-use and structure recovery.
 Current campaign results and bounded profile-sweep evidence are recorded in
 `notes/remaining-decompilation-pass.md`.
 
+The inline-assembly replacement phase is terminal: 21 pure-C replacements were
+accepted during the remaining campaign, and all 59 retained inline sources
+have complete six-attempt refinement histories.
+
 ## Resource ceiling
 
 - Never use more than four concurrent processes.
