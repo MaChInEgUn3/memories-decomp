@@ -54,6 +54,7 @@ source grouping.
 | `src/game/sound_frontend.c` | `gcc_2_8_1_g8` | Eight game-facing sound command wrappers from `SD_SEPlayFull` (`0x8003FEE0`) through `0x8003FFFC` |
 | `src/game/sound_init.c` | `gcc_2_8_1_g0` | Thirteen music/sequence and secondary sound-state initialization helpers from `0x80049200` through `0x800495EC`, including `SD_Init` |
 | `src/game/sound_voice_selection.c` | `gcc_2_8_1_g0` | Five voice lifetime, selection, and activation helpers from `0x800478EC` through `0x80047BB4` |
+| `src/game/sound_voice_slots.c` | `gcc_2_8_1_g0` | Voice release polling (`0x80047C70`) and four-slot search/removal (`0x80047CC4`) |
 
 These pilots reduce four one-function source files to two coherent
 translation units and reduce generated C objects from 769 to 767. Function

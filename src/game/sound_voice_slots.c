@@ -1,17 +1,30 @@
 #include "../types.h"
 #include "sound.h"
 
-extern int func_80047C50(int);
-extern void func_80047C70(int);
+extern s32 func_80047C50(s32);
+extern s32 func_80077090(s32);
+extern void func_80076ED0(s32, s32);
 
-void func_80047CC4(int value)
+void func_80047C70(s32 value)
 {
-    int normalized = func_80047C50((u16)value);
+    s32 count;
+
+    for (count = 0; count < 256; count++) {
+        func_80076ED0(0, value);
+        if (func_80077090(value) == 0)
+            break;
+    }
+}
+
+void func_80047CC4(s32 value)
+{
+    s32 normalized = func_80047C50((u16)value);
     SDValue *state = g_SDValue;
-    int tries = 0;
-    int slot = state->field_0435;
-    int bit = 1 << (u8)slot;
-    int command = 1 << ((u8)slot + 20);
+    s32 tries = 0;
+    s32 slot = state->field_0435;
+    s32 bit = 1 << (u8)slot;
+    s32 command = 1 << ((u8)slot + 20);
+
     do {
         state = g_SDValue;
         if (state->voice_active_mask & bit) {
