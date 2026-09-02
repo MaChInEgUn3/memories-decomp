@@ -2461,27 +2461,27 @@ global_address,global_name,observed_names,function_address,function_name,functio
 0x800E9EB4,D_800E9EB4,D_800E9EB4,0x8005C388,func_8005C388,unmatched_asm,game,assembly,tmp/splat/asm/generated/text_04cb88.s,read,32,"lui $v0, %hi(D_800E9EB4) | lw $a0, %lo(D_800E9EB4)($v0)"
 0x800E9EC0,D_800E9EC0,D_800E9EC0,0x80012B50,Main_Init,unmatched_asm,game,assembly,tmp/splat/asm/generated/text_0031d8.s,read,8,"lbu $a0, %lo(D_800E9EC0)($v0) | lui $v0, %hi(D_800E9EC0)"
 0x800E9EC0,D_800E9EC0,D_800E9EC0,0x80014C40,func_80014C40,unmatched_asm,game,assembly,tmp/splat/asm/generated/text_005440.s,read,32,"lui $v0, %hi(D_800E9EC0) | lw $a0, %lo(D_800E9EC0)($v0)"
-0x800E9EC8,D_800E9EC8,D_800E9EC8,0x800151B0,func_800151B0,matching_c,game,C,src/game/func_800151B0.c,address,,State *state = &D_800E9EC8;
+0x800E9EC8,D_800E9EC8,D_800E9EC8,0x800151B0,func_800151B0,matching_c,game,C,src/game/func_800151B0.c,address,,FadeTransitionState *state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x800151D8,func_800151D8,unmatched_asm,game,assembly,tmp/splat/asm/generated/text_0059d8.s,address,,"addiu $a2, $v0, %lo(D_800E9EC8) | lui $v0, %hi(D_800E9EC8)"
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015310,func_80015310,unmatched_asm,game,assembly,tmp/splat/asm/generated/text_0059d8.s,address,,"addiu $s0, $v0, %lo(D_800E9EC8) | addiu $s1, $v0, %lo(D_800E9EC8) | (+1 more)"
-0x800E9EC8,D_800E9EC8,D_800E9EC8|D_800E9EC8_arr,0x800154E4,func_800154E4,matching_c,game,C,src/game/func_800154E4.c,read,8,if (D_800E9EC8[6] & 0x10) { | rec = D_800E9EC8_arr; | (+1 more)
-0x800E9EC8,D_800E9EC8,D_800E9EC8,0x800156B8,func_800156B8,matching_c,game,C,src/game/func_800156B8.c,address,8,u8 *p = D_800E9EC8;
+0x800E9EC8,D_800E9EC8,D_800E9EC8|D_800E9EC8_arr,0x800154E4,func_800154E4,matching_c,game,C,src/game/func_800154E4.c,read,,if (D_800E9EC8.flags & 0x10) { | rec = D_800E9EC8_arr; | (+1 more)
+0x800E9EC8,D_800E9EC8,D_800E9EC8,0x800156B8,func_800156B8,matching_c,game,C,src/game/func_800156B8.c,address,,u8 *p = (u8 *)&D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x800156DC,func_800156DC,matching_c,game,C,src/game/func_800156DC.c,address,,state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x8001572C,func_8001572C,matching_c,game,C,src/game/func_8001572C.c,address,,state = &D_800E9EC8;
-0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015780,func_80015780,matching_c,game,C,src/game/func_80015780.c,address,,State *state = &D_800E9EC8;
+0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015780,func_80015780,matching_c,game,C,src/game/func_80015780.c,address,,FadeTransitionState *state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x800157DC,func_800157DC,matching_c,game,C,src/game/func_800157DC.c,address,,state = &D_800E9EC8;
-0x800E9EC8,D_800E9EC8,D_800E9EC8,0x8001581C,func_8001581C,matching_c,game,C,src/game/func_8001581C.c,write,32,D_800E9EC8[0] = arg0; | state = (State *)D_800E9EC8;
+0x800E9EC8,D_800E9EC8,D_800E9EC8,0x8001581C,func_8001581C,matching_c,game,C,src/game/func_8001581C.c,address,,*(s32 *)&D_800E9EC8 = arg0; | state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015870,func_80015870,matching_c,game,C,src/game/func_80015870.c,address,,state = &D_800E9EC8;
-0x800E9EC8,D_800E9EC8,D_800E9EC8,0x800158B8,func_800158B8,matching_c,game,C,src/game/func_800158B8.c,address,,State *state = &D_800E9EC8;
+0x800E9EC8,D_800E9EC8,D_800E9EC8,0x800158B8,func_800158B8,matching_c,game,C,src/game/func_800158B8.c,address,,FadeTransitionState *state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015904,func_80015904,matching_c,game,C,src/game/func_80015904.c,address,,state = &D_800E9EC8;
-0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015944,func_80015944,matching_c,game,C,src/game/func_80015944.c,write,32,D_800E9EC8[0] = arg0; | state = (State *)D_800E9EC8;
-0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015998,func_80015998,matching_c,game,C,src/game/func_80015998.c,address,,State *state = &D_800E9EC8;
+0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015944,func_80015944,matching_c,game,C,src/game/func_80015944.c,address,,*(s32 *)&D_800E9EC8 = arg0; | state = &D_800E9EC8;
+0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015998,func_80015998,matching_c,game,C,src/game/func_80015998.c,address,,FadeTransitionState *state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015A50,func_80015A50,matching_c,game,C,src/game/func_80015A50.c,address,,state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015A94,func_80015A94,matching_c,game,C,src/game/func_80015A94.c,address,,state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015B50,func_80015B50,matching_c,game,C,src/game/func_80015B50.c,address,,state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015B94,func_80015B94,matching_c,game,C,src/game/func_80015B94.c,address,,state = &D_800E9EC8;
-0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015BD8,func_80015BD8,matching_c,game,C,src/game/func_80015BD8.c,address,,State *state = &D_800E9EC8;
-0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015BF0,func_80015BF0,matching_c,game,C,src/game/func_80015BF0.c,address,,State *state = &D_800E9EC8;
+0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015BD8,func_80015BD8,matching_c,game,C,src/game/func_80015BD8.c,address,,FadeTransitionState *state = &D_800E9EC8;
+0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015BF0,func_80015BF0,matching_c,game,C,src/game/func_80015BF0.c,address,,FadeTransitionState *state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015C0C,func_80015C0C,matching_c,game,C,src/game/func_80015C0C.c,address,,state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015C48,func_80015C48,matching_c,game,C,src/game/func_80015C48.c,address,,state = &D_800E9EC8;
 0x800E9EC8,D_800E9EC8,D_800E9EC8,0x80015C84,func_80015C84,matching_c,game,C,src/game/func_80015C84.c,address,,state = &D_800E9EC8;
