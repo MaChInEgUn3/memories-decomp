@@ -142,10 +142,17 @@ def require_clean_master(root: Path) -> None:
         raise ApplyError("exact-match integration requires master")
     if git_output(root, "status", "--porcelain=v1", "--untracked-files=all"):
         raise ApplyError("exact-match integration requires a clean worktree")
-    if git_output(root, "rev-parse", "HEAD") != git_output(
-        root, "rev-parse", "origin/master"
-    ):
-        raise ApplyError("master must be synchronized before integration")
+    counts = git_output(
+        root,
+        "rev-list",
+        "--left-right",
+        "--count",
+        "origin/master...HEAD",
+    ).split()
+    if len(counts) != 2 or counts[0] != "0":
+        raise ApplyError(
+            "master must not be behind or diverged from origin/master"
+        )
 
 
 def prepare_source(
