@@ -1,17 +1,17 @@
 #include "../types.h"
+#include "sound.h"
 
-extern u8 *g_SDValue;
 extern void func_8007CDC0(u8 *);
 
 void func_80044F58(int value)
 {
     u8 data[4];
-    u8 *first;
-    u8 *second;
-    g_SDValue[0x533] = 7;
+    SDValue *first;
+    SDValue *second;
+    g_SDValue->mix_multiplier = 7;
     data[0] = value;
     data[3] = 0;
-    if (g_SDValue[0x48] == 0) {
+    if (g_SDValue->output_type == 0) {
         data[1] = 0;
         data[2] = value;
     } else {
@@ -20,8 +20,8 @@ void func_80044F58(int value)
     }
     func_8007CDC0(data);
     first = g_SDValue;
-    first[0x49] = value;
+    first->field_0049 = value;
     second = g_SDValue;
-    *(short *)(first + 0x510) = value;
-    *(short *)(second + 0x512) = 0;
+    first->cd_volume = value;
+    second->field_0512 = 0;
 }

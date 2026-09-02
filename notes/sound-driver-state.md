@@ -28,6 +28,9 @@ Konami type or field naming.
 | `0x0510` | `cd_volume` | Sound output changes recalculate and store this signed 16-bit value. |
 | `0x0514` | `channel_volume[2]` | Two byte channel-volume scalars. |
 | `0x0533` | `mix_multiplier` | Multiplies the shared CD mix scale. |
+| `0x053C` | `buffer_053C[4][0x200]` | Four work buffers whose addresses are installed during sound initialization. |
+| `0x153C` | `buffer_ptrs_153C[4]` | Pointers to the four work buffers. |
+| `0x1560` | `field_1560` | Base pointer used to select a music/sequence table entry. |
 | `0x1564` | `music_track` | Pointer defaults to `0x801EA800`; its first 16-bit value is initialized to `0xFFFF`. |
 | `0x1618` | `busy` | Command registration tests and sets this byte. |
 
@@ -67,3 +70,17 @@ Two accesses deliberately retain an explicit byte-pointer expression:
 
 Both files include `sound.h`; the raw expressions are exact-code-generation
 views of fields whose offsets and types are defined by `SDValue`.
+
+All pure-C `g_SDValue` users now include `sound.h`. Nine additional functions
+use the shared command queue, buffer pointers, voice arrays, flags, and late
+control fields directly.
+
+`func_80049138` is the third deliberate raw-view exception. The global pointer
+is volatile in that routine, and typed member expressions change its repeated
+load/register schedule. It suppresses the default extern declaration from
+`sound.h`, redeclares the pointer as `u8 * volatile`, and retains the verified
+offset expressions while still using the shared header as the layout source.
+
+Functions containing GCC inline assembly remain unchanged. Migrating their
+declarations is deferred until the inline assembly itself can be replaced with
+matching C.

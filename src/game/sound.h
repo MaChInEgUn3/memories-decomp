@@ -45,8 +45,8 @@ typedef struct {
     u8 pad03D0[0x34];
     u16 voice_ids[4];
     u8 pad040C[4];
-    u8 field_0410;
-    u8 pad0411[0x13];
+    u8 voice_flags[4];
+    u8 pad0414[0x10];
     u8 voice_value[4];
     u8 voice_step[4];
     u16 voice_timer[4];
@@ -65,7 +65,12 @@ typedef struct {
     u8 channel_volume[2];
     u8 pad0516[0x1D];
     u8 mix_multiplier;
-    u8 pad0534[0x1030];
+    u8 pad0534[8];
+    u8 buffer_053C[4][0x200];
+    u8 pad0D3C[0x800];
+    u8 *buffer_ptrs_153C[4];
+    u8 pad154C[0x14];
+    u8 *field_1560;
     u16 *music_track;
     u8 pad1568[0x10];
     s16 field_1578;
@@ -99,6 +104,8 @@ typedef char SDValue_size_must_be_0x164C[
     sizeof(SDValue) == 0x164C ? 1 : -1
 ];
 
+#ifndef SDVALUE_CUSTOM_EXTERN
 extern SDValue *g_SDValue;
+#endif
 
 #endif

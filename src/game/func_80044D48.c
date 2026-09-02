@@ -1,18 +1,19 @@
 #include "../types.h"
+#include "sound.h"
 
-extern unsigned char *g_SDValue;
 extern void func_80044DA0(void);
 extern void func_80044DC0(int);
 
 void func_80044D48(void)
 {
-    unsigned char *base;
+    SDValue *base;
+
     func_80044DA0();
     func_80044DC0(255);
     base = g_SDValue;
-    *(unsigned char **)(base + 0x153C) = base + 0x53C;
-    *(unsigned char **)(base + 0x1540) = base + 0x73C;
-    *(unsigned char **)(base + 0x1544) = base + 0x93C;
-    *(short *)(base + 0x512) = 0;
-    *(unsigned char **)(base + 0x1548) = base + 0xB3C;
+    base->buffer_ptrs_153C[0] = base->buffer_053C[0];
+    base->buffer_ptrs_153C[1] = base->buffer_053C[1];
+    base->buffer_ptrs_153C[2] = base->buffer_053C[2];
+    base->field_0512 = 0;
+    base->buffer_ptrs_153C[3] = base->buffer_053C[3];
 }

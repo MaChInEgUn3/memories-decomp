@@ -1,5 +1,8 @@
 #include "../types.h"
 
+#define SDVALUE_CUSTOM_EXTERN
+#include "sound.h"
+
 extern u8 * volatile g_SDValue;
 extern void func_80046294(void);
 extern void func_80049010(void);
