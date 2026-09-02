@@ -1,7 +1,7 @@
 #include "../types.h"
+#include "duel_effect.h"
 
 extern u8 D_80090E58[];
-extern u8 D_800EB288[];
 
 void func_8003B6AC(s32 arg0, s32 arg1)
 {
@@ -11,11 +11,11 @@ void func_8003B6AC(s32 arg0, s32 arg1)
     s32 i = *(u16 *)lo;
 
     if (i < *(u16 *)hi) {
-        u8 *base = D_800EB288;
-        u8 *p = base + i * 28;
+        DuelEffectEntry *base = D_800EB288;
+        DuelEffectEntry *p = &base[i];
         do {
-            p[0x18] = arg1;
-            p += 0x1C;
+            p->field_18 = arg1;
+            p++;
             i++;
         } while (i < *(u16 *)hi);
     }

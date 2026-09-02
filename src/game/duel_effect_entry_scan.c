@@ -1,12 +1,11 @@
 #include "../types.h"
+#include "duel_effect.h"
 
 struct Obj {
     u8 pad[92];
     u16 field92;
     u16 field94;
 };
-
-extern u8 D_800EB288[];
 
 /* Starting from record a0->field92, scans up to a0->field94 stride-28
    entries; returns 1 on the first entry with field17&0x80 set and field19
@@ -17,7 +16,7 @@ int DuelEffect_HasActiveEntry(struct Obj *a0) {
     u8 *v1;
     v0 = a0->field92;
     count = a0->field94;
-    v1 = D_800EB288 + v0 * 28;
+    v1 = (u8 *)D_800EB288 + v0 * 28;
     if (count == 0) {
         goto ret_zero_a;
     }
@@ -50,7 +49,7 @@ void func_800373C8(struct Obj *a0, u8 a1, u8 a2) {
 
     v0 = a0->field92;
     count = a0->field94;
-    v1 = D_800EB288 + v0 * 28;
+    v1 = (u8 *)D_800EB288 + v0 * 28;
     if (count == 0) {
         return;
     }
