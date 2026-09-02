@@ -1,29 +1,22 @@
 #include "../types.h"
-
-typedef struct {
-    unsigned char pad0[0xE12];
-    unsigned char value;
-    unsigned char padE13[0xD];
-} EntryE20;
-
-extern EntryE20 D_800F2C40[];
+#include "model.h"
 
 int func_80059AA8(int index, int value)
 {
-    register EntryE20 *entry;
+    register ModelSlot *entry;
     register int old;
 
     {
-        register EntryE20 *base = D_800F2C40;
+        register ModelSlot *base = D_800F2C40;
 
-        entry = (EntryE20 *)(index * sizeof(EntryE20));
+        entry = (ModelSlot *)(index * sizeof(ModelSlot));
 
-        entry = (EntryE20 *)((unsigned int)entry + (unsigned int)base);
+        entry = (ModelSlot *)((unsigned int)entry + (unsigned int)base);
     }
 
-    old = entry->value;
+    old = entry->field_E12;
     if (value >= 0) {
-        entry->value = value;
+        entry->field_E12 = value;
     }
     return old;
 }

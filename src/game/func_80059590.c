@@ -1,15 +1,5 @@
 #include "../types.h"
-
-typedef struct {
-    unsigned char pad0[0xDC0];
-    unsigned char first;
-    unsigned char second;
-    unsigned char third;
-    unsigned char fourth;
-    unsigned char padDC4[0x5C];
-} EntryE20;
-
-extern EntryE20 D_800F2C40[];
+#include "model.h"
 
 void func_80059590(
     int index,
@@ -18,10 +8,10 @@ void func_80059590(
     int second,
     int third)
 {
-    EntryE20 *entry = &D_800F2C40[index];
+    ModelSlot *entry = &D_800F2C40[index];
 
-    entry->fourth = fourth;
-    entry->first = first;
-    entry->second = second;
-    entry->third = third;
+    entry->field_DC0[3] = fourth;
+    entry->field_DC0[0] = first;
+    entry->field_DC0[1] = second;
+    entry->field_DC0[2] = third;
 }
