@@ -1,6 +1,58 @@
 #include "../types.h"
 
-typedef struct{char p[8];u16 flags;char pA[2];int color;char p10[6];u16 eflags;char p18[9];u8 a,b;char p23[0x44];u8 mark;char p68[2];u8 index;}Obj;
-typedef struct{char p[0x16];u16 flags;char tail[4];}Entry;extern Entry D_801A7AD8[];extern void func_80017DB4(Obj*);
-void func_80018080(Obj*o){register int index asm("$4")=o->index;register int offset asm("$3")=(index*7)*4;Entry*e=(Entry*)((char*)D_801A7AD8+offset);
- o->b=0;o->flags&=~4;if(e->flags&0x1000)o->b=0x80;o->a=0;if(e->flags&0x800)o->a=0xC0;o->color=0x808080;if(e->flags&0x4000)o->color=0x404040;func_80017DB4(o);if(!(e->flags&0x2000))o->mark=0;}
+/* Same D_801A7AD8[] stat table (0x1C-byte stride) as
+   obj_apply_table801a7ad8_flags.c / table801a7ad8_row_search.c, but with the
+   f21/f22 bit mapping SWAPPED relative to that sibling: here bit 0x1000
+   marks f22, bit 0x800 marks f21. */
+struct Table801A7AD8 {
+    char pad0[0x16];
+    u16 flags;
+    char pad1[0x1C - 0x18];
+};
+
+struct Obj {
+    char pad0[0x8];
+    u16 f8;
+    char pad1[0xC - 0xA];
+    u32 fC;
+    char pad2[0x21 - 0x10];
+    u8 f21;
+    u8 f22;
+    char pad3[0x67 - 0x23];
+    u8 f67;
+    char pad4[0x6A - 0x68];
+    u8 f6A;
+};
+
+extern struct Table801A7AD8 D_801A7AD8[];
+extern void func_80017DB4(struct Obj *a0);
+
+/* Clears a0->f8's bit 0x4 and a0->f22, then re-derives f22 (0x80) and f21
+   (0xC0) from D_801A7AD8[a0->f6A]'s bits 0x1000/0x800; always sets fC to
+   0x808080, or 0x404040 if bit 0x4000 is set; runs func_80017DB4(a0), then
+   clears a0->f67 unless bit 0x2000 is set. */
+void func_80018080(struct Obj *a0) {
+    u16 flags8 = a0->f8;
+    s32 type = a0->f6A;
+    struct Table801A7AD8 *rec;
+
+    a0->f22 = 0;
+    a0->f8 = flags8 & 0xFFFB;
+    rec = &D_801A7AD8[type];
+
+    if (rec->flags & 0x1000) {
+        a0->f22 = 0x80;
+    }
+    a0->f21 = 0;
+    if (rec->flags & 0x800) {
+        a0->f21 = 0xC0;
+    }
+    a0->fC = 0x808080;
+    if (rec->flags & 0x4000) {
+        a0->fC = 0x404040;
+    }
+    func_80017DB4(a0);
+    if (!(rec->flags & 0x2000)) {
+        a0->f67 = 0;
+    }
+}
