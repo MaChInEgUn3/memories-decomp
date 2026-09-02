@@ -430,7 +430,7 @@ address,size,name,status,module,notes
 0x80035CA8,0x3C,func_80035CA8,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
 0x80035CE4,0x2C,func_80035CE4,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80035D10,0xA8,func_80035D10,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
-0x80035DB8,0x3C,func_80035DB8,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
+0x80035DB8,0x3C,func_80035DB8,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80035DF4,0x2C,func_80035DF4,matching_c,game,Pure-C profile recovery; exact linked bytes and relocations with gcc_2_8_1_g8_split.
 0x80035E20,0xDAC,func_80035E20,unmatched_asm,game,
 0x80036BCC,0x48,func_80036BCC,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_g8_split.

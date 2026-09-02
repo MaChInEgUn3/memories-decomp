@@ -1,25 +1,32 @@
 #include "../types.h"
 
-typedef struct {
-    u8 pad_00[0x11];
-    u8 field_11;
-    u8 field_12;
-    u8 pad_13[9];
-} Entry28;
-extern Entry28 D_800EB288[];
-void func_80035DB8(int value)
-{
-    int remaining = 0x26C;
-    register Entry28 *base asm("$2");
-    u8 *entry;
-    value++;
-    base = D_800EB288;
-    asm("" : "+r"(base));
-    entry = &base->field_11;
+/* Stride-28 entry, field17/field18 relative to a base 17 bytes into
+   D_800EB288. */
+struct Entry {
+    u8 field17;
+    u8 field18;
+    u8 pad[28 - 2];
+};
+
+extern u8 D_800EB288[];
+
+/* Clears field17 on the first (only) entry whose field18 equals a0+1,
+   scanning 620 entries. */
+void func_80035DB8(int a0) {
+    struct Entry *v1;
+    int a1;
+    u8 v0;
+    int off;
+    a1 = 620;
+    a0 = a0 + 1;
+    off = 17;
+    v1 = (struct Entry *)(D_800EB288 + off);
     do {
-        if (entry[1] == value) {
-            entry[0] = 0;
+        v0 = v1->field18;
+        if (v0 == a0) {
+            v1->field17 = 0;
         }
-        entry += sizeof(Entry28);
-    } while (--remaining != 0);
+        a1 -= 1;
+        v1 += 1;
+    } while (a1 != 0);
 }
