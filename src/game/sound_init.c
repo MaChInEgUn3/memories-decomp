@@ -24,6 +24,8 @@ extern void func_8004B9E0(void);
 extern void func_80074E60(void);
 extern void func_80077FF0(s32);
 
+void func_80049230(s32 value, s32 data);
+
 void func_80049200(s32 value)
 {
     func_80049230((s16)value, g_SDValue->field_164B);
