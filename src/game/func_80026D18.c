@@ -1,15 +1,15 @@
 #include "../types.h"
+#include "duel_card.h"
 
 extern u8 D_8009B1D5;
 extern s32 gDuel_adwCardStats[];
-extern u8 D_801A7AD8[];
 
 s32 func_80026D18(u8 **out, s32 arg1, s32 arg2) {
     s32 count = 0;
     s32 i = 0;
     s32 d = D_8009B1D5;
     s32 *t = gDuel_adwCardStats;
-    u8 *r = D_801A7AD8 + (d * 15 + arg1) * 28;
+    DuelCardRecord *r = &D_801A7AD8[d * 15 + arg1];
     s32 k;
 
     do {
@@ -20,15 +20,15 @@ s32 func_80026D18(u8 **out, s32 arg1, s32 arg2) {
          * initialised before `i` -- that alone is 6. Found by the permuter;
          * see docs/PARKED.txt's former entry. */
         do {
-            if (*(u16 *)(r + 0x16) & 0x8000) {
-                if (arg2 < 0 || (k = *(s16 *)(r + 0xC), k--, ((t[k] >> 26) & 0x1F) == arg2)) {
-                    *out++ = r;
+            if (r->flags & 0x8000) {
+                if (arg2 < 0 || (k = (s16)r->card_id, k--, ((t[k] >> 26) & 0x1F) == arg2)) {
+                    *out++ = (u8 *)r;
                     count++;
                 }
             }
         } while (0);
         i++;
-        r += 0x1C;
+        r++;
     } while (i < 5);
 
     *out = 0;

@@ -1,15 +1,10 @@
 #include "../types.h"
+#include "duel_card.h"
 
 /* Same D_801A7AD8[] stat table (0x1C-byte stride) as
    obj_apply_table801a7ad8_flags.c / table801a7ad8_row_search.c, but with the
    f21/f22 bit mapping SWAPPED relative to that sibling: here bit 0x1000
    marks f22, bit 0x800 marks f21. */
-struct Table801A7AD8 {
-    char pad0[0x16];
-    u16 flags;
-    char pad1[0x1C - 0x18];
-};
-
 struct Obj {
     char pad0[0x8];
     u16 f8;
@@ -24,7 +19,6 @@ struct Obj {
     u8 f6A;
 };
 
-extern struct Table801A7AD8 D_801A7AD8[];
 extern void func_80017DB4(struct Obj *a0);
 
 /* Clears a0->f8's bit 0x4 and a0->f22, then re-derives f22 (0x80) and f21
@@ -34,7 +28,7 @@ extern void func_80017DB4(struct Obj *a0);
 void Duel_ApplyCardObjectFlags(struct Obj *a0) {
     u16 flags8 = a0->f8;
     s32 type = a0->f6A;
-    struct Table801A7AD8 *rec;
+    DuelCardRecord *rec;
 
     a0->f22 = 0;
     a0->f8 = flags8 & 0xFFFB;

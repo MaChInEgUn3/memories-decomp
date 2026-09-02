@@ -1,4 +1,5 @@
 #include "../types.h"
+#include "duel_card.h"
 
 /* Same D_800907D8/D_801A7AD8 scan as func_8002778C.c, but skips the
    func_8001EFD4 comparison (while still counting the row as "found") when
@@ -14,32 +15,24 @@ struct Obj {
     u8 f6A;
 };
 
-struct Table801A7AD8 {
-    struct Obj *f0;
-    char pad1[0x16 - 0x4];
-    u16 f16;
-    char pad2[0x1C - 0x18];
-};
-
 extern s32 func_8001EFD4(struct Obj *a0, struct Obj *a1);
 extern u8 D_800907D8[];
-extern struct Table801A7AD8 D_801A7AD8[];
 extern u8 D_8009B1D5;
 
 s32 func_800278A0(void *arg0) {
     s32 i;
     s32 found = 0;
-    struct Table801A7AD8 *entry = 0;
+    DuelCardRecord *entry = 0;
 
     for (i = 5; i < 10; i++) {
         u8 row = D_800907D8[i + D_8009B1D5 * 20];
         entry = &D_801A7AD8[row];
-        if (entry->f16 & 0x8000) {
+        if (entry->flags & 0x8000) {
             found++;
-            if (!(entry->f16 & 0x1000)) {
-                s32 result = func_8001EFD4(*(struct Obj **)arg0, entry->f0);
+            if (!(entry->flags & 0x1000)) {
+                s32 result = func_8001EFD4(*(struct Obj **)arg0, entry->object);
                 if (result > 0) {
-                    return entry->f0->f6A;
+                    return ((struct Obj *)entry->object)->f6A;
                 }
             }
         }

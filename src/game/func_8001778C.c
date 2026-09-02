@@ -1,14 +1,5 @@
 #include "../types.h"
-
-typedef struct {
-    int field_00;
-    int field_04;
-    u8 pad_08[14];
-    u16 field_16;
-    u8 pad_18[4];
-} Entry;
-
-extern Entry D_801A7AD8[30];
+#include "duel_card.h"
 
 void func_8001778C(void)
 {
@@ -20,8 +11,8 @@ void func_8001778C(void)
         *(int *)entry = 0;
         *(int *)(field_16 - 0x12) = 0;
         *(u16 *)field_16 = 0;
-        field_16 += sizeof(Entry);
+        field_16 += sizeof(DuelCardRecord);
         i++;
-        entry += sizeof(Entry);
-    } while (i < 30);
+        entry += sizeof(DuelCardRecord);
+    } while (i < DUEL_CARD_RECORD_COUNT);
 }

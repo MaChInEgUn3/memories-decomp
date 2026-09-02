@@ -1,4 +1,5 @@
 #include "../types.h"
+#include "duel_card.h"
 
 /* Same D_801A7AD8[] stat table (0x1C-byte stride) as
    table801a7ad8_row_search.c / func_8001EFD4.c. Applies the record at
@@ -7,12 +8,6 @@
    re-marks f8 with bit 0x4, resets f21/f22 and re-derives them from those
    two bits (0x80 / 0xC0). Always sets fC to 0x808080, or 0x404040 if bit
    0x4000 is set. */
-struct Table801A7AD8 {
-    char pad0[0x16];
-    u16 flags;                 /* 0x16 */
-    char pad1[0x1C - 0x18];
-};
-
 struct Obj {
     char pad0[0x8];
     u16 f8;
@@ -27,10 +22,8 @@ struct Obj {
     u8 f6A;
 };
 
-extern struct Table801A7AD8 D_801A7AD8[];
-
 void func_80017E3C(struct Obj *a0) {
-    struct Table801A7AD8 *rec = &D_801A7AD8[a0->f6A];
+    DuelCardRecord *rec = &D_801A7AD8[a0->f6A];
     u16 flags8;
 
     if (!(rec->flags & 0x2000)) {

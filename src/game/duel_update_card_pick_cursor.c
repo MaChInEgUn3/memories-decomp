@@ -1,4 +1,5 @@
 #include "../types.h"
+#include "duel_card.h"
 
 /* Per-frame step for the "pick a card off the field" cursor.
  *
@@ -40,11 +41,6 @@ struct Cursor {
     u8 f19;         /* 0x19 — the status byte func_80024060 returns */
 };
 
-/* D_801A7AD8 field-slot record, stride 0x1C; see arm_field_effect_marker.c. */
-struct FieldSlot {
-    char pad0[0x1C];
-};
-
 /* gp-relative in the target (0x2CC/0x2CD/0x25A($gp)), so plain scalars. */
 extern u8 D_8009B1D4;
 extern u8 D_8009B1D5;
@@ -52,7 +48,6 @@ extern u16 D_8009B162;
 
 /* Absolute in the target, so array-typed to keep them out of small data. */
 extern u8 D_800907D8[];
-extern struct FieldSlot D_801A7AD8[];
 extern u16 D_8009B3A4[];
 
 /* Both callees are reached without a prototype in the original, so their
@@ -61,7 +56,7 @@ extern u16 D_8009B3A4[];
    src/call_80023fbc_read_field25.c) and card_pick_on_up really returns s16
    (see src/card_pick.c). */
 extern s32 func_80024060(struct Cursor *);
-extern s32 func_80017034(struct FieldSlot *);
+extern s32 func_80017034(DuelCardRecord *);
 
 void Duel_UpdateCardPickCursor(struct Cursor *o) {
     u8 f;

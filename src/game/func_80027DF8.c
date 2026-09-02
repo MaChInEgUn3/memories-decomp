@@ -1,4 +1,5 @@
 #include "../types.h"
+#include "duel_card.h"
 
 typedef struct LocalObj {
     u8 pad0[0x68];
@@ -14,14 +15,6 @@ typedef struct LocalEnt {
     s8 bA;
     u8 bB;
 } LocalEnt;
-typedef struct LocalRec {
-    LocalObj *obj;
-    u8 pad4[8];
-    u16 id;
-    u8 padE[8];
-    u16 flags;
-    u8 pad18[4];
-} LocalRec;
 typedef struct LocalE9 {
     u8 pad0[0x18];
     s8 count;
@@ -39,22 +32,21 @@ typedef struct LocalBlob {
 } LocalBlob;
 extern LocalE9 D_800E9FF0[];
 extern LocalBlob D_8015C424;
-extern u8 D_801A7AD8[];
 extern LocalR6 gDuel_aPlayerHand[];
 extern s32 gDuel_adwCardStats[];
 extern int Duel_CalcCardStats();
 
 void func_80027DF8(LocalEnt *out, s32 who) {
-    u8 *base;
+    DuelCardRecord *base;
     s32 i;
 
-    base = &D_801A7AD8[who * 0x1A4];
+    base = &D_801A7AD8[who * 15];
 
     {
-        LocalRec *rec;
+        DuelCardRecord *rec;
         s32 *tbl;
 
-        rec = (LocalRec *) (base + 0x8C);
+        rec = base + 5;
         i = 0;
         tbl = gDuel_adwCardStats;
         do {
@@ -63,16 +55,16 @@ void func_80027DF8(LocalEnt *out, s32 who) {
                 s32 r;
                 s32 t;
 
-                out->id = rec->id;
+                out->id = rec->card_id;
                 r = Duel_CalcCardStats(rec);
                 out->x = r;
                 out->y = r >> 16;
                 out->flags = rec->flags;
-                out->b8 = rec->obj->f68;
+                out->b8 = ((LocalObj *)rec->object)->f68;
                 if (rec->flags & 0x200) {
-                    t = *(s32 *) ((((s16) rec->id - 1) << 2) + (u32) tbl) >> 18;
+                    t = *(s32 *) ((((s16) rec->card_id - 1) << 2) + (u32) tbl) >> 18;
                 } else {
-                    t = *(s32 *) ((((s16) rec->id - 1) << 2) + (u32) tbl) >> 22;
+                    t = *(s32 *) ((((s16) rec->card_id - 1) << 2) + (u32) tbl) >> 22;
                 }
                 out->b9 = t & 0xF;
             }
@@ -83,10 +75,10 @@ void func_80027DF8(LocalEnt *out, s32 who) {
     }
 
     {
-        LocalRec *rec;
+        DuelCardRecord *rec;
         s32 *tbl;
 
-        rec = (LocalRec *) (base + 0x118);
+        rec = base + 10;
         i = 0;
         tbl = gDuel_adwCardStats;
         do {
@@ -95,16 +87,16 @@ void func_80027DF8(LocalEnt *out, s32 who) {
                 s32 r;
                 s32 t;
 
-                out->id = rec->id;
+                out->id = rec->card_id;
                 r = Duel_CalcCardStats(rec);
                 out->x = r;
                 out->y = r >> 16;
                 out->flags = rec->flags;
-                out->b8 = rec->obj->f68;
+                out->b8 = ((LocalObj *)rec->object)->f68;
                 if (rec->flags & 0x200) {
-                    t = *(s32 *) ((((s16) rec->id - 1) << 2) + (u32) tbl) >> 18;
+                    t = *(s32 *) ((((s16) rec->card_id - 1) << 2) + (u32) tbl) >> 18;
                 } else {
-                    t = *(s32 *) ((((s16) rec->id - 1) << 2) + (u32) tbl) >> 22;
+                    t = *(s32 *) ((((s16) rec->card_id - 1) << 2) + (u32) tbl) >> 22;
                 }
                 out->b9 = t & 0xF;
             }
