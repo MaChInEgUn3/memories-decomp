@@ -1678,31 +1678,31 @@
       "address": "0x80035CA8",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x3C",
-      "source": "src/game/func_80035CA8.c"
+      "source": "src/game/duel_effect_entry_occupancy.c"
     },
     {
       "address": "0x80035CE4",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x2C",
-      "source": "src/game/duel_effect_reset_occupancy.c"
+      "source": "src/game/duel_effect_entry_occupancy.c"
     },
     {
       "address": "0x80035D10",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0xA8",
-      "source": "src/game/func_80035D10.c"
+      "source": "src/game/duel_effect_entry_occupancy.c"
     },
     {
       "address": "0x80035DB8",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x3C",
-      "source": "src/game/duel_effect_clear_matching_marker.c"
+      "source": "src/game/duel_effect_entry_occupancy.c"
     },
     {
       "address": "0x80035DF4",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x2C",
-      "source": "src/game/duel_effect_reset_entry_markers.c"
+      "source": "src/game/duel_effect_entry_occupancy.c"
     },
     {
       "address": "0x80036BCC",
