@@ -1,22 +1,8 @@
 #include "../types.h"
-
-typedef void (*AiScriptHandler)(void);
-
-typedef struct {
-    s32 f0;
-    s32 f4;
-    s32 f8;
-    s32 fC;
-    u8 pad10[4];
-    u8 count;
-    u8 pad15[3];
-    s32 items[1];
-} AiScriptState;
+#include "ai.h"
 
 extern u8 D_800EAE88[];
-extern s32 gAiScript_aMemory[];
 extern AiScriptState gAiScript_State;
-extern AiScriptHandler gAiScript_apfnCommand[];
 
 extern s32 AiScript_ReadByte(void);
 extern s32 func_80074170(s32);
@@ -44,7 +30,7 @@ s32 AiScript_Run(void)
         s32 idx;
         AiScriptHandler handler;
 
-        gAiScript_State.fC = gAiScript_State.f8;
+        gAiScript_State.previous_cursor = gAiScript_State.script_cursor;
         idx = AiScript_ReadByte();
         gAiScript_apfnCommand[idx]();
         handler = gAiScript_apfnCommand[idx];

@@ -1,17 +1,8 @@
 #include "../types.h"
-
-typedef struct {
-    s16 card_id;
-    u8 pad02[4];
-    u16 flags;
-    s8 card_type;
-    u8 pad09[3];
-} AiActiveCard;
+#include "ai.h"
 
 extern u8 D_800EAE88[];
-extern s32 gAiScript_aMemory[];
 extern u8 gAiScript_State[];
-extern AiActiveCard gDuel_aActiveCards[];
 
 extern s32 AiScript_ReadByte(void);
 extern s32 Ai_IsCardInSets(s32, s32);

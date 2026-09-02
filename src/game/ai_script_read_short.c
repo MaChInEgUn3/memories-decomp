@@ -1,19 +1,15 @@
 #include "../types.h"
+#include "ai.h"
 
-typedef struct {
-    unsigned char padding[8];
-    unsigned char *current;
-} ByteStream;
-
-extern ByteStream gAiScript_State;
+extern AiScriptState gAiScript_State;
 
 int AiScript_ReadShort(void)
 {
     // Preserve the original stream and increment register allocation.
-    register ByteStream *stream asm("$2") = &gAiScript_State;
-    unsigned char *current = stream->current;
+    register AiScriptState *stream asm("$2") = &gAiScript_State;
+    unsigned char *current = stream->script_cursor;
     register unsigned char *next asm("$4") = current + 2;
 
-    stream->current = next;
+    stream->script_cursor = next;
     return current[0] | (current[1] << 8);
 }

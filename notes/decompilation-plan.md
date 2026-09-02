@@ -21,6 +21,11 @@
 - Grouped translation units are supported for contiguous, same-profile
   functions. The first two duel groups are documented in
   `notes/grouped-translation-units.md`.
+- Subsequent subsystem grouping now covers AI VM/query/control/action/fusion,
+  File streaming, Build Deck comparison, Duel rewards, and Main debug code.
+- `src/game/ai.h` centralizes the verified active-card, interpreter-state, and
+  per-duelist AI layouts; remaining inline-assembly views are deliberately
+  deferred.
 
 ## Problem and proposed approach
 

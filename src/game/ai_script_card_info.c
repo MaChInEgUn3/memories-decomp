@@ -1,13 +1,7 @@
 #include "../types.h"
+#include "ai.h"
 
-typedef struct {
-    s16 card_id;
-    u8 pad02[10];
-} AiActiveCard;
-
-extern s32 gAiScript_aMemory[];
 extern s32 gDuel_adwCardStats[];
-extern AiActiveCard gDuel_aActiveCards[];
 
 extern s32 AiScript_ReadByte(void);
 extern s32 Duel_GetBaseCardStat(s32, s32);

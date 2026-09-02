@@ -1,16 +1,12 @@
 #include "../types.h"
+#include "ai.h"
 
-typedef struct {
-    unsigned char padding[8];
-    unsigned char *current;
-} ByteStream;
-
-extern ByteStream gAiScript_State;
+extern AiScriptState gAiScript_State;
 
 int AiScript_ReadByte(void)
 {
     // Preserve the original stream-base register allocation.
-    register ByteStream *stream = &gAiScript_State;
+    register AiScriptState *stream = &gAiScript_State;
 
-    return *stream->current++;
+    return *stream->script_cursor++;
 }

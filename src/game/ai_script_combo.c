@@ -1,15 +1,8 @@
 #include "../types.h"
+#include "ai.h"
 
-typedef struct {
-    u8 pad00[25];
-    s8 pinned;
-    u8 pad1A[6];
-} AiPinnedState;
-
-extern s32 gAiScript_aMemory[];
-extern u8 gAiScript_State[];
-extern AiPinnedState D_800E9FF0[];
 extern u8 D_8009B1D5[];
+extern u8 gAiScript_State[];
 
 extern s32 AiScript_ReadByte(void);
 

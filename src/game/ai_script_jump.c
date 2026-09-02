@@ -1,18 +1,14 @@
 #include "../types.h"
+#include "ai.h"
 
-typedef struct {
-    int first;
-    int addend;
-    int result;
-} State;
-
-extern State gAiScript_State;
+extern AiScriptState gAiScript_State;
 extern int AiScript_ReadShort(void);
 
 void AiScript_Jump(void)
 {
     int result = AiScript_ReadShort();
-    register State *state = &gAiScript_State;
+    register AiScriptState *state = &gAiScript_State;
 
-    state->result = result + state->addend;
+    state->script_cursor =
+        (u8 *)(result + (s32)state->script_base);
 }

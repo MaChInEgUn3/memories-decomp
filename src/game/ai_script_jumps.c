@@ -1,13 +1,7 @@
 #include "../types.h"
+#include "ai.h"
 
-typedef struct {
-    s32 first;
-    s32 addend;
-    s32 result;
-} AiScriptCursor;
-
-extern s32 gAiScript_aMemory[];
-extern AiScriptCursor gAiScript_State;
+extern AiScriptState gAiScript_State;
 
 extern s32 AiScript_ReadByte(void);
 extern s32 AiScript_ReadShort(void);
@@ -25,8 +19,8 @@ void AiScript_JumpBetween(void)
         value <= gAiScript_aMemory[second] &&
         gAiScript_aMemory[third] <= value
     ) {
-        offset += gAiScript_State.addend;
-        gAiScript_State.result = offset;
+        offset += (s32)gAiScript_State.script_base;
+        gAiScript_State.script_cursor = (u8 *)offset;
     }
 }
 
@@ -40,7 +34,7 @@ void AiScript_JumpRandom(void)
     limit = values[index];
     result = AiScript_ReadShort();
     if (func_8008E590() % 100 < limit) {
-        result += gAiScript_State.addend;
-        gAiScript_State.result = result;
+        result += (s32)gAiScript_State.script_base;
+        gAiScript_State.script_cursor = (u8 *)result;
     }
 }
