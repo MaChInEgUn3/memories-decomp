@@ -54,6 +54,10 @@ These pilots reduce four one-function source files to two coherent
 translation units and reduce generated C objects from 769 to 767. Function
 emission order and the complete retail executable SHA-256 remain unchanged.
 
+After the subsystem pass, all 769 matching functions build from 733
+translation units. Eighteen grouped units contain 54 functions; the largest is
+the ten-function `sound_output.c` block.
+
 ## Expansion policy
 
 Expand grouping only after names and behavior are stable. Prefer small
