@@ -1,5 +1,7 @@
 #include "../types.h"
 
+#include "fade.h"
+
 /* Full-screen fade / brightness overlay, drawn once per frame from
    func_8001306C's dispatcher.
 
@@ -51,8 +53,6 @@ typedef struct {
    scalars. The 0x800E9xxx globals are reached lui/%lo (absolute), so each
    is declared oversized -- a size over 8 bytes keeps it out of the -G8
    small-data section. */
-extern u8 D_800E9EC8_arr[64];  /* fade record, alias of D_800E9EC8 */
-extern u8 D_800E9EC8[64];
 extern u8 D_800E9ECE[16];
 extern s32 D_800E9D94[4];      /* [0] = ordering table the boxes sort into */
 extern u8 D_8009B140;
@@ -106,11 +106,11 @@ void func_800154E4(void) {
             }
         }
 
-        shade = 0xFF - D_800E9EC8[4];
+        shade = 0xFF - D_800E9EC8.level;
         p->b = (u8) shade;
         p->g = (u8) shade;
         p->r = (u8) shade;
-        if (D_800E9EC8[6] & 0x10) {
+        if (D_800E9EC8.flags & 0x10) {
             p->tag = 0x50000000;
             tint = rec[0] - rec[4];
             if (tint < 0) tint = 0;
