@@ -3220,19 +3220,19 @@
       "address": "0x800490F0",
       "profile": "gcc_2_8_1_g0",
       "size": "0x18",
-      "source": "src/game/func_800490F0.c"
+      "source": "src/game/sound_sequence_state.c"
     },
     {
       "address": "0x80049108",
       "profile": "gcc_2_8_1_g0",
       "size": "0x18",
-      "source": "src/game/func_80049108.c"
+      "source": "src/game/sound_sequence_state.c"
     },
     {
       "address": "0x80049120",
       "profile": "gcc_2_8_1_g0",
       "size": "0x18",
-      "source": "src/game/func_80049120.c"
+      "source": "src/game/sound_sequence_state.c"
     },
     {
       "address": "0x80049138",
