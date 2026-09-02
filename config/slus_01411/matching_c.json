@@ -3034,61 +3034,61 @@
       "address": "0x80046F58",
       "profile": "gcc_2_8_1_g8",
       "size": "0x48",
-      "source": "src/game/func_80046F58.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x80046FA0",
       "profile": "gcc_2_8_1_g8",
       "size": "0x68",
-      "source": "src/game/sd_set_output_type.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x80047008",
       "profile": "gcc_2_8_1_g8",
       "size": "0x14",
-      "source": "src/game/func_80047008.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x8004701C",
       "profile": "gcc_2_8_1_g8",
       "size": "0x20",
-      "source": "src/game/func_8004701C.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x8004703C",
       "profile": "gcc_2_8_1_g8",
       "size": "0x14",
-      "source": "src/game/func_8004703C.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x80047050",
       "profile": "gcc_2_8_1_g8",
       "size": "0x60",
-      "source": "src/game/func_80047050.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x800470B0",
       "profile": "gcc_2_8_1_g8",
       "size": "0x90",
-      "source": "src/game/func_800470B0.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x80047140",
       "profile": "gcc_2_8_1_g8",
       "size": "0x90",
-      "source": "src/game/func_80047140.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x800471D0",
       "profile": "gcc_2_8_1_g8",
       "size": "0xA8",
-      "source": "src/game/func_800471D0.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x80047278",
       "profile": "gcc_2_8_1_g8",
       "size": "0x30",
-      "source": "src/game/func_80047278.c"
+      "source": "src/game/sound_output.c"
     },
     {
       "address": "0x80047314",

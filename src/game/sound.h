@@ -5,7 +5,15 @@
 
 typedef struct {
     u8 command;
-    u8 data[0x2F];
+    u8 pad01[0x0F];
+    s32 field_0010;
+    s32 field_0014;
+    s32 field_0018;
+    s32 field_001C;
+    s32 field_0020;
+    s32 field_0024;
+    s32 field_0028;
+    s32 field_002C;
 } SDCommand;
 
 typedef struct {

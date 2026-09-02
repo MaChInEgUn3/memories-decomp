@@ -19,7 +19,7 @@ Konami type or field naming.
 | `0x0048` | `output_type` | `SD_SetOutputType`; live stereo/mono traces establish values 0 and 1. |
 | `0x004A` | `flags_004A` | Initialization and command processing use independent bits. |
 | `0x004C` | `command_count` | Bounds the 16-entry command scan. |
-| `0x0080` | `commands[16]` | 16 records, each `0x30` bytes; command byte at record offset zero. |
+| `0x0080` | `commands[16]` | 16 records, each `0x30` bytes; command at `+0x00` and eight verified 32-bit argument/result slots at `+0x10`-`+0x2C`. |
 | `0x0404` | `voice_ids[4]` | Four 16-bit voice identifiers. |
 | `0x0424` | `voice_value[4]` | Four per-voice byte values reduced by `voice_step`. |
 | `0x0428` | `voice_step[4]` | Four per-voice decrement values. |
@@ -46,3 +46,8 @@ Some translation units may continue using raw pointer views when required to
 preserve GCC relocation shape. The shared header remains the layout reference,
 while exact executable matching decides whether a typed field access is safe
 for a particular function.
+
+The contiguous output/control block at `0x80046F58-0x80047278` now builds as
+`src/game/sound_output.c`. Its ten functions use `SDValue` and `SDCommand`
+directly, including output-type reads/writes, driver flags, CD-volume reuse,
+and construction of three command variants.
