@@ -28,13 +28,15 @@ session-memory growth:
 - Run candidate verification sequentially and emit one compact result record
   per candidate instead of returning compiler or disassembly dumps.
 - Work in small recoverable batches, update durable ledgers immediately, and
-  commit plus push each completed batch before loading more reference context.
+  commit each completed batch before loading more reference context. Push
+  accumulated commits about every 15 minutes.
 - Start a fresh CLI session from the durable notes after a bounded batch if
   memory usage is rising. Do not rely on a single indefinitely resumed
   session as the project state store.
 - End the active CLI session after at most one substantial subsystem batch or
-  two small atomic commits. Resume from the pushed commits and tracked notes
-  instead of continuing a long conversation.
+  two small atomic commits. If memory forces a handoff before the next normal
+  push window, push pending commits immediately, then resume from the tracked
+  notes instead of continuing a long conversation.
 
 Every `make` target that enters through `workspace` runs
 `tools/project/session_memory_guard.py`. When the parent Copilot CLI reaches
@@ -297,5 +299,6 @@ be corroborated before being treated as final.
   they are independently valid.
 - Never amend or rewrite completed commits unless the user explicitly requests
   it.
-- Push committed work to `origin/master` at least every 30 minutes while
-  decompilation is active.
+- Keep commits atomic. Push accumulated commits to `origin/master` about every
+  15 minutes while decompilation is active; push sooner only for an explicit
+  request or an OOM-risk handoff.
