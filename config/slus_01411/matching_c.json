@@ -4234,13 +4234,13 @@
       "address": "0x800603DC",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x40",
-      "source": "src/game/func_800603DC.c"
+      "source": "src/game/model_primitive_handler.c"
     },
     {
       "address": "0x8006041C",
       "profile": "gcc_2_8_1_g0_split",
       "size": "0x450",
-      "source": "src/game/model_get_primitive_handler.c"
+      "source": "src/game/model_primitive_handler.c"
     },
     {
       "address": "0x8006086C",
