@@ -1,6 +1,5 @@
 #include "../types.h"
-
-extern u8 D_800F2C40[];
+#include "model.h"
 extern void func_800871D0(void);
 extern void func_8008A4A0(u8 *, u8 *);
 extern void func_800855D0(u8 *);
@@ -15,7 +14,7 @@ s32 func_800593D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u8 *q;
     u8 *base;
 
-    p = D_800F2C40 + arg0 * 3616;
+    p = (u8 *)&D_800F2C40[arg0];
     e = p + (arg1 + 1) * 8;
     q = *(u8 **)(e + 4);
     q = *(u8 **)(q + 4);

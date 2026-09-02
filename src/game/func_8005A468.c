@@ -1,10 +1,9 @@
 #include "../types.h"
-
-extern u8 D_800F2C40[];
+#include "model.h"
 
 void func_8005A468(s32 arg0, s32 arg1)
 {
-    u8 *rec = &D_800F2C40[arg0 * 3616];
+    u8 *rec = (u8 *)&D_800F2C40[arg0];
     u8 **p;
     s32 i;
 

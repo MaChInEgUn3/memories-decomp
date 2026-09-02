@@ -1,4 +1,5 @@
 #include "../types.h"
+#include "model.h"
 
 typedef struct {
     s16 vx, vy, vz, pad;
@@ -34,7 +35,6 @@ typedef struct {
     s32 f4C;
 } Obj;
 
-extern u8 D_800F2C40[16];
 extern MATRIX *func_80087370(MATRIX *m0, MATRIX *m1);
 extern MATRIX *func_800889C0(SVECTOR *r, MATRIX *m);
 extern void func_80088E50(SVECTOR *r, MATRIX *m);
@@ -55,7 +55,7 @@ void func_800592AC(s32 arg0, s32 arg1, Obj *arg2) {
     raw.vy = (s16)(0x1000 - D_8009B47A);
     raw.vz = (s16)D_8009B47C;
 
-    slot = (Slot *)(D_800F2C40 + arg0 * 0xE20);
+    slot = (Slot *)&D_800F2C40[arg0];
 
     packed = raw;
 

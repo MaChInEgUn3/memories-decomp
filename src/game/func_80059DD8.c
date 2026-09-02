@@ -1,12 +1,11 @@
 #include "../types.h"
-
-extern u8 D_800F2C40[];
+#include "model.h"
 extern s32 func_8005FC1C(s32);
 extern void func_8005A53C();
 
 void func_80059DD8(s32 index)
 {
-    u8 *base = D_800F2C40 + index * 3616;
+    u8 *base = (u8 *)&D_800F2C40[index];
     u8 *slot = base;
     s32 (*callback)(s32) = func_8005FC1C;
     u8 *node;

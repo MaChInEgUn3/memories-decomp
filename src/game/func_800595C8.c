@@ -1,10 +1,9 @@
 #include "../types.h"
-
-extern u8 D_800F2C40[];
+#include "model.h"
 
 void func_800595C8(s32 index, s32 x, s32 y, s32 z)
 {
-    u8 *record = D_800F2C40 + index * 3616;
+    u8 *record = (u8 *)&D_800F2C40[index];
 
     x = x < -4096 ? -4096 : (x > 12288 ? 12288 : x);
     *(s32 *)(record + 3488) = x;

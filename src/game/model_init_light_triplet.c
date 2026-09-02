@@ -1,16 +1,11 @@
 #include "../types.h"
+#include "model.h"
 
 //@ target 49934 8C
 //@ sym D_800F2C40=0x800F2C40
 // Per-index (stride 0xE20) table; this function seeds 3 records of
 // {s32,s32,s32,u8,u8,u8} at +0xD70/+0xD80/+0xD90 -- looks like X/Y/Z offsets
 // plus an intensity-byte triple for a 3-point light/particle rig.
-struct Entry {
-    char pad0[0xE20];
-};
-
-extern struct Entry D_800F2C40[];
-
 void Model_InitLightTriplet(s32 a0) {
     u8 *base = (u8 *)&D_800F2C40[a0];
 

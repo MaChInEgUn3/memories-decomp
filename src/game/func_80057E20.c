@@ -1,6 +1,5 @@
 #include "../types.h"
-
-extern u8 D_800F2C40[]; /* 0xE20-byte-stride record array, shared with other D_800F2C40 users */
+#include "model.h"
 
 typedef struct {
     u16 x, y, z, w;
@@ -11,7 +10,7 @@ typedef struct {
    (record+0xCFF/0xD00/0xD01, each a byte multiplied by 16; 0 means "no
    clamp"). Finally sets out->w to the largest of {x (if positive), y, z}. */
 void func_80057E20(s32 idx, Vec4s *out) {
-    u8 *rec = D_800F2C40 + idx * 0xE20;
+    u8 *rec = (u8 *)&D_800F2C40[idx];
     u8 *thresh = rec + 0xCF8;
 
     *out = *(Vec4s *)(rec + 0xDC8);

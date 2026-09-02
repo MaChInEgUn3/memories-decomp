@@ -139,8 +139,20 @@ typedef char ModelSlot_field_E0D_offset_must_be_0xE0D[
 typedef char ModelSlot_field_E11_offset_must_be_0xE11[
     MODEL_OFFSET(ModelSlot, field_E11) == 0xE11 ? 1 : -1
 ];
+typedef char ModelSlot_field_E12_offset_must_be_0xE12[
+    MODEL_OFFSET(ModelSlot, field_E12) == 0xE12 ? 1 : -1
+];
 typedef char ModelSlot_field_E14_offset_must_be_0xE14[
     MODEL_OFFSET(ModelSlot, field_E14) == 0xE14 ? 1 : -1
+];
+typedef char ModelSlot_field_E16_offset_must_be_0xE16[
+    MODEL_OFFSET(ModelSlot, field_E16) == 0xE16 ? 1 : -1
+];
+typedef char ModelSlot_field_E17_offset_must_be_0xE17[
+    MODEL_OFFSET(ModelSlot, field_E17) == 0xE17 ? 1 : -1
+];
+typedef char ModelSlot_field_E18_offset_must_be_0xE18[
+    MODEL_OFFSET(ModelSlot, field_E18) == 0xE18 ? 1 : -1
 ];
 typedef char ModelSlot_field_E1A_offset_must_be_0xE1A[
     MODEL_OFFSET(ModelSlot, field_E1A) == 0xE1A ? 1 : -1
@@ -154,6 +166,9 @@ typedef char ModelSlot_field_E1F_offset_must_be_0xE1F[
 
 typedef char ModelHandlerRegistryEntry_size_must_be_0x8[
     sizeof(ModelHandlerRegistryEntry) == 0x8 ? 1 : -1
+];
+typedef char ModelHandlerRegistryEntry_handler_value_offset_must_be_0x0[
+    MODEL_OFFSET(ModelHandlerRegistryEntry, handler_value) == 0x0 ? 1 : -1
 ];
 typedef char ModelHandlerRegistryEntry_key_offset_must_be_0x4[
     MODEL_OFFSET(ModelHandlerRegistryEntry, key) == 0x4 ? 1 : -1
