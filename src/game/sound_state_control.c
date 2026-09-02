@@ -1,14 +1,15 @@
 #include "../types.h"
+#define SDSECONDARYSTATE_CUSTOM_EXTERN
 #include "sound.h"
 
-extern u8 *volatile D_8009B458;
+extern SDSecondaryState *volatile D_8009B458;
 
 void func_8004695C(s32 value)
 {
     u8 *state;
 
-    D_8009B458[0x509] = value;
-    state = D_8009B458;
+    D_8009B458->field_0509 = value;
+    state = (u8 *)D_8009B458;
     if (state[0x509] != 0)
         state[0x500] = 1;
     else

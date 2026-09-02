@@ -1,8 +1,6 @@
 #include "../types.h"
 #include "sound.h"
 
-extern u8 *D_8009B458;
-
 extern void func_80044DC0(s32);
 extern void func_8004503C(s32, s32, s32);
 extern void func_80045BE8(SDCommand *);
@@ -62,7 +60,7 @@ s32 func_8004703C(void)
 
 void func_80047050(void)
 {
-    if (D_8009B458[0x509])
+    if (D_8009B458->field_0509)
         func_800495A4();
     func_80045F3C();
     if (g_SDValue->flags_0040 & 8)

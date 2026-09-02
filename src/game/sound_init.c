@@ -10,8 +10,6 @@ typedef struct {
     u8 pad0C[0x24];
 } SDSequenceCommand;
 
-extern u8 *D_8009B458;
-
 extern void func_80045BE8(SDSequenceCommand *);
 extern void func_80046294(void);
 extern void func_800471D0(s32, s32, s32, s32, s32, s32);
@@ -101,46 +99,46 @@ void func_800493F8(void)
 
 void func_80049434(void)
 {
-    u8 *state;
-    u8 *other;
-    u8 *third;
-    u8 *fourth;
-    u8 *fifth;
-    u8 *final;
+    SDSecondaryState *state;
+    SDSecondaryState *other;
+    SDSecondaryState *third;
+    SDSecondaryState *fourth;
+    SDSecondaryState *fifth;
+    SDSecondaryState *final;
 
-    D_8009B458[0x500] = 0;
-    D_8009B458[0x501] = 0;
-    D_8009B458[0x502] = 0;
+    D_8009B458->flag_0500 = 0;
+    D_8009B458->flag_0501 = 0;
+    D_8009B458->flag_0502 = 0;
     state = D_8009B458;
-    *(s16 *)(state + 0x510) = 20;
-    state[0x814] = 0;
+    state->object_count = 20;
+    state->field_0814 = 0;
     other = D_8009B458;
-    *(s16 *)(state + 0x512) = 127;
-    *(s16 *)(state + 0x514) = 127;
-    *(s16 *)(state + 0x516) = 127;
-    other[0x815] = 0;
+    state->field_0512 = 127;
+    state->field_0514 = 127;
+    state->field_0516 = 127;
+    other->field_0815 = 0;
     third = D_8009B458;
-    third[0x4BD] = 127;
+    third->transfer.field_0019 = 127;
     fourth = D_8009B458;
-    *(s16 *)(third + 0x4A4) = -1;
-    fourth[0x4BE] = 127;
+    third->transfer.field_0000 = -1;
+    fourth->transfer.field_001A = 127;
     fifth = D_8009B458;
-    fifth[0x4BF] = 64;
+    fifth->transfer.field_001B = 64;
     final = D_8009B458;
-    *(s16 *)(final + 0x7E0) = -1;
-    *(s16 *)(final + 0x7E2) = 0;
-    *(s16 *)(final + 0x7E6) = 127;
-    *(s16 *)(final + 0x7E4) = 127;
-    *(s32 *)(final + 0x80C) = 0;
-    *(s32 *)(final + 0x810) = 0;
-    *(s32 *)(final + 0x81C) = 0x1000;
+    final->field_07E0 = -1;
+    final->field_07E2 = 0;
+    final->field_07E6 = 127;
+    final->field_07E4 = 127;
+    final->field_080C = 0;
+    final->field_0810 = 0;
+    final->field_081C = 0x1000;
 }
 
 void func_800494F4(s32 *data)
 {
     u32 i = 0;
 
-    D_8009B458 = (u8 *)data;
+    D_8009B458 = (SDSecondaryState *)data;
     do {
         *data = 0;
         i++;
@@ -153,32 +151,32 @@ void func_800494F4(s32 *data)
 
 void func_80049544(void)
 {
-    s32 value = *(s32 *)(D_8009B458 + 0x81C);
+    s32 value = D_8009B458->field_081C;
 
     if (value > 0) {
         if (value < 4)
             func_8004B854();
     }
-    D_8009B458[0x814] = 1;
+    D_8009B458->field_0814 = 1;
 }
 
 void func_80049594(s32 value)
 {
-    *(s32 *)(D_8009B458 + 0x81C) = value;
+    D_8009B458->field_081C = value;
 }
 
 void func_800495A4(void)
 {
-    if (D_8009B458[0x814])
+    if (D_8009B458->field_0814)
         func_8004B9E0();
 }
 
 void func_800495DC(void)
 {
-    D_8009B458[0x815] = 0;
+    D_8009B458->field_0815 = 0;
 }
 
 void func_800495EC(void)
 {
-    D_8009B458[0x815] = 1;
+    D_8009B458->field_0815 = 1;
 }

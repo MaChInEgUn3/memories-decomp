@@ -3,6 +3,8 @@
 
 #include "../types.h"
 
+#define SD_STATE_OFFSET(type, member) ((u32)&(((type *)0)->member))
+
 typedef struct {
     u8 command;
     u8 pad01[0x0F];
@@ -94,6 +96,76 @@ typedef struct {
     u8 field_164B;
 } SDValue;
 
+typedef struct {
+    u8 pad0000[3];
+    u8 field_0003;
+    u8 pad0004[0x1A];
+    u16 field_001E;
+    u8 pad0020[8];
+} SDSecondaryObject;
+
+typedef struct {
+    s16 field_0000;
+    u8 pad0002[2];
+    u8 *field_0004;
+    s32 field_0008;
+    s32 field_000C;
+    s32 field_0010;
+    u8 *field_0014;
+    u8 field_0018;
+    u8 field_0019;
+    u8 field_001A;
+    u8 field_001B;
+} SDSecondaryTransfer;
+
+typedef struct {
+    u8 pad0000[0x180];
+    SDSecondaryObject objects[20];
+    u8 pad04A0[4];
+    SDSecondaryTransfer transfer;
+    u8 pad04C0[0x40];
+    u8 flag_0500;
+    u8 flag_0501;
+    u8 flag_0502;
+    u8 flag_0503;
+    void *field_0504;
+    u8 field_0508;
+    u8 field_0509;
+    u8 pad050A[2];
+    void (*field_050C)(void);
+    s16 object_count;
+    s16 field_0512;
+    s16 field_0514;
+    s16 field_0516;
+    u8 pad0518[0x2C4];
+    u8 *field_07DC;
+    s16 field_07E0;
+    s16 field_07E2;
+    s16 field_07E4;
+    s16 field_07E6;
+    u8 *field_07E8;
+    s32 field_07EC;
+    u8 pad07F0[0x0A];
+    u16 field_07FA;
+    u16 timebase;
+    u8 pad07FE[2];
+    u8 field_0800;
+    u8 pad0801[3];
+    s32 field_0804;
+    s32 field_0808;
+    s32 field_080C;
+    s32 field_0810;
+    u8 field_0814;
+    u8 field_0815;
+    u8 pad0816[2];
+    u32 bytes_consumed;
+    s32 field_081C;
+    u8 pad0820[0x24];
+    u8 field_0844;
+    u8 field_0845;
+    u8 pad0846[2];
+} SDSecondaryState;
+
 typedef char SDCommand_size_must_be_0x30[
     sizeof(SDCommand) == 0x30 ? 1 : -1
 ];
@@ -103,9 +175,49 @@ typedef char SDValueLink_size_must_be_0x08[
 typedef char SDValue_size_must_be_0x164C[
     sizeof(SDValue) == 0x164C ? 1 : -1
 ];
+typedef char SDSecondaryObject_size_must_be_0x28[
+    sizeof(SDSecondaryObject) == 0x28 ? 1 : -1
+];
+typedef char SDSecondaryTransfer_size_must_be_0x1C[
+    sizeof(SDSecondaryTransfer) == 0x1C ? 1 : -1
+];
+typedef char SDSecondaryState_size_must_be_0x848[
+    sizeof(SDSecondaryState) == 0x848 ? 1 : -1
+];
+typedef char SDSecondaryState_objects_offset_must_be_0x180[
+    SD_STATE_OFFSET(SDSecondaryState, objects) == 0x180 ? 1 : -1
+];
+typedef char SDSecondaryState_transfer_offset_must_be_0x4A4[
+    SD_STATE_OFFSET(SDSecondaryState, transfer) == 0x4A4 ? 1 : -1
+];
+typedef char SDSecondaryState_flag_0500_offset_must_be_0x500[
+    SD_STATE_OFFSET(SDSecondaryState, flag_0500) == 0x500 ? 1 : -1
+];
+typedef char SDSecondaryState_object_count_offset_must_be_0x510[
+    SD_STATE_OFFSET(SDSecondaryState, object_count) == 0x510 ? 1 : -1
+];
+typedef char SDSecondaryState_field_07DC_offset_must_be_0x7DC[
+    SD_STATE_OFFSET(SDSecondaryState, field_07DC) == 0x7DC ? 1 : -1
+];
+typedef char SDSecondaryState_field_07E0_offset_must_be_0x7E0[
+    SD_STATE_OFFSET(SDSecondaryState, field_07E0) == 0x7E0 ? 1 : -1
+];
+typedef char SDSecondaryState_field_07FA_offset_must_be_0x7FA[
+    SD_STATE_OFFSET(SDSecondaryState, field_07FA) == 0x7FA ? 1 : -1
+];
+typedef char SDSecondaryState_bytes_consumed_offset_must_be_0x818[
+    SD_STATE_OFFSET(SDSecondaryState, bytes_consumed) == 0x818 ? 1 : -1
+];
+typedef char SDSecondaryState_field_0844_offset_must_be_0x844[
+    SD_STATE_OFFSET(SDSecondaryState, field_0844) == 0x844 ? 1 : -1
+];
 
 #ifndef SDVALUE_CUSTOM_EXTERN
 extern SDValue *g_SDValue;
+#endif
+
+#ifndef SDSECONDARYSTATE_CUSTOM_EXTERN
+extern SDSecondaryState *D_8009B458;
 #endif
 
 #endif
