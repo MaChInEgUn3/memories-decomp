@@ -71,6 +71,24 @@ leak or unbounded handle retention in the CLI/session/tool path. It explains
 why limiting compiler and agent concurrency did not stop the crashes: the
 leaked objects belong to the long-lived Copilot process itself.
 
+A later report, `tmp/report.20260902.011413.381967.0.001.json`, reproduced the
+other failure signature:
+
+| Measurement | Value |
+| --- | ---: |
+| V8 used heap | 1,866,923,712 bytes |
+| V8 heap limit | 2,150,629,376 bytes |
+| Old-space available | 141,608 bytes |
+| Process RSS | 4,488,863,744 bytes |
+| Host available memory | 2,773,397,504 bytes |
+| Active workers | 0 |
+| libuv handles | 0 |
+
+This confirms two independent manifestations of the same long-session
+retention problem: one dump retained approximately 30,000 async handles, while
+this dump exhausted old-space with no active handles or workers. Limiting
+compiler processes cannot prevent either form.
+
 The failing process accumulated about 621,000 filesystem reads and ran for
 roughly fourteen minutes. Immediately before the failure, the work repeatedly
 loaded source, configuration, generated assembly, and collaborator-reference
@@ -112,6 +130,10 @@ failure is resolved.
 - Consolidate a complete bounded phase into one standalone sequential script
   that writes compact results to disk, instead of issuing one CLI tool call per
   candidate.
+- Stop after one substantial subsystem batch or two small atomic commits, push
+  the checkpoint, and start a fresh CLI session.
+- Refuse `make` commands when the parent Copilot process reaches 2560 MiB RSS
+  via `tools/project/session_memory_guard.py`.
 - Put verbose compiler, linker, and comparison logs under `tmp/`.
 - Process collaborator candidates through a sequential driver that writes a
   compact manifest and result ledger rather than returning per-candidate
