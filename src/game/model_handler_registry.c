@@ -1,5 +1,10 @@
 #include "../types.h"
 
+struct Entry {
+    s32 val;
+    s32 key;
+};
+
 typedef float f32;
 typedef double f64;
 typedef char M2C_UNK;
@@ -13,9 +18,47 @@ typedef u8 Rec;
 typedef u8 Block;
 typedef struct { u32 words[2]; } Blk8;
 
+extern struct Entry D_800F5918[80];
+extern s32 func_80089E20[];
 extern s32 (*func_800603DC())();
 extern s32 func_8007F6CC();
-extern s32 func_80089E20();
+
+/* Finds `key` in the table; if absent and there is a free slot, claims it
+   with (key, val). No-op once all 80 slots are taken and no match exists. */
+void Model_RegisterHandlerKey(s32 key, s32 val) {
+    s32 i;
+    struct Entry *e = D_800F5918;
+    for (i = 0; i < 80; i++, e++) {
+        if (e->key == key) {
+            return;
+        }
+        if (e->key != 0) {
+            continue;
+        }
+        if (e->val != 0) {
+            continue;
+        }
+        e->key = key;
+        e->val = val;
+        return;
+    }
+}
+
+/* Reverse lookup: finds the entry whose val matches, returns its key (or -1
+   if val is the sentinel, or if no entry matches after scanning all 80). */
+s32 Model_FindHandlerKey(s32 val) {
+    struct Entry *e = D_800F5918;
+    s32 i;
+    if (val == (s32) func_80089E20) {
+        return -1;
+    }
+    for (i = 0; i < 80; i++, e++) {
+        if (e->val == val) {
+            return e->key;
+        }
+    }
+    return -1;
+}
 
 void func_80060220(s32 arg0, u8 *arg1, u8 *arg2) {
     u8 *p;

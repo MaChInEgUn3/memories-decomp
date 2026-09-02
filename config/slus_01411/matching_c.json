@@ -4216,19 +4216,19 @@
       "address": "0x80060170",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x60",
-      "source": "src/game/model_register_handler_key.c"
+      "source": "src/game/model_handler_registry.c"
     },
     {
       "address": "0x800601D0",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x50",
-      "source": "src/game/model_find_handler_key.c"
+      "source": "src/game/model_handler_registry.c"
     },
     {
       "address": "0x80060220",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x1BC",
-      "source": "src/game/func_80060220.c"
+      "source": "src/game/model_handler_registry.c"
     },
     {
       "address": "0x800603DC",
