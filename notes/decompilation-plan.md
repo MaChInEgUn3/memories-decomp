@@ -86,7 +86,8 @@ with full-file comparison as the merge gate.
   Record every result in `config/slus_01411/attempts.csv`; defer the function
   after the sixth nonmatching attempt.
 - Keep commits atomic and push accumulated commits to `origin/master` about
-  every 15 minutes during active decompilation.
+  every 15 minutes during active decompilation. Continue working between push
+  windows rather than waiting for the timer.
 - Attribute every implementation commit solely to
   `Copilot <223556219+Copilot@users.noreply.github.com>`. Do not add a
   `Co-authored-by` trailer or attribute commits to the user.

@@ -301,4 +301,5 @@ be corroborated before being treated as final.
   it.
 - Keep commits atomic. Push accumulated commits to `origin/master` about every
   15 minutes while decompilation is active; push sooner only for an explicit
-  request or an OOM-risk handoff.
+  request or an OOM-risk handoff. Never wait idly for the interval: continue
+  the active task and push opportunistically once enough time has elapsed.
