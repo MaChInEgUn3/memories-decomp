@@ -1640,7 +1640,7 @@
     },
     {
       "address": "0x80035AF0",
-      "profile": "gcc_2_8_1_g0",
+      "profile": "gcc_2_8_1_o1_g0",
       "size": "0x8C",
       "source": "src/game/func_80035AF0.c"
     },
