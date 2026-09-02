@@ -182,7 +182,7 @@ address,size,name,status,module,notes
 0x80023FBC,0xA4,func_80023FBC,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_cc_g0_as_g8_no_split.
 0x80024060,0x28,func_80024060,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80024088,0x28,func_80024088,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x800240B0,0x150,func_800240B0,unmatched_asm,game,
+0x800240B0,0x150,func_800240B0,matching_c,game,Unchiga pure-C structure independently verified with split addresses; exact linked bytes. Three isolated absolute-address stores preserve target register allocation.
 0x80024200,0x188,func_80024200,matching_c,game,6 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x80024388,0x6C,func_80024388,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x800243F4,0x1AC,Duel_ShuffleDeck,unmatched_asm,game,
