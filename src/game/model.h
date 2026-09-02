@@ -34,18 +34,25 @@ typedef struct {
 } ModelSlotS32Quad;
 
 typedef struct {
+    u8 pad_00[0x44];
+    u16 field_44;
+    u16 field_46;
+    u16 field_48;
+} ModelSlotRotationEntry;
+
+typedef struct {
     ModelSlotHeadEntry field_000[1];
     u8 pad_008[0x1D8];
     void *field_1E0[1];
     u8 pad_1E4[0x5E0];
-    ModelSlotIndexedEntry field_7C4;
+    ModelSlotIndexedEntry field_7C4[1];
     u8 pad_83A[0x3BB];
     u8 field_BF5;
     u8 pad_BF6[0x102];
     u8 field_CF8[10];
     u8 pad_D02[0x12];
     u8 *field_D14;
-    void *field_D18;
+    ModelSlotRotationEntry *field_D18;
     u8 pad_D1C[0x54];
     ModelSlotLightEntry field_D70[3];
     s32 field_DA0[3];
@@ -90,6 +97,9 @@ typedef char ModelSlotLightEntry_size_must_be_0x10[
 ];
 typedef char ModelSlotS32Quad_size_must_be_0x10[
     sizeof(ModelSlotS32Quad) == 0x10 ? 1 : -1
+];
+typedef char ModelSlotRotationEntry_field_44_offset_must_be_0x44[
+    MODEL_OFFSET(ModelSlotRotationEntry, field_44) == 0x44 ? 1 : -1
 ];
 typedef char ModelSlot_size_must_be_0xE20[
     sizeof(ModelSlot) == 0xE20 ? 1 : -1
