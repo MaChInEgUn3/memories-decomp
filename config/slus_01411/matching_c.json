@@ -3328,13 +3328,13 @@
       "address": "0x80049640",
       "profile": "gcc_2_8_1_g0",
       "size": "0x54",
-      "source": "src/game/func_80049640.c"
+      "source": "src/game/sound_term.c"
     },
     {
       "address": "0x80049694",
       "profile": "gcc_2_8_1_g0",
       "size": "0x30",
-      "source": "src/game/sd_term.c"
+      "source": "src/game/sound_term.c"
     },
     {
       "address": "0x800496C4",
