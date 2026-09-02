@@ -84,3 +84,8 @@ offset expressions while still using the shared header as the layout source.
 Functions containing GCC inline assembly remain unchanged. Migrating their
 declarations is deferred until the inline assembly itself can be replaced with
 matching C.
+
+The contiguous initialization block at `0x80049200-0x800495EC` now builds as
+`src/game/sound_init.c`. It preserves the explicit raw music-pointer write in
+`func_800493F8` while sharing `SDValue` declarations across the other
+music/sequence helpers.
