@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 
 import record_attempt
+import record_external_attempt
 from workspace import WorkspaceError, require_workspace_root, resolve_within
 
 
@@ -60,7 +61,7 @@ def summary(row: dict[str, str]) -> str:
     )
 
 
-def import_results(root: Path, path: Path) -> int:
+def import_unmatched_results(root: Path, path: Path) -> int:
     functions_path = resolve_within(
         root, "config/slus_01411/functions.csv", must_exist=True
     )
@@ -117,11 +118,97 @@ def import_results(root: Path, path: Path) -> int:
     return imported
 
 
+def import_inline_results(root: Path, path: Path) -> int:
+    ledger_path = resolve_within(
+        root,
+        "config/slus_01411/external_attempts.csv",
+        must_exist=True,
+    )
+    rows = record_external_attempt.load_rows(ledger_path)
+    functions = record_external_attempt.load_functions(
+        resolve_within(
+            root, "config/slus_01411/functions.csv", must_exist=True
+        )
+    )
+    matching = record_external_attempt.load_matching_addresses(
+        resolve_within(
+            root, "config/slus_01411/matching_c.json", must_exist=True
+        )
+    )
+    profiles = record_external_attempt.load_profiles(
+        resolve_within(
+            root,
+            "config/slus_01411/compiler_profiles.json",
+            must_exist=True,
+        )
+    )
+    imported = 0
+    for result in read_results(path):
+        if result["exact"] == "True":
+            raise ImportError(
+                f"{result['address']}: exact results require integration review"
+            )
+        address = record_external_attempt.parse_address(result["address"])
+        history = [
+            row
+            for row in rows
+            if row["mode"] == "inline_refinement"
+            and record_external_attempt.parse_address(row["address"]) == address
+        ]
+        if history and history[-1]["result"] in {"matched", "deferred"}:
+            continue
+        if len(history) >= record_external_attempt.MAX_ATTEMPTS:
+            raise ImportError(f"{address:#010x}: refinement budget exhausted")
+        profile = result["profile"]
+        source = resolve_within(root, result["source"], must_exist=True)
+        source_value = str(source.relative_to(root))
+        if any(
+            row["profile"] == profile
+            and row["candidate_source"] == source_value
+            for row in history
+        ):
+            continue
+        attempt = len(history) + 1
+        outcome = (
+            "deferred"
+            if attempt == record_external_attempt.MAX_ATTEMPTS
+            else "nonmatch"
+        )
+        rows.append(
+            {
+                "mode": "inline_refinement",
+                "address": f"0x{address:08X}",
+                "attempt": str(attempt),
+                "reference_path": "",
+                "reference_sha256": "",
+                "profile": profile,
+                "candidate_source": source_value,
+                "candidate_sha256": record_external_attempt.sha256(source),
+                "result": outcome,
+                "summary": summary(result),
+            }
+        )
+        imported += 1
+    record_external_attempt.validate_rows(
+        rows,
+        functions,
+        matching,
+        profiles,
+    )
+    record_external_attempt.write_rows(ledger_path, rows)
+    return imported
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Import reviewed remaining-profile pass results."
     )
     parser.add_argument("results", help="result CSV beneath tmp/")
+    parser.add_argument(
+        "--scope",
+        choices=("unmatched", "inline"),
+        default="unmatched",
+    )
     return parser.parse_args()
 
 
@@ -132,7 +219,11 @@ def main() -> int:
         path = resolve_within(root, args.results, must_exist=True)
         temporary_root = resolve_within(root, "tmp", must_exist=True)
         path.relative_to(temporary_root)
-        imported = import_results(root, path)
+        imported = (
+            import_inline_results(root, path)
+            if args.scope == "inline"
+            else import_unmatched_results(root, path)
+        )
     except (
         ImportError,
         record_attempt.AttemptError,

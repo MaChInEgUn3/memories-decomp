@@ -17,6 +17,8 @@ from workspace import WorkspaceError, require_workspace_root, resolve_within
 WORK_PATH = "tmp/agents/remaining-profile-pass"
 FUNCTIONS_PATH = "config/slus_01411/functions.csv"
 ATTEMPTS_PATH = "config/slus_01411/attempts.csv"
+EXTERNAL_ATTEMPTS_PATH = "config/slus_01411/external_attempts.csv"
+MATCHING_PATH = "config/slus_01411/matching_c.json"
 PROFILES_PATH = "config/slus_01411/compiler_profiles.json"
 SOURCE_PATTERN = re.compile(r"(?:^|\s)source=([^\s]+)")
 PROFILE_PATTERN = re.compile(r"profile=(gcc_[A-Za-z0-9_]+)")
@@ -129,10 +131,67 @@ def attempted_profiles(history: list[dict[str, str]]) -> set[str]:
 def candidates(
     root: Path,
     *,
+    scope: str,
     variant: str,
     limit: int,
 ) -> list[dict[str, Any]]:
     functions = read_csv(resolve_within(root, FUNCTIONS_PATH, must_exist=True))
+    functions_by_address = {
+        int(row["address"], 0): row for row in functions
+    }
+    if scope == "inline":
+        matching = json.loads(
+            resolve_within(root, MATCHING_PATH, must_exist=True).read_text(
+                encoding="utf-8"
+            )
+        )["functions"]
+        external = read_csv(
+            resolve_within(root, EXTERNAL_ATTEMPTS_PATH, must_exist=True)
+        )
+        by_address: dict[int, list[dict[str, str]]] = {}
+        for row in external:
+            if row["mode"] == "inline_refinement":
+                by_address.setdefault(int(row["address"], 0), []).append(row)
+        result: list[dict[str, Any]] = []
+        for entry in matching:
+            address = int(entry["address"], 0)
+            source = resolve_within(root, entry["source"], must_exist=True)
+            if source_is_pure(source):
+                continue
+            history = by_address.get(address, [])
+            if (
+                not history
+                or len(history) >= 6
+                or history[-1]["result"] in {"matched", "deferred"}
+            ):
+                continue
+            candidate = normalize_source(root, history[-1]["candidate_source"])
+            if (
+                candidate is None
+                or not candidate.is_file()
+                or not source_is_pure(candidate)
+            ):
+                continue
+            group = "g8" if "_g8" in history[-1]["profile"] else "g0"
+            profile = selected_profile(group, variant)
+            tried = {row["profile"] for row in history}
+            if profile in tried:
+                continue
+            function = functions_by_address[address]
+            result.append(
+                {
+                    "address": address,
+                    "size": int(entry["size"], 0),
+                    "name": function["name"],
+                    "attempt_count": len(history),
+                    "profile": profile,
+                    "source": candidate,
+                    "mode": "inline_refinement",
+                }
+            )
+        result.sort(key=lambda row: (row["size"], row["address"]))
+        return result[:limit]
+
     attempts = read_csv(resolve_within(root, ATTEMPTS_PATH, must_exist=True))
     by_address: dict[int, list[dict[str, str]]] = {}
     for row in attempts:
@@ -169,6 +228,7 @@ def candidates(
                 "attempt_count": len(history),
                 "profile": profile,
                 "source": source,
+                "mode": "collaborator_match",
             }
         )
     result.sort(key=lambda row: (row["size"], row["address"]))
@@ -196,7 +256,7 @@ def run_pass(
                 "address": f"0x{candidate['address']:08X}",
                 "size": f"0x{candidate['size']:X}",
                 "current_name": candidate["name"],
-                "mode": "collaborator_match",
+                "mode": candidate["mode"],
                 "candidate_source": str(candidate["source"].relative_to(root)),
                 "profile": candidate["profile"],
             },
@@ -229,6 +289,11 @@ def parse_args() -> argparse.Namespace:
         )
     )
     parser.add_argument(
+        "--scope",
+        choices=("unmatched", "inline"),
+        default="unmatched",
+    )
+    parser.add_argument(
         "--variant",
         choices=("default", "split", "no-split"),
         required=True,
@@ -245,20 +310,28 @@ def main() -> int:
         root = require_workspace_root()
         selected = candidates(
             root,
+            scope=args.scope,
             variant=args.variant,
             limit=args.limit,
         )
         rows = run_pass(root, selected)
         work = resolve_within(root, WORK_PATH)
-        write_csv(work / f"{args.variant}-results.csv", rows)
+        output_name = f"{args.scope}-{args.variant}-results"
+        write_csv(work / f"{output_name}.csv", rows)
         write_json(
-            work / f"{args.variant}-results.json",
-            {"schema": 1, "variant": args.variant, "results": rows},
+            work / f"{output_name}.json",
+            {
+                "schema": 1,
+                "scope": args.scope,
+                "variant": args.variant,
+                "results": rows,
+            },
         )
         exact = sum(bool(row["exact"]) for row in rows)
         errors = sum(bool(row["error"]) for row in rows)
         print(
-            f"profile pass: variant={args.variant} selected={len(rows)} "
+            f"profile pass: scope={args.scope} variant={args.variant} "
+            f"selected={len(rows)} "
             f"exact={exact} nonmatch={len(rows) - exact - errors} "
             f"errors={errors}"
         )
