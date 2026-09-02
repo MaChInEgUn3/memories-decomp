@@ -97,8 +97,9 @@ with full-file comparison as the merge gate.
   observed modules at `0x80180000`.
 - Put all project scripts, downloaded tools, compilers, runtimes, environments,
   and third-party sources under `tools/`.
-- Put all documentation, research, naming notes, and curated reports under
-  `notes/`.
+- Put all detailed documentation, research, naming notes, and curated reports
+  under `notes/`. Keep only the generated project overview in the root
+  `README.md`.
 - Persist the approved implementation plan at
   `notes/decompilation-plan.md` and update that tracked copy during future plan
   iterations.
@@ -225,6 +226,7 @@ file is byte-identical to its original disc extent.
 ├── linker/                     # Linker scripts and section-order inputs
 ├── notes/                      # All human documentation and research
 │   └── decompilation-plan.md   # Durable copy of the approved plan
+├── README.md                   # Overview with generated current progress
 ├── src/                        # Matching C sources
 ├── tmp/                        # Every generated or temporary artifact
 └── tools/
@@ -237,10 +239,11 @@ file is byte-identical to its original disc extent.
 ```
 
 No executable project script should be placed at the repository root. The root
-`Makefile` is only a stable command interface and must invoke tools beneath
-`tools/`. Generated assembly listings, split output, object files, rebuilt
-executables, compiler experiments, caches, and reports remain under `tmp/`;
-only reviewed source assembly and metadata move into tracked directories.
+contains only the stable `Makefile` interface and `README.md` overview; scripts
+must remain beneath `tools/`. Generated assembly listings, split output, object
+files, rebuilt executables, compiler experiments, caches, and reports remain
+under `tmp/`; only reviewed source assembly and metadata move into tracked
+directories.
 
 ## Plan persistence and future iterations
 
@@ -543,7 +546,7 @@ Completion target:
   original game C.
 - The full executable remains byte-identical.
 
-### 9. Maintain documentation and progress under `notes/`
+### 9. Maintain detailed documentation under `notes/` and progress in README
 
 Create and update:
 
@@ -557,13 +560,18 @@ Create and update:
 - `notes/build.md` for the exact build/link pipeline and troubleshooting.
 - `notes/progress.md` for current matching metrics and milestone summaries.
 - `notes/research/` for curated subsystem investigations.
+- Root `README.md` for the generated high-level project status and contributor
+  entry points.
 
 Generate transient HTML, CSV, JSON, diff, and graph reports under `tmp/`; move
-only reviewed, durable conclusions into `notes/`.
+only reviewed, durable conclusions into `notes/`. Regenerate the marked README
+progress section from authoritative metadata with `make progress`, and reject
+stale values in CI and `make audit`.
 
 Acceptance criteria:
 
-- Documentation never appears outside `notes/`.
+- Detailed documentation never appears outside `notes/`; the root `README.md`
+  is the sole project-overview exception.
 - Reported progress is generated from the build configuration and symbol map,
   not manually estimated.
 
@@ -584,9 +592,10 @@ Acceptance criteria:
 Final acceptance criteria:
 
 - A clean local run rebuilds `SLUS_014.11` byte for byte.
-- All project-managed tools are under `tools/`, all documentation is under
-  `notes/`, all temporary/generated work is under `tmp/`, and all original game
-  files remain immutable and untracked under `game/`.
+- All project-managed tools are under `tools/`, detailed documentation is under
+  `notes/`, the generated overview is in root `README.md`, all
+  temporary/generated work is under `tmp/`, and all original game files remain
+  immutable and untracked under `game/`.
 - `notes/decompilation-plan.md` contains the current approved implementation
   plan for future sessions and iterations.
 - The project contains no unexplained unmatched game code or unclassified

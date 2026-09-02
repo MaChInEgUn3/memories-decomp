@@ -70,7 +70,8 @@ make verify-disc
   `config/slus_01411/functions.csv`.
 - `classify-functions` applies the verified game/CRT/SDK ownership ranges
   without overwriting a future `matching_c` status.
-- `progress` writes current status and ownership metrics to
+- `progress` refreshes the generated progress section in the root `README.md`
+  and writes current status and ownership metrics to
   `tmp/reports/progress.json`.
 - `verify-disc` verifies the original MODE2/2352 BIN/CUE, tracked ISO9660 LBAs,
   and every extracted file against its disc extent.
@@ -113,8 +114,8 @@ Resident code is regenerated as MIPS assembly, known data ranges are
 regenerated as assembly, and remaining binary ranges are separately classified
 and excluded from C-decompilation progress.
 
-The current C pipeline has one matching function,
-`src/game/check_point.c::func_800736C4`.
+Current matching totals are generated in the root `README.md`; run
+`make progress` after accepted decompilation changes.
 
 ## Full repository audit
 
@@ -129,7 +130,10 @@ reapplies ownership classifications, generates progress metrics, and checks:
 - No commit contains a `Co-authored-by` trailer.
 - No supplied game file, generated output, downloaded dependency, installed
   environment, vendor checkout, or local toolchain is tracked.
-- Tracked Markdown documentation is under `notes/`.
+- Tracked Markdown documentation is under `notes/`, except for the generated
+  project overview at the root `README.md`.
+- The root README progress section matches the authoritative function
+  inventory.
 - The worktree is clean after deterministic regeneration.
 
 ## Cleanup

@@ -28,6 +28,7 @@ FORBIDDEN_TRACKED_PREFIXES = (
     "tools/toolchains/",
     "tools/vendor/",
 )
+ALLOWED_ROOT_MARKDOWN = {"README.md"}
 ATTEMPT_FIELDS = ("address", "attempt", "compiler", "flags", "result", "summary")
 ATTEMPT_RESULTS = {"matched", "nonmatch", "deferred"}
 MAX_FUNCTION_ATTEMPTS = 6
@@ -158,8 +159,14 @@ def audit_tracked_paths(root: Path) -> None:
     for path in tracked:
         if path.startswith(FORBIDDEN_TRACKED_PREFIXES):
             raise AuditError(f"forbidden generated or supplied path tracked: {path}")
-        if path.lower().endswith(".md") and not path.startswith("notes/"):
-            raise AuditError(f"documentation is outside notes/: {path}")
+        if (
+            path.lower().endswith(".md")
+            and not path.startswith("notes/")
+            and path not in ALLOWED_ROOT_MARKDOWN
+        ):
+            raise AuditError(
+                f"documentation is outside notes/ or the root README: {path}"
+            )
 
     ignored = git(
         root,

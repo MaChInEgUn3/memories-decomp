@@ -1,0 +1,101 @@
+# Yu-Gi-Oh! Forbidden Memories Decompilation
+
+[![Matching build](https://github.com/krystalgamer/memories-decomp/actions/workflows/matching-build.yml/badge.svg)](https://github.com/krystalgamer/memories-decomp/actions/workflows/matching-build.yml)
+
+This repository is a byte-matching decompilation of the North American
+PlayStation release of **Yu-Gi-Oh! Forbidden Memories** (`SLUS-01411`).
+Accepted changes must continue to rebuild the complete PS-X executable exactly.
+
+> [!IMPORTANT]
+> The repository does not contain game data or proprietary Psy-Q tools. Supply
+> legally obtained copies of the required files beneath `game/`; they remain
+> ignored by Git.
+
+## Project status
+
+The current mixed C/assembly build reproduces `game/SLUS_014.11` with SHA-256:
+
+```text
+84a54ed74f3d0edd6d81380839f7e4ef5bfb21ecea18be9a062bd6bfa5a45c88
+```
+
+<!-- BEGIN GENERATED PROGRESS -->
+
+| Metric | Current |
+|---|---:|
+| Matching C functions | **773 / 1,196 (64.63%)** |
+| Matching C bytes | **94,316 (`0x1706C`) / 396,212 (`0x60BB4`) (23.80%)** |
+| Remaining compiler-generated game assembly | 360 functions, 255,660 (`0x3E6AC`) |
+| Intentional handwritten game assembly | 63 functions, 46,236 (`0xB49C`) |
+| Preserved Psy-Q CRT/SDK assembly | 598 functions, 117,332 (`0x1CA54`) |
+| Total discovered functions | 1,794 |
+| Embedded/unassigned resident text | 1,780 (`0x6F4`) |
+
+_Generated from `config/slus_01411/functions.csv` by `tools/project/progress.py`._
+
+<!-- END GENERATED PROGRESS -->
+
+Matching progress covers game-owned code only. Psy-Q CRT/SDK functions are
+identified and preserved as assembly rather than counted as decompilation
+targets.
+
+Run `make progress` after accepted decompilation changes. It refreshes the
+generated table above and writes detailed machine-readable metrics to
+`tmp/reports/progress.json`. `make check-progress`, the repository audit, and
+CI reject a stale README.
+
+## Quick start
+
+Place the original executable at `game/SLUS_014.11`, then run:
+
+```sh
+make verify-target
+make tools
+MAKEFLAGS=-j2 make match
+make progress
+```
+
+`make match` succeeds only when the rebuilt executable is byte-identical to the
+retail target. The full repository audit additionally requires the DATA files
+and BIN/CUE listed in `config/slus_01411/files.sha256`:
+
+```sh
+MAKEFLAGS=-j2 make audit
+```
+
+## Decompilation workflow
+
+1. Select a game-owned assembly function from
+   `config/slus_01411/functions.csv`.
+2. Record each distinct source/compiler attempt in the appropriate attempt
+   ledger, with a maximum of six variants per function.
+3. Accept C only when `make match` reproduces the entire executable exactly.
+4. Run `make progress` and commit the refreshed README with the matching
+   source and metadata.
+
+Unmatched functions remain exact assembly fallbacks. Handwritten and Psy-Q
+assembly are tracked separately from compiler-generated game code.
+
+## Repository layout
+
+| Path | Purpose |
+|---|---|
+| `src/` | Matching C sources and shared game types |
+| `asm/` | Exact assembly fallbacks and data assembly |
+| `config/slus_01411/` | Function inventory, compiler profiles, symbols, and target metadata |
+| `tools/` | Project scripts, pinned tools, and local toolchains |
+| `notes/` | Research, plans, evidence, and detailed documentation |
+| `tmp/` | Generated builds, reports, caches, and scratch work |
+| `game/` | Ignored, immutable user-supplied retail inputs |
+
+All commands must run from the repository root, and project work must remain
+inside this working directory.
+
+## Documentation
+
+- [Setup and required inputs](notes/setup.md)
+- [Build and exact-match workflow](notes/build.md)
+- [Decompilation plan](notes/decompilation-plan.md)
+- [Completed remaining-function campaign](notes/remaining-decompilation-pass.md)
+- [Semantic naming pass](notes/semantic-naming-pass.md)
+- [Global usage map](notes/global-usage.md)

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -18,6 +19,10 @@ from workspace import WorkspaceError, require_workspace_root, resolve_within
 
 class ProgressError(RuntimeError):
     pass
+
+
+README_PROGRESS_START = "<!-- BEGIN GENERATED PROGRESS -->"
+README_PROGRESS_END = "<!-- END GENERATED PROGRESS -->"
 
 
 def parse_integer(value: Any, description: str) -> int:
@@ -77,18 +82,120 @@ def validate_inventory(
             )
 
 
-def atomic_write_json(path: Path, value: dict[str, Any]) -> None:
+def atomic_write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f"{path.name}.tmp")
     try:
-        temporary.write_text(
-            json.dumps(value, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
+        temporary.write_text(text, encoding="utf-8")
         temporary.replace(path)
     except OSError:
         temporary.unlink(missing_ok=True)
         raise
+
+
+def atomic_write_json(path: Path, value: dict[str, Any]) -> None:
+    atomic_write_text(path, json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def format_bytes(value: int) -> str:
+    return f"{value:,} (`0x{value:X}`)"
+
+
+def format_percentage(value: int, total: int) -> str:
+    if total <= 0:
+        raise ProgressError("progress percentage has an empty denominator")
+    return f"{value / total:.2%}"
+
+
+def render_readme_progress(progress: dict[str, Any]) -> str:
+    game_count = progress["game_function_count"]
+    game_bytes = progress["game_function_bytes"]
+    matching_count = progress["matching_c_function_count"]
+    matching_bytes = progress["matching_c_bytes"]
+    assembly_count = progress["assembly_function_count"]
+    assembly_bytes = progress["assembly_function_bytes"]
+    handwritten_count = progress["handwritten_function_count"]
+    handwritten_bytes = progress["handwritten_function_bytes"]
+    sdk_count = progress["sdk_function_count"]
+    sdk_bytes = progress["sdk_function_bytes"]
+
+    return "\n".join(
+        (
+            "| Metric | Current |",
+            "|---|---:|",
+            (
+                "| Matching C functions | "
+                f"**{matching_count:,} / {game_count:,} "
+                f"({format_percentage(matching_count, game_count)})** |"
+            ),
+            (
+                "| Matching C bytes | "
+                f"**{format_bytes(matching_bytes)} / {format_bytes(game_bytes)} "
+                f"({format_percentage(matching_bytes, game_bytes)})** |"
+            ),
+            (
+                "| Remaining compiler-generated game assembly | "
+                f"{assembly_count:,} functions, {format_bytes(assembly_bytes)} |"
+            ),
+            (
+                "| Intentional handwritten game assembly | "
+                f"{handwritten_count:,} functions, "
+                f"{format_bytes(handwritten_bytes)} |"
+            ),
+            (
+                "| Preserved Psy-Q CRT/SDK assembly | "
+                f"{sdk_count:,} functions, {format_bytes(sdk_bytes)} |"
+            ),
+            (
+                "| Total discovered functions | "
+                f"{progress['function_count']:,} |"
+            ),
+            (
+                "| Embedded/unassigned resident text | "
+                f"{format_bytes(progress['unassigned_text_bytes'])} |"
+            ),
+            "",
+            (
+                "_Generated from `config/slus_01411/functions.csv` by "
+                "`tools/project/progress.py`._"
+            ),
+        )
+    )
+
+
+def expected_readme(current: str, generated: str) -> str:
+    if current.count(README_PROGRESS_START) != 1:
+        raise ProgressError(
+            f"README.md must contain exactly one {README_PROGRESS_START}"
+        )
+    if current.count(README_PROGRESS_END) != 1:
+        raise ProgressError(
+            f"README.md must contain exactly one {README_PROGRESS_END}"
+        )
+
+    prefix, remainder = current.split(README_PROGRESS_START, 1)
+    _, suffix = remainder.split(README_PROGRESS_END, 1)
+    replacement = (
+        f"{README_PROGRESS_START}\n\n{generated}\n\n{README_PROGRESS_END}"
+    )
+    return prefix + replacement + suffix
+
+
+def sync_readme(
+    root: Path, progress: dict[str, Any], *, check: bool
+) -> str:
+    path = resolve_within(root, "README.md", must_exist=True)
+    current = path.read_text(encoding="utf-8")
+    expected = expected_readme(current, render_readme_progress(progress))
+    if check:
+        if current != expected:
+            raise ProgressError("README.md progress is stale; run make progress")
+        return "current"
+
+    if current == expected:
+        return "current"
+    atomic_write_text(path, expected)
+    return "updated"
 
 
 def calculate(root: Path) -> dict[str, Any]:
@@ -115,6 +222,13 @@ def calculate(root: Path) -> dict[str, Any]:
     sdk_bytes = sum(function.size for function in sdk)
     matching = [function for function in functions if function.status == "matching_c"]
     matching_bytes = sum(function.size for function in matching)
+    game = [function for function in functions if function.module == "game"]
+    game_bytes = sum(function.size for function in game)
+    game_status_count = len(handwritten) + len(assembly) + len(matching)
+    if len(game) != game_status_count:
+        raise ProgressError(
+            "game function count does not match matching/assembly statuses"
+        )
     modules: dict[str, dict[str, int]] = {}
     for function in functions:
         module = modules.setdefault(
@@ -133,6 +247,8 @@ def calculate(root: Path) -> dict[str, Any]:
         "text_bytes": text_bytes,
         "function_count": len(functions),
         "function_bytes": function_bytes,
+        "game_function_count": len(game),
+        "game_function_bytes": game_bytes,
         "handwritten_function_count": len(handwritten),
         "handwritten_function_bytes": handwritten_bytes,
         "assembly_function_count": len(assembly),
@@ -146,12 +262,30 @@ def calculate(root: Path) -> dict[str, Any]:
     }
 
 
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Generate project progress metrics and README status."
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="fail if the generated README progress section is stale",
+    )
+    return parser.parse_args()
+
+
 def main() -> int:
+    arguments = parse_arguments()
     try:
         root = require_workspace_root()
         progress = calculate(root)
         output = resolve_within(root, "tmp/reports/progress.json")
         atomic_write_json(output, progress)
+        readme_status = sync_readme(
+            root,
+            progress,
+            check=arguments.check,
+        )
     except (
         ProgressError,
         InventoryError,
@@ -182,6 +316,7 @@ def main() -> int:
     print(f"matching C:         {progress['matching_c_bytes']:#x} bytes")
     print(f"unassigned text:    {progress['unassigned_text_bytes']:#x} bytes")
     print(f"report:             {output.relative_to(root)}")
+    print(f"README.md:          {readme_status}")
     return 0
 
 
