@@ -50,6 +50,7 @@ Verified shared fields and partial arrays are:
 | `0xDC0` | `field_DC0[8]` | byte writes in `func_80059590` and selection in `func_80059520` |
 | `0xDC8` | `field_DC8[4]` | exact eight-byte copies in `func_80057E20` and `func_80059000`; element 3 is cleared by `func_800597C8` |
 | `0xDD0` | `field_DD0[4]` | four adjacent `u16` reads in `Model_CopySlotU16Values` |
+| `0xE00` | model-data size, `u16` | `Model_HasInsufficientBufferSpace` subtracts this value from the remaining model-data bank capacity |
 | `0xE06` | `field_E06` | shifted read in `func_80058E94`; write/read in `func_800597C8` |
 | `0xE0D` | `field_E0D` | `func_80058E3C` reads it and `func_8005969C` writes it |
 | `0xE11` | `field_E11` | `func_800590DC`, `func_80059284`, and `func_800595C8` |

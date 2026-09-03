@@ -369,3 +369,25 @@ State after this one-function checkpoint:
 | Intentional handwritten assembly | 63 |
 | Matching sources retaining GCC asm | 58 |
 | Accepted semantic mappings | 201 |
+
+### Continuous wave 9
+
+`Model_HasInsufficientBufferSpace` (`0x8005A8C4`) matched after correcting the
+storage class of `D_800FE240`. Declaring it as a direct `s32` scalar forced to
+`.data` preserves the target's self-referential `$a0` address/load sequence
+while avoiding the G8 small-data relocation overflow. The function matches
+200/200 bytes with exact relocations.
+
+The predicate accounts for the current model-data heap pointer, bank base,
+loaded-bank count, and the selected model slot's `0xE00` size field; it returns
+true when less than `0x401` bytes would remain.
+
+State after this one-function checkpoint:
+
+| State | Count |
+|---|---:|
+| Matching C | 785 |
+| Terminal unmatched assembly | 348 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 202 |

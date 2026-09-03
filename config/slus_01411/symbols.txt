@@ -246,3 +246,6 @@ Text_EncodeDecimalNoPadding = 0x800358A0; // type:func
 
 // Semantic names
 File_ActivateTransfer = 0x800143DC; // type:func
+
+// Semantic names
+Model_HasInsufficientBufferSpace = 0x8005A8C4; // type:func
