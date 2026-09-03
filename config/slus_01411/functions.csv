@@ -416,7 +416,7 @@ address,size,name,status,module,notes
 0x800356A0,0xA8,Util_CopyWords,matching_c,game,Post-terminal pure-C match; duplicate switch case bodies reproduce retail tail dispatch without reference headers.
 0x80035748,0xA0,Util_FillMemory,matching_c,game,Post-terminal pure-C match; duplicate switch case bodies reproduce retail tail dispatch without reference headers.
 0x800357E8,0xB8,Text_EncodeDecimalDigits,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
-0x800358A0,0x5C,func_800358A0,unmatched_asm,game,
+0x800358A0,0x5C,Text_EncodeDecimalNoPadding,matching_c,game,Post-terminal pure-C match; unconditional scan decrement reproduces the retail backward-branch delay slot.
 0x800358FC,0x50,Rand_GetInterval,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8003594C,0x64,func_8003594C,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800359B0,0xA8,func_800359B0,unmatched_asm,game,

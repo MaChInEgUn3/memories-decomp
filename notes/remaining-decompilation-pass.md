@@ -325,3 +325,26 @@ State after this one-function checkpoint:
 | Intentional handwritten assembly | 63 |
 | Matching sources retaining GCC asm | 58 |
 | Accepted semantic mappings | 199 |
+
+### Continuous wave 7
+
+`Text_EncodeDecimalNoPadding` (`0x800358A0`) matched after expressing the
+backward scan's decrement in its original source order. The scan decrements
+unconditionally after loading each byte, branches back with that decrement in
+the delay slot for digit bytes, and restores the index only before clearing a
+non-digit marker. This produces exact 92/92-byte code and relocations without
+register pins.
+
+The function follows `Text_EncodeDecimalDigits` contiguously but remains a
+separate object because the base encoder uses `gcc_2_8_1_g0_split` and this
+wrapper uses `gcc_2_8_1_g0`.
+
+State after this one-function checkpoint:
+
+| State | Count |
+|---|---:|
+| Matching C | 783 |
+| Terminal unmatched assembly | 350 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 200 |
