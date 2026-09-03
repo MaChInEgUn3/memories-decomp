@@ -330,8 +330,8 @@ KB.
 decode with every card id in range: 4,041 (equip, monster) pairs over the 34
 equip cards; 25,131 fusion recipes indexed by the smaller card id through a
 `u16 offset[723]` table; 24 rituals. The equip table's real length is
-`0x201A` bytes, which is why the sector-rounded `0x2800` phase overlaps the
-fusion destination by `0x700` without harm.
+`0x201C` bytes including its zero terminator, which is why the sector-rounded
+`0x2800` phase overlaps the fusion destination by `0x700` without harm.
 
 **The two 158-sector variants (WA 8153 and 8311) are the Egypt overworld
 before and after Heishin's coup.** `func_8003C0C0` picks `0x1FD9` or
@@ -341,15 +341,19 @@ array at `0x801D0618`, tested by `func_8002CCA8`).
 
 **The mini-record family at WA 7475 is the per-duelist block**, indexed by
 the opponent id (`D_8009B361`, 1-based; block 0 is a copy of block 1; ids
-8 and 35 — Heishin's two duels — are identical), 3 sectors each: deck
+8 and 35 — Heishin's two duels — share their drop pools but not their
+decks), 3 sectors each: deck
 weights at `+0`, the S/A-POW, B/C/D and S/A-TEC drop pools at `+0x5B4`,
 `+0xB68`, `+0x111C` (722 × u16 each, every one summing to 2048), the
-rank-score table at `+0x16D0`. Ids 1–38 use 7475–7592; the family's
-40 × 3 extent leaves one spare slot.
+rank-score table at `+0x16D0`. Ids 1–38 use 7475–7592 and block 39
+(7592–7595) is Duel Master K: Villager 3's drop pools with a placeholder
+deck, since his script plays a copy of the player's — all 40 × 4 weight
+tables sum to 2048.
 
 **The `0x80168000` packages, by screen.** WA 7968 (in the main-menu blob
-at 7903) and 8054 (in the password-screen blob at 7983) are the same
-0x7800-byte **password-shop overlay**; three GameShark patch codes verify
+at 7903) and 8054 (in the password-screen blob at 7983) carry the same
+0x7800-byte **password-shop overlay** (identical but for the last data
+sector); three GameShark patch codes verify
 in it (`0x8016A87C` `subu $v1, $v1, $s0`, the star-cost subtraction;
 `0x8016A880` `bnez`; `0x8016A6E0` `beqz`), and it tests/sets the per-card
 "password used" flag `0x400 + card` at `0x8016A6D8`/`0x8016A764`. WA 7898
