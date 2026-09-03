@@ -311,3 +311,57 @@ The following remain provisional:
 - Full MODEL and SU merged-file manifests.
 - Reads that might be issued by dynamically loaded code rather than resident
   code.
+
+## Semantic identities, from the disc side
+
+Measured in the `MaChInEgUn3/ygofm-decomp` tree against the same NTSC-U
+disc; the layout above stands as written, this only fills some of its
+provisional items.
+
+**The seven 235-sector records are the seven terrain types.** The index in
+`func_8001798C` is the terrain byte `D_8009B364` (0 normal, 1 forest, 2
+wasteland, 3 mountain, 4 meadow, 5 sea, 6 dark). Hashing all thirteen phases
+across the seven records, twelve are byte-identical and only phase 12 (the
+last `0x10000`, VRAM (640, 256)) differs — the field picture. So the seven
+copies are seven backgrounds each shipped with a duplicate of the same 416
+KB.
+
+**Phases 2, 3 and 4 are the equip, fusion and ritual tables**, and they
+decode with every card id in range: 4,041 (equip, monster) pairs over the 34
+equip cards; 25,131 fusion recipes indexed by the smaller card id through a
+`u16 offset[723]` table; 24 rituals. The equip table's real length is
+`0x201A` bytes, which is why the sector-rounded `0x2800` phase overlaps the
+fusion destination by `0x700` without harm.
+
+**The two 158-sector variants (WA 8153 and 8311) are the Egypt overworld
+before and after Heishin's coup.** `func_8003C0C0` picks `0x1FD9` or
+`0x1FD9 + 0x9E` on save flag `0x47`, which the dialogue "Now you can go back
+to your own world" sets after the tournament (save flags are a 256-byte
+array at `0x801D0618`, tested by `func_8002CCA8`).
+
+**The mini-record family at WA 7475 is the per-duelist block**, indexed by
+the opponent id (`D_8009B361`, 1-based; block 0 is a copy of block 1; ids
+8 and 35 — Heishin's two duels — are identical), 3 sectors each: deck
+weights at `+0`, the S/A-POW, B/C/D and S/A-TEC drop pools at `+0x5B4`,
+`+0xB68`, `+0x111C` (722 × u16 each, every one summing to 2048), the
+rank-score table at `+0x16D0`. Ids 1–38 use 7475–7592; the family's
+40 × 3 extent leaves one spare slot.
+
+**The `0x80168000` packages, by screen.** WA 7968 (in the main-menu blob
+at 7903) and 8054 (in the password-screen blob at 7983) are the same
+0x7800-byte **password-shop overlay**; three GameShark patch codes verify
+in it (`0x8016A87C` `subu $v1, $v1, $s0`, the star-cost subtraction;
+`0x8016A880` `bnez`; `0x8016A6E0` `beqz`), and it tests/sets the per-card
+"password used" flag `0x400 + card` at `0x8016A6D8`/`0x8016A764`. WA 7898
+(end of the Free Duel blob at 7816) is the **Free Duel overlay**: its
+unlock loop at `0x801683C0`–`0x801683EC` marks 40 grid entries and clears,
+for ids 1–38, those whose save flag `0x6E0 + id` is off; the "all opponents"
+patch code verifies on its `bnez` at `0x801683D4`. Four of the five function
+addresses Unchiga read from a live disassembly of that screen land on
+`addiu $sp` prologues in this image.
+
+**WA 7767 (49 sectors) is the campaign's scene loader** (`func_8002FD10`):
+its `0x1000` phase to `0x801A8000` is the campaign event script — a
+`u16 offset[199]` table and 199 byte-coded events run through the 23-entry
+table at `0x80090C50`. WA 7629 (138) is the Library (`func_8002BFCC`);
+WA 7903–8069 are the main menu, Free Duel, password and shop screens.
