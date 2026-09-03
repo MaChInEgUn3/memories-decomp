@@ -68,6 +68,10 @@ types.
 from `field_18 % 10` after resolving the entry through the channel's
 `D_80090E58` range index.
 
+`DuelEffect_PlaySoundCommand` is now exact C in the effect-handler dispatch
+family. It consumes one 16-bit script value, uses the high bit to select the
+flagged sound path, and arms effect state `0x11` with a follow-up value.
+
 Five pure-C functions now use the shared declaration:
 `DuelEffect_ClearMatchingMarker`, `DuelEffect_ResetEntryMarkers`,
 `DuelEffect_HasActiveEntry`, `func_800373C8`, and `func_8003B6AC`.

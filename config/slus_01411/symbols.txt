@@ -237,3 +237,6 @@ DuelEffect_UpdateObjectLayout = 0x80036DBC; // type:func
 
 // Semantic names
 SD_ResetSequenceTracks = 0x8004CA60; // type:func
+
+// Semantic names
+DuelEffect_PlaySoundCommand = 0x80038798; // type:func

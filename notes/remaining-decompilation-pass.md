@@ -306,3 +306,22 @@ State after this one-function checkpoint:
 | Intentional handwritten assembly | 63 |
 | Matching sources retaining GCC asm | 58 |
 | Accepted semantic mappings | 198 |
+
+### Continuous wave 6
+
+`DuelEffect_PlaySoundCommand` (`0x80038798`) matched after recovering the
+callee argument contract visible in both GenericMadScientist's pseudocode and
+the target registers. Keeping the script value as a 32-bit local, explicitly
+masking it to 16 bits, and passing it to both sound wrappers preserves the
+retail `andi $a0,$v0,0xffff` followed by `andi $v0,$a0,0x8000` sequence
+without register pins. The result matches 104/104 bytes and exact relocations.
+
+State after this one-function checkpoint:
+
+| State | Count |
+|---|---:|
+| Matching C | 782 |
+| Terminal unmatched assembly | 351 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 199 |
