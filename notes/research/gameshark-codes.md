@@ -165,7 +165,7 @@ carries the star cost. The containing function is **`func_80038BF0`**.
 The other patch codes target `0x8016xxxx`–`0x8018xxxx`, which is not in the
 main executable — that is **overlay** code, loaded at runtime from
 `WA_MRG.MRG`. The password-shop overlay has since been located on the disc
-(`docs/DISC.txt` in `MaChInEgUn3/ygofm-decomp`, 2026-09-02), and three of those codes verify against it, all
+(`docs/DISC.txt`, 2026-09-02), and three of those codes verify against it, all
 by hugopocked:
 
 **`D016A87C 1823` / `8016A87E 2400` — "buying cards does not subtract
@@ -180,9 +180,17 @@ card's star cost; the patch makes it `addiu $zero, $zero, 0x1823`, a no-op.
 `beqz $v0, +5`; the patch replaces it with `j 0x8016A6F8`, taking the
 already-owned path unconditionally.
 
-The Free Duel unlock patch (`D01683D4 0002` …) and the two "enable" codes
-guard a *different* overlay loaded to the same region, and that one was not
-found in raw form on the disc; those three remain unverified.
+**`D01683D4 0002` / `801683D4 A0F8` / `D01683D6 1440` / `801683D6 0805` —
+"all Free Duel opponents unlocked".** Verified against the Free Duel overlay,
+also on the disc (`docs/DISC.txt` in `MaChInEgUn3/ygofm-decomp`). `0x801683D4` holds `bnez $v0, +2`, the
+branch in the loop that clears a grid entry whose unlock flag is off; the
+patch makes it `j 0x801683E0`, skipping the clear, so every entry stays
+available. Related: the plain-data code `801D06F4 FFFF` / `801D06F6 FFFF`
+writes four bytes of the flag array, which hold the flags of duelists 1–31;
+duelists 32–38 sit in the next byte, `0x801D06F8`.
+
+The two "enable" codes (`D0168188 023A`, `D0168100 000A`) match neither
+located overlay and remain unverified.
 
 ## From other sources
 
