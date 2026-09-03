@@ -127,6 +127,12 @@
       "source": "src/game/file_read_callbacks.c"
     },
     {
+      "address": "0x800143DC",
+      "profile": "gcc_2_8_1_g8_split",
+      "size": "0xDC",
+      "source": "src/game/file_activate_transfer.c"
+    },
+    {
       "address": "0x800144B8",
       "profile": "gcc_2_8_1_g8",
       "size": "0xA4",

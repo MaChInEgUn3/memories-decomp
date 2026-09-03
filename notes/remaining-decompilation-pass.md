@@ -348,3 +348,24 @@ State after this one-function checkpoint:
 | Intentional handwritten assembly | 63 |
 | Matching sources retaining GCC asm | 58 |
 | Accepted semantic mappings | 200 |
+
+### Continuous wave 8
+
+`File_ActivateTransfer` (`0x800143DC`) matched after correcting the width of
+`D_8009B112`. Target instructions use `lhu`/`sh`, proving a 16-bit flag; the
+previous local candidate declared it as `u8` and differed only at those two
+accesses. The corrected source matches 220/220 bytes with exact relocations.
+
+The function copies the queued `FileTransfer` at `D_800E9E18` to the active
+descriptor at `D_800E9E60`, rotates an eight-word shared buffer half, and
+propagates the active-state flags.
+
+State after this one-function checkpoint:
+
+| State | Count |
+|---|---:|
+| Matching C | 784 |
+| Terminal unmatched assembly | 349 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 201 |
