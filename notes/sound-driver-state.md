@@ -46,6 +46,11 @@ state offset `0x518` is traversed as `0x2C`-byte sequence-track records. Each
 active record advances a 16-bit timer, dispatches MIDI commands when the timer
 wraps past `0xFF`, and contributes to the secondary state's running total.
 
+`SD_ResetSequenceTracks` independently confirms 16 records and the `0x2C`
+stride. It sets each record's byte at `0x24` and clears its leading word; the
+two exact functions remain separate because grouping changes resident text
+size.
+
 ## Structure safeguards
 
 The header contains compile-time size assertions for:

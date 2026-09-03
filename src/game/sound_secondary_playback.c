@@ -3,7 +3,7 @@
 
 extern void func_8004A518(void);
 extern void func_8004C77C(void);
-extern void func_8004CA60(void);
+extern void SD_ResetSequenceTracks(void);
 
 void func_80049BAC(s32 value)
 {
@@ -36,7 +36,7 @@ void func_80049C40(void)
         SDSecondaryState *state;
         SDSecondaryState *other;
         initial->flag_0500 = 1;
-        func_8004CA60();
+        SD_ResetSequenceTracks();
         func_8004A518();
         state = D_8009B458;
         state->flag_0500 = 0;

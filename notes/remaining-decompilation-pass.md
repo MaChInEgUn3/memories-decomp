@@ -283,3 +283,26 @@ State after this one-function checkpoint:
 | Intentional handwritten assembly | 63 |
 | Matching sources retaining GCC asm | 58 |
 | Accepted semantic mappings | 197 |
+
+### Continuous wave 5
+
+`SD_ResetSequenceTracks` (`0x8004CA60`) matched after replacing raw parallel
+pointer arithmetic with a typed array of 16 `0x2C`-byte sequence-track
+records. The typed `tracks[i].flag` and `tracks[i].value` expressions preserve
+the retail `root + offset` operand order, resolving the two commutative `addu`
+words in the previous candidate. The function matches 92/92 bytes with exact
+relocations.
+
+It is contiguous with `SD_ProcessSequenceTracks` and uses the same
+`gcc_2_8_1_g0` profile, but compiling both in one translation unit changes the
+resident text size. They remain separate exact objects.
+
+State after this one-function checkpoint:
+
+| State | Count |
+|---|---:|
+| Matching C | 781 |
+| Terminal unmatched assembly | 352 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 198 |
