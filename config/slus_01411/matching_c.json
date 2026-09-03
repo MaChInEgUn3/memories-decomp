@@ -1153,6 +1153,12 @@
       "source": "src/game/main_debug.c"
     },
     {
+      "address": "0x8002CE64",
+      "profile": "gcc_2_8_1_g8_split",
+      "size": "0x84",
+      "source": "src/game/main_run_campaign.c"
+    },
+    {
       "address": "0x8002CEE8",
       "profile": "gcc_2_8_1_g8",
       "size": "0x1F8",

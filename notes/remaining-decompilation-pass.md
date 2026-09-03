@@ -391,3 +391,22 @@ State after this one-function checkpoint:
 | Intentional handwritten assembly | 63 |
 | Matching sources retaining GCC asm | 58 |
 | Accepted semantic mappings | 202 |
+
+### Continuous wave 10
+
+`Main_RunCampaign` (`0x8002CE64`) matched after correcting two absolute-address
+forms. `D_8009B27A` is declared as an absolute `.data` scalar so GCC loads it
+directly into `$a0`; the write-only `D_8009B254` clear uses the documented
+absolute C literal exception to preserve retail `$at` materialization. Linked
+text is byte-identical, and the complete executable remains the acceptance
+authority for the omitted literal-store relocation.
+
+State after this one-function checkpoint:
+
+| State | Count |
+|---|---:|
+| Matching C | 786 |
+| Terminal unmatched assembly | 347 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 202 |

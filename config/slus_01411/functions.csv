@@ -293,7 +293,7 @@ address,size,name,status,module,notes
 0x8002CD8C,0x5C,func_8002CD8C,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8002CDE8,0x20,func_8002CDE8,matching_c,game,Direct call matched the exact R_MIPS_26 relocation.
 0x8002CE08,0x5C,Main_RunDebugMenu,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g8.
-0x8002CE64,0x84,Main_RunCampaign,unmatched_asm,game,
+0x8002CE64,0x84,Main_RunCampaign,matching_c,game,Post-terminal pure-C match; absolute scalar opponent-state load and one verified literal store preserve retail addressing.
 0x8002CEE8,0x1F8,Main_RunDuel,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8002D0E0,0xA0,Main_RunLibraryMenu,matching_c,game,1 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8.
 0x8002D180,0x158,Main_RunAnimatedBattle,unmatched_asm,game,
