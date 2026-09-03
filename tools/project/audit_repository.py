@@ -28,7 +28,10 @@ FORBIDDEN_TRACKED_PREFIXES = (
     "tools/toolchains/",
     "tools/vendor/",
 )
-ALLOWED_ROOT_MARKDOWN = {"README.md"}
+ALLOWED_MARKDOWN_PATHS = {
+    ".github/copilot-instructions.md",
+    "README.md",
+}
 ATTEMPT_FIELDS = ("address", "attempt", "compiler", "flags", "result", "summary")
 ATTEMPT_RESULTS = {"matched", "nonmatch", "deferred"}
 MAX_FUNCTION_ATTEMPTS = 6
@@ -164,10 +167,11 @@ def audit_tracked_paths(root: Path) -> None:
         if (
             path.lower().endswith(".md")
             and not path.startswith("notes/")
-            and path not in ALLOWED_ROOT_MARKDOWN
+            and path not in ALLOWED_MARKDOWN_PATHS
         ):
             raise AuditError(
-                f"documentation is outside notes/ or the root README: {path}"
+                f"documentation is outside notes/ or the allowed project "
+                f"Markdown paths: {path}"
             )
 
     ignored = git(

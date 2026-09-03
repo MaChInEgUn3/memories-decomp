@@ -131,7 +131,8 @@ reapplies ownership classifications, generates progress metrics, and checks:
 - No supplied game file, generated output, downloaded dependency, installed
   environment, vendor checkout, or local toolchain is tracked.
 - Tracked Markdown documentation is under `notes/`, except for the generated
-  project overview at the root `README.md`.
+  project overview at the root `README.md` and repository guidance at
+  `.github/copilot-instructions.md`.
 - The root README progress section matches the authoritative function
   inventory.
 - The worktree is clean after deterministic regeneration.
