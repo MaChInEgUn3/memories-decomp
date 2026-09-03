@@ -228,3 +228,6 @@ DuelEffect_UpdateState = 0x8002892C; // type:func
 
 // Semantic names
 Util_FillMemory = 0x80035748; // type:func
+
+// Semantic names
+SD_ProcessSequenceTracks = 0x8004C8C8; // type:func

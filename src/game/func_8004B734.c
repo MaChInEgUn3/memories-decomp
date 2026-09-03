@@ -2,7 +2,7 @@
 
 extern u8 *D_8009B458;
 extern void func_800739EC(unsigned int);
-extern void func_8004C8C8(void);
+extern void SD_ProcessSequenceTracks(void);
 extern void func_8004C84C(void);
 extern void func_8004AAFC(void);
 
@@ -22,7 +22,7 @@ int func_8004B734(void)
     D_8009B458[0x501] = 1;
     for (i = 0; i < 8; i++) {
         void (*callback)(void);
-        func_8004C8C8();
+        SD_ProcessSequenceTracks();
         D_8009B458[0x508]++;
         state = D_8009B458;
         if (state[0x508] >= 11) {

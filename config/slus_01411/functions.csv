@@ -861,7 +861,7 @@ address,size,name,status,module,notes
 0x8004C5C8,0x1B4,func_8004C5C8,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x8004C77C,0xD0,func_8004C77C,matching_c,game,3 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g0.
 0x8004C84C,0x7C,func_8004C84C,matching_c,game,Unchiga pure-C structure independently reproduced; exact linked bytes and relocations with gcc_2_8_1_cc_g0_as_g8_no_split.
-0x8004C8C8,0x198,func_8004C8C8,unmatched_asm,game,
+0x8004C8C8,0x198,SD_ProcessSequenceTracks,matching_c,game,Post-terminal pure-C match; corrected timer-threshold scope skips command processing until the accumulator wraps.
 0x8004CA60,0x5C,func_8004CA60,unmatched_asm,game,
 0x8004CABC,0x50,func_8004CABC,unmatched_asm,game,
 0x8004CB0C,0x628,func_8004CB0C,unmatched_asm,game,

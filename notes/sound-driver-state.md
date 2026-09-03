@@ -41,6 +41,11 @@ insufficient semantic evidence for stronger names.
 `busy` and installs `SD_ClearBusyFlag` in the main callback slot. This replaces
 the former register-pinned source while preserving exact code generation.
 
+`SD_ProcessSequenceTracks` establishes that the region beginning at secondary
+state offset `0x518` is traversed as `0x2C`-byte sequence-track records. Each
+active record advances a 16-bit timer, dispatches MIDI commands when the timer
+wraps past `0xFF`, and contributes to the secondary state's running total.
+
 ## Structure safeguards
 
 The header contains compile-time size assertions for:

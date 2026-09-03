@@ -1,7 +1,7 @@
 #include "../types.h"
 #include "sound.h"
 
-extern void func_8004C8C8(void);
+extern void SD_ProcessSequenceTracks(void);
 extern void func_8004C84C(void);
 extern void func_8004AAFC(void);
 
@@ -11,16 +11,16 @@ void func_8004B9E0(void)
         return;
     D_8009B458->flag_0501 = 1;
     if (D_8009B458->flag_0502) {
-        func_8004C8C8();
-        func_8004C8C8();
-        func_8004C8C8();
-        func_8004C8C8();
-        func_8004C8C8();
-        func_8004C8C8();
-        func_8004C8C8();
-        func_8004C8C8();
-        func_8004C8C8();
-        func_8004C8C8();
+        SD_ProcessSequenceTracks();
+        SD_ProcessSequenceTracks();
+        SD_ProcessSequenceTracks();
+        SD_ProcessSequenceTracks();
+        SD_ProcessSequenceTracks();
+        SD_ProcessSequenceTracks();
+        SD_ProcessSequenceTracks();
+        SD_ProcessSequenceTracks();
+        SD_ProcessSequenceTracks();
+        SD_ProcessSequenceTracks();
     }
     func_8004C84C();
     func_8004AAFC();

@@ -3625,6 +3625,12 @@
       "source": "src/game/func_8004C84C.c"
     },
     {
+      "address": "0x8004C8C8",
+      "profile": "gcc_2_8_1_g0",
+      "size": "0x198",
+      "source": "src/game/sd_process_sequence_tracks.c"
+    },
+    {
       "address": "0x8004E9A0",
       "profile": "gcc_2_8_1_g8_split",
       "size": "0x160",

@@ -246,3 +246,22 @@ State after wave 2:
 | Intentional handwritten assembly | 63 |
 | Matching sources retaining GCC asm | 58 |
 | Accepted semantic mappings | 195 |
+
+### Continuous wave 3
+
+`SD_ProcessSequenceTracks` (`0x8004C8C8`) matched as pure C after correcting
+one control-flow scope in the closest preserved candidate. Retail skips the
+entire command-processing and accumulation block while a track timer is below
+`0x100`; the previous source skipped only the wrap-counter update. Removing
+the candidate's register pins and expressing that scope directly produced an
+exact 408-byte function with exact relocations.
+
+State after this one-function checkpoint:
+
+| State | Count |
+|---|---:|
+| Matching C | 779 |
+| Terminal unmatched assembly | 354 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 196 |
