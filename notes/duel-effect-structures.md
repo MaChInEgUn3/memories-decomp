@@ -63,6 +63,11 @@ to one record rather than parallel arrays. Unchiga's same-address sketches
 and GMS pseudocode corroborate these accesses but do not determine the shared
 types.
 
+`DuelEffect_UpdateObjectLayout` now provides an additional exact-C read of
+`DuelEffectEntry.field_18`. It selects the display-object coordinate layout
+from `field_18 % 10` after resolving the entry through the channel's
+`D_80090E58` range index.
+
 Five pure-C functions now use the shared declaration:
 `DuelEffect_ClearMatchingMarker`, `DuelEffect_ResetEntryMarkers`,
 `DuelEffect_HasActiveEntry`, `func_800373C8`, and `func_8003B6AC`.

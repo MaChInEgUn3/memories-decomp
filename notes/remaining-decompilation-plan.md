@@ -8,9 +8,9 @@ The resident inventory contains 1,794 functions:
 |---|---:|
 | Game functions | 1,196 |
 | Psy-Q CRT/SDK functions | 598 |
-| Matching-C game functions | 779 |
+| Matching-C game functions | 780 |
 | Matching sources still containing GCC inline assembly | 58 |
-| Terminal compiler-generated game assembly | 354 |
+| Terminal compiler-generated game assembly | 353 |
 | Intentional handwritten game assembly | 63 |
 
 The previous bounded campaign produced terminal histories for every remaining

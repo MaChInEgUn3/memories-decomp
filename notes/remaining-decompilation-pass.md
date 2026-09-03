@@ -265,3 +265,21 @@ State after this one-function checkpoint:
 | Intentional handwritten assembly | 63 |
 | Matching sources retaining GCC asm | 58 |
 | Accepted semantic mappings | 196 |
+
+### Continuous wave 4
+
+`DuelEffect_UpdateObjectLayout` (`0x80036DBC`) matched after correcting a
+double-scaled halfword-table index. The candidate declared `D_80090E58` as
+`u16[]` but also multiplied `p[0x57]` by two before indexing, producing
+`sll ...,2`; direct halfword indexing produces the retail `sll ...,1`.
+The corrected source matches 452/452 bytes with exact relocations.
+
+State after this one-function checkpoint:
+
+| State | Count |
+|---|---:|
+| Matching C | 780 |
+| Terminal unmatched assembly | 353 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 197 |

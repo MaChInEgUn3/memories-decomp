@@ -1,7 +1,7 @@
 #include "../types.h"
 
 extern void func_80039140();
-extern void func_80036DBC();
+extern void DuelEffect_UpdateObjectLayout();
 
 void func_80039934(u8 *record, s32 x, s32 y)
 {
@@ -25,7 +25,7 @@ void func_80039934(u8 *record, s32 x, s32 y)
     object = *(u8 **)(record + 48);
     if (object != (u8 *)0) {
         if (*(s16 *)(object + 30) == 4)
-            func_80036DBC(record);
+            DuelEffect_UpdateObjectLayout(record);
         else {
             *(s16 *)(object + 48) = *(u16 *)(record + 62) + x - 16;
             *(s16 *)(object + 50) = *(u16 *)(record + 66) + y - 16;

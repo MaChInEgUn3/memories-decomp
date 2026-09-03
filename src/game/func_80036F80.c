@@ -2,7 +2,7 @@
 
 extern u8 D_8009B336;
 extern s8 D_8009B34D;
-extern void func_80036DBC(void *);
+extern void DuelEffect_UpdateObjectLayout(void *);
 void func_80036F80(u8 *arg0) {
     s32 value;
     u8 *sub = *(u8 **)(arg0 + 0x30);
@@ -16,5 +16,5 @@ void func_80036F80(u8 *arg0) {
     *(s32 *)(*(u8 **)(arg0 + 0x30) + 0x34) = value;
     *(s32 *)(*(u8 **)(arg0 + 0x30) + 0x4C) = value;
     *(s32 *)(*(u8 **)(arg0 + 0x30) + 0x54) = value;
-    func_80036DBC(arg0);
+    DuelEffect_UpdateObjectLayout(arg0);
 }
