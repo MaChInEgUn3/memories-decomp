@@ -16,7 +16,7 @@ extern s8 D_8009B34D[9];
 extern Window D_800EB224;
 extern void (*D_80090998[])(void);
 extern void func_800235C0(void), func_8002C6C8(void);
-extern int func_80026B34(void), func_8002892C(void);
+extern int func_80026B34(void), DuelEffect_UpdateState(void);
 extern void SD_SEPlayFull(int);
 extern Window *func_80035C38(int, int, int, int, int, int, int);
 extern void func_80039794(void), func_80035B7C(Window *);
@@ -34,7 +34,7 @@ void func_80024200(void)
             return;
         D_8009B260 = value & 0x7F;
     }
-    if (func_80026B34() != 0 || func_8002892C() != 0)
+    if (func_80026B34() != 0 || DuelEffect_UpdateState() != 0)
         return;
     value = D_8009B164;
     if (value != 0) {

@@ -214,3 +214,35 @@ State after this wave:
 
 `GMS` in historical notes refers to **GenericMadScientist**, whose `gms.c` IDA
 decompilation is used as supporting evidence rather than ground truth.
+
+### Continuous wave 2
+
+The second continuous wave promoted three more terminal functions:
+
+| Address | Semantic name | Resolution |
+|---|---|---|
+| `0x8002892C` | `DuelEffect_UpdateState` | The preserved pure-C candidate was already 128/128 byte-identical. Two symbolic `D_8009B24A` GPREL16 relocations correspond to raw `$gp+0x342` target accesses omitted by the relocation oracle; the complete executable confirms the match. |
+| `0x800356A0` | `Util_CopyWords` | Reproducing separate `case 1` and `case 2` bodies yields the retail switch layout. The self-contained locally typed source matches 168/168 bytes with no relocations. |
+| `0x80035748` | `Util_FillMemory` | The same duplicated-case source distinction yields a strict 160/160-byte match for the repeated-byte fill counterpart. |
+
+The utility pair is contiguous, uses `gcc_2_8_1_g8`, and now shares
+`src/game/util_memory.c`.
+
+Two new evidence-backed scheduler experiments did not match and remain under
+`tmp/candidates/continuous-wave-2/`:
+
+- `0x8003C628`: an oversized signed output-mode declaration fixed the absolute
+  relocation form but scheduled its `lui` one word too early.
+- `0x8004A6F8`: splitting `0x60100` into a high-half value plus a later OR
+  retained exact size but did not move the high-half materialization ahead of
+  table addressing.
+
+State after wave 2:
+
+| State | Count |
+|---|---:|
+| Matching C | 778 |
+| Terminal unmatched assembly | 355 |
+| Intentional handwritten assembly | 63 |
+| Matching sources retaining GCC asm | 58 |
+| Accepted semantic mappings | 195 |

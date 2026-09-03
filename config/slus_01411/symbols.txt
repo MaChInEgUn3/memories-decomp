@@ -222,3 +222,9 @@ DuelEffect_CreateChannel = 0x8003D46C; // type:func
 // Semantic names
 SD_ClearBusyFlag = 0x8004544C; // type:func
 SD_ArmBusyCallback = 0x8004545C; // type:func
+
+// Semantic names
+DuelEffect_UpdateState = 0x8002892C; // type:func
+
+// Semantic names
+Util_FillMemory = 0x80035748; // type:func

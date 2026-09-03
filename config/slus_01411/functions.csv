@@ -238,7 +238,7 @@ address,size,name,status,module,notes
 0x80028310,0xDC,func_80028310,matching_c,game,2 recorded attempts; exact full-executable SHA-256 match with gcc_2_8_1_g8_split.
 0x800283EC,0x8,func_800283EC,matching_c,game,Empty function matched exactly.
 0x800283F4,0x538,func_800283F4,unmatched_asm,game,
-0x8002892C,0x80,func_8002892C,unmatched_asm,game,
+0x8002892C,0x80,DuelEffect_UpdateState,matching_c,game,"Post-terminal pure-C match; inferred target relocations omit two raw GP-relative D_8009B24A accesses, but linked bytes and full executable match exactly."
 0x800289AC,0x8,func_800289AC,matching_c,game,Empty function matched exactly.
 0x800289B4,0x8,func_800289B4,matching_c,game,Empty function matched exactly.
 0x800289BC,0x14C,func_800289BC,unmatched_asm,game,
@@ -413,8 +413,8 @@ address,size,name,status,module,notes
 0x800355C8,0xA0,func_800355C8,unmatched_asm,game,
 0x80035668,0x18,func_80035668,matching_c,game,First -O2 -G8 constant/global-store candidate matched.
 0x80035680,0x20,func_80035680,matching_c,game,First -O2 -G8 global-update candidate matched.
-0x800356A0,0xA8,Util_CopyWords,unmatched_asm,game,
-0x80035748,0xA0,func_80035748,unmatched_asm,game,
+0x800356A0,0xA8,Util_CopyWords,matching_c,game,Post-terminal pure-C match; duplicate switch case bodies reproduce retail tail dispatch without reference headers.
+0x80035748,0xA0,Util_FillMemory,matching_c,game,Post-terminal pure-C match; duplicate switch case bodies reproduce retail tail dispatch without reference headers.
 0x800357E8,0xB8,Text_EncodeDecimalDigits,matching_c,game,Reference structure only; declarations and types independently recovered locally; exact linked bytes and relocations.
 0x800358A0,0x5C,func_800358A0,unmatched_asm,game,
 0x800358FC,0x50,Rand_GetInterval,matching_c,game,1 recorded attempt; exact full-executable SHA-256 match with gcc_2_8_1_g0.
