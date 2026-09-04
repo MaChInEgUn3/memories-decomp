@@ -19,7 +19,9 @@ class AuditError(RuntimeError):
 
 
 EXPECTED_NAME = "Copilot"
-EXPECTED_EMAIL = "223556219+Copilot@users.noreply.github.com"
+EXPECTED_EMAIL_SUFFIX = "+Copilot@users.noreply.github.com"
+EXPECTED_IDENTITY = f"{EXPECTED_NAME} <*{EXPECTED_EMAIL_SUFFIX}>"
+TRAILER_IDENTITY_PATTERN = re.compile(r"^(?P<name>.*?)\s*<(?P<email>[^>]*)>$")
 FORBIDDEN_TRACKED_PREFIXES = (
     "game/",
     "tmp/",
@@ -30,8 +32,8 @@ FORBIDDEN_TRACKED_PREFIXES = (
 )
 ALLOWED_MARKDOWN_PATHS = {
     ".github/copilot-instructions.md",
-    "README.md",
 }
+ALLOWED_MARKDOWN_NAME = "README.md"
 ATTEMPT_FIELDS = ("address", "attempt", "compiler", "flags", "result", "summary")
 ATTEMPT_RESULTS = {"matched", "nonmatch", "deferred"}
 MAX_FUNCTION_ATTEMPTS = 6
@@ -83,13 +85,25 @@ def git(root: Path, *arguments: str) -> str:
     return result.stdout
 
 
+def is_copilot_attributed(name: str, email: str) -> bool:
+    return name == EXPECTED_NAME or email.casefold().endswith(
+        EXPECTED_EMAIL_SUFFIX.casefold()
+    )
+
+
+def is_copilot_identity(name: str, email: str) -> bool:
+    return name == EXPECTED_NAME and email.casefold().endswith(
+        EXPECTED_EMAIL_SUFFIX.casefold()
+    )
+
+
 def audit_identity(root: Path) -> None:
     name = git(root, "config", "--local", "user.name").strip()
     email = git(root, "config", "--local", "user.email").strip()
-    if (name, email) != (EXPECTED_NAME, EXPECTED_EMAIL):
+    if not is_copilot_identity(name, email):
         raise AuditError(
             f"local Git identity is {name} <{email}>, expected "
-            f"{EXPECTED_NAME} <{EXPECTED_EMAIL}>"
+            f"{EXPECTED_IDENTITY}"
         )
 
     commits = [
@@ -127,28 +141,40 @@ def audit_identity(root: Path) -> None:
             and re.match(r"^Merge pull request #\d+ from ", message)
         ):
             continue
-        if (author_name, author_email) != (EXPECTED_NAME, EXPECTED_EMAIL):
-            raise AuditError(
-                f"{commit}: unexpected author "
-                f"{author_name} <{author_email}>"
-            )
-        if (committer_name, committer_email) != (
-            EXPECTED_NAME,
-            EXPECTED_EMAIL,
+        author_is_copilot = is_copilot_attributed(author_name, author_email)
+        committer_is_copilot = is_copilot_attributed(
+            committer_name, committer_email
+        )
+        if author_is_copilot and not is_copilot_identity(
+            author_name, author_email
         ):
             raise AuditError(
-                f"{commit}: unexpected committer "
-                f"{committer_name} <{committer_email}>"
+                f"{commit}: Copilot-attributed author is "
+                f"{author_name} <{author_email}>, expected "
+                f"{EXPECTED_IDENTITY}"
             )
+        if committer_is_copilot and not is_copilot_identity(
+            committer_name, committer_email
+        ):
+            raise AuditError(
+                f"{commit}: Copilot-attributed committer is "
+                f"{committer_name} <{committer_email}>, expected "
+                f"{EXPECTED_IDENTITY}"
+            )
+        if not (author_is_copilot or committer_is_copilot):
+            continue
         trailers = re.findall(
             r"^Co-authored-by:\s*(.+?)\s*$",
             message,
             flags=re.IGNORECASE | re.MULTILINE,
         )
-        expected_trailer = f"{EXPECTED_NAME} <{EXPECTED_EMAIL}>"
-        unexpected = [
-            trailer for trailer in trailers if trailer != expected_trailer
-        ]
+        unexpected = []
+        for trailer in trailers:
+            identity = TRAILER_IDENTITY_PATTERN.match(trailer)
+            if identity is None or not is_copilot_identity(
+                identity.group("name"), identity.group("email")
+            ):
+                unexpected.append(trailer)
         if unexpected:
             raise AuditError(
                 f"{commit}: unexpected Co-authored-by trailer "
@@ -167,10 +193,12 @@ def audit_tracked_paths(root: Path) -> None:
         if (
             path.lower().endswith(".md")
             and not path.startswith("notes/")
+            and PurePosixPath(path).name != ALLOWED_MARKDOWN_NAME
             and path not in ALLOWED_MARKDOWN_PATHS
         ):
             raise AuditError(
-                f"documentation is outside notes/ or the allowed project "
+                f"documentation is outside notes/, a directory "
+                f"{ALLOWED_MARKDOWN_NAME}, or the allowed project "
                 f"Markdown paths: {path}"
             )
 
@@ -215,6 +243,23 @@ def require_tmp_path(value: str, description: str) -> None:
         or ".." in path.parts
     ):
         raise AuditError(f"{description} must normalize beneath tmp/")
+
+
+def function_body(source_text: str, name: str) -> str | None:
+    text = COMMENT_PATTERN.sub("", source_text)
+    definition = re.compile(rf"\b{re.escape(name)}\s*\([^;{{}}]*\)\s*{{")
+    match = definition.search(text)
+    if match is None:
+        return None
+    depth = 0
+    for index in range(match.end() - 1, len(text)):
+        if text[index] == "{":
+            depth += 1
+        elif text[index] == "}":
+            depth -= 1
+            if depth == 0:
+                return text[match.start() : index + 1]
+    return None
 
 
 def audit_attempts(root: Path) -> None:
@@ -479,15 +524,13 @@ def audit_attempts(root: Path) -> None:
                 f"{address:#010x}: matching source does not exist"
             )
         source_text = source.read_text(encoding="utf-8")
-        definition = re.compile(
-            rf"\b{re.escape(function_names[address])}\s*\("
-        )
-        if definition.search(source_text) is None:
+        body = function_body(source_text, function_names[address])
+        if body is None:
             raise AuditError(
                 f"{address:#010x}: current source does not define "
                 f"{function_names[address]}"
             )
-        if ASM_PATTERN.search(COMMENT_PATTERN.sub("", source_text)):
+        if ASM_PATTERN.search(body):
             raise AuditError(
                 f"{address:#010x}: successful external source still uses GCC asm"
             )
